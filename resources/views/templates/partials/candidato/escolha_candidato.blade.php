@@ -27,7 +27,7 @@
     @if(isset($cursos_verao))
       <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{trans('tela_escolha_candidato.texto_cursos_verao')}}</legend>
-          <div class="row"">
+          <div class="row">
               @foreach ($cursos_verao as $curso)
                 <div class="col-md-4">
                   <label class="radio-inline">{!! Form::checkbox('curso_desejado[]', $curso->id_curso_verao, False , []) !!}{{ " ".$curso->$nome_coluna }}{{ $curso->seleciona_pos ? " (Seleciona para a Pós)" : "" }}</label>
