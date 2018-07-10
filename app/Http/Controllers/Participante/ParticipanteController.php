@@ -45,7 +45,7 @@ use Illuminate\Support\Facades\Storage;
 /**
 * Classe para manipulação do candidato.
 */
-class CandidatoController extends BaseController
+class ParticipanteController extends BaseController
 {
 
 	private $estadoModel;
