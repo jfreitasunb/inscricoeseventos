@@ -17,7 +17,11 @@ class ViewComposerServiceProvider extends ServiceProvider
 
                 $periodo_inscricao = $periodo->retorna_periodo_inscricao();
 
-                $ano_evento = $periodo->retorna_inscricao_ativa()->ano_evento;
+                if (is_null($periodo->retorna_inscricao_ativa())) {
+                    $ano_evento = null;
+                }else{
+                    $ano_evento = $periodo->retorna_inscricao_ativa()->ano_evento;
+                }
         
                 $view->with(compact('periodo_inscricao', 'ano_evento'));
             });
