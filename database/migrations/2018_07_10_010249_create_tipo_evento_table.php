@@ -15,9 +15,7 @@ class CreateTipoEventoTable extends Migration
     {
         Schema::create('tipo_evento', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tipo_ptbr',50);
-            $table->string('tipo_en',50)->nullable();
-            $table->string('tipo_es',50)->nullable();
+            $table->string('tipo',50);
             $table->timestamps();
         });
     }
