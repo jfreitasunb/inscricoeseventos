@@ -32,9 +32,9 @@ Route::prefix('participante')->middleware('user.role:participante,admin','define
 
 	Route::post('dados/pessoais', '\InscricoesEventosMat\Http\Controllers\Participante\DadosPessoaisParticipanteController@postDadosPessoais')->name('dados.pessoais.salvar');
 
-	Route::get('dados/academicos', '\InscricoesEventosMat\Http\Controllers\Participante\DadosAcademicosController@getDadosAcademicos')->name('dados.academicos');
+	Route::get('submeter/trabalho', '\InscricoesEventosMat\Http\Controllers\Participante\SubmeterTrabalhoController@getSubmeterTrabalho')->name('submeter.trabalho');
 
-	Route::post('dados/academicos', '\InscricoesEventosMat\Http\Controllers\Participante\DadosAcademicosController@postDadosAcademicos');
+	Route::post('submeter/trabalho', '\InscricoesEventosMat\Http\Controllers\Participante\SubmeterTrabalhoController@postSubmeterTrabalho')->name('submeter.trabalho');
 
 	Route::get('dados/escolhas', '\InscricoesEventosMat\Http\Controllers\Participante\EscolhaParticipanteController@getEscolhaParticipante')->name('dados.escolhas');
 
