@@ -8,7 +8,7 @@ use Mail;
 use Session;
 use Notification;
 use Carbon\Carbon;
-use InscricoesEventosMat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao,  DadoPessoalCandidato, EscolhaCursoVerao};
+use InscricoesEventosMat\Models\{User, ConfiguraInscricaoEvento, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao,  DadoPessoalCandidato, EscolhaCursoVerao};
 use Illuminate\Http\Request;
 use InscricoesEventosMat\Mail\EmailVerification;
 use InscricoesEventosMat\Http\Controllers\Controller;
@@ -28,7 +28,7 @@ class ListaInscricaoNaoFinalizadasController extends AdminController
 
 	public function getInscricoesNaoFinalizadas()
 	{
-		$relatorio = new ConfiguraInscricaoPos();
+		$relatorio = new ConfiguraInscricaoEvento();
 
       	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
 

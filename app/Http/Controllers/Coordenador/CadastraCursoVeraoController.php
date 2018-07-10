@@ -11,7 +11,7 @@ use PDF;
 use Notification;
 use Carbon\Carbon;
 use InscricoesEventosMat\Models\User;
-use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\CursoVeraoMat;
 use InscricoesEventosMat\Models\CartaRecomendacao;
 use InscricoesEventosMat\Models\Formacao;

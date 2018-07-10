@@ -3,7 +3,7 @@
 namespace InscricoesEventosMat\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use Validator;
 use Illuminate\Http\Request;
 

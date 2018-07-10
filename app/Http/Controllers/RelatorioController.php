@@ -14,7 +14,7 @@ use InscricoesEventosMat\Http\Controllers\FPDFController;
 use Carbon\Carbon;
 use InscricoesEventosMat\Models\OfertaCursoVerao;
 use InscricoesEventosMat\Models\User;
-use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\CursoVeraoMat;
 use InscricoesEventosMat\Models\FinalizaInscricao;
 use InscricoesEventosMat\Models\DadoPessoalCandidato;
@@ -310,7 +310,7 @@ class RelatorioController extends BaseController
 
     $locale_relatorio = 'pt-br';
 
-    $relatorio = new ConfiguraInscricaoPos();
+    $relatorio = new ConfiguraInscricaoEvento();
 
     $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
@@ -342,7 +342,7 @@ class RelatorioController extends BaseController
    public function getListaRelatoriosAnteriores()
   {
 
-    $relatorio = new ConfiguraInscricaoPos();
+    $relatorio = new ConfiguraInscricaoEvento();
 
     $relatorios_anteriores = $relatorio->retorna_lista_para_relatorio();
 
@@ -363,7 +363,7 @@ class RelatorioController extends BaseController
 
     $locale_relatorio = 'pt-br';
 
-  $relatorio = new ConfiguraInscricaoPos();
+  $relatorio = new ConfiguraInscricaoEvento();
 
   $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
@@ -415,7 +415,7 @@ class RelatorioController extends BaseController
 
     $locale_relatorio = 'pt-br';
 
-    $relatorio = ConfiguraInscricaoPos::find($id_inscricao_verao);
+    $relatorio = ConfiguraInscricaoEvento::find($id_inscricao_verao);
 
     $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio->ano_evento);
 
@@ -479,7 +479,7 @@ class RelatorioController extends BaseController
   public function geraFichaIndividual($id_candidato, $locale_relatorio)
   {
 
-      $relatorio = new ConfiguraInscricaoPos();
+      $relatorio = new ConfiguraInscricaoEvento();
 
       $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
@@ -523,7 +523,7 @@ class RelatorioController extends BaseController
   public function getArquivosRelatoriosAnteriores($id_inscricao_verao,$arquivos_zipados_para_view,$relatorio_csv)
   {
 
-    $relatorio = new ConfiguraInscricaoPos();
+    $relatorio = new ConfiguraInscricaoEvento();
 
     $relatorios_anteriores = $relatorio->retorna_lista_para_relatorio();
 
@@ -538,7 +538,7 @@ class RelatorioController extends BaseController
 
     $locale_relatorio = 'pt-br';
 
-    $relatorio_disponivel = ConfiguraInscricaoPos::find($id_inscricao_verao);
+    $relatorio_disponivel = ConfiguraInscricaoEvento::find($id_inscricao_verao);
 
     $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel['ano_evento']);
 
@@ -612,7 +612,7 @@ class RelatorioController extends BaseController
     //Para ser usado no MAT
     // $endereco_mudar = '/var/www/inscricoesverao/storage/app/public/';
     
-    $relatorio = new ConfiguraInscricaoPos();
+    $relatorio = new ConfiguraInscricaoEvento();
 
     $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 

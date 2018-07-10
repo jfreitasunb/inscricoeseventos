@@ -12,7 +12,7 @@ use Notification;
 use Carbon\Carbon;
 use InscricoesEventosMat\Models\User;
 use InscricoesEventosMat\Models\AssociaEmailsRecomendante;
-use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\AreaPosMat;
 use InscricoesEventosMat\Models\CartaMotivacao;
 use InscricoesEventosMat\Models\ProgramaPos;
@@ -259,7 +259,7 @@ class DadosPessoaisController extends BaseController
 
 		notify()->flash('Seus dados pessoais foram atualizados.','success');
 
-		$edital_ativo = new ConfiguraInscricaoPos();
+		$edital_ativo = new ConfiguraInscricaoEvento();
 
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;

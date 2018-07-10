@@ -12,7 +12,7 @@ use Notification;
 use Carbon\Carbon;
 use InscricoesEventosMat\Models\User;
 use InscricoesEventosMat\Models\AssociaEmailsRecomendante;
-use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\AreaPosMat;
 use InscricoesEventosMat\Models\CartaMotivacao;
 use InscricoesEventosMat\Models\ProgramaPos;

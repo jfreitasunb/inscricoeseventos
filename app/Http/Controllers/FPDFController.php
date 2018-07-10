@@ -11,7 +11,7 @@ use ZipArchive;
 use Fpdf;
 use Carbon\Carbon;
 use InscricoesEventosMat\Models\User;
-use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\FinalizaInscricao;
 use InscricoesEventosMat\Models\DadoPessoal;
 use InscricoesEventosMat\Models\Paises;

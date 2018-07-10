@@ -13,7 +13,7 @@ use PDF;
 use InscricoesEventosMat\Http\Controllers\FPDFController;
 use Carbon\Carbon;
 use InscricoesEventosMat\Models\User;
-use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\FinalizaInscricao;
 use InscricoesEventosMat\Models\DadoPessoalCandidato;
 use InscricoesEventosMat\Models\Paises;
@@ -162,7 +162,7 @@ class MigracaoController extends BaseController
 
         foreach ($inscricoes_configuradas as $inscricao) {
             
-            $nova_inscricao_configurada = new ConfiguraInscricaoPos();
+            $nova_inscricao_configurada = new ConfiguraInscricaoEvento();
 
             $nova_inscricao_configurada->id_inscricao_pos = $inscricao->id_inscricao_pos;
             $nova_inscricao_configurada->inicio_inscricao = $inscricao->inicio_inscricao;

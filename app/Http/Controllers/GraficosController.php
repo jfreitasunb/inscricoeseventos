@@ -14,7 +14,7 @@ use Charts;
 use InscricoesEventosMat\Http\Controllers\FPDFController;
 use Carbon\Carbon;
 use InscricoesEventosMat\Models\User;
-use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\FinalizaInscricao;
 use InscricoesEventosMat\Models\DadoPessoal;
 use InscricoesEventosMat\Models\Paises;
@@ -49,7 +49,7 @@ class GraficosController extends BaseController
 
         $user = Auth::user();
         
-        $relatorio = new ConfiguraInscricaoPos();
+        $relatorio = new ConfiguraInscricaoEvento();
 
         $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 

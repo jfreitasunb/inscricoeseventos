@@ -11,7 +11,7 @@ use PDF;
 use Notification;
 use Carbon\Carbon;
 use InscricoesEventosMat\Models\User;
-use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\CursoVeraoMat;
 use InscricoesEventosMat\Models\OfertaCursoVerao;
 use InscricoesEventosMat\Models\Formacao;
@@ -29,13 +29,13 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 /**
 * Classe para visualização da página inicial.
 */
-class ConfiguraInscricaoPosController extends CoordenadorController
+class ConfiguraInscricaoEventoController extends CoordenadorController
 {
 
-	public function getConfiguraInscricaoPos()
+	public function getConfiguraInscricaoEvento()
 	{
 
-		$inscricao_pos = new ConfiguraInscricaoPos();
+		$inscricao_pos = new ConfiguraInscricaoEvento();
 
 		// $programas_pos_mat = ProgramaPos::get()->all();
 
@@ -46,7 +46,7 @@ class ConfiguraInscricaoPosController extends CoordenadorController
 		return view('templates.partials.coordenador.configurar_inscricao')->with(compact('cursos_verao_mat'));
 	}
 
-	public function postConfiguraInscricaoPos(Request $request)
+	public function postConfiguraInscricaoEvento(Request $request)
 	{
 		$this->validate($request, [
 			'inicio_inscricao' => 'required|date_format:"d/m/Y"|before:fim_inscricao|after:today',
@@ -60,7 +60,7 @@ class ConfiguraInscricaoPosController extends CoordenadorController
             return redirect()->back();
         }
 		
-        $configura_nova_inscricao_pos = new ConfiguraInscricaoPos();
+        $configura_nova_inscricao_pos = new ConfiguraInscricaoEvento();
 
 		$user = Auth::user();
     

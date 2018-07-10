@@ -110,9 +110,9 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::get('/','\InscricoesEventosMat\Http\Controllers\Coordenador\CoordenadorController@getMenu')->name('menu.coordenador');
 
-	Route::get('configura/inscricao', '\InscricoesEventosMat\Http\Controllers\Coordenador\ConfiguraInscricaoPosController@getConfiguraInscricaoPos')->name('configura.inscricao');
+	Route::get('configura/inscricao', '\InscricoesEventosMat\Http\Controllers\Coordenador\ConfiguraInscricaoEventoController@getConfiguraInscricaoEvento')->name('configura.inscricao');
 
-	Route::post('configura/inscricao', '\InscricoesEventosMat\Http\Controllers\Coordenador\ConfiguraInscricaoPosController@postConfiguraInscricaoPos');
+	Route::post('configura/inscricao', '\InscricoesEventosMat\Http\Controllers\Coordenador\ConfiguraInscricaoEventoController@postConfiguraInscricaoEvento');
 
 	Route::get('cadastra/area/pos', '\InscricoesEventosMat\Http\Controllers\Coordenador\CadastraCursoVeraoController@getCadastraAreaPos')->name('cadastra.area.pos');
 

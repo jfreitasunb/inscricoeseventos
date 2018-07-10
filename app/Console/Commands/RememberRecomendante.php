@@ -5,7 +5,7 @@ namespace InscricoesEventosMat\Console\Commands;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Notification;
-use InscricoesEventosMat\Models\{User, ConfiguraInscricaoPos, DadoRecomendante, CartaRecomendacao};
+use InscricoesEventosMat\Models\{User, ConfiguraInscricaoEvento, DadoRecomendante, CartaRecomendacao};
 use InscricoesEventosMat\Notifications\EmailRememberRecomendante;
 
 use Illuminate\Console\Command;
@@ -43,7 +43,7 @@ class RememberRecomendante extends Command
      */
     public function handle()
     {
-        $edital = new ConfiguraInscricaoPos;
+        $edital = new ConfiguraInscricaoEvento;
 
         $edital_vigente = $edital->retorna_inscricao_ativa();
 

@@ -12,7 +12,7 @@ use Notification;
 use Carbon\Carbon;
 use InscricoesEventosMat\Models\User;
 use InscricoesEventosMat\Models\AssociaEmailsRecomendante;
-use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\OfertaCursoVerao;
 use InscricoesEventosMat\Models\CartaMotivacao;
 use InscricoesEventosMat\Models\ProgramaPos;
@@ -61,7 +61,7 @@ class EscolhaCandidatoController extends BaseController
 
 		$locale_candidato = Session::get('locale');
 		
-		$edital_ativo = new ConfiguraInscricaoPos();
+		$edital_ativo = new ConfiguraInscricaoEvento();
 
 		$id_inscricao_verao = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_verao;
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
@@ -138,7 +138,7 @@ class EscolhaCandidatoController extends BaseController
 		
 		$id_candidato = $user->id_user;
 		
-		$edital_ativo = new ConfiguraInscricaoPos();
+		$edital_ativo = new ConfiguraInscricaoEvento();
 
 		$id_inscricao_verao = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_verao;
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();

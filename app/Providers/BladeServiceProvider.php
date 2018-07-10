@@ -2,7 +2,7 @@
 
 namespace InscricoesEventosMat\Providers;
 
-use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\FinalizaInscricao;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -148,7 +148,7 @@ class BladeServiceProvider extends ServiceProvider
             $user = auth()->user();
             $id_user = $user->id_user;
 
-            $edital_ativo = new ConfiguraInscricaoPos();
+            $edital_ativo = new ConfiguraInscricaoEvento();
 
             $id_inscricao_verao = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_verao;
             // $edital = $edital_ativo->retorna_inscricao_ativa()->edital;
@@ -170,7 +170,7 @@ class BladeServiceProvider extends ServiceProvider
             $user = auth()->user();
             $id_user = $user->id_user;
 
-            $edital_ativo = new ConfiguraInscricaoPos();
+            $edital_ativo = new ConfiguraInscricaoEvento();
 
             $autoriza_preenchimento_carta = $edital_ativo->autoriza_carta();
 
@@ -187,7 +187,7 @@ class BladeServiceProvider extends ServiceProvider
             $user = auth()->user();
             $id_user = $user->id_user;
 
-            $edital_ativo = new ConfiguraInscricaoPos();
+            $edital_ativo = new ConfiguraInscricaoEvento();
 
             $id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
             $edital = $edital_ativo->retorna_inscricao_ativa()->edital;

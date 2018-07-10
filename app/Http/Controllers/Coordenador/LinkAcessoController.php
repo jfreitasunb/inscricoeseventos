@@ -11,7 +11,7 @@ use PDF;
 use Notification;
 use Carbon\Carbon;
 use InscricoesEventosMat\Models\User;
-use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\AreaPosMat;
 use InscricoesEventosMat\Models\CartaRecomendacao;
 use InscricoesEventosMat\Models\Formacao;
@@ -38,7 +38,7 @@ class LinkAcessoController extends CoordenadorController
 	{
 		$user = Auth::user();
 		
-		$relatorio = new ConfiguraInscricaoPos();
+		$relatorio = new ConfiguraInscricaoEvento();
 
       	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
@@ -62,7 +62,7 @@ class LinkAcessoController extends CoordenadorController
 
 		$tempo_validade = $request->tempo_validade;
 		
-		$relatorio = new ConfiguraInscricaoPos();
+		$relatorio = new ConfiguraInscricaoEvento();
 
       	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
 

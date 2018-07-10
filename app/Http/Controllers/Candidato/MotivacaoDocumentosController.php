@@ -12,7 +12,7 @@ use Notification;
 use Carbon\Carbon;
 use InscricoesEventosMat\Models\User;
 use InscricoesEventosMat\Models\AssociaEmailsRecomendante;
-use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\AreaPosMat;
 use InscricoesEventosMat\Models\ProgramaPos;
 use InscricoesEventosMat\Models\DadoPessoal;
@@ -54,7 +54,7 @@ class MotivacaoDocumentosController extends BaseController
 		
 		$id_candidato = $user->id_user;
 
-		$edital_ativo = new ConfiguraInscricaoPos();
+		$edital_ativo = new ConfiguraInscricaoEvento();
 
 		$id_inscricao_verao = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_verao;
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
@@ -94,7 +94,7 @@ class MotivacaoDocumentosController extends BaseController
 			
 			$id_candidato = $user->id_user;
 
-			$edital_ativo = new ConfiguraInscricaoPos();
+			$edital_ativo = new ConfiguraInscricaoEvento();
 
 			$id_inscricao_verao = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_verao;
 			

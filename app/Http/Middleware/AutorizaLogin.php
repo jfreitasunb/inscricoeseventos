@@ -3,7 +3,7 @@
 namespace InscricoesEventosMat\Http\Middleware;
 
 use Closure;
-use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 
 class AutorizaLogin
 {
@@ -16,7 +16,7 @@ class AutorizaLogin
      */
     public function handle($request, Closure $next)
     {
-        $monitoria = new ConfiguraInscricaoPos();
+        $monitoria = new ConfiguraInscricaoEvento();
 
         $autoriza_inscricao = $monitoria->autoriza_inscricao();
 

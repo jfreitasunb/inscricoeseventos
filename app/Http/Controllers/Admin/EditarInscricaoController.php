@@ -8,7 +8,7 @@ use Mail;
 use Session;
 use Notification;
 use Carbon\Carbon;
-use InscricoesEventosMat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoal, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
+use InscricoesEventosMat\Models\{User, ConfiguraInscricaoEvento, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoal, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
 use Illuminate\Http\Request;
 use InscricoesEventosMat\Mail\EmailVerification;
 use InscricoesEventosMat\Http\Controllers\Controller;
@@ -29,7 +29,7 @@ class EditarInscricaoController extends AdminController
 	public function getEditarInscricao()
 	{
 
-		$edital = new ConfiguraInscricaoPos();
+		$edital = new ConfiguraInscricaoEvento();
 
       	$edital_vigente = $edital->retorna_edital_vigente();
 
@@ -45,7 +45,7 @@ class EditarInscricaoController extends AdminController
 			'tipo_evento' => 'required',
 		]);
 
-		$edital_vigente = ConfiguraInscricaoPos::find((int)$request->id_inscricao_verao);
+		$edital_vigente = ConfiguraInscricaoEvento::find((int)$request->id_inscricao_verao);
 
 		$novos_dados_edital['inicio_inscricao'] = $request->inicio_inscricao;
 		$novos_dados_edital['fim_inscricao'] = $request->fim_inscricao;

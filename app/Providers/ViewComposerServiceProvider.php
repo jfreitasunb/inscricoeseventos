@@ -3,7 +3,7 @@
 namespace InscricoesEventosMat\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 
 
 class ViewComposerServiceProvider extends ServiceProvider
@@ -13,7 +13,7 @@ class ViewComposerServiceProvider extends ServiceProvider
 
         view()->composer('templates.partials.cabecalho', function($view)
             {
-                $periodo = new ConfiguraInscricaoPos();
+                $periodo = new ConfiguraInscricaoEvento();
 
                 $periodo_inscricao = $periodo->retorna_periodo_inscricao();
 

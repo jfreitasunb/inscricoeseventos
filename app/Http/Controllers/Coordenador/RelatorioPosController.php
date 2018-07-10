@@ -11,7 +11,7 @@ use PDF;
 use Notification;
 use Carbon\Carbon;
 use InscricoesEventosMat\Models\User;
-use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\Formacao;
 use InscricoesEventosMat\Models\ProgramaPos;
 use InscricoesEventosMat\Models\FinalizaInscricao;
@@ -42,7 +42,7 @@ class RelatorioPosController extends CoordenadorController
 
 		$user = Auth::user();
 		
-		$relatorio = new ConfiguraInscricaoPos();
+		$relatorio = new ConfiguraInscricaoEvento();
 
       	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
@@ -61,7 +61,7 @@ class RelatorioPosController extends CoordenadorController
 
 		$user = Auth::user();
 		
-		$relatorio = new ConfiguraInscricaoPos();
+		$relatorio = new ConfiguraInscricaoEvento();
 
       	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
