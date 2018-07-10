@@ -37,8 +37,6 @@ class ConfiguraInscricaoEventoController extends CoordenadorController
 
 		$inscricao_pos = new ConfiguraInscricaoEvento();
 
-		// $programas_pos_mat = ProgramaPos::get()->all();
-
         $evento = new TipoEvento();
 
         $eventos_mat = $evento->retorna_tipo_eventos();
