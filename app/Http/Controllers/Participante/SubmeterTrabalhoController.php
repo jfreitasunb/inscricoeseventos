@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Controllers\Candidato;
+namespace InscricoesEventosMat\Http\Controllers\Participante;
 
 use Auth;
 use DB;
@@ -45,13 +45,13 @@ use Illuminate\Support\Facades\Storage;
 /**
 * Classe para manipulação do candidato.
 */
-class DadosAcademicosController extends BaseController
+class SubmeterTrabalhoController extends BaseController
 {
 
 /*
 /Gravação dos dados Acadêmicos
  */
-	public function getDadosAcademicos()
+	public function getSubmeterTrabalho()
 	{
 		$user = $this->SetUser();
 		
@@ -116,7 +116,7 @@ class DadosAcademicosController extends BaseController
 		}
 	}
 
-	public function postDadosAcademicos(Request $request)
+	public function postSubmeterTrabalho(Request $request)
 	{
 		$this->validate($request, [
 			'curso_pos' => 'required_without_all:curso_graduacao',
