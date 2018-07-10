@@ -7,7 +7,7 @@
 return [
     'tela_dados_pessoais' => 'Personal Data',
     'nome' => 'Full Name',
-    'nome_cracha' => 'Badge\'s Name',
+    'nome_cracha' => 'Name to appear on your badge',
     'numero_documento' => 'CPF number (or Passaport)',
     'instituicao' => 'Institution',
     'pais' => 'Country',
