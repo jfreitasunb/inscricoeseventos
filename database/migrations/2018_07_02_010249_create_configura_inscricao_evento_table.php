@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateConfiguraInscricaoVeraoTable extends Migration
+class CreateConfiguraInscricaoEventoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateConfiguraInscricaoVeraoTable extends Migration
      */
     public function up()
     {
-        Schema::create('configura_inscricao_verao', function (Blueprint $table){
-            $table->increments('id_inscricao_verao');
+        Schema::create('configura_inscricao_evento', function (Blueprint $table){
+            $table->increments('id_inscricao_evento');
             $table->date('inicio_inscricao');
             $table->date('fim_inscricao');
-            $table->string('tipo_evento', 7);
+            $table->unsignedInteger('id_tipo_evento');
+            $table->foreign('id_tipo_evento')->references('id')->on('tipo_evento')->onDelete('cascade');
+            $table->text('nome_evento');
             $table->integer('ano_evento');
             $table->unsignedInteger('id_coordenador');
             $table->foreign('id_coordenador')->references('id_user')->on('users')->onDelete('cascade');
@@ -32,6 +34,6 @@ class CreateConfiguraInscricaoVeraoTable extends Migration
      */
     public function down()
     {
-        Schema::drop('configura_inscricao_verao');
+        Schema::drop('configura_inscricao_evento');
     }
 }
