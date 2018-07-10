@@ -15,10 +15,10 @@ class CreateFinalizaInscricaoTable extends Migration
     {
         Schema::create('finaliza_inscricao', function (Blueprint $table){
             $table->increments('id');
-            $table->unsignedInteger('id_candidato');
-            $table->foreign('id_candidato')->references('id_user')->on('users')->onDelete('cascade');
-            $table->unsignedInteger('id_inscricao_verao');
-            $table->foreign('id_inscricao_verao')->references('id_inscricao_verao')->on('configura_inscricao_verao')->onDelete('cascade');
+            $table->unsignedInteger('id_participante');
+            $table->foreign('id_participante')->references('id_user')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('id_inscricao_evento');
+            $table->foreign('id_inscricao_evento')->references('id_inscricao_evento')->on('configura_inscricao_verao')->onDelete('cascade');
             $table->boolean('finalizada');
             $table->timestamps();
         });
