@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Controllers\Candidato;
+namespace InscricoesEventosMat\Http\Controllers\Participante;
 
 use Auth;
 use DB;
@@ -16,7 +16,7 @@ use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\AreaPosMat;
 use InscricoesEventosMat\Models\CartaMotivacao;
 use InscricoesEventosMat\Models\ProgramaPos;
-use InscricoesEventosMat\Models\DadoPessoalCandidato;
+use InscricoesEventosMat\Models\DadoPessoalParticipante;
 use InscricoesEventosMat\Models\Formacao;
 use InscricoesEventosMat\Models\Estado;
 use InscricoesEventosMat\Models\DadoAcademico;
@@ -45,7 +45,7 @@ use Illuminate\Support\Facades\Storage;
 /**
 * Classe para manipulação do candidato.
 */
-class DadosPessoaisController extends BaseController
+class DadosPessoaisParticipanteController extends BaseController
 {
 
 	/*
@@ -65,7 +65,7 @@ class DadosPessoaisController extends BaseController
 
 		$editar_dados = false;
 		
-		$candidato = new DadoPessoalCandidato();
+		$candidato = new DadoPessoalParticipante();
 		$dados_pessoais = $candidato->retorna_dados_pessoais($id_user);
 
 		if (is_null($dados_pessoais)) {
@@ -137,7 +137,7 @@ class DadosPessoaisController extends BaseController
 			];
 		}
 
-		return view('templates.partials.candidato.dados_pessoais')->with(compact('countries','dados','editar_dados'));
+		return view('templates.partials.participante.dados_pessoais')->with(compact('countries','dados','editar_dados'));
 		
 	}
 
@@ -155,7 +155,7 @@ class DadosPessoaisController extends BaseController
 
 		$editar_dados = true;
 		
-		$candidato = new DadoPessoalCandidato();
+		$candidato = new DadoPessoalParticipante();
 		$dados_pessoais = $candidato->retorna_dados_pessoais($id_user);
 
 		if (is_null($dados_pessoais)) {
@@ -191,7 +191,7 @@ class DadosPessoaisController extends BaseController
 		}
 
 
-		return view('templates.partials.candidato.dados_pessoais')->with(compact('countries','dados','editar_dados'));
+		return view('templates.partials.participante.dados_pessoais')->with(compact('countries','dados','editar_dados'));
 		
 	}
 
@@ -228,14 +228,14 @@ class DadosPessoaisController extends BaseController
 			'celular' => Purifier::clean(trim($request->input('celular'))),
 		];
 
-		$candidato =  DadoPessoalCandidato::find($id_candidato);
+		$candidato =  DadoPessoalParticipante::find($id_candidato);
 		
 		$usuario = User::find($id_candidato);
 
 		$update_nome['candidato'] = Purifier::clean(trim($request->input('nome')));;
 
 		if (is_null($candidato)) {
-			$cria_candidato = new DadoPessoalCandidato();
+			$cria_candidato = new DadoPessoalParticipante();
 			$cria_candidato->id_candidato = $id_candidato;
 			$cria_candidato->data_nascimento = $data_nascimento;
 			$cria_candidato->numerorg = Purifier::clean(trim($request->input('numerorg')));

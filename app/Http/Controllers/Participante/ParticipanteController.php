@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Controllers\Candidato;
+namespace InscricoesEventosMat\Http\Controllers\Participante;
 
 use Auth;
 use DB;
