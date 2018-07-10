@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class Formacao extends Model
+class TipoEvento extends Model
 {
     
 

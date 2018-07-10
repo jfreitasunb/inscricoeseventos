@@ -12,7 +12,7 @@ use Notification;
 use Carbon\Carbon;
 use InscricoesEventosMat\Models\User;
 use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
-use InscricoesEventosMat\Models\CursoVeraoMat;
+use InscricoesEventosMat\Models\TipoEvento;
 use InscricoesEventosMat\Models\OfertaCursoVerao;
 use InscricoesEventosMat\Models\Formacao;
 use InscricoesEventosMat\Models\ProgramaPos;
@@ -39,7 +39,7 @@ class ConfiguraInscricaoEventoController extends CoordenadorController
 
 		// $programas_pos_mat = ProgramaPos::get()->all();
 
-        $cursos = new CursoVeraoMat();
+        $cursos = new TipoEvento();
 
         $cursos_verao_mat = $cursos->retorna_cursos_de_verao();
 
