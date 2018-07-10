@@ -9,7 +9,7 @@
 @section('editar_inscricao')
 {!! Form::open(array('route' => 'editar.inscricao', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 
-{!! Form::hidden('id_inscricao_verao', $edital_vigente->id_inscricao_verao, []) !!}
+{!! Form::hidden('id_inscricao_evento', $edital_vigente->id_inscricao_evento, []) !!}
 
 <div class="form-group">
 	{!! Form::label('inicio_inscricao', 'Início da Inscrição', ['class' => 'col-md-4 control-label']) !!}
@@ -24,10 +24,22 @@
 	</div>
 </div>
 <div class="form-group">
-	{!! Form::label('tipo_evento', 'Tipo de evento', ['class' => 'col-md-4 control-label']) !!}
+	{!! Form::label('id_tipo_evento', 'Tipo de evento', ['class' => 'col-md-4 control-label']) !!}
 	<div class="col-md-4">
-		{!! Form::text('tipo_evento', $edital_vigente->tipo_evento, ['class' => 'form-control input-md']) !!}
+		{!! Form::text('id_tipo_evento', $edital_vigente->id_tipo_evento, ['class' => 'form-control input-md']) !!}
 	</div>
+</div>
+<div class="form-group">
+  {!! Form::label('nome_evento', 'Nome do evento', ['class' => 'col-md-4 control-label']) !!}
+  <div class="col-md-4">
+    {!! Form::text('nome_evento', $edital_vigente->nome_evento, ['class' => 'form-control input-md']) !!}
+  </div>
+</div>
+<div class="form-group">
+  {!! Form::label('ano_evento', 'Ano do evento', ['class' => 'col-md-4 control-label']) !!}
+  <div class="col-md-4">
+    {!! Form::text('ano_evento', $edital_vigente->ano_evento, ['class' => 'form-control input-md']) !!}
+  </div>
 </div>
 <div class="form-group">
   <div class="row">
