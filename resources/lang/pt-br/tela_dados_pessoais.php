@@ -7,7 +7,6 @@
 return [
     'tela_dados_pessoais' => 'Dados Pessoais',
     'nome' => 'Nome Completo',
-    'email' => 'E-mail',
     'nome_cracha' => 'Nome para crachá',
     'numero_documento' => 'No. CPF (ou Passaporte)',
     'instituicao' => 'Instituição',

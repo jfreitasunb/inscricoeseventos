@@ -6,16 +6,11 @@
 
 return [
     'tela_dados_pessoais' => 'Personal Data',
-    'nome' => 'Name',
-    'rg' => 'Identification card number',
-    'data_nascimento' => 'Date of birth',
-    'endereco' => 'Address',
-    'endereco_pessoal' => 'Personal Address',
-    'cidade' => 'City',
-    'estado' => 'State',
-    'cep' => 'ZIP code',
+    'nome' => 'Full Name',
+    'nome_cracha' => 'Badge\'s Name',
+    'numero_documento' => 'CPF number (or Passaport)',
+    'instituicao' => 'Institution',
     'pais' => 'Country',
-    'celular' => 'Contact phone',
     'menu_enviar' => 'Submit',
     'menu_editar' => 'Edit',
 
