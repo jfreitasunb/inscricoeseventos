@@ -115,11 +115,11 @@ class AuthController extends BaseController
 		
 		Session::put('user_type', $user_type);
 
-		if ($user_type === 'coordenador') {
+		if ($user_type === 'participante') {
 			notify()->flash(trans('mensagens_gerais.bem_vindo'),'success',[
 				'timer' => 1500,
 			]);
-			return redirect()->intended('coordenador');
+			return redirect()->intended('participante');
 		}
 		
 		if ($user_type === 'admin') {
