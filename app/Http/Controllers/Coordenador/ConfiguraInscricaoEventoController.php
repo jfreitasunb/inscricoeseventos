@@ -39,15 +39,17 @@ class ConfiguraInscricaoEventoController extends CoordenadorController
 
 		// $programas_pos_mat = ProgramaPos::get()->all();
 
-        $cursos = new TipoEvento();
+        $evento = new TipoEvento();
 
-        $cursos_verao_mat = $cursos->retorna_cursos_de_verao();
+        $eventos_mat = $evento->retorna_tipo_eventos();
 
-		return view('templates.partials.coordenador.configurar_inscricao')->with(compact('cursos_verao_mat'));
+		return view('templates.partials.coordenador.configurar_inscricao')->with(compact('eventos_mat'));
 	}
 
 	public function postConfiguraInscricaoEvento(Request $request)
-	{
+	{      
+
+        dd($request);
 		$this->validate($request, [
 			'inicio_inscricao' => 'required|date_format:"d/m/Y"|before:fim_inscricao|after:today',
 			'fim_inscricao' => 'required|date_format:"d/m/Y"|after:inicio_inscricao|after:today',
