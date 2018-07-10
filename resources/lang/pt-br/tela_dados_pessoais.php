@@ -6,10 +6,10 @@
 
 return [
     'tela_dados_pessoais' => 'Dados Pessoais',
-    'nome' => 'Nome',
+    'nome' => 'Nome Completo',
     'email' => 'E-mail',
-    'rg' => 'No. Documento de Identificação',
-    'data_nascimento' => 'Data de Nascimento',
+    'nome_cracha' => 'Nome para crachá',
+    'numero_documento' => 'No. CPF (ou Passaporte)',
     'endereco' => 'Endereço',
     'endereco_pessoal' => 'Endereço Pessoal',
     'cidade' => 'Cidade',
