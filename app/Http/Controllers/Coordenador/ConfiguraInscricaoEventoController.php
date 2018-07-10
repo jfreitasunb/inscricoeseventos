@@ -45,12 +45,13 @@ class ConfiguraInscricaoEventoController extends CoordenadorController
 	}
 
 	public function postConfiguraInscricaoEvento(Request $request)
-	{      
-
-        dd($request);
+	{    
 		$this->validate($request, [
 			'inicio_inscricao' => 'required|date_format:"d/m/Y"|before:fim_inscricao|after:today',
 			'fim_inscricao' => 'required|date_format:"d/m/Y"|after:inicio_inscricao|after:today',
+            'id_evento_desejado' => 'required',
+            'evento_ano' => 'required',
+            'evento_nome' => 'required',
 		]);
 
         if (is_null($request->curso_verao)) {
