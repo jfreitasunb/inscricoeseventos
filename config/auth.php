@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Veraomat\Models\User::class,
+            'model' => InscricoesEventosMat\Models\User::class,
         ],
 
         // 'users' => [
