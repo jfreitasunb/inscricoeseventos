@@ -12,7 +12,7 @@
       <ul class="nav navbar-nav">
         <li class="{{ Route::currentRouteNamed('dados.pessoais') ? 'active' : '' }}"><a href="{{ route('dados.pessoais') }}">{{trans('tela_dados_pessoais.tela_dados_pessoais')}}</a></li>
         @liberamenu(Auth()->user())
-        <li class="{{ Route::currentRouteNamed('dados.academicos') ? 'active' : '' }}"><a href="{{ route('dados.academicos') }}">{{ trans('tela_dados_academicos.tela_dados_academicos') }}</a></li>
+        <li class="{{ Route::currentRouteNamed('submeter.trabalho') ? 'active' : '' }}"><a href="{{ route('submeter.trabalho') }}">{{ trans('tela_dados_academicos.tela_dados_academicos') }}</a></li>
         <li class="{{ Route::currentRouteNamed('dados.escolhas') ? 'active' : '' }}"><a href="{{ route('dados.escolhas') }}">{{ trans('tela_escolha_candidato.tela_escolhas') }}</a></li>
         {{-- <li class="{{ Route::currentRouteNamed('motivacao.documentos') ? 'active' : '' }}"><a href="{{ route('motivacao.documentos') }}">{{ trans('tela_motivacao_documentos.tela_motivacao_documentos') }}</a></li> --}}
         @endliberamenu
