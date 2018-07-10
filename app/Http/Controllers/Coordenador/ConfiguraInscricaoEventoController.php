@@ -9,6 +9,7 @@ use Session;
 use File;
 use PDF;
 use Notification;
+use Purifier;
 use Carbon\Carbon;
 use InscricoesEventosMat\Models\User;
 use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
@@ -66,9 +67,9 @@ class ConfiguraInscricaoEventoController extends CoordenadorController
 
         $id_tipo_evento = (int)Purifier::clean(trim($request->id_evento_desejado));
 
-        $ano_evento = (int)Purifier::clean(trim($request->ano_evento));
+        $ano_evento = (int)Purifier::clean(trim($request->evento_ano));
 
-        $nome_evento = Purifier::clean(trim($request->nome_evento));
+        $nome_evento = Purifier::clean(trim($request->evento_nome));
 
     	if ($configura_nova_inscricao_evento->autoriza_configuracao_inscricao($data_inicio)) {
 
