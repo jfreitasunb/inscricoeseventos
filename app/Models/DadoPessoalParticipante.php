@@ -14,15 +14,10 @@ class DadoPessoalParticipante extends Model
     protected $table = 'dados_pessoais_participante';
 
     protected $fillable = [
-        'nome',
-        'data_nascimento',
-        'numerorg',
-        'endereco',
-        'cep',
+        'nome_cracha',
+        'numero_documento',
+        'instituicao',
         'pais',
-        'estado',
-        'cidade',
-        'celular',
     ];
 
     public function retorna_dados_pessoais($id_participante)
