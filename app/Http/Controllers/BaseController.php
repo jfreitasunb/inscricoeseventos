@@ -2,7 +2,7 @@
 
 namespace InscricoesEventosMat\Http\Controllers;
 
-use InscricoesEventosMat\Models\{ConfiguraInscricaoPos, User};
+use InscricoesEventosMat\Models\{ConfiguraInscricaoEvento, User};
 use Auth;
 use Session;
 
@@ -21,7 +21,7 @@ class BaseController extends Controller
 
 	public function __construct() {
 
-       $inscricao_pos = new ConfiguraInscricaoPos();
+       $inscricao_pos = new ConfiguraInscricaoEvento();
 
 	   $periodo_inscricao = $inscricao_pos->retorna_periodo_inscricao();
 
