@@ -7,6 +7,7 @@ use DB;
 use Mail;
 use Session;
 use Notification;
+use Purifier;
 use Carbon\Carbon;
 use InscricoesEventosMat\Models\{User, ConfiguraInscricaoEvento, AreaPosMat, RelatorioController, FinalizaInscricao, DadoPessoal};
 use Illuminate\Http\Request;
@@ -38,18 +39,21 @@ class EditarInscricaoController extends AdminController
 
 	public function postEditarInscricao(Request $request)
 	{
-
 		$this->validate($request, [
 			'inicio_inscricao' => 'required|date_format:"Y-m-d"|before:fim_inscricao',
 			'fim_inscricao' => 'required|date_format:"Y-m-d"|after:inicio_inscricao',
-			'tipo_evento' => 'required',
+			'id_tipo_evento' => 'required',
+			'nome_evento' => 'required',
+			'ano_evento' => 'required',
 		]);
 
-		$edital_vigente = ConfiguraInscricaoEvento::find((int)$request->id_inscricao_verao);
+		$edital_vigente = ConfiguraInscricaoEvento::find((int)$request->id_inscricao_evento);
 
-		$novos_dados_edital['inicio_inscricao'] = $request->inicio_inscricao;
-		$novos_dados_edital['fim_inscricao'] = $request->fim_inscricao;
-		$novos_dados_edital['tipo_evento'] = $request->tipo_evento;
+		$novos_dados_edital['inicio_inscricao'] = Purifier::clean(trim($request->inicio_inscricao));
+		$novos_dados_edital['fim_inscricao'] = Purifier::clean(trim($request->fim_inscricao));
+		$novos_dados_edital['id_tipo_evento'] = (int)Purifier::clean(trim($request->id_tipo_evento));
+		$novos_dados_edital['nome_evento'] = Purifier::clean(trim($request->nome_evento));
+		$novos_dados_edital['ano_evento'] = (int)Purifier::clean(trim($request->ano_evento));
 
 		$edital_vigente->update($novos_dados_edital);
 
