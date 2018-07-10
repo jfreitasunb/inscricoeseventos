@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DadoPessoalParticipante extends Model
 {
-    protected $primaryKey = 'id_candidato';
+    protected $primaryKey = 'id_participante';
 
     protected $table = 'dados_pessoais_participante';
 
@@ -25,10 +25,10 @@ class DadoPessoalParticipante extends Model
         'celular',
     ];
 
-    public function retorna_dados_pessoais($id_candidato)
+    public function retorna_dados_pessoais($id_participante)
     {
         
-        return $this->where('id_candidato', $id_candidato)->join('users', 'users.id_user', 'dados_pessoais_candidato.id_candidato')->select('users.nome', 'users.email', 'dados_pessoais_candidato.*')->get()->first();
+        return $this->where('id_participante', $id_participante)->join('users', 'users.id_user', 'dados_pessoais_participante.id_participante')->select('users.nome', 'users.email', 'dados_pessoais_participante.*')->get()->first();
 
     }
 }
