@@ -27,7 +27,6 @@ class ConfiguraInscricaoEvento extends Model
         'id_tipo_evento',
         'nome_evento',
         'ano_evento',
-        'tipo_evento',
         'ano_evento',
         'id_coordenador',
     ];
