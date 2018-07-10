@@ -25,7 +25,7 @@
         @participante(Auth()->user())
           @include('templates.partials.participante.menu_participante')
           @yield('dados_pessoais')
-          @yield('dados_academicos')
+          @yield('submete_trabalho')
           @yield('escolha_monitoria')
           {{-- @yield('motivacao_documentos') --}}
           @yield('finaliza_inscricao')

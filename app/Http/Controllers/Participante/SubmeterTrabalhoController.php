@@ -73,47 +73,50 @@ class SubmeterTrabalhoController extends BaseController
 		 		break;
 		 }
 
-		$dados_academicos = new DadoAcademicoCandidato();
+		// $dados_academicos = new DadoAcademicoCandidato();
 
-		$tipo_formacao = new Formacao();
+		// $tipo_formacao = new Formacao();
 
-		$graduacao = $tipo_formacao->where('nivel','Graduação')->whereNotNull($nome_coluna)->pluck($nome_coluna,'id')->prepend(trans('mensagens_gerais.selecionar'),'');
+		// $graduacao = $tipo_formacao->where('nivel','Graduação')->whereNotNull($nome_coluna)->pluck($nome_coluna,'id')->prepend(trans('mensagens_gerais.selecionar'),'');
 
-		$pos = $tipo_formacao->where('nivel','Pós-Graduação')->whereNotNull($nome_coluna)->pluck($nome_coluna,'id')->prepend(trans('mensagens_gerais.selecionar'),'');;
+		// $pos = $tipo_formacao->where('nivel','Pós-Graduação')->whereNotNull($nome_coluna)->pluck($nome_coluna,'id')->prepend(trans('mensagens_gerais.selecionar'),'');;
 
-		$dados_academicos_candidato = $dados_academicos->retorna_dados_academicos($id_candidato);
+		// $dados_academicos_candidato = $dados_academicos->retorna_dados_academicos($id_candidato);
 
-		$nivel_candidato[0] = 'Especialista';
-		$nivel_candidato[1] = 'Mestrado';
-		$nivel_candidato[2] = 'Doutorado';
-
-
-		if (is_null($dados_academicos_candidato)) {
-			$dados = [];
-			$dados['curso_graduacao'] = '';
-			$dados['tipo_curso_graduacao'] = '';
-			$dados['instituicao_graduacao'] = '';
-			$dados['ano_conclusao_graduacao'] = '';
-			$dados['curso_pos'] = '';
-			$dados['tipo_curso_pos'] = '';
-			// $dados['nivel_pos'] = '';
-			$dados['instituicao_pos'] = '';
-			$dados['ano_conclusao_pos'] = '';
-			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao', 'nivel_candidato','pos'));
-		}else{
-			$dados['curso_graduacao'] = $dados_academicos_candidato->curso_graduacao;
-			$dados['tipo_curso_graduacao'] = $dados_academicos_candidato->tipo_curso_graduacao;
-			$dados['instituicao_graduacao'] = $dados_academicos_candidato->instituicao_graduacao;
-			$dados['ano_conclusao_graduacao'] = $dados_academicos_candidato->ano_conclusao_graduacao;
-			$dados['curso_pos'] = $dados_academicos_candidato->curso_pos;
-			// $dados['nivel_pos'] = $dados_academicos_candidato->nivel_pos;
-			$dados['tipo_curso_pos'] = $dados_academicos_candidato->tipo_curso_pos;
-			$dados['instituicao_pos'] = $dados_academicos_candidato->instituicao_pos;
-			$dados['ano_conclusao_pos'] = $dados_academicos_candidato->ano_conclusao_pos;
+		// $nivel_candidato[0] = 'Especialista';
+		// $nivel_candidato[1] = 'Mestrado';
+		// $nivel_candidato[2] = 'Doutorado';
 
 
-			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao', 'nivel_candidato', 'pos'));
-		}
+		// if (is_null($dados_academicos_candidato)) {
+		// 	$dados = [];
+		// 	$dados['curso_graduacao'] = '';
+		// 	$dados['tipo_curso_graduacao'] = '';
+		// 	$dados['instituicao_graduacao'] = '';
+		// 	$dados['ano_conclusao_graduacao'] = '';
+		// 	$dados['curso_pos'] = '';
+		// 	$dados['tipo_curso_pos'] = '';
+		// 	// $dados['nivel_pos'] = '';
+		// 	$dados['instituicao_pos'] = '';
+		// 	$dados['ano_conclusao_pos'] = '';
+		// 	return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao', 'nivel_candidato','pos'));
+		// }else{
+		// 	$dados['curso_graduacao'] = $dados_academicos_candidato->curso_graduacao;
+		// 	$dados['tipo_curso_graduacao'] = $dados_academicos_candidato->tipo_curso_graduacao;
+		// 	$dados['instituicao_graduacao'] = $dados_academicos_candidato->instituicao_graduacao;
+		// 	$dados['ano_conclusao_graduacao'] = $dados_academicos_candidato->ano_conclusao_graduacao;
+		// 	$dados['curso_pos'] = $dados_academicos_candidato->curso_pos;
+		// 	// $dados['nivel_pos'] = $dados_academicos_candidato->nivel_pos;
+		// 	$dados['tipo_curso_pos'] = $dados_academicos_candidato->tipo_curso_pos;
+		// 	$dados['instituicao_pos'] = $dados_academicos_candidato->instituicao_pos;
+		// 	$dados['ano_conclusao_pos'] = $dados_academicos_candidato->ano_conclusao_pos;
+
+
+			// return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao', 'nivel_candidato', 'pos'));
+		// }
+		// 
+		
+		return view('templates.partials.participante.submete_trabalho');
 	}
 
 	public function postSubmeterTrabalho(Request $request)
