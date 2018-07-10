@@ -10,7 +10,7 @@ return [
     'email' => 'E-mail',
     'nome_cracha' => 'Nome para crachá',
     'numero_documento' => 'No. CPF (ou Passaporte)',
-    'endereco' => 'Endereço',
+    'instituicao' => 'Instituição',
     'endereco_pessoal' => 'Endereço Pessoal',
     'cidade' => 'Cidade',
     'estado' => 'Estado',
