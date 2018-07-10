@@ -38,7 +38,7 @@
         <legend >Qual o tipo de evento deseja configurar?</legend>
           @foreach($eventos_mat as $evento)
             <div class="col-md-6">
-              <label class="radio-inline">{!! Form::radio('id_evento_desejado', $evento->id, False , []) !!}{{ " ".$evento->tipo }}</label>
+              <label class="radio-inline">{!! Form::radio('id_evento_desejado', $evento->id, False , ['required' => '']) !!}{{ " ".$evento->tipo }}</label>
             </div> 
           @endforeach
         
