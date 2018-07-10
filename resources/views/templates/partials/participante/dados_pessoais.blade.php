@@ -83,16 +83,16 @@
         
         @if ($editar_dados)
           <div class="row">
-          {!! Form::label('pais', trans('tela_dados_pessoais.pais'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('id_pais', trans('tela_dados_pessoais.pais'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::select('pais', ['' => 'Select'] +$countries,'',array('class'=>'form-control input-md formhorizontal','id'=>'pais'));!!}
+            {!! Form::select('id_pais', ['' => 'Select'] +$countries,'',array('class'=>'form-control input-md formhorizontal','id'=>'pais'));!!}
           </div>
         </div>
         @else
           <div class="row">
-          {!! Form::label('pais', trans('tela_dados_pessoais.pais'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('id_pais', trans('tela_dados_pessoais.pais'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('pais', $dados['pais'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
+            {!! Form::text('id_pais', $dados['id_pais'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
           </div>
         </div>
         @endif
@@ -126,7 +126,7 @@
 
 @section('post-script')
 <script type="text/javascript">
-    $('#pais').change(function(){
+    $('#id_pais').change(function(){
     var paisID = $(this).val();    
     if(paisID){
         $.ajax({

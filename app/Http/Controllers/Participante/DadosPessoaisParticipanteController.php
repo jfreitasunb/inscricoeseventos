@@ -74,7 +74,7 @@ class DadosPessoaisParticipanteController extends BaseController
 					'nome_cracha' => '',
 					'numero_documento' => '',
 					'instituicao' => '',
-					'pais' => '',
+					'id_pais' => '',
 				];
 		}else{
 			
@@ -92,7 +92,7 @@ class DadosPessoaisParticipanteController extends BaseController
 				'nome_cracha' => $dados_pessoais->nome_cracha,
 				'numero_documento' => $dados_pessoais->numero_documento,
 				'instituicao' => $dados_pessoais->instituicao,
-				'pais' => $pais,
+				'id_pais' => $pais,
 			];
 		}
 
@@ -123,7 +123,7 @@ class DadosPessoaisParticipanteController extends BaseController
 					'nome_cracha' => '',
 					'numero_documento' => '',
 					'instituicao' => '',
-					'pais' => '',
+					'id_pais' => '',
 				];
 		}else{
 			$dados = [
@@ -131,7 +131,7 @@ class DadosPessoaisParticipanteController extends BaseController
 				'nome_cracha' => $dados_pessoais->nome_cracha,
 				'numero_documento' => $dados_pessoais->numero_documento,
 				'instituicao' => $dados_pessoais->instituicao,
-				'pais' => $dados_pessoais->pais,
+				'id_pais' => $dados_pessoais->pais,
 			];
 		}
 
@@ -142,61 +142,54 @@ class DadosPessoaisParticipanteController extends BaseController
 
 	public function postDadosPessoais(Request $request)
 	{
+		
 		$this->validate($request, [
 			'nome' => 'max:256',
-			'data_nascimento' => 'required',
-			'numerorg' => 'required|max:21',
-			'endereco' => 'required|max:256',
-			'cep' => 'required|max:20',
-			'pais' => 'required',
-			'celular' => 'max:21',
+			'nome_cracha' => 'required',
+			'numero_documento' => 'required',
+			'instituicao' => 'required',
+			'id_pais' => 'required',
 		]);
 
 		$user = $this->SetUser();
 		
-		$id_candidato = $user->id_user;
+		$id_participante = $user->id_user;
 
-		$nascimento = Carbon::createFromFormat('d/m/Y', Purifier::clean(trim($request->data_nascimento)));
+		$nome = Purifier::clean(trim($request->input('nome')));
+		$nome_cracha = Purifier::clean(trim($request->input('nome_cracha')));
+		$numero_documento = Purifier::clean(trim($request->input('numero_documento')));
+		$instituicao = Purifier::clean(trim($request->input('instituicao')));
+		$id_pais = (int) Purifier::clean($request->input('id_pais'));
 
-		$data_nascimento = $nascimento->format('Y-m-d');
-	
 		$dados_pessoais = [
-			'id_candidato' => $id_candidato,
-			'nome' => Purifier::clean(trim($request->input('nome'))),
-			'data_nascimento' => $data_nascimento,
-			'numerorg' => Purifier::clean(trim($request->input('numerorg'))),
-			'endereco' => Purifier::clean(trim($request->input('endereco'))),
-			'cep' => Purifier::clean(trim($request->input('cep'))),
-			'estado' => $request->input('estado'),
-			'cidade' => $request->input('cidade'),
-			'pais' => $request->input('pais'),
-			'celular' => Purifier::clean(trim($request->input('celular'))),
+			'id_participante' => $id_participante,
+			'nome' => $nome,
+			'nome_cracha' => $nome_cracha,
+			'numero_documento' => $numero_documento,
+			'instituicao' => $instituicao,
+			'id_pais' => $id_pais,
 		];
 
-		$candidato =  DadoPessoalParticipante::find($id_candidato);
+		$participante =  DadoPessoalParticipante::find($id_participante);
 		
-		$usuario = User::find($id_candidato);
+		$usuario = User::find($id_participante);
 
-		$update_nome['candidato'] = Purifier::clean(trim($request->input('nome')));;
+		$update_nome['nome'] = $nome;
 
-		if (is_null($candidato)) {
-			$cria_candidato = new DadoPessoalParticipante();
-			$cria_candidato->id_candidato = $id_candidato;
-			$cria_candidato->data_nascimento = $data_nascimento;
-			$cria_candidato->numerorg = Purifier::clean(trim($request->input('numerorg')));
-			$cria_candidato->endereco = Purifier::clean(trim($request->input('endereco')));
-			$cria_candidato->cep = Purifier::clean(trim($request->input('cep')));
-			$cria_candidato->estado = $request->input('estado');
-			$cria_candidato->cidade = $request->input('cidade');
-			$cria_candidato->pais = $request->input('pais');
-			$cria_candidato->celular = Purifier::clean(trim($request->input('celular')));
-			$cria_candidato->save($dados_pessoais);
+		if (is_null($participante)) {
+			$cria_participante = new DadoPessoalParticipante();
+			$cria_participante->id_participante = $id_participante;
+			$cria_participante->nome_cracha = $nome_cracha;
+			$cria_participante->numero_documento = $numero_documento;
+			$cria_participante->instituicao = $instituicao;
+			$cria_participante->id_pais = $id_pais;
+			$cria_participante->save($dados_pessoais);
 
 			$usuario->update($update_nome);
 
 		}else{
 			
-			$candidato->update($dados_pessoais);
+			$participante->update($dados_pessoais);
 
 			$usuario->update($update_nome);
 		}
@@ -212,8 +205,8 @@ class DadosPessoaisParticipanteController extends BaseController
 
 		$finaliza_inscricao = new FinalizaInscricao();
 
-		$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_candidato,$id_inscricao_pos);
-
+		$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_participante,$id_inscricao_pos);
+		dd("parou");
 		if ($autoriza_inscricao and !$status_inscricao) {
 			return redirect()->route('dados.academicos');
 		}else{

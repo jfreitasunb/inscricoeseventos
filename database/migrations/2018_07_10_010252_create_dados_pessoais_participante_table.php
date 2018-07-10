@@ -20,7 +20,8 @@ class CreateDadosPessoaisParticipanteTable extends Migration
             $table->text('nome_cracha');
             $table->string('numero_documento',50)->nullable();
             $table->string('instituicao',500)->nullable();
-            $table->integer('pais')->nullable();
+            $table->unsignedInteger('id_pais')->nullable();
+            $table->foreign('id_pais')->references('id')->on('paises')->onDelete('cascade');
             $table->timestamps();
         });
     }
