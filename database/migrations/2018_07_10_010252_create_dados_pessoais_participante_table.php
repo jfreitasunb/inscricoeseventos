@@ -18,7 +18,7 @@ class CreateDadosPessoaisParticipanteTable extends Migration
             $table->unsignedInteger('id_participante');
             $table->foreign('id_participante')->references('id_user')->on('users')->onDelete('cascade');
             $table->text('nome_cracha');
-            $table->string('numero_documento',30)->nullable();
+            $table->string('numero_documento',50)->nullable();
             $table->string('instituicao',500)->nullable();
             $table->integer('pais')->nullable();
             $table->timestamps();
