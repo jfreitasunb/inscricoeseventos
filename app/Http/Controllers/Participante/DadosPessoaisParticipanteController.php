@@ -206,9 +206,9 @@ class DadosPessoaisParticipanteController extends BaseController
 		$finaliza_inscricao = new FinalizaInscricao();
 
 		$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_participante,$id_inscricao_pos);
-		dd("parou");
+		
 		if ($autoriza_inscricao and !$status_inscricao) {
-			return redirect()->route('dados.academicos');
+			return redirect()->route('submeter.trabalho');
 		}else{
 
 			return redirect()->back();
