@@ -120,32 +120,18 @@ class DadosPessoaisParticipanteController extends BaseController
 		if (is_null($dados_pessoais)) {
 			$dados = [
 					'nome' => $user->nome,
-					'data_nascimento' => '',
-					'numerorg' => '',
-					'emissorrg' => '',
-					'cpf' => '',
-					'data_nascimento' => '',
-					'endereco' => '',
+					'nome_cracha' => '',
+					'numero_documento' => '',
+					'instituicao' => '',
 					'pais' => '',
-					'estado' => '',
-					'cidade' => '',
-					'cep' => '',
-					'celular' => '',
 				];
 		}else{
 			$dados = [
 				'nome' => $dados_pessoais->nome,
-				'data_nascimento' => $dados_pessoais->data_nascimento,
-				'numerorg' => $dados_pessoais->numerorg,
-				'emissorrg' => $dados_pessoais->emissorrg,
-				'cpf' => $dados_pessoais->cpf,
-				'data_nascimento' => $dados_pessoais->data_nascimento,
-				'endereco' => $dados_pessoais->endereco,
+				'nome_cracha' => $dados_pessoais->nome_cracha,
+				'numero_documento' => $dados_pessoais->numero_documento,
+				'instituicao' => $dados_pessoais->instituicao,
 				'pais' => $dados_pessoais->pais,
-				'estado' => $dados_pessoais->estado,
-				'cidade' => $dados_pessoais->cidade,
-				'cep' => $dados_pessoais->cep,
-				'celular' => $dados_pessoais->celular,
 			];
 		}
 
