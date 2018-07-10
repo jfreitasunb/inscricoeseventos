@@ -26,11 +26,11 @@ Route::prefix('participante')->middleware('user.role:participante,admin','define
 	
 	Route::get('/', '\InscricoesEventosMat\Http\Controllers\Participante\ParticipanteController@getMenu')->name('menu.participante');
 
-	Route::get('dados/pessoais', '\InscricoesEventosMat\Http\Controllers\Participante\DadosPessoaisController@getDadosPessoais')->name('dados.pessoais');
+	Route::get('dados/pessoais', '\InscricoesEventosMat\Http\Controllers\Participante\DadosPessoaisParticipanteController@getDadosPessoais')->name('dados.pessoais');
 
-	Route::get('dados/pessoais/editar', '\InscricoesEventosMat\Http\Controllers\Participante\DadosPessoaisController@getDadosPessoaisEditar')->name('dados.pessoais.editar');
+	Route::get('dados/pessoais/editar', '\InscricoesEventosMat\Http\Controllers\Participante\DadosPessoaisParticipanteController@getDadosPessoaisEditar')->name('dados.pessoais.editar');
 
-	Route::post('dados/pessoais', '\InscricoesEventosMat\Http\Controllers\Participante\DadosPessoaisController@postDadosPessoais')->name('dados.pessoais.salvar');
+	Route::post('dados/pessoais', '\InscricoesEventosMat\Http\Controllers\Participante\DadosPessoaisParticipanteController@postDadosPessoais')->name('dados.pessoais.salvar');
 
 	Route::get('dados/academicos', '\InscricoesEventosMat\Http\Controllers\Participante\DadosAcademicosController@getDadosAcademicos')->name('dados.academicos');
 
