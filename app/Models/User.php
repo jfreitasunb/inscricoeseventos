@@ -100,9 +100,9 @@ class User extends Authenticatable
         }
     }
 
-    public function isCandidato()
+    public function isParticipante()
     {
-        if (auth()->user()->user_type === 'candidato') {
+        if (auth()->user()->user_type === 'participante') {
             return TRUE;
         }else{
             return FALSE;

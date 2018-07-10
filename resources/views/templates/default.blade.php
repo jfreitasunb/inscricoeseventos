@@ -22,15 +22,15 @@
     <div class="container">
       @if (Auth::check())
         {{-- @include($templatemenu) --}}
-        @candidato(Auth()->user())
-          @include('templates.partials.candidato.menu_candidato')
+        @participante(Auth()->user())
+          @include('templates.partials.participante.menu_participante')
           @yield('dados_pessoais')
           @yield('dados_academicos')
           @yield('escolha_monitoria')
           {{-- @yield('motivacao_documentos') --}}
           @yield('finaliza_inscricao')
           @yield('status_cartas')
-        @endcandidato
+        @endparticipante
         @coordenador(Auth()->user())
           @include('templates.partials.coordenador.menu_coordenador')
         @endcoordenador

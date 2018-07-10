@@ -117,7 +117,7 @@ class BladeServiceProvider extends ServiceProvider
             return $user->isCoordenador();
         });
 
-         Blade::if('candidato', function ( $user = null ){
+         Blade::if('participante', function ( $user = null ){
 
             if (!$user && auth()->check()) {
                 $user = auth()->user();
@@ -127,7 +127,7 @@ class BladeServiceProvider extends ServiceProvider
                 return false;
             }
 
-            return $user->isCandidato();
+            return $user->isParticipante();
         });
 
         Blade::if('recomendante', function ( $user = null ){
