@@ -7,11 +7,11 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class DadoPessoalCandidato extends Model
+class DadoPessoalParticipante extends Model
 {
     protected $primaryKey = 'id_candidato';
 
-    protected $table = 'dados_pessoais_candidato';
+    protected $table = 'dados_pessoais_participante';
 
     protected $fillable = [
         'nome',
