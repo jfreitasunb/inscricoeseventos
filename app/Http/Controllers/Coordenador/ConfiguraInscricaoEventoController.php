@@ -82,35 +82,6 @@ class ConfiguraInscricaoEventoController extends CoordenadorController
 			
             $configura_nova_inscricao_evento->save();
 
-            foreach ($request->curso_verao as $curso) {
-                
-                $oferta_verao = new OfertaCursoVerao;
-
-                $oferta_verao->id_inscricao_verao = $configura_nova_inscricao_pos->id_inscricao_verao;
-
-                $oferta_verao->id_curso_verao = (int)$curso;
-
-                $oferta_verao->seleciona_pos = $request->seleciona_pos[(int)$curso];
-
-                $oferta_verao->save();
-            }
-
-            
-
-			// $dados_email['inicio_inscricao'] = $request->inicio_inscricao;
-			// $dados_email['fim_inscricao'] = $request->fim_inscricao;
-
-			// foreach ($request->escolhas_coordenador as $key) {
-				
-			// 	$nome_programa_pos = new ProgramaPos();
-
-			// 	$temp[] = $nome_programa_pos->pega_programa_pos_mat($key, $this->locale_default);
-			// }
-
-			// $dados_email['programa'] = implode('/', $temp);
-
-			// Notification::send(User::find('1'), new NotificaNovaInscricao($dados_email));
-
 			notify()->flash('Inscrição configurada com sucesso.','success');
 			return redirect()->route('configura.inscricao');
     	}else{
