@@ -50,14 +50,14 @@
 
         @if ($editar_dados)
           <div class="row">
-          {!! Form::label('numero_documento', trans('tela_dados_pessoais.rg'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('numero_documento', trans('tela_dados_pessoais.numero_documento'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
             {!! Form::text('numero_documento', $dados['numero_documento'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
           </div>
         </div>
         @else
           <div class="row">
-          {!! Form::label('numero_documento', trans('tela_dados_pessoais.rg'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('numero_documento', trans('tela_dados_pessoais.numero_documento'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
             {!! Form::text('numero_documento', $dados['numero_documento'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
           </div>
