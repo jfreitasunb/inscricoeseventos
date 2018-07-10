@@ -130,19 +130,6 @@ class BladeServiceProvider extends ServiceProvider
             return $user->isParticipante();
         });
 
-        Blade::if('recomendante', function ( $user = null ){
-
-            if (!$user && auth()->check()) {
-                $user = auth()->user();
-            }
-
-            if (!$user) {
-                return false;
-            }
-
-            return $user->isRecomendante();
-        });
-
         Blade::if('liberamenu', function ( $user = null ){
 
             $user = auth()->user();

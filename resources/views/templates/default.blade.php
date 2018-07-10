@@ -34,14 +34,6 @@
         @coordenador(Auth()->user())
           @include('templates.partials.coordenador.menu_coordenador')
         @endcoordenador
-        @recomendante(Auth()->user())
-          @include('templates.partials.recomendante.menu_recomendante')
-          @yield('dados_pessoais_recomendante')
-          @yield('cartas_pendentes')
-          @yield('cartas_anteriores')
-          @yield('carta_parte_inicial')
-          @yield('carta_parte_final')
-        @endrecomendante
         @admin(Auth()->user())
           @include('templates.partials.admin.menu_admin')
           @impersonating_recomendante

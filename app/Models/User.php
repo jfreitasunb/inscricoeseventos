@@ -108,29 +108,4 @@ class User extends Authenticatable
             return FALSE;
         }
     }
-
-    public function isRecomendante()
-    {
-        if (auth()->user()->user_type === 'recomendante') {
-            return TRUE;
-        }else{
-            return FALSE;
-        }
-    }
-
-    public function registra_recomendante($novo_recomendante)
-    {
-        if (is_null($this->retorna_user_por_email($novo_recomendante['email']))){
-                
-            $novo_usuario = new User();
-            $novo_usuario->nome = $novo_recomendante['nome'];
-            $novo_usuario->email = $novo_recomendante['email'];
-            $novo_usuario->password = bcrypt(date("d-m-Y H:i:s:u").str_random(10));
-            $novo_usuario->user_type =  "recomendante";
-            $novo_usuario->ativo = true;
-            $novo_usuario->save();
-        }elseif ($this->retorna_user_por_email($novo_recomendante['email'])->user_type <> "recomendante"){
-                return true;
-        }
-    }
 }
