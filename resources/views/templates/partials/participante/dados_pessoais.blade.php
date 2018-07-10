@@ -18,16 +18,16 @@
         
         @if ($editar_dados)
           <div class="row">
-            {!! Form::label('nome', trans('tela_dados_pessoais.nome'), ['class' => 'col-md-4 control-label'])!!}
+            {!! Form::label('nome_cracha', trans('tela_dados_pessoais.nome_cracha'), ['class' => 'col-md-4 control-label'])!!}
             <div class="col-md-4">
-              {!! Form::text('nome', $dados['nome'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+              {!! Form::text('nome_cracha', $dados['nome_cracha'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
             </div>
           </div>
         @else
           <div class="row">
-            {!! Form::label('nome', trans('tela_dados_pessoais.nome'), ['class' => 'col-md-4 control-label'])!!}
+            {!! Form::label('nome_cracha', trans('tela_dados_pessoais.nome_cracha'), ['class' => 'col-md-4 control-label'])!!}
             <div class="col-md-4">
-              {!! Form::text('nome', $dados['nome'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
+              {!! Form::text('nome_cracha', $dados['nome_cracha'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
             </div>
           </div>
         @endif
@@ -51,16 +51,16 @@
 
         @if ($editar_dados)
           <div class="row">
-          {!! Form::label('numerorg', trans('tela_dados_pessoais.rg'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('numero_documento', trans('tela_dados_pessoais.rg'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('numerorg', $dados['numerorg'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+            {!! Form::text('numero_documento', $dados['numero_documento'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
           </div>
         </div>
         @else
           <div class="row">
-          {!! Form::label('numerorg', trans('tela_dados_pessoais.rg'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('numero_documento', trans('tela_dados_pessoais.rg'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('numerorg', $dados['numerorg'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
+            {!! Form::text('numero_documento', $dados['numero_documento'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
           </div>
         </div>
         @endif
@@ -68,16 +68,16 @@
 
         @if ($editar_dados)
           <div class="row">
-          {!! Form::label('endereco', trans('tela_dados_pessoais.endereco'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('instituicao', trans('tela_dados_pessoais.instituicao'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('endereco', $dados['endereco'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+            {!! Form::text('instituicao', $dados['instituicao'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
           </div>
         </div>
         @else
           <div class="row">
-          {!! Form::label('endereco', trans('tela_dados_pessoais.endereco'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('instituicao', trans('tela_dados_pessoais.instituicao'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('endereco', $dados['endereco'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
+            {!! Form::text('instituicao', $dados['instituicao'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
           </div>
         </div>
         @endif
