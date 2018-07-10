@@ -54,14 +54,7 @@ class ConfiguraInscricaoEventoController extends CoordenadorController
             'evento_nome' => 'required',
 		]);
 
-        if (is_null($request->curso_verao)) {
-                    
-            notify()->flash(trans('Você deve selecionar as disciplinas do Verão.'),'warning');
-
-            return redirect()->back();
-        }
-		
-        $configura_nova_inscricao_pos = new ConfiguraInscricaoEvento();
+        $configura_nova_inscricao_evento = new ConfiguraInscricaoEvento();
 
 		$user = Auth::user();
     
@@ -71,18 +64,20 @@ class ConfiguraInscricaoEventoController extends CoordenadorController
     	$data_inicio = $inicio->format('Y-m-d');
     	$data_fim = $fim->format('Y-m-d');
 
-        $ano_evento = (int)$inicio->format('Y') + 1;
+        $ano_evento = (int)Purifier::clean(trim($request->ano_evento));
 
-    	if ($configura_nova_inscricao_pos->autoriza_configuracao_inscricao($data_inicio)) {
+        $nome_evento = Purifier::clean(trim($request->nome_evento));
 
-    		$configura_nova_inscricao_pos->inicio_inscricao = $data_inicio;
-			$configura_nova_inscricao_pos->fim_inscricao = $data_fim;
-            $configura_nova_inscricao_pos->ano_evento = $ano_evento;
-            $configura_nova_inscricao_pos->tipo_evento = 2;
-			// $configura_nova_inscricao_pos->tipo_evento = implode("_", $request->escolhas_coordenador);
-			$configura_nova_inscricao_pos->id_coordenador = $user->id_user;
+    	if ($configura_nova_inscricao_evento->autoriza_configuracao_inscricao($data_inicio)) {
+
+    		$configura_nova_inscricao_evento->inicio_inscricao = $data_inicio;
+			$configura_nova_inscricao_evento->fim_inscricao = $data_fim;
+            $configura_nova_inscricao_evento->ano_evento = $ano_evento;
+            $configura_nova_inscricao_evento->tipo_evento = 2;
+			// $configura_nova_inscricao_evento->tipo_evento = implode("_", $request->escolhas_coordenador);
+			$configura_nova_inscricao_evento->id_coordenador = $user->id_user;
 			
-            $configura_nova_inscricao_pos->save();
+            $configura_nova_inscricao_evento->save();
 
             foreach ($request->curso_verao as $curso) {
                 
