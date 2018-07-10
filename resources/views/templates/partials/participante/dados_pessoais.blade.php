@@ -18,6 +18,22 @@
         
         @if ($editar_dados)
           <div class="row">
+            {!! Form::label('nome', trans('tela_dados_pessoais.nome'), ['class' => 'col-md-4 control-label'])!!}
+            <div class="col-md-4">
+              {!! Form::text('nome', $dados['nome'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+            </div>
+          </div>
+        @else
+          <div class="row">
+            {!! Form::label('nome_cracha', trans('tela_dados_pessoais.nome'), ['class' => 'col-md-4 control-label'])!!}
+            <div class="col-md-4">
+              {!! Form::text('nome_cracha', $dados['nome_cracha'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
+            </div>
+          </div>
+        @endif
+
+        @if ($editar_dados)
+          <div class="row">
             {!! Form::label('nome_cracha', trans('tela_dados_pessoais.nome_cracha'), ['class' => 'col-md-4 control-label'])!!}
             <div class="col-md-4">
               {!! Form::text('nome_cracha', $dados['nome_cracha'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
