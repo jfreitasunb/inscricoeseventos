@@ -18,39 +18,39 @@ Route::get('api/get-state-list','APIController@getStateList');
 Route::get('api/get-city-list','APIController@getCityList');
 
 /*
-*Área do candidato
+*Área do participante
 */
 
 
-Route::prefix('candidato')->middleware('user.role:candidato,admin','define.locale')->group(function () {
+Route::prefix('participante')->middleware('user.role:participante,admin','define.locale')->group(function () {
 	
-	Route::get('/', '\InscricoesEventosMat\Http\Controllers\Candidato\CandidatoController@getMenu')->name('menu.candidato');
+	Route::get('/', '\InscricoesEventosMat\Http\Controllers\Participante\ParticipanteController@getMenu')->name('menu.participante');
 
-	Route::get('dados/pessoais', '\InscricoesEventosMat\Http\Controllers\Candidato\DadosPessoaisController@getDadosPessoais')->name('dados.pessoais');
+	Route::get('dados/pessoais', '\InscricoesEventosMat\Http\Controllers\Participante\DadosPessoaisController@getDadosPessoais')->name('dados.pessoais');
 
-	Route::get('dados/pessoais/editar', '\InscricoesEventosMat\Http\Controllers\Candidato\DadosPessoaisController@getDadosPessoaisEditar')->name('dados.pessoais.editar');
+	Route::get('dados/pessoais/editar', '\InscricoesEventosMat\Http\Controllers\Participante\DadosPessoaisController@getDadosPessoaisEditar')->name('dados.pessoais.editar');
 
-	Route::post('dados/pessoais', '\InscricoesEventosMat\Http\Controllers\Candidato\DadosPessoaisController@postDadosPessoais')->name('dados.pessoais.salvar');
+	Route::post('dados/pessoais', '\InscricoesEventosMat\Http\Controllers\Participante\DadosPessoaisController@postDadosPessoais')->name('dados.pessoais.salvar');
 
-	Route::get('dados/academicos', '\InscricoesEventosMat\Http\Controllers\Candidato\DadosAcademicosController@getDadosAcademicos')->name('dados.academicos');
+	Route::get('dados/academicos', '\InscricoesEventosMat\Http\Controllers\Participante\DadosAcademicosController@getDadosAcademicos')->name('dados.academicos');
 
-	Route::post('dados/academicos', '\InscricoesEventosMat\Http\Controllers\Candidato\DadosAcademicosController@postDadosAcademicos');
+	Route::post('dados/academicos', '\InscricoesEventosMat\Http\Controllers\Participante\DadosAcademicosController@postDadosAcademicos');
 
-	Route::get('dados/escolhas', '\InscricoesEventosMat\Http\Controllers\Candidato\EscolhaCandidatoController@getEscolhaCandidato')->name('dados.escolhas');
+	Route::get('dados/escolhas', '\InscricoesEventosMat\Http\Controllers\Participante\EscolhaParticipanteController@getEscolhaParticipante')->name('dados.escolhas');
 
-	Route::post('dados/escolhas', '\InscricoesEventosMat\Http\Controllers\Candidato\EscolhaCandidatoController@postEscolhaCandidato');
+	Route::post('dados/escolhas', '\InscricoesEventosMat\Http\Controllers\Participante\EscolhaParticipanteController@postEscolhaParticipante');
 
-	Route::get('motivacao/documentos', '\InscricoesEventosMat\Http\Controllers\Candidato\MotivacaoDocumentosController@getMotivacaoDocumentos')->name('motivacao.documentos');
+	Route::get('motivacao/documentos', '\InscricoesEventosMat\Http\Controllers\Participante\MotivacaoDocumentosController@getMotivacaoDocumentos')->name('motivacao.documentos');
 
-	Route::post('motivacao/documentos', '\InscricoesEventosMat\Http\Controllers\Candidato\MotivacaoDocumentosController@postMotivacaoDocumentos');
+	Route::post('motivacao/documentos', '\InscricoesEventosMat\Http\Controllers\Participante\MotivacaoDocumentosController@postMotivacaoDocumentos');
 
-	Route::get('finalizar/inscricao', '\InscricoesEventosMat\Http\Controllers\Candidato\FinalizarInscricaoController@getFinalizarInscricao')->name('finalizar.inscricao');
+	Route::get('finalizar/inscricao', '\InscricoesEventosMat\Http\Controllers\Participante\FinalizarInscricaoController@getFinalizarInscricao')->name('finalizar.inscricao');
 
-	Route::post('finalizar/inscricao', '\InscricoesEventosMat\Http\Controllers\Candidato\FinalizarInscricaoController@postFinalizarInscricao');
+	Route::post('finalizar/inscricao', '\InscricoesEventosMat\Http\Controllers\Participante\FinalizarInscricaoController@postFinalizarInscricao');
 
-	Route::get('status/cartas', '\InscricoesEventosMat\Http\Controllers\Candidato\StatusCartasController@getStatusCartas')->name('status.cartas');
+	Route::get('status/cartas', '\InscricoesEventosMat\Http\Controllers\Participante\StatusCartasController@getStatusCartas')->name('status.cartas');
 
-	Route::post('status/cartas', '\InscricoesEventosMat\Http\Controllers\Candidato\StatusCartasController@postStatusCartas');
+	Route::post('status/cartas', '\InscricoesEventosMat\Http\Controllers\Participante\StatusCartasController@postStatusCartas');
 });
 
 
