@@ -64,6 +64,8 @@ class ConfiguraInscricaoEventoController extends CoordenadorController
     	$data_inicio = $inicio->format('Y-m-d');
     	$data_fim = $fim->format('Y-m-d');
 
+        $id_tipo_evento = (int)Purifier::clean(trim($request->id_evento_desejado));
+
         $ano_evento = (int)Purifier::clean(trim($request->ano_evento));
 
         $nome_evento = Purifier::clean(trim($request->nome_evento));
@@ -72,9 +74,9 @@ class ConfiguraInscricaoEventoController extends CoordenadorController
 
     		$configura_nova_inscricao_evento->inicio_inscricao = $data_inicio;
 			$configura_nova_inscricao_evento->fim_inscricao = $data_fim;
+            $configura_nova_inscricao_evento->id_tipo_evento = $id_tipo_evento;
+            $configura_nova_inscricao_evento->nome_evento = $nome_evento;
             $configura_nova_inscricao_evento->ano_evento = $ano_evento;
-            $configura_nova_inscricao_evento->tipo_evento = 2;
-			// $configura_nova_inscricao_evento->tipo_evento = implode("_", $request->escolhas_coordenador);
 			$configura_nova_inscricao_evento->id_coordenador = $user->id_user;
 			
             $configura_nova_inscricao_evento->save();
