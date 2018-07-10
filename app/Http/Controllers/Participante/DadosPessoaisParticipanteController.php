@@ -71,34 +71,14 @@ class DadosPessoaisParticipanteController extends BaseController
 		if (is_null($dados_pessoais)) {
 				$dados = [
 					'nome' => $user->nome,
-					'data_nascimento' => '',
-					'numerorg' => '',
-					'emissorrg' => '',
-					'cpf' => '',
-					'data_nascimento' => '',
-					'endereco' => '',
+					'nome_cracha' => '',
+					'numero_documento' => '',
+					'instituicao' => '',
 					'pais' => '',
-					'estado' => '',
-					'cidade' => '',
-					'cep' => '',
-					'celular' => '',
 				];
 		}else{
-			if (!is_null($dados_pessoais->data_nascimento)) {
 			
-				$nascimento = Carbon::createFromFormat('Y-m-d',$dados_pessoais->data_nascimento);
-
-				$data_nascimento = $nascimento->format('d/m/Y');
-			}else{
-				$data_nascimento = '';
-			}
-			
-
 			$nome_pais = new Paises;
-
-			$nome_estado = new Estado;
-
-			$nome_cidade = new Cidade;
 
 			if (!is_null($dados_pessoais->pais)) {
 				$pais = $nome_pais->retorna_nome_pais_por_id($dados_pessoais->pais);
@@ -107,33 +87,12 @@ class DadosPessoaisParticipanteController extends BaseController
 				$pais = '';
 			}
 
-			if (!is_null($dados_pessoais->estado)) {
-				$estado = $nome_estado->retorna_nome_estados_por_id($dados_pessoais->pais, $dados_pessoais->estado);
-			}else{
-
-				$estado = '';
-			}
-
-			if (!is_null($dados_pessoais->cidade)) {
-				$cidade = $nome_cidade->retorna_nome_cidade_por_id($dados_pessoais->cidade, $dados_pessoais->estado);
-			}else{
-
-				$cidade = '';
-			}
-
 			$dados = [
 				'nome' => $dados_pessoais->nome,
-				'data_nascimento' => $dados_pessoais->data_nascimento,
-				'numerorg' => $dados_pessoais->numerorg,
-				'emissorrg' => $dados_pessoais->emissorrg,
-				'cpf' => $dados_pessoais->cpf,
-				'data_nascimento' => $data_nascimento,
-				'endereco' => $dados_pessoais->endereco,
+				'nome_cracha' => $dados_pessoais->nome_cracha,
+				'numero_documento' => $dados_pessoais->numero_documento,
+				'instituicao' => $dados_pessoais->instituicao,
 				'pais' => $pais,
-				'estado' => $estado,
-				'cidade' => $cidade,
-				'cep' => $dados_pessoais->cep,
-				'celular' => $dados_pessoais->celular,
 			];
 		}
 
