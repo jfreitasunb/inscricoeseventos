@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDadosPessoaisCandidatoTable extends Migration
+class CreateDadosPessoaisParticipanteTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateDadosPessoaisCandidatoTable extends Migration
      */
     public function up()
     {
-        Schema::create('dados_pessoais_candidato', function (Blueprint $table){
+        Schema::create('dados_pessoais_participante', function (Blueprint $table){
             $table->Increments('id');
-            $table->unsignedInteger('id_candidato');
-            $table->foreign('id_candidato')->references('id_user')->on('users')->onDelete('cascade');
-            $table->date('data_nascimento')->nullable();
+            $table->unsignedInteger('id_participante');
+            $table->foreign('id_participante')->references('id_user')->on('users')->onDelete('cascade');
+            $table->string('instituicao_recomendante',500)->nullable();
             $table->string('numerorg',30)->nullable();
             $table->string('endereco',255)->nullable();
             $table->string('cep',30)->nullable();
@@ -36,6 +36,6 @@ class CreateDadosPessoaisCandidatoTable extends Migration
      */
     public function down()
     {
-        Schema::drop('dados_pessoais_candidato');
+        Schema::drop('dados_pessoais_participante');
     }
 }
