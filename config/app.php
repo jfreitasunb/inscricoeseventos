@@ -175,15 +175,15 @@ return [
         /*
          * Application Service Providers...
          */
-        Veraomat\Providers\AppServiceProvider::class,
-        Veraomat\Providers\AuthServiceProvider::class,
-        // Veraomat\Providers\BroadcastServiceProvider::class,
-        Veraomat\Providers\EventServiceProvider::class,
-        Veraomat\Providers\RouteServiceProvider::class,
+        InscricoesEventosMat\Providers\AppServiceProvider::class,
+        InscricoesEventosMat\Providers\AuthServiceProvider::class,
+        // InscricoesEventosMat\Providers\BroadcastServiceProvider::class,
+        InscricoesEventosMat\Providers\EventServiceProvider::class,
+        InscricoesEventosMat\Providers\RouteServiceProvider::class,
         ValidadorCpf\CpfServiceProvider54::class,
-        Veraomat\Providers\ViewComposerServiceProvider::class,
+        InscricoesEventosMat\Providers\ViewComposerServiceProvider::class,
         Codecourse\Notify\NotifyServiceProvider::class,
-        Veraomat\Providers\BladeServiceProvider::class,
+        InscricoesEventosMat\Providers\BladeServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
 

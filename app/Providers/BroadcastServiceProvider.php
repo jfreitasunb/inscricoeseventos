@@ -1,6 +1,6 @@
 <?php
 
-namespace Veraomat\Providers;
+namespace InscricoesEventosMat\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;

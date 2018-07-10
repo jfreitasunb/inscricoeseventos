@@ -1,6 +1,6 @@
 <?php
 
-namespace Veraomat\Providers;
+namespace InscricoesEventosMat\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Veraomat\Model' => 'Veraomat\Policies\ModelPolicy',
+        'InscricoesEventosMat\Model' => 'InscricoesEventosMat\Policies\ModelPolicy',
     ];
 
     /**

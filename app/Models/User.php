@@ -1,12 +1,12 @@
 <?php
 
-namespace Veraomat\Models;
+namespace InscricoesEventosMat\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Veraomat\Notifications\ResetPassword as ResetPasswordNotification;
+use InscricoesEventosMat\Notifications\ResetPassword as ResetPasswordNotification;
 use Notification;
-use Veraomat\Notifications\LinkSenha;
+use InscricoesEventosMat\Notifications\LinkSenha;
 
 class User extends Authenticatable
 {

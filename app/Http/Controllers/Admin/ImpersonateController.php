@@ -1,11 +1,11 @@
 <?php
 
-namespace Veraomat\Http\Controllers\Admin;
+namespace InscricoesEventosMat\Http\Controllers\Admin;
 
 use Auth;
 use Illuminate\Http\Request;
-use Veraomat\Http\Controllers\Controller;
-use Veraomat\Models\User;
+use InscricoesEventosMat\Http\Controllers\Controller;
+use InscricoesEventosMat\Models\User;
 
 class ImpersonateController extends Controller
 {   

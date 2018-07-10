@@ -1,6 +1,6 @@
 <?php
 
-namespace Veraomat\Http\Middleware;
+namespace InscricoesEventosMat\Http\Middleware;
 
 use Closure;
 

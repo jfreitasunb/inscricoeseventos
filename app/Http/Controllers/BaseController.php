@@ -1,8 +1,8 @@
 <?php
 
-namespace Veraomat\Http\Controllers;
+namespace InscricoesEventosMat\Http\Controllers;
 
-use Veraomat\Models\{ConfiguraInscricaoPos, User};
+use InscricoesEventosMat\Models\{ConfiguraInscricaoPos, User};
 use Auth;
 use Session;
 

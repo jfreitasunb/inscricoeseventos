@@ -1,12 +1,12 @@
 <?php
 
-namespace Veraomat\Console\Commands;
+namespace InscricoesEventosMat\Console\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Notification;
-use Veraomat\Models\{User, ConfiguraInscricaoPos, DadoRecomendante, CartaRecomendacao};
-use Veraomat\Notifications\EmailRememberRecomendante;
+use InscricoesEventosMat\Models\{User, ConfiguraInscricaoPos, DadoRecomendante, CartaRecomendacao};
+use InscricoesEventosMat\Notifications\EmailRememberRecomendante;
 
 use Illuminate\Console\Command;
 

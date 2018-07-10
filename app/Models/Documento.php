@@ -1,6 +1,6 @@
 <?php
 
-namespace Veraomat\Models;
+namespace InscricoesEventosMat\Models;
 
 use DB;
 use Carbon\Carbon;

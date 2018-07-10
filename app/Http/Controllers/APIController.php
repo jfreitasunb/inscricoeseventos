@@ -1,5 +1,5 @@
 <?php
-namespace Veraomat\Http\Controllers;
+namespace InscricoesEventosMat\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;

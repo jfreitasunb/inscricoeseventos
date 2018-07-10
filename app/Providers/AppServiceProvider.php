@@ -1,9 +1,9 @@
 <?php
 
-namespace Veraomat\Providers;
+namespace InscricoesEventosMat\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Veraomat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
 use Validator;
 use Illuminate\Http\Request;
 

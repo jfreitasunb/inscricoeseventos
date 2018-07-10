@@ -1,8 +1,8 @@
 <?php
 
-namespace Veraomat\Http\Controllers\Coordenador;
+namespace InscricoesEventosMat\Http\Controllers\Coordenador;
 
-use Veraomat\Models\OfertaCursoVerao;
+use InscricoesEventosMat\Models\OfertaCursoVerao;
 use Illuminate\Http\Request;
 
 class OfertaCursoVeraoController extends Controller
@@ -41,7 +41,7 @@ class OfertaCursoVeraoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Veraomat\OfertaCursoVerao  $ofertaCursoVerao
+     * @param  \InscricoesEventosMat\OfertaCursoVerao  $ofertaCursoVerao
      * @return \Illuminate\Http\Response
      */
     public function show(OfertaCursoVerao $ofertaCursoVerao)
@@ -52,7 +52,7 @@ class OfertaCursoVeraoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Veraomat\OfertaCursoVerao  $ofertaCursoVerao
+     * @param  \InscricoesEventosMat\OfertaCursoVerao  $ofertaCursoVerao
      * @return \Illuminate\Http\Response
      */
     public function edit(OfertaCursoVerao $ofertaCursoVerao)
@@ -64,7 +64,7 @@ class OfertaCursoVeraoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Veraomat\OfertaCursoVerao  $ofertaCursoVerao
+     * @param  \InscricoesEventosMat\OfertaCursoVerao  $ofertaCursoVerao
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, OfertaCursoVerao $ofertaCursoVerao)
@@ -75,7 +75,7 @@ class OfertaCursoVeraoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Veraomat\OfertaCursoVerao  $ofertaCursoVerao
+     * @param  \InscricoesEventosMat\OfertaCursoVerao  $ofertaCursoVerao
      * @return \Illuminate\Http\Response
      */
     public function destroy(OfertaCursoVerao $ofertaCursoVerao)

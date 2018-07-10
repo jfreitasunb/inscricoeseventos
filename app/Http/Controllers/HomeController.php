@@ -1,10 +1,10 @@
 <?php
 
-namespace Veraomat\Http\Controllers;
+namespace InscricoesEventosMat\Http\Controllers;
 
 use Auth;
 use Session;
-use Veraomat\Models\User;
+use InscricoesEventosMat\Models\User;
 
 
 /**

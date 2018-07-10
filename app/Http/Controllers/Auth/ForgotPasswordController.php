@@ -1,8 +1,8 @@
 <?php
 
-namespace Veraomat\Http\Controllers\Auth;
+namespace InscricoesEventosMat\Http\Controllers\Auth;
 
-use Veraomat\Http\Controllers\Controller;
+use InscricoesEventosMat\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller

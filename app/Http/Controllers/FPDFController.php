@@ -1,6 +1,6 @@
 <?php
 
-namespace Veraomat\Http\Controllers;
+namespace InscricoesEventosMat\Http\Controllers;
 
 use Auth;
 use DB;
@@ -10,23 +10,23 @@ use File;
 use ZipArchive;
 use Fpdf;
 use Carbon\Carbon;
-use Veraomat\Models\User;
-use Veraomat\Models\ConfiguraInscricaoPos;
-use Veraomat\Models\FinalizaInscricao;
-use Veraomat\Models\DadoPessoal;
-use Veraomat\Models\Paises;
-use Veraomat\Models\Estado;
-use Veraomat\Models\Cidade;
-use Veraomat\Models\DadoAcademico;
-use Veraomat\Models\EscolhaCandidato;
-use Veraomat\Models\ContatoRecomendante;
-use Veraomat\Models\CartaMotivacao;
-use Veraomat\Models\AreaPosMat;
-use Veraomat\Models\ProgramaPos;
+use InscricoesEventosMat\Models\User;
+use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\FinalizaInscricao;
+use InscricoesEventosMat\Models\DadoPessoal;
+use InscricoesEventosMat\Models\Paises;
+use InscricoesEventosMat\Models\Estado;
+use InscricoesEventosMat\Models\Cidade;
+use InscricoesEventosMat\Models\DadoAcademico;
+use InscricoesEventosMat\Models\EscolhaCandidato;
+use InscricoesEventosMat\Models\ContatoRecomendante;
+use InscricoesEventosMat\Models\CartaMotivacao;
+use InscricoesEventosMat\Models\AreaPosMat;
+use InscricoesEventosMat\Models\ProgramaPos;
 use Illuminate\Http\Request;
-use Veraomat\Mail\EmailVerification;
-use Veraomat\Http\Controllers\Controller;
-use Veraomat\Http\Controllers\AuthController;
+use InscricoesEventosMat\Mail\EmailVerification;
+use InscricoesEventosMat\Http\Controllers\Controller;
+use InscricoesEventosMat\Http\Controllers\AuthController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use League\Csv\Writer;
 use Storage;

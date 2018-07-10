@@ -1,9 +1,9 @@
 <?php
 
-namespace Veraomat\Http\Middleware;
+namespace InscricoesEventosMat\Http\Middleware;
 
 use Closure;
-use Veraomat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
 
 class AutorizaLogin
 {

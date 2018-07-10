@@ -1,6 +1,6 @@
 <?php
 
-namespace Veraomat\Notifications;
+namespace InscricoesEventosMat\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;

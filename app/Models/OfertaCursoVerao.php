@@ -1,6 +1,6 @@
 <?php
 
-namespace Veraomat\Models;
+namespace InscricoesEventosMat\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Veraomat\Providers;
+namespace InscricoesEventosMat\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Veraomat\Events\SomeEvent' => [
-            'Veraomat\Listeners\EventListener',
+        'InscricoesEventosMat\Events\SomeEvent' => [
+            'InscricoesEventosMat\Listeners\EventListener',
         ],
     ];
 

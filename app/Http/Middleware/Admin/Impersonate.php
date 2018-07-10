@@ -1,6 +1,6 @@
 <?php
 
-namespace Veraomat\Http\Middleware\Admin;
+namespace InscricoesEventosMat\Http\Middleware\Admin;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Veraomat\Http\Controllers\Coordenador;
+namespace InscricoesEventosMat\Http\Controllers\Coordenador;
 
 use Auth;
 use DB;
@@ -10,19 +10,19 @@ use File;
 use PDF;
 use Notification;
 use Carbon\Carbon;
-use Veraomat\Models\User;
-use Veraomat\Models\ConfiguraInscricaoPos;
-use Veraomat\Models\CursoVeraoMat;
-use Veraomat\Models\CartaRecomendacao;
-use Veraomat\Models\Formacao;
-use Veraomat\Models\ProgramaPos;
-use Veraomat\Models\FinalizaInscricao;
-use Veraomat\Notifications\NotificaNovaInscricao;
+use InscricoesEventosMat\Models\User;
+use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\CursoVeraoMat;
+use InscricoesEventosMat\Models\CartaRecomendacao;
+use InscricoesEventosMat\Models\Formacao;
+use InscricoesEventosMat\Models\ProgramaPos;
+use InscricoesEventosMat\Models\FinalizaInscricao;
+use InscricoesEventosMat\Notifications\NotificaNovaInscricao;
 use Illuminate\Http\Request;
-use Veraomat\Mail\EmailVerification;
-use Veraomat\Http\Controllers\BaseController;
-use Veraomat\Http\Controllers\CidadeController;
-use Veraomat\Http\Controllers\AuthController;
+use InscricoesEventosMat\Mail\EmailVerification;
+use InscricoesEventosMat\Http\Controllers\BaseController;
+use InscricoesEventosMat\Http\Controllers\CidadeController;
+use InscricoesEventosMat\Http\Controllers\AuthController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 

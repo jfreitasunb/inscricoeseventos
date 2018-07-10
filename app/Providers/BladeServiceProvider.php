@@ -1,9 +1,9 @@
 <?php
 
-namespace Veraomat\Providers;
+namespace InscricoesEventosMat\Providers;
 
-use Veraomat\Models\ConfiguraInscricaoPos;
-use Veraomat\Models\FinalizaInscricao;
+use InscricoesEventosMat\Models\ConfiguraInscricaoPos;
+use InscricoesEventosMat\Models\FinalizaInscricao;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;

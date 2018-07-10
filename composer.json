@@ -28,7 +28,7 @@
             "database"
         ],
         "psr-4": {
-            "Veraomat\\": "app/"
+            "InscricoesEventosMat\\": "app/"
         }
     },
     "autoload-dev": {

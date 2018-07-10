@@ -1,6 +1,6 @@
 <?php
 
-namespace Veraomat\Http;
+namespace InscricoesEventosMat\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -16,9 +16,9 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \Veraomat\Http\Middleware\TrimStrings::class,
+        \InscricoesEventosMat\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Veraomat\Http\Middleware\LocaleMiddleware::class,
+        \InscricoesEventosMat\Http\Middleware\LocaleMiddleware::class,
     ];
 
     /**
@@ -28,12 +28,12 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \Veraomat\Http\Middleware\EncryptCookies::class,
+            \InscricoesEventosMat\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \Veraomat\Http\Middleware\VerifyCsrfToken::class,
+            \InscricoesEventosMat\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -55,12 +55,12 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \Veraomat\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \InscricoesEventosMat\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'user.role' => \Veraomat\Http\Middleware\UserRoles::class,
-        'autoriza.inscricao' => \Veraomat\Http\Middleware\AutorizaLogin::class,
-        'define.locale' => \Veraomat\Http\Middleware\LocaleMiddleware::class,
-        'impersonate.user' => \Veraomat\Http\Middleware\Admin\Impersonate::class,
-        'validaassinatura' => \Veraomat\Http\Middleware\ValidaSignature::class,
+        'user.role' => \InscricoesEventosMat\Http\Middleware\UserRoles::class,
+        'autoriza.inscricao' => \InscricoesEventosMat\Http\Middleware\AutorizaLogin::class,
+        'define.locale' => \InscricoesEventosMat\Http\Middleware\LocaleMiddleware::class,
+        'impersonate.user' => \InscricoesEventosMat\Http\Middleware\Admin\Impersonate::class,
+        'validaassinatura' => \InscricoesEventosMat\Http\Middleware\ValidaSignature::class,
     ];
 }

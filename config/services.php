@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => Veraomat\User::class,
+        'model' => InscricoesEventosMat\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

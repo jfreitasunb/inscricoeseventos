@@ -1,7 +1,7 @@
 <?php
 
-namespace Veraomat\Mail;
-use Veraomat\Models\User;
+namespace InscricoesEventosMat\Mail;
+use InscricoesEventosMat\Models\User;
 
 
 use Illuminate\Bus\Queueable;

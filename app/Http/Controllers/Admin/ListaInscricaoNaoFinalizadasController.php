@@ -1,6 +1,6 @@
 <?php
 
-namespace Veraomat\Http\Controllers\Admin;
+namespace InscricoesEventosMat\Http\Controllers\Admin;
 
 use Auth;
 use DB;
@@ -8,14 +8,14 @@ use Mail;
 use Session;
 use Notification;
 use Carbon\Carbon;
-use Veraomat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao,  DadoPessoalCandidato, EscolhaCursoVerao};
+use InscricoesEventosMat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao,  DadoPessoalCandidato, EscolhaCursoVerao};
 use Illuminate\Http\Request;
-use Veraomat\Mail\EmailVerification;
-use Veraomat\Http\Controllers\Controller;
-use Veraomat\Http\Controllers\AuthController;
-use Veraomat\Http\Controllers\CoordenadorController;
-use Veraomat\Http\Controllers\DataTable\UserController;
-use Veraomat\Notifications\NotificaRecomendante;
+use InscricoesEventosMat\Mail\EmailVerification;
+use InscricoesEventosMat\Http\Controllers\Controller;
+use InscricoesEventosMat\Http\Controllers\AuthController;
+use InscricoesEventosMat\Http\Controllers\CoordenadorController;
+use InscricoesEventosMat\Http\Controllers\DataTable\UserController;
+use InscricoesEventosMat\Notifications\NotificaRecomendante;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Pagination\LengthAwarePaginator;

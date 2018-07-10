@@ -1,6 +1,6 @@
 <?php
 
-namespace Veraomat\Exceptions;
+namespace InscricoesEventosMat\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;

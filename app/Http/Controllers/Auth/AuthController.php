@@ -1,24 +1,24 @@
 <?php
 
-namespace Veraomat\Http\Controllers\Auth;
+namespace InscricoesEventosMat\Http\Controllers\Auth;
 
 use Auth;
 use DB;
 use Mail;
 use Session;
 use Purifier;
-use Veraomat\Models\User;
-use Veraomat\Models\Monitoria;
-use Veraomat\Models\DadoPessoal;
+use InscricoesEventosMat\Models\User;
+use InscricoesEventosMat\Models\Monitoria;
+use InscricoesEventosMat\Models\DadoPessoal;
 use Illuminate\Http\Request;
-use Veraomat\Mail\EmailVerification;
-use Veraomat\Http\Controllers\Controller;
-use Veraomat\Http\Controllers\BaseController;
-use Veraomat\Http\Controllers\HomeController;
+use InscricoesEventosMat\Mail\EmailVerification;
+use InscricoesEventosMat\Http\Controllers\Controller;
+use InscricoesEventosMat\Http\Controllers\BaseController;
+use InscricoesEventosMat\Http\Controllers\HomeController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Notification;
 use Illuminate\Notifications\Messages\MailMessage;
-use Veraomat\Notifications\AtivaConta;
+use InscricoesEventosMat\Notifications\AtivaConta;
 
 
 
