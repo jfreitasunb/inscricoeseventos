@@ -19,65 +19,14 @@ class TipoEvento extends Model
     
     protected $primaryKey = 'id';
 
-    protected $table = 'formacao';
+    protected $table = 'tipo_evento';
 
     protected $fillable = [
-        'tipo_ptbr',
-        'tipo_en',
-        'tipo_es',
+        'tipo',
     ];
 
-    public function define_coluna_formacao_por_locale($locale)
+    public function retorna_tipo_eventos()
     {
-        switch ($locale) {
-            case 'en':
-                return 'tipo_en';
-                break;
-
-            case 'es':
-                return 'tipo_es';
-                break;
-            
-            default:
-                return 'tipo_ptbr';
-                break;
-        }
-
+        return $this->all();
     }
-
-    public function pega_tipo_formacao($id,$nivel, $locale)
-    {
-        $nome_coluna = $this->define_coluna_formacao_por_locale($locale);
-        
-        return $this->select($nome_coluna)
-            ->where('id', $id)
-            ->where('nivel', $nivel)
-            ->value($nome_coluna);
-    }
-
-     public function retorna_id_formacao($tipo,$nivel, $locale_candidato)
-     {
-        $nome_coluna = $this->define_coluna_formacao_por_locale($locale);
-
-        return $this->select('id')
-            ->where($nome_coluna, $tipo)
-            ->where('nivel', $nivel)
-            ->value('id');
-    }
-
-    // public function pega_disciplinas_monitoria()
-    // {
-    
-    //     $disciplinas_para_monitoria = $this->select('codigo', 'nome')->orderBy('nome')->get();
-
-    //     return $disciplinas_para_monitoria;
-    // }
-
-    // public function retorna_nome_pelo_codigo($codigo)
-    // {
-    //     $nome_disciplina = $this->select('nome')->where('codigo',$codigo)->get();
-
-    //     return $nome_disciplina;
-
-    // }
 }
