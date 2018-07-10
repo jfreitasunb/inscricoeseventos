@@ -34,44 +34,26 @@
             </div>
           </div>
         </div>
-        {{-- <legend>Escolher os programas para Inscrição:</legend>
-          @foreach($programas_pos_mat as $programa)
-            <div class="col-xs-6">
-              <div class="form-group form-inline">
-                <label>
-                  {!! Form::checkbox('escolhas_coordenador[]', $programa->id_programa_pos, null) !!} {{ $programa->tipo_programa_pos_ptbr }} 
-                </label> 
-              </div>
-            </div>
-          @endforeach --}}
 
-        <legend>Escolher os cursos do Verão:</legend>
-          <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Curso</th>
-                  <th>Seleciona para Pós?</th>
-                </tr>
-              </thead>
-            <tbody>
-              @foreach($cursos_verao_mat as $curso)
-                <tr>
-                  <td>{!! Form::checkbox('curso_verao[]', $curso->id_curso_verao, null) !!} </td>
-                  <td>{{ $curso->nome_ptbr }}</td>
-                  <td><label class="radio-inline">{{ Form::radio('seleciona_pos['.$curso->id_curso_verao.']', 0, True) }}Não</label>
-                  <label class="radio-inline">{{ Form::radio('seleciona_pos['.$curso->id_curso_verao.']', 1, False) }}Sim</label>
-                  </td>
-                  </tr>
-              @endforeach
-            </tbody>
-    </table>
-  </div>
-
-        @if ($errors->has('edital'))
-          <span class="help-block">{{ $errors->first('edital') }}</span>
-        @endif
+        <legend >Qual o tipo de evento deseja configurar?</legend>
+          @foreach($eventos_mat as $evento)
+            <div class="col-md-6">
+              <label class="radio-inline">{!! Form::radio('id_evento_desejado', $evento->id, False , []) !!}{{ " ".$evento->tipo }}</label>
+            </div> 
+          @endforeach
+        
+        
+       <legend>Nome do Evento</legend>
+        <div class="col-xs-3">
+          
+          {!! Form::label('evento_ano', 'Ano', ['class' => 'form-label']) !!}
+          {!! Form::text('evento_ano', null, ['class' => 'form-control', 'required' => '']) !!}
+        </div>
+        <div class="col-xs-9">
+          {!! Form::label('evento_nome', 'Nome', ['class' => 'form-label']) !!}
+          {!! Form::text('evento_nome', null, ['class' => 'form-control', 'required' => '']) !!}
+        </div>
+          
         
         <div class="col-md-10 text-center"> 
           {!! Form::submit('Salvar', array('class' => 'register-submit btn btn-primary btn-lg', 'id' => 'register-submit', 'tabindex' => '4')) !!}
