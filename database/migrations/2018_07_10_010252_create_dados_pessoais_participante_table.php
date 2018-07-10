@@ -17,14 +17,10 @@ class CreateDadosPessoaisParticipanteTable extends Migration
             $table->Increments('id');
             $table->unsignedInteger('id_participante');
             $table->foreign('id_participante')->references('id_user')->on('users')->onDelete('cascade');
-            $table->string('instituicao_recomendante',500)->nullable();
-            $table->string('numerorg',30)->nullable();
-            $table->string('endereco',255)->nullable();
-            $table->string('cep',30)->nullable();
+            $table->text('nome_cracha');
+            $table->string('numero_documento',30)->nullable();
+            $table->string('instituicao',500)->nullable();
             $table->integer('pais')->nullable();
-            $table->integer('estado')->nullable();
-            $table->integer('cidade')->nullable();
-            $table->string('celular',20)->nullable();
             $table->timestamps();
         });
     }
