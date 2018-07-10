@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class ConfiguraInscricaoPos extends Model
+class ConfiguraInscricaoEvento extends Model
 {
     
 
@@ -17,13 +17,16 @@ class ConfiguraInscricaoPos extends Model
      * @var array
      */
     
-    protected $primaryKey = 'id_inscricao_verao';
+    protected $primaryKey = 'id_inscricao_evento';
 
-    protected $table = 'configura_inscricao_verao';
+    protected $table = 'configura_inscricao_evento';
 
     protected $fillable = [ 
         'inicio_inscricao', 
         'fim_inscricao',
+        'id_tipo_evento',
+        'nome_evento',
+        'ano_evento',
         'tipo_evento',
         'ano_evento',
         'id_coordenador',
@@ -32,20 +35,20 @@ class ConfiguraInscricaoPos extends Model
     public function retorna_lista_para_relatorio()
     {
 
-        return $this->orderBy('id_inscricao_verao','desc')->paginate(5);
+        return $this->orderBy('id_inscricao_evento','desc')->paginate(5);
     }
 
      public function retorna_edital_vigente()
     {
 
-        return $this->orderBy('id_inscricao_verao','desc')->get()->first();
+        return $this->orderBy('id_inscricao_evento','desc')->get()->first();
 
     }
 
     public function retorna_inscricao_ativa()
     {
 
-        return $this->get()->sortByDesc('id_inscricao_verao')->first();
+        return $this->get()->sortByDesc('id_inscricao_evento')->first();
 
     }
 
