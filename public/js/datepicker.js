@@ -11,7 +11,7 @@ $(function () {
             locale: 'pt-br',
             format: 'DD/MM/YYYY'
         });
-        $('#edital_ano').datetimepicker({
+        $('#evento_ano').datetimepicker({
             locale: 'pt-br',
             format: 'YYYY',
             viewMode: 'years'
