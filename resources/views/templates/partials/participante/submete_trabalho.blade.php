@@ -15,7 +15,14 @@
     @foreach ($categorias as $categoria)
       <label class="radio-inline">{!! Form::radio('id_categoria', $categoria->id, False , ['required' => '']) !!}{{ " ".$categoria->nome_categoria_ptbr }}</label>
     @endforeach
-    </div>
+  </div>
+</fieldset>
+
+<fieldset class="scheduler-border">
+  <legend class="scheduler-border">{{trans('tela_dados_academicos.apresentar_trabalho')}}</legend>
+  <div class="col-md-6">
+      <label class="radio-inline">{!! Form::radio('apresenta_trabalho', 1, False , ['required' => '']) !!}{{ " ".trans('tela_dados_academicos.sim') }}</label>
+      <label class="radio-inline">{!! Form::radio('apresenta_trabalho', 0, False , ['required' => '']) !!}{{ " ".trans('tela_dados_academicos.nao') }}</label>
   </div>
 </fieldset>
 
