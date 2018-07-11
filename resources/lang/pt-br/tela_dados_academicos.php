@@ -17,6 +17,7 @@ return [
     'autores' => 'Autores (separados por ponto-e-vírgula)',
     'abstract' => 'Abstract Form',
     'abstract_text' => 'Copy and paste into this box your TeX/LaTeX file',
+    'secao' => 'Seção',
     'nivel' => 'Nivel',
     'menu_enviar' => 'Enviar',
     'menu_registro_sucesso_parte_inicial' => 'Conta criada com sucesso. Foi enviado para o e-mail: ',
