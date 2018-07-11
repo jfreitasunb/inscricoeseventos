@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
     {   
         $this->call(AreaPosMatTableSeeder::class);
         $this->call(TipoEventoTableSeeder::class);
+        $this->call(CategoriaParticipanteSeeder::class);
+        $this->call(TipoApresentacaoSeeder::class);
         $this->call(PaisesTableSeeder::class);
         $this->call(EstadosTableSeeder::class);
         $this->call(CidadesTableSeeder::class);
