@@ -17,6 +17,7 @@ use InscricoesEventosMat\Models\AreaPosMat;
 use InscricoesEventosMat\Models\CategoriaParticipante;
 use InscricoesEventosMat\Models\TipoApresentacao;
 use InscricoesEventosMat\Models\TipoParticipacao;
+use InscricoesEventosMat\Models\TrabalhoSubmetido;
 use InscricoesEventosMat\Models\ProgramaPos;
 use InscricoesEventosMat\Models\DadoPessoalCandidato;
 use InscricoesEventosMat\Models\Formacao;
@@ -142,15 +143,48 @@ class SubmeterTrabalhoController extends BaseController
 			'apresentar_trabalho' => 'required',
 		]);
 
+		$user = $this->SetUser();
+
+		$evento = new ConfiguraInscricaoEvento();
+
+		$evento_corrente = $evento->retorna_edital_vigente();
+
+		
+		$id_participante = $user->id_user;
+
+		$id_categoria_participante = (int)$request->id_categoria_participante;
+
+		$id_area_trabalho = (int)$request->id_area_trabalho;
+
+		$titulo_trabalho = Purifier::clean(trim($request->titulo_trabalho));
+
+		$autores_trabalho = Purifier::clean(trim($request->autores_trabalho));
+
+		$abstract_trabalho = Purifier::clean(trim($request->abstract_trabalho));
+
 		$apresentar_trabalho = $request->apresentar_trabalho;
 		if ($apresentar_trabalho === "on") {
 			$apresentar_trabalho = 1;
+
+			$submeter_trabalho = new TrabalhoSubmetido();
+
+			$submeter_trabalho->id_participante = $id_participante;
+			$submeter_trabalho->id_area_trabalho = $id_area_trabalho;
+			$submeter_trabalho->id_inscricao_evento = $evento_corrente->id_inscricao_evento;
+			$submeter_trabalho->titulo_trabalho = $titulo_trabalho;
+			$submeter_trabalho->autores_trabalho = $autores_trabalho;
+			$submeter_trabalho->abstract_trabalho = $abstract_trabalho;
+
+			$submeter_trabalho->save();
+
+
+
 		}else{
 			$apresentar_trabalho = 0;
 			$id_tipo_apresentacao = null;
 		}
 
-		$id_categoria_participante = (int)$request->id_categoria_participante;
+		
 
 		$nova_participacao = new TipoParticipacao();
 
