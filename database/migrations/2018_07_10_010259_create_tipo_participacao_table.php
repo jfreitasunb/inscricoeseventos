@@ -15,6 +15,8 @@ class CreateTipoParticipacaoTable extends Migration
     {
         Schema::create('tipo_participacao', function (Blueprint $table){
             $table->increments('id');
+            $table->unsignedInteger('id_participante');
+            $table->foreign('id_participante')->references('id_user')->on('users')->onDelete('cascade');
             $table->unsignedInteger('id_categoria_participante');
             $table->foreign('id_categoria_participante')->references('id')->on('categoria_participante')->onDelete('cascade');
             $table->unsignedInteger('id_inscricao_evento');
