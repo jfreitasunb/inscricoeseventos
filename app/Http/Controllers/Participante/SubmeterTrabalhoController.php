@@ -14,7 +14,7 @@ use InscricoesEventosMat\Models\User;
 use InscricoesEventosMat\Models\AssociaEmailsRecomendante;
 use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\AreaPosMat;
-use InscricoesEventosMat\Models\CartaMotivacao;
+use InscricoesEventosMat\Models\CategoriaParticipante;
 use InscricoesEventosMat\Models\ProgramaPos;
 use InscricoesEventosMat\Models\DadoPessoalCandidato;
 use InscricoesEventosMat\Models\Formacao;
@@ -116,7 +116,11 @@ class SubmeterTrabalhoController extends BaseController
 		// }
 		// 
 		
-		return view('templates.partials.participante.submete_trabalho');
+		$categoria = new CategoriaParticipante();
+
+		$categorias = $categoria->pega_nome_categoria();
+		
+		return view('templates.partials.participante.submete_trabalho')->with(compact('categorias'));
 	}
 
 	public function postSubmeterTrabalho(Request $request)
