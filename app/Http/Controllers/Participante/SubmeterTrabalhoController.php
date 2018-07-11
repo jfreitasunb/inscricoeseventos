@@ -124,12 +124,18 @@ class SubmeterTrabalhoController extends BaseController
 		$tipo_apresentacao = new TipoApresentacao();
 
 		$tipos_apresentacao = $tipo_apresentacao->pega_tipo_apresentacao();
+
+		$area_pos = new AreaPosMat();
+
+		$secao = $area_pos->retorna_areas_pos($locale_candidato);
 		
-		return view('templates.partials.participante.submete_trabalho')->with(compact('categorias', 'tipos_apresentacao'));
+		return view('templates.partials.participante.submete_trabalho')->with(compact('categorias', 'tipos_apresentacao', 'secao'));
 	}
 
 	public function postSubmeterTrabalho(Request $request)
 	{
+		dd($request);
+		
 		$this->validate($request, [
 			'curso_pos' => 'required_without_all:curso_graduacao',
 			'tipo_curso_pos' => 'required_without_all:tipo_curso_graduacao',
