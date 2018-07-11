@@ -36,26 +36,29 @@
     </div>
   </fieldset>
 
-  <div class="row">
-    {!! Form::label('titulo_trabalho', trans('tela_dados_academicos.titulo_apresentacao'), ['class' => 'col-md-4 control-label', 'required' => ''])!!}
-    <div class="col-md-4">
-    {!! Form::text('titulo_trabalho', '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border">{{trans('tela_dados_academicos.area_trabalho')}}</legend>
+    <div class="row">
+      {!! Form::label('titulo_trabalho', trans('tela_dados_academicos.titulo_apresentacao'), ['class' => 'col-md-4 control-label', 'required' => ''])!!}
+      <div class="col-md-8">
+      {!! Form::text('titulo_trabalho', '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    {!! Form::label('autores_trabalho', trans('tela_dados_academicos.autores'), ['class' => 'col-md-4 control-label', 'required' => ''])!!}
-    <div class="col-md-4">
-    {!! Form::text('autores_trabalho', '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+    <div class="row">
+      {!! Form::label('autores_trabalho', trans('tela_dados_academicos.autores'), ['class' => 'col-md-4 control-label', 'required' => ''])!!}
+      <div class="col-md-8">
+      {!! Form::text('autores_trabalho', '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    {!! Form::label('abstract_trabalho', trans('tela_dados_academicos.abstract_text'), ['class' => 'col-md-4 control-label'])!!}
-    <div class="col-md-4">
-    {!! Form::textarea('abstract_trabalho', '' , ['class' => 'form-control input-md formhorizontal', 'rows' => '5', 'required' => '']) !!}
+    <div class="row">
+      {!! Form::label('abstract_trabalho', trans('tela_dados_academicos.abstract_text'), ['class' => 'col-md-4 control-label'])!!}
+      <div class="col-md-8">
+      {!! Form::textarea('abstract_trabalho', '' , ['class' => 'form-control input-md formhorizontal', 'rows' => '10', 'required' => '']) !!}
+      </div>
     </div>
-  </div>
+  </fieldset>
 
 </div>
 
