@@ -11,7 +11,7 @@ return [
 	'apresentar_trabalho' => 'Deseja apresentar trabalho?',
     'sim' => 'Sim',
     'nao' => 'Não',
-    'ano_conclusao' => 'Ano de conclusão (ou previsão)',
+    'tipo_apresentacao' => 'Em que formato gostaria de apresentar seu trabalho?',
     'curso_pos' => 'Pós-Graduação',
     'nivel' => 'Nivel',
     'menu_enviar' => 'Enviar',

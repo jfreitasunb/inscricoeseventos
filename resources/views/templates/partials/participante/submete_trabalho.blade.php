@@ -28,7 +28,7 @@
 
 <div id="ifYes" style="display:none">
     <fieldset class="scheduler-border">
-  <legend class="scheduler-border">{{trans('tela_dados_academicos.categoria')}}</legend>
+  <legend class="scheduler-border">{{trans('tela_dados_academicos.tipo_apresentacao')}}</legend>
   <div class="col-md-6">
     @foreach ($tipos_apresentacao as $tipo)
       <label class="radio-inline">{!! Form::radio('id_tipo_apresentacao', $tipo->id, False , ['required' => '']) !!}{{ " ".$tipo->nome_tipo_apresentacao_ptbr }}</label>
