@@ -256,6 +256,6 @@ class SubmeterTrabalhoController extends BaseController
 		// 	$dados_academicos->update($cria_dados_academicos);
 		// }
 		dd("morreu aqui");
-		return redirect()->route('dados.escolhas');
+		return redirect()->route('finalizar.inscricao');
 	}
 }
