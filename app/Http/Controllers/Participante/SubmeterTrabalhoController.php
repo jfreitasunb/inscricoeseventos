@@ -15,6 +15,7 @@ use InscricoesEventosMat\Models\AssociaEmailsRecomendante;
 use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\AreaPosMat;
 use InscricoesEventosMat\Models\CategoriaParticipante;
+use InscricoesEventosMat\Models\TipoApresentacao;
 use InscricoesEventosMat\Models\ProgramaPos;
 use InscricoesEventosMat\Models\DadoPessoalCandidato;
 use InscricoesEventosMat\Models\Formacao;
@@ -119,8 +120,12 @@ class SubmeterTrabalhoController extends BaseController
 		$categoria = new CategoriaParticipante();
 
 		$categorias = $categoria->pega_nome_categoria();
+
+		$tipo_apresentacao = new TipoApresentacao();
+
+		$tipos_apresentacao = $tipo_apresentacao->pega_tipo_apresentacao();
 		
-		return view('templates.partials.participante.submete_trabalho')->with(compact('categorias'));
+		return view('templates.partials.participante.submete_trabalho')->with(compact('categorias', 'tipos_apresentacao'));
 	}
 
 	public function postSubmeterTrabalho(Request $request)
