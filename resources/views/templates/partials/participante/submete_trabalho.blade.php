@@ -59,9 +59,9 @@
       </div>
     </div>
     <div class="row">
-      {!! Form::label('secao', trans('tela_dados_academicos.secao'), ['class' => 'col-md-4 control-label'])!!}
+      {!! Form::label('id_area_trabalho', trans('tela_dados_academicos.secao'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-4">
-      <label class="radio">{!! Form::select('secao', $secao, '',  ['class' => 'form-control col-md-6']) !!}</label>
+      <label class="radio">{!! Form::select('id_area_trabalho', $secao, '',  ['class' => 'form-control col-md-6']) !!}</label>
       </div>
     </div>
   </fieldset>
