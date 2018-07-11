@@ -10,11 +10,11 @@
 {!! Form::open(array('route' => 'submeter.trabalho', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 
 <fieldset class="scheduler-border">
-  <legend class="scheduler-border">{{trans('tela_dados_academicos.curso_graduacao')}}</legend>
-  <div class="row">
-    {!! Form::label('curso_graduacao', trans('tela_dados_academicos.curso'), ['class' => 'col-md-4 control-label'])!!}
-      <div class="col-md-4">
-        {!! Form::text('curso_graduacao', '' , ['class' => 'form-control input-md formhorizontal']) !!}
+  <legend class="scheduler-border">{{trans('tela_dados_academicos.categoria')}}</legend>
+  <div class="col-md-6">
+    @foreach ($categorias as $categoria)
+      <label class="radio-inline">{!! Form::radio('id_categoria', $categoria->id, False , ['required' => '']) !!}{{ " ".$categoria->nome_categoria_ptbr }}</label>
+    @endforeach
     </div>
   </div>
 </fieldset>
