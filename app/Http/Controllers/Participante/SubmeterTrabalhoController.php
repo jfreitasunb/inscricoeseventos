@@ -78,12 +78,15 @@ class SubmeterTrabalhoController extends BaseController
 		 	default:
 		 		$nome_coluna = 'tipo_ptbr';
 		 		break;
-		 }
+		}
 
-		 $participacao = new TipoParticipacao();
+		$participacao = new TipoParticipacao();
 
-		 dd($participacao->retorna_participacao($evento_corrente->id_inscricao_evento, $id_participante));
+		$dados_participacao = $participacao->retorna_participacao($evento_corrente->id_inscricao_evento, $id_participante);
 
+		if (count($dados_participacao) == 0) {
+			dd("sem dados");
+		}
 
 		// $dados_academicos = new DadoAcademicoCandidato();
 
