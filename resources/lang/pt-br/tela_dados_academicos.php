@@ -8,9 +8,9 @@
 return [
 	'tela_dados_academicos' => 'Dados Acadêmicos',
     'categoria' => 'Categoria',
-	'curso' => 'Curso',
-    'tipo_curso' => 'Tipo',
-    'instituicao' => 'Instituição',
+	'apresentar_trabalho' => 'Deseja apresentar trabalho?',
+    'sim' => 'Sim',
+    'nao' => 'Não',
     'ano_conclusao' => 'Ano de conclusão (ou previsão)',
     'curso_pos' => 'Pós-Graduação',
     'nivel' => 'Nivel',
