@@ -12,6 +12,7 @@ return [
     'sim' => 'Sim',
     'nao' => 'Não',
     'tipo_apresentacao' => 'Em que formato gostaria de apresentar seu trabalho?',
+    'area_trabalho' => 'Submissão do trabalho',
     'titulo_apresentacao' => 'Título',
     'autores' => 'Autores (separados por ponto-e-vírgula)',
     'abstract' => 'Abstract Form',
