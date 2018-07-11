@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class CursoVeraoMat extends Model
+class AreaPosMat extends Model
 {
     
 
@@ -17,9 +17,9 @@ class CursoVeraoMat extends Model
      * @var array
      */
     
-    protected $primaryKey = 'id_curso_verao';
+    protected $primaryKey = 'id_area_pos';
 
-    protected $table = 'curso_verao_mat';
+    protected $table = 'area_pos_mat';
 
     protected $fillable = [
         'nome_ptbr',
@@ -29,7 +29,7 @@ class CursoVeraoMat extends Model
 
     public function retorna_cursos_de_verao()
     {
-        return $this->where('id_curso_verao','>', 1)->orderBy('id_curso_verao')->get();
+        return $this->where('id_area_pos','>', 1)->orderBy('id_area_pos')->get();
     }
 
     public function define_nome_coluna_por_locale($locale)
@@ -57,8 +57,15 @@ class CursoVeraoMat extends Model
             return null;
         }else{
             return $this->select($nome_coluna)
-            ->where('id_curso_verao', $area_pos)->where('id_curso_verao', '!=', 10)
+            ->where('id_area_pos', $area_pos)->where('id_area_pos', '!=', 10)
             ->value($nome_coluna);
         }   
+    }
+
+    public function retorna_areas_pos($locale)
+    {   
+        $nome_coluna = $this->define_nome_coluna_por_locale($locale);
+
+        return $this->select('id_area_pos', $nome_coluna)->orderBy('id_area_pos')->get()->pluck($nome_coluna, 'id_area_pos');
     }
 }
