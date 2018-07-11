@@ -135,12 +135,10 @@ class SubmeterTrabalhoController extends BaseController
 	public function postSubmeterTrabalho(Request $request)
 	{
 		dd($request);
-		
+
 		$this->validate($request, [
-			'curso_pos' => 'required_without_all:curso_graduacao',
-			'tipo_curso_pos' => 'required_without_all:tipo_curso_graduacao',
-			'instituicao_pos' => 'required_without_all:instituicao_graduacao',
-			'ano_conclusao_pos' => 'required_without_all:ano_conclusao_graduacao',
+			'id_categoria' => 'required',
+			'apresentar_trabalho' => 'required',
 		]);
 
 		$user = $this->SetUser();
