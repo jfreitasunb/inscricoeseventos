@@ -7,7 +7,7 @@
 
 return [
 	'tela_dados_academicos' => 'Dados Acadêmicos',
-    'curso_graduacao' => 'Graduação',
+    'categoria' => 'Categoria',
 	'curso' => 'Curso',
     'tipo_curso' => 'Tipo',
     'instituicao' => 'Instituição',
