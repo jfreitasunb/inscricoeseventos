@@ -27,14 +27,35 @@
 </fieldset>
 
 <div id="ifYes" style="display:none">
-    <fieldset class="scheduler-border">
-  <legend class="scheduler-border">{{trans('tela_dados_academicos.tipo_apresentacao')}}</legend>
-  <div class="col-md-6">
-    @foreach ($tipos_apresentacao as $tipo)
-      <label class="radio-inline">{!! Form::radio('id_tipo_apresentacao', $tipo->id, False , ['required' => '']) !!}{{ " ".$tipo->nome_tipo_apresentacao_ptbr }}</label>
-    @endforeach
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border">{{trans('tela_dados_academicos.tipo_apresentacao')}}</legend>
+    <div class="col-md-6">
+      @foreach ($tipos_apresentacao as $tipo)
+        <label class="radio-inline">{!! Form::radio('id_tipo_apresentacao', $tipo->id, False , ['required' => '']) !!}{{ " ".$tipo->nome_tipo_apresentacao_ptbr }}</label>
+      @endforeach
+    </div>
+  </fieldset>
+
+  <div class="row">
+    {!! Form::label('titulo_trabalho', trans('tela_dados_academicos.titulo_apresentacao'), ['class' => 'col-md-4 control-label', 'required' => ''])!!}
+    <div class="col-md-4">
+    {!! Form::text('titulo_trabalho', '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+    </div>
   </div>
-</fieldset>
+
+  <div class="row">
+    {!! Form::label('autores_trabalho', trans('tela_dados_academicos.autores'), ['class' => 'col-md-4 control-label', 'required' => ''])!!}
+    <div class="col-md-4">
+    {!! Form::text('autores_trabalho', '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+    </div>
+  </div>
+
+  <div class="row">
+    {!! Form::label('abstract_trabalho', trans('tela_dados_academicos.abstract_text'), ['class' => 'col-md-4 control-label'])!!}
+    <div class="col-md-4">
+    {!! Form::textarea('abstract_trabalho', '' , ['class' => 'form-control input-md formhorizontal', 'rows' => '5', 'required' => '']) !!}
+    </div>
+  </div>
 
 </div>
 
