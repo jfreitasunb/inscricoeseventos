@@ -136,8 +136,6 @@ class SubmeterTrabalhoController extends BaseController
 
 	public function postSubmeterTrabalho(Request $request)
 	{
-		
-
 		$this->validate($request, [
 			'id_categoria_participante' => 'required',
 			'apresentar_trabalho' => 'required',
@@ -164,6 +162,14 @@ class SubmeterTrabalhoController extends BaseController
 
 		$apresentar_trabalho = $request->apresentar_trabalho;
 		if ($apresentar_trabalho === "on") {
+
+			$this->validate($request, [
+				'id_area_trabalho' => 'required',
+				'titulo_trabalho' => 'required',
+				'autores_trabalho' => 'required',
+				'abstract_trabalho' => 'required',
+			]);
+
 			$apresentar_trabalho = 1;
 
 			$submeter_trabalho = new TrabalhoSubmetido();
