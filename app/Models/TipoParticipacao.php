@@ -23,6 +23,7 @@ class TipoParticipacao extends Model
 
     protected $fillable = [
         'id_categoria_participante',
+        'id_inscricao_evento',
         'apresentar_trabalho',
         'id_tipo_apresentacao',
     ];
