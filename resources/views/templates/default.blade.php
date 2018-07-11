@@ -26,10 +26,7 @@
           @include('templates.partials.participante.menu_participante')
           @yield('dados_pessoais')
           @yield('submete_trabalho')
-          @yield('escolha_monitoria')
-          {{-- @yield('motivacao_documentos') --}}
           @yield('finaliza_inscricao')
-          @yield('status_cartas')
         @endparticipante
         @coordenador(Auth()->user())
           @include('templates.partials.coordenador.menu_coordenador')
