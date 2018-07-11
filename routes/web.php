@@ -36,14 +36,6 @@ Route::prefix('participante')->middleware('user.role:participante,admin','define
 
 	Route::post('submeter/trabalho', '\InscricoesEventosMat\Http\Controllers\Participante\SubmeterTrabalhoController@postSubmeterTrabalho')->name('submeter.trabalho');
 
-	Route::get('dados/escolhas', '\InscricoesEventosMat\Http\Controllers\Participante\EscolhaParticipanteController@getEscolhaParticipante')->name('dados.escolhas');
-
-	Route::post('dados/escolhas', '\InscricoesEventosMat\Http\Controllers\Participante\EscolhaParticipanteController@postEscolhaParticipante');
-
-	Route::get('motivacao/documentos', '\InscricoesEventosMat\Http\Controllers\Participante\MotivacaoDocumentosController@getMotivacaoDocumentos')->name('motivacao.documentos');
-
-	Route::post('motivacao/documentos', '\InscricoesEventosMat\Http\Controllers\Participante\MotivacaoDocumentosController@postMotivacaoDocumentos');
-
 	Route::get('finalizar/inscricao', '\InscricoesEventosMat\Http\Controllers\Participante\FinalizarInscricaoController@getFinalizarInscricao')->name('finalizar.inscricao');
 
 	Route::post('finalizar/inscricao', '\InscricoesEventosMat\Http\Controllers\Participante\FinalizarInscricaoController@postFinalizarInscricao');
