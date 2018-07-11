@@ -58,7 +58,11 @@ class SubmeterTrabalhoController extends BaseController
 	{
 		$user = $this->SetUser();
 		
-		$id_candidato = $user->id_user;
+		$id_participante = $user->id_user;
+
+		$evento = new ConfiguraInscricaoEvento();
+
+		$evento_corrente = $evento->retorna_edital_vigente();
 		
 		$locale_candidato = Session::get('locale');
 
@@ -75,6 +79,11 @@ class SubmeterTrabalhoController extends BaseController
 		 		$nome_coluna = 'tipo_ptbr';
 		 		break;
 		 }
+
+		 $participacao = new TipoParticipacao();
+
+		 dd($participacao->retorna_participacao($evento_corrente->id_inscricao_evento, $id_participante));
+
 
 		// $dados_academicos = new DadoAcademicoCandidato();
 
@@ -194,7 +203,9 @@ class SubmeterTrabalhoController extends BaseController
 
 		$nova_participacao = new TipoParticipacao();
 
+		$nova_participacao->id_participante = $id_participante;
 		$nova_participacao->id_categoria_participante = $id_categoria_participante;
+		$nova_participacao->id_inscricao_evento = $evento_corrente->id_inscricao_evento;
 		$nova_participacao->apresentar_trabalho = $apresentar_trabalho;
 		$nova_participacao->id_tipo_apresentacao = $id_tipo_apresentacao;
 
