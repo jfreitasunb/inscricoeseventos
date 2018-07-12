@@ -12,20 +12,10 @@ use PDF;
 use Imagick;
 use InscricoesEventosMat\Http\Controllers\FPDFController;
 use Carbon\Carbon;
-use InscricoesEventosMat\Models\OfertaCursoVerao;
 use InscricoesEventosMat\Models\User;
 use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
-use InscricoesEventosMat\Models\CursoVeraoMat;
 use InscricoesEventosMat\Models\FinalizaInscricao;
-use InscricoesEventosMat\Models\DadoPessoalCandidato;
-use InscricoesEventosMat\Models\Paises;
-use InscricoesEventosMat\Models\Formacao;
-use InscricoesEventosMat\Models\Estado;
-use InscricoesEventosMat\Models\Cidade;
-use InscricoesEventosMat\Models\DadoAcademicoCandidato;
-use InscricoesEventosMat\Models\Documento;
-use InscricoesEventosMat\Models\EscolhaCursoVerao;
-use InscricoesEventosMat\Models\ProgramaPos;
+use InscricoesEventosMat\Models\DadoPessoalParticipante;
 use Illuminate\Http\Request;
 use InscricoesEventosMat\Mail\EmailVerification;
 use InscricoesEventosMat\Http\Controllers\Controller;
@@ -57,6 +47,12 @@ class RelatorioController extends BaseController
   {
      
     return DB::table('escolhas_curso_verao')->where('escolhas_curso_verao.id_inscricao_verao', $id_inscricao_verao)->where('escolhas_curso_verao.curso_verao', $programa)->join('finaliza_inscricao', 'finaliza_inscricao.id_candidato', 'escolhas_curso_verao.id_candidato')->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_inscricao_verao', $id_inscricao_verao)->count();
+
+  }
+
+  public function ConsolidaArquivoTex($id_participante, $id_inscricao_evento, $locale_participante)
+  {
+
 
   }
 
@@ -100,7 +96,7 @@ class RelatorioController extends BaseController
   {
     $consolida_dados = [];
 
-    $dado_pessoal = new DadoPessoalCandidato();
+    $dado_pessoal = new DadoPessoalParticipante();
 
     $dados_pessoais_candidato = $dado_pessoal->retorna_dados_pessoais($id_candidato);
 
