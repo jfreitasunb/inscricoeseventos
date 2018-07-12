@@ -46,9 +46,9 @@
     </div>
 
     <div class="row">
-      {!! Form::label('autores_trabalho', trans('tela_dados_academicos.autores'), ['class' => 'col-md-4 control-label', ])!!}
+      {!! Form::label('autor_trabalho', trans('tela_dados_academicos.autores'), ['class' => 'col-md-4 control-label', ])!!}
       <div class="col-md-8">
-      {!! Form::text('autores_trabalho', '' , ['class' => 'form-control input-md formhorizontal']) !!}
+      {!! Form::text('autor_trabalho', '' , ['class' => 'form-control input-md formhorizontal']) !!}
       </div>
     </div>
 
