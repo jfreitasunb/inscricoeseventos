@@ -50,7 +50,7 @@ class FinalizarInscricaoController extends BaseController
 
 		$edital_ativo = new ConfiguraInscricaoEvento();
 
-		$id_inscricao_verao = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_verao;
+		$id_inscricao_evento = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_evento;
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 		$arquivos_editais = storage_path("/app/editais/");
@@ -60,7 +60,7 @@ class FinalizarInscricaoController extends BaseController
 
 			$finaliza_inscricao = new FinalizaInscricao();
 
-			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_participante,$id_inscricao_verao);
+			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_participante,$id_inscricao_evento);
 
 			if ($status_inscricao) {
 
@@ -85,7 +85,7 @@ class FinalizarInscricaoController extends BaseController
 			
 			$novo_relatorio = new RelatorioController;
 
-			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_participante, $id_inscricao_verao, $locale_candidato);
+			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_participante, $id_inscricao_evento, $locale_candidato);
 
 
 			return view('templates.partials.candidato.finalizar_inscricao',compact('ficha_inscricao','nome_candidato'));
@@ -107,7 +107,7 @@ class FinalizarInscricaoController extends BaseController
 
 		$edital_ativo = new ConfiguraInscricaoEvento();
 
-		$id_inscricao_verao = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_verao;
+		$id_inscricao_evento = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_evento;
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
@@ -115,7 +115,7 @@ class FinalizarInscricaoController extends BaseController
 			
 			$finaliza_inscricao = new FinalizaInscricao();
 
-			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_participante,$id_inscricao_verao);
+			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_participante,$id_inscricao_evento);
 
 			if ($status_inscricao) {
 				notify()->flash(trans('mensagens_gerais.inscricao_finalizada'),'warning');
@@ -130,15 +130,15 @@ class FinalizarInscricaoController extends BaseController
 
 			$finalizar_inscricao = new FinalizaInscricao();
 
-			$id_finalizada_anteriormente = $finalizar_inscricao->select('id')->where('id_participante',$id_participante)->where('id_inscricao_verao',$id_inscricao_verao)->pluck('id');
+			$id_finalizada_anteriormente = $finalizar_inscricao->select('id')->where('id_participante',$id_participante)->where('id_inscricao_evento',$id_inscricao_evento)->pluck('id');
 
 			if (count($id_finalizada_anteriormente)>0){
 
-				DB::table('finaliza_inscricao')->where('id', $id_finalizada_anteriormente[0])->where('id_participante', $id_participante)->where('id_inscricao_verao', $id_inscricao_verao)->update(['finalizada' => True]);
+				DB::table('finaliza_inscricao')->where('id', $id_finalizada_anteriormente[0])->where('id_participante', $id_participante)->where('id_inscricao_evento', $id_inscricao_evento)->update(['finalizada' => True]);
 			}else{
 				
 				$finalizar_inscricao->id_participante = $id_participante;
-				$finalizar_inscricao->id_inscricao_verao = $id_inscricao_verao;
+				$finalizar_inscricao->id_inscricao_evento = $id_inscricao_evento;
 				$finalizar_inscricao->finalizada = true;
 				$finalizar_inscricao->save();
 			}
