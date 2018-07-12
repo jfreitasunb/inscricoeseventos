@@ -147,6 +147,7 @@ class SubmeterTrabalhoController extends BaseController
 
 		$evento_corrente = $evento->retorna_edital_vigente();
 
+		$id_inscricao_evento = $evento_corrente->id_inscricao_evento;
 		
 		$id_participante = $user->id_user;
 
@@ -163,6 +164,7 @@ class SubmeterTrabalhoController extends BaseController
 		$abstract_trabalho = Purifier::clean(trim($request->abstract_trabalho));
 
 		$apresentar_trabalho = $request->apresentar_trabalho;
+		
 		if ($apresentar_trabalho === "on") {
 
 			$this->validate($request, [
@@ -176,14 +178,33 @@ class SubmeterTrabalhoController extends BaseController
 
 			$submeter_trabalho = new TrabalhoSubmetido();
 
-			$submeter_trabalho->id_participante = $id_participante;
-			$submeter_trabalho->id_area_trabalho = $id_area_trabalho;
-			$submeter_trabalho->id_inscricao_evento = $evento_corrente->id_inscricao_evento;
-			$submeter_trabalho->titulo_trabalho = $titulo_trabalho;
-			$submeter_trabalho->autor_trabalho = $autor_trabalho;
-			$submeter_trabalho->abstract_trabalho = $abstract_trabalho;
+			$submeteu_trabalho = $submeter_trabalho->retorna_trabalho_submetido($id_participante, $id_inscricao_evento);
 
-			$submeter_trabalho->save();
+			if (is_null($submeteu_trabalho)) {
+				$submeter_trabalho->id_participante = $id_participante;
+				$submeter_trabalho->id_area_trabalho = $id_area_trabalho;
+				$submeter_trabalho->id_inscricao_evento = $evento_corrente->id_inscricao_evento;
+				$submeter_trabalho->titulo_trabalho = $titulo_trabalho;
+				$submeter_trabalho->autor_trabalho = $autor_trabalho;
+				$submeter_trabalho->abstract_trabalho = $abstract_trabalho;
+
+				$submeter_trabalho->save();
+			}else{
+				$atualiza_trabalho = [];
+				
+				$id = $submeteu_trabalho->id;
+
+				$atualiza_trabalho['id_area_trabalho'] = $submeteu_trabalho->id_area_trabalho;
+
+				$atualiza_trabalho['titulo_trabalho'] = $titulo_trabalho;
+
+				$atualiza_trabalho['autor_trabalho'] = $autor_trabalho;
+
+				$atualiza_trabalho['abstract_trabalho'] = $abstract_trabalho;
+
+				$submeteu_trabalho->atualiza_trabalho_submetido($id, $id_inscricao_evento, $id_participante, $atualiza_trabalho);
+				
+			}
 
 		}else{
 			$apresentar_trabalho = 0;
