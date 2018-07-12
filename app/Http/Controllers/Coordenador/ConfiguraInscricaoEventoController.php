@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use InscricoesEventosMat\Models\User;
 use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\TipoEvento;
+use InscricoesEventosMat\Models\AreaPosMat;
 use InscricoesEventosMat\Models\OfertaCursoVerao;
 use InscricoesEventosMat\Models\Formacao;
 use InscricoesEventosMat\Models\ProgramaPos;
@@ -42,11 +43,18 @@ class ConfiguraInscricaoEventoController extends CoordenadorController
 
         $eventos_mat = $evento->retorna_tipo_eventos();
 
-		return view('templates.partials.coordenador.configurar_inscricao')->with(compact('eventos_mat'));
+        $area_pos = new AreaPosMat();
+
+        $secao = $area_pos->retorna_areas_pos($this->locale_default)->toArray();
+
+        array_unshift($secao, "Todas");
+
+		return view('templates.partials.coordenador.configurar_inscricao')->with(compact('eventos_mat', 'secao'));
 	}
 
 	public function postConfiguraInscricaoEvento(Request $request)
 	{    
+
 		$this->validate($request, [
 			'inicio_inscricao' => 'required|date_format:"d/m/Y"|before:fim_inscricao|after:today',
 			'fim_inscricao' => 'required|date_format:"d/m/Y"|after:inicio_inscricao|after:today',
@@ -67,6 +75,8 @@ class ConfiguraInscricaoEventoController extends CoordenadorController
 
         $id_tipo_evento = (int)Purifier::clean(trim($request->id_evento_desejado));
 
+        $id_area_evento = (int)Purifier::clean(trim($request->id_area_evento));
+
         $ano_evento = (int)Purifier::clean(trim($request->evento_ano));
 
         $nome_evento = Purifier::clean(trim($request->evento_nome));
@@ -78,6 +88,13 @@ class ConfiguraInscricaoEventoController extends CoordenadorController
             $configura_nova_inscricao_evento->id_tipo_evento = $id_tipo_evento;
             $configura_nova_inscricao_evento->nome_evento = $nome_evento;
             $configura_nova_inscricao_evento->ano_evento = $ano_evento;
+
+            if ($id_area_evento == 0) {
+                $configura_nova_inscricao_evento->id_area_evento = null;
+            }else{
+                $configura_nova_inscricao_evento->id_area_evento = $id_area_evento;
+            }
+
 			$configura_nova_inscricao_evento->id_coordenador = $user->id_user;
 			
             $configura_nova_inscricao_evento->save();

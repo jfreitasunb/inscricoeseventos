@@ -19,6 +19,8 @@ class CreateConfiguraInscricaoEventoTable extends Migration
             $table->date('fim_inscricao');
             $table->unsignedInteger('id_tipo_evento');
             $table->foreign('id_tipo_evento')->references('id')->on('tipo_evento')->onDelete('cascade');
+            $table->unsignedInteger('id_area_evento')->nullable();
+            $table->foreign('id_area_evento')->references('id_area_pos')->on('area_pos_mat')->onDelete('cascade');
             $table->text('nome_evento');
             $table->integer('ano_evento');
             $table->unsignedInteger('id_coordenador');
