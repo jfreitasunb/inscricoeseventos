@@ -46,7 +46,7 @@ class FinalizarInscricaoController extends BaseController
 		
 		$id_participante = $user->id_user;
 
-		$locale_participante = Session::get('locale');
+		$locale_candidato = Session::get('locale');
 
 		$edital_ativo = new ConfiguraInscricaoEvento();
 
@@ -85,7 +85,7 @@ class FinalizarInscricaoController extends BaseController
 			
 			$novo_relatorio = new RelatorioController;
 
-			$ficha_inscricao = $novo_relatorio->geraAbstract($id_participante, $id_inscricao_evento, $locale_participante);
+			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_participante, $id_inscricao_evento, $locale_candidato);
 
 
 			return view('templates.partials.candidato.finalizar_inscricao',compact('ficha_inscricao','nome_candidato'));
