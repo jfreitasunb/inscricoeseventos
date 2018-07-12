@@ -58,12 +58,16 @@
       {!! Form::textarea('abstract_trabalho', '' , ['class' => 'form-control input-md formhorizontal', 'rows' => '10']) !!}
       </div>
     </div>
-    <div class="row">
+    @if (count($secao) ==1)
+      {!! Form::hidden('id_area_trabalho', array_keys($secao)[0],  []) !!}
+    @else
+      <div class="row">
       {!! Form::label('id_area_trabalho', trans('tela_dados_academicos.secao'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-4">
       <label class="radio">{!! Form::select('id_area_trabalho', $secao, '',  ['class' => 'form-control col-md-6']) !!}</label>
       </div>
     </div>
+    @endif
   </fieldset>
 
 </div>
