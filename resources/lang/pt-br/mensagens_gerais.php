@@ -33,4 +33,5 @@ return [
     'duvidas_pos' => 'Dúvidas sobre o Verão? Clique aqui',
     'departamento' => 'Departamento de Matemática',
     'inscricao_pos' => 'Inscrições para o Verão',
+    'erro' => 'Houve um erro ao atualizar seus dados. Tente novamente mais tarde.',
 ];
