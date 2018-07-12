@@ -170,7 +170,9 @@ class SubmeterTrabalhoController extends BaseController
 
 		$titulo_trabalho = Purifier::clean(trim($request->titulo_trabalho));
 
-		$autores_trabalho = Purifier::clean(trim($request->autores_trabalho));
+		$id_tipo_apresentacao = (int)Purifier::clean(trim($request->id_tipo_apresentacao));
+
+		$autor_trabalho = Purifier::clean(trim($request->autor_trabalho));
 
 		$abstract_trabalho = Purifier::clean(trim($request->abstract_trabalho));
 
@@ -180,7 +182,7 @@ class SubmeterTrabalhoController extends BaseController
 			$this->validate($request, [
 				'id_area_trabalho' => 'required',
 				'titulo_trabalho' => 'required',
-				'autores_trabalho' => 'required',
+				'autor_trabalho' => 'required',
 				'abstract_trabalho' => 'required',
 			]);
 
@@ -192,19 +194,15 @@ class SubmeterTrabalhoController extends BaseController
 			$submeter_trabalho->id_area_trabalho = $id_area_trabalho;
 			$submeter_trabalho->id_inscricao_evento = $evento_corrente->id_inscricao_evento;
 			$submeter_trabalho->titulo_trabalho = $titulo_trabalho;
-			$submeter_trabalho->autores_trabalho = $autores_trabalho;
+			$submeter_trabalho->autor_trabalho = $autor_trabalho;
 			$submeter_trabalho->abstract_trabalho = $abstract_trabalho;
 
 			$submeter_trabalho->save();
 
-
-
 		}else{
 			$apresentar_trabalho = 0;
 			$id_tipo_apresentacao = null;
-		}
-
-		
+		}	
 
 		$nova_participacao = new TipoParticipacao();
 
