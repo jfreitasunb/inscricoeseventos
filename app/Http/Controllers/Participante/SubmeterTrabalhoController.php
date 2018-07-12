@@ -65,6 +65,8 @@ class SubmeterTrabalhoController extends BaseController
 		$evento_corrente = $evento->retorna_edital_vigente();
 
 		$id_area_evento = $evento_corrente->id_area_evento;
+
+		$id_inscricao_evento = $evento_corrente->id_inscricao_evento;
 		
 		$locale_candidato = Session::get('locale');
 
@@ -82,23 +84,54 @@ class SubmeterTrabalhoController extends BaseController
 		 		break;
 		}
 
+		$categoria = new CategoriaParticipante();
+
+		$categorias = $categoria->pega_nome_categoria();
+
+		$tipo_apresentacao = new TipoApresentacao();
+
+		$tipos_apresentacao = $tipo_apresentacao->pega_tipo_apresentacao();
+
+		$area_pos = new AreaPosMat();
+
+		$secao = $area_pos->retorna_areas_evento($id_area_evento, $locale_candidato);
+
 		$participacao = new TipoParticipacao();
 
-		$dados_participacao = $participacao->retorna_participacao($evento_corrente->id_inscricao_evento, $id_participante);
+		$dados_participacao = $participacao->retorna_participacao($id_inscricao_evento, $id_participante);
 
-		if (count($dados_participacao) == 0) {
+		$trabalho_submetido = new TrabalhoSubmetido();
+
+		$dados_trabalho = $trabalho_submetido->retorna_trabalho_submetido($id_participante, $id_inscricao_evento);
+
+		if (is_null($dados_participacao)) {
 			
 			$dados = [];
 			$dados['id_categoria_participante'] = '';
 			$dados['id_tipo_apresentacao'] = '';
+
+		}else{
+
+			$dados = [];
+			$dados['id_categoria_participante'] = $dados_participacao->id_categoria_participante;
+			$dados['id_tipo_apresentacao'] = $dados_participacao->id_tipo_apresentacao;
+			
+		}
+
+		if (is_null($dados_trabalho)) {
 			$dados['titulo_trabalho'] = '';
+			$dados['autor_trabalho'] = '';
 			$dados['abstract_trabalho'] = '';
 			$dados['id_area_trabalho'] = '';
 
-			return view('templates.partials.participante.submete_trabalho')->with(compact('categorias', 'tipos_apresentacao', 'secao', 'dados'));
-
-
+		}else{
+			$dados['titulo_trabalho'] = $dados_trabalho->titulo_trabalho;
+			$dados['autor_trabalho'] = $dados_trabalho->autor_trabalho;
+			$dados['abstract_trabalho'] = $dados_trabalho->abstract_trabalho;
+			$dados['id_area_trabalho'] = $dados_trabalho->id_area_trabalho;
 		}
+
+		return view('templates.partials.participante.submete_trabalho')->with(compact('categorias', 'tipos_apresentacao', 'secao', 'dados'));
 
 		// $dados_academicos = new DadoAcademicoCandidato();
 
@@ -143,19 +176,9 @@ class SubmeterTrabalhoController extends BaseController
 		// }
 		// 
 		
-		$categoria = new CategoriaParticipante();
-
-		$categorias = $categoria->pega_nome_categoria();
-
-		$tipo_apresentacao = new TipoApresentacao();
-
-		$tipos_apresentacao = $tipo_apresentacao->pega_tipo_apresentacao();
-
-		$area_pos = new AreaPosMat();
-
-		$secao = $area_pos->retorna_areas_evento($id_area_evento, $locale_candidato);
 		
-		return view('templates.partials.participante.submete_trabalho')->with(compact('categorias', 'tipos_apresentacao', 'secao'));
+		
+		
 	}
 
 	public function postSubmeterTrabalho(Request $request)

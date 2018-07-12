@@ -36,6 +36,6 @@ class TipoParticipacao extends Model
 
     public function retorna_participacao($id_inscricao_evento, $id_participante)
     {
-        return $this->where('id_inscricao_evento', $id_inscricao_evento)->where('id_participante', $id_participante)->get();  
+        return $this->where('id_inscricao_evento', $id_inscricao_evento)->where('id_participante', $id_participante)->get()->first();  
     }
 }

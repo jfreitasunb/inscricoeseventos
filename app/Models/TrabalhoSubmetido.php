@@ -35,4 +35,10 @@ class TrabalhoSubmetido extends Model
     {
         return $this->get()->all();  
     }
+
+    public function retorna_trabalho_submetido($id_participante, $id_inscricao_evento)
+    {
+
+        return $this->where('id_participante', $id_participante)->where('id_inscricao_evento', $id_inscricao_evento)->get()->first();
+    }
 }

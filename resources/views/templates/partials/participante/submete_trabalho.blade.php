@@ -13,7 +13,7 @@
   <legend class="scheduler-border">{{trans('tela_dados_academicos.categoria')}}</legend>
   <div class="col-md-6">
     @foreach ($categorias as $categoria)
-      <label class="radio-inline">{!! Form::radio('id_categoria_participante', $categoria->id, False , ['required' => '']) !!}{{ " ".$categoria->nome_categoria_ptbr }}</label>
+      <label class="radio-inline">{!! Form::radio('id_categoria_participante', $categoria->id, $dados['id_categoria_participante'] == $categoria->id ? : '', ['required' => '']) !!}{{ " ".$categoria->nome_categoria_ptbr }}</label>
     @endforeach
   </div>
 </fieldset>
@@ -31,7 +31,7 @@
     <legend class="scheduler-border">{{trans('tela_dados_academicos.tipo_apresentacao')}}</legend>
     <div class="col-md-6">
       @foreach ($tipos_apresentacao as $tipo)
-        <label class="radio-inline">{!! Form::radio('id_tipo_apresentacao', $tipo->id, False , []) !!}{{ " ".$tipo->nome_tipo_apresentacao_ptbr }}</label>
+        <label class="radio-inline">{!! Form::radio('id_tipo_apresentacao', $tipo->id, $dados['id_tipo_apresentacao'] == $tipo->id ? : '', []) !!}{{ " ".$tipo->nome_tipo_apresentacao_ptbr }}</label>
       @endforeach
     </div>
   </fieldset>
@@ -41,21 +41,21 @@
     <div class="row">
       {!! Form::label('titulo_trabalho', trans('tela_dados_academicos.titulo_apresentacao'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-8">
-      {!! Form::text('titulo_trabalho', '' , ['class' => 'form-control input-md formhorizontal']) !!}
+      {!! Form::text('titulo_trabalho', $dados['titulo_trabalho'] ? : '', ['class' => 'form-control input-md formhorizontal']) !!}
       </div>
     </div>
 
     <div class="row">
       {!! Form::label('autor_trabalho', trans('tela_dados_academicos.autores'), ['class' => 'col-md-4 control-label', ])!!}
       <div class="col-md-8">
-      {!! Form::text('autor_trabalho', '' , ['class' => 'form-control input-md formhorizontal']) !!}
+      {!! Form::text('autor_trabalho', $dados['autor_trabalho'] ? : '', ['class' => 'form-control input-md formhorizontal']) !!}
       </div>
     </div>
 
     <div class="row">
       {!! Form::label('abstract_trabalho', trans('tela_dados_academicos.abstract_text'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-8">
-      {!! Form::textarea('abstract_trabalho', '' , ['class' => 'form-control input-md formhorizontal', 'rows' => '10']) !!}
+      {!! Form::textarea('abstract_trabalho', $dados['abstract_trabalho'] ? : '', ['class' => 'form-control input-md formhorizontal', 'rows' => '10']) !!}
       </div>
     </div>
     @if (count($secao) ==1)
@@ -64,7 +64,7 @@
       <div class="row">
       {!! Form::label('id_area_trabalho', trans('tela_dados_academicos.secao'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-4">
-      <label class="radio">{!! Form::select('id_area_trabalho', $secao, '',  ['class' => 'form-control col-md-6']) !!}</label>
+      <label class="radio">{!! Form::select('id_area_trabalho', $secao, $dados['id_area_trabalho'] ? : '',  ['class' => 'form-control col-md-6']) !!}</label>
       </div>
     </div>
     @endif
