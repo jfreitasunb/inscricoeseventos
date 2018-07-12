@@ -38,4 +38,15 @@ class TipoParticipacao extends Model
     {
         return $this->where('id_inscricao_evento', $id_inscricao_evento)->where('id_participante', $id_participante)->get()->first();  
     }
+
+    public function atualiza_trabalho_submetido($id, $id_inscricao_evento, $id_participante, $atualiza_participacao)
+    {
+        $atualiza = DB::table('tipo_participacao')->where('id', $id)->where('id_participante', $id_participante)->where('id_inscricao_evento', $id_inscricao_evento)->update($atualiza_participacao);
+        
+        if ($atualiza) {
+            return True;
+        }else{
+            return False;
+        }
+    }
 }
