@@ -14,7 +14,7 @@ use InscricoesEventosMat\Models\User;
 use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\AreaPosMat;
 use InscricoesEventosMat\Models\ProgramaPos;
-use InscricoesEventosMat\Models\DadoPessoalCandidato;
+use InscricoesEventosMat\Models\DadoPessoalParticipante;
 use InscricoesEventosMat\Models\Formacao;
 use InscricoesEventosMat\Models\Estado;
 use InscricoesEventosMat\Models\FinalizaInscricao;
@@ -69,7 +69,7 @@ class FinalizarInscricaoController extends BaseController
 				return redirect()->back();
 			}
 
-			$dados_pessoais = new DadoPessoalCandidato();
+			$dados_pessoais = new DadoPessoalParticipante();
 
 			$dados_pessoais_candidato = $dados_pessoais->retorna_dados_pessoais($id_candidato);
 			
