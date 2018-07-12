@@ -53,6 +53,13 @@
           {!! Form::label('evento_nome', 'Nome', ['class' => 'form-label']) !!}
           {!! Form::text('evento_nome', null, ['class' => 'form-control', 'required' => '']) !!}
         </div>
+
+        <div class="row">
+          {!! Form::label('id_area_evento', "Área do Evento:", ['class' => 'col-md-4 control-label'])!!}
+          <div class="col-xs-9">
+          <label class="radio">{!! Form::select('id_area_evento', $secao, '',  ['class' => 'form-control col-md-6']) !!}</label>
+        </div>
+    </div>
           
         
         <div class="col-md-10 text-center"> 
