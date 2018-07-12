@@ -82,39 +82,6 @@ class FinalizarInscricaoController extends BaseController
 				return redirect()->route('dados.pessoais');
 			}
 
-			$informou_dados_academicos = DadoAcademicoCandidato::find($id_participante);
-
-
-			if (is_null($informou_dados_academicos)) {
-				
-				notify()->flash(trans('tela_finalizar_inscricao.falta_dados_academicos'),'warning');
-
-				return redirect()->route('dados.academicos');
-			}
-
-			$informou_escolha = new EscolhaCursoVerao();
-
-			$escolheu = $informou_escolha->retorna_escolha_candidato($id_participante,$id_inscricao_verao);
-			
-			if (is_null($escolheu)) {
-				
-				notify()->flash(trans('tela_finalizar_inscricao.falta_escolha'),'warning');
-
-				return redirect()->route('dados.escolhas');
-			}
-
-			$documentos = new Documento();
-
-			$enviou_historico = $documentos->retorna_historico($id_participante, $id_inscricao_verao);
-
-			// $enviou_documentos = $documentos->retorna_documento($id_participante, $id_inscricao_verao);
-
-			if (is_null($enviou_historico)) {
-				
-				notify()->flash(trans('tela_finalizar_inscricao.falta_documentos'),'warning');
-
-				return redirect()->route('motivacao.documentos');
-			}
 			
 			$novo_relatorio = new RelatorioController;
 
@@ -158,18 +125,6 @@ class FinalizarInscricaoController extends BaseController
 
 			$dados_pessoais_candidato = User::find($id_participante);
 
-			$escolha_candidato = new EscolhaCursoVerao();
-
-			$programa_pretendido = $escolha_candidato->retorna_escolha_programa($id_participante,$id_inscricao_verao)->programa_pretendido;
-			
-			$programa_pos = new ProgramaPos();
-
-			$nome_programa_pos_candidato = $programa_pos->pega_programa_pos_mat($programa_pretendido, $locale_fixo);
-
-			$dados_email_candidato['nome_candidato'] = $dados_pessoais_candidato->nome;
-			$dados_email_candidato['programa'] = $nome_programa_pos_candidato;
-
-			$dados_email_candidato['ficha_inscricao'] = $request->ficha_inscricao;
 			
 			Notification::send(User::find($id_participante), new NotificaCandidato($dados_email_candidato));
 
