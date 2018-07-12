@@ -41,4 +41,17 @@ class TrabalhoSubmetido extends Model
 
         return $this->where('id_participante', $id_participante)->where('id_inscricao_evento', $id_inscricao_evento)->get()->first();
     }
+
+    public function atualiza_trabalho_submetido($id, $id_inscricao_evento, $id_participante, $atualiza_trabalho)
+    {
+        $atualiza = DB::table('trabalho_submetido')->where('id', $id)->where('id_participante', $id_participante)->where('id_inscricao_evento', $id_inscricao_evento)->update($atualiza_trabalho);
+
+        if ($atualiza) {
+            return True;
+        }else{
+            return False;
+        }
+    }
+
+    
 }
