@@ -39,10 +39,6 @@ Route::prefix('participante')->middleware('user.role:participante,admin','define
 	Route::get('finalizar/inscricao', '\InscricoesEventosMat\Http\Controllers\Participante\FinalizarInscricaoController@getFinalizarInscricao')->name('finalizar.inscricao');
 
 	Route::post('finalizar/inscricao', '\InscricoesEventosMat\Http\Controllers\Participante\FinalizarInscricaoController@postFinalizarInscricao');
-
-	Route::get('status/cartas', '\InscricoesEventosMat\Http\Controllers\Participante\StatusCartasController@getStatusCartas')->name('status.cartas');
-
-	Route::post('status/cartas', '\InscricoesEventosMat\Http\Controllers\Participante\StatusCartasController@postStatusCartas');
 });
 
 
