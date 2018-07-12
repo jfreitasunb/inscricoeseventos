@@ -16,6 +16,7 @@ use InscricoesEventosMat\Models\User;
 use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
 use InscricoesEventosMat\Models\FinalizaInscricao;
 use InscricoesEventosMat\Models\DadoPessoalParticipante;
+use InscricoesEventosMat\Models\TrabalhoSubmetido;
 use Illuminate\Http\Request;
 use InscricoesEventosMat\Mail\EmailVerification;
 use InscricoesEventosMat\Http\Controllers\Controller;
@@ -50,10 +51,14 @@ class RelatorioController extends BaseController
 
   }
 
-  public function ConsolidaArquivoTex($id_participante, $id_inscricao_evento, $locale_participante)
+  public function ConsolidaArquivoTex($id_participante, $id_inscricao_evento)
   {
 
+    $trabalho = new TrabalhoSubmetido();
 
+    $trabalho_submetido = $trabalho->retorna_trabalho_submetido($id_participante, $id_inscricao_evento);
+
+    dd($trabalho_submetido);
   }
 
 
