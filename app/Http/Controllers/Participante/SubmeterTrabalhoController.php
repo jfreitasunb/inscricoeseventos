@@ -86,9 +86,19 @@ class SubmeterTrabalhoController extends BaseController
 
 		$dados_participacao = $participacao->retorna_participacao($evento_corrente->id_inscricao_evento, $id_participante);
 
-		// if (count($dados_participacao) == 0) {
-		// 	dd("sem dados");
-		// }
+		if (count($dados_participacao) == 0) {
+			
+			$dados = [];
+			$dados['id_categoria_participante'] = '';
+			$dados['id_tipo_apresentacao'] = '';
+			$dados['titulo_trabalho'] = '';
+			$dados['abstract_trabalho'] = '';
+			$dados['id_area_trabalho'] = '';
+
+			return view('templates.partials.participante.submete_trabalho')->with(compact('categorias', 'tipos_apresentacao', 'secao', 'dados'));
+
+
+		}
 
 		// $dados_academicos = new DadoAcademicoCandidato();
 
