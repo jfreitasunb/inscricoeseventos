@@ -202,7 +202,7 @@ class SubmeterTrabalhoController extends BaseController
 
 				$atualiza_trabalho['abstract_trabalho'] = $abstract_trabalho;
 
-				$submeteu_trabalho->atualiza_trabalho_submetido($id, $id_inscricao_evento, $id_participante, $atualiza_trabalho);
+				$status_trabalho = $submeteu_trabalho->atualiza_trabalho_submetido($id, $id_inscricao_evento, $id_participante, $atualiza_trabalho);
 				
 			}
 
@@ -213,14 +213,40 @@ class SubmeterTrabalhoController extends BaseController
 
 		$nova_participacao = new TipoParticipacao();
 
-		$nova_participacao->id_participante = $id_participante;
-		$nova_participacao->id_categoria_participante = $id_categoria_participante;
-		$nova_participacao->id_inscricao_evento = $evento_corrente->id_inscricao_evento;
-		$nova_participacao->apresentar_trabalho = $apresentar_trabalho;
-		$nova_participacao->id_tipo_apresentacao = $id_tipo_apresentacao;
+		$submeteu_participacao = $nova_participacao->retorna_participacao($id_inscricao_evento, $id_participante);
 
-		$nova_participacao->save();
+		if (is_null($submeteu_participacao)) {
+			$nova_participacao->id_participante = $id_participante;
+			$nova_participacao->id_categoria_participante = $id_categoria_participante;
+			$nova_participacao->id_inscricao_evento = $id_inscricao_evento;
+			$nova_participacao->apresentar_trabalho = $apresentar_trabalho;
+			$nova_participacao->id_tipo_apresentacao = $id_tipo_apresentacao;
 
+			$nova_participacao->save();
+		}else{
+
+			$atualiza_participacao = [];
+
+			$id_participacao = $submeteu_participacao->id;
+
+			$atualiza_participacao['id_categoria_participante'] = $id_categoria_participante;
+
+			$atualiza_participacao['apresentar_trabalho'] = $apresentar_trabalho;
+
+			$atualiza_participacao['id_tipo_apresentacao'] = $id_tipo_apresentacao;
+
+			$status_participacao = $submeteu_participacao->atualiza_trabalho_submetido($id_participacao, $id_inscricao_evento, $id_participante, $atualiza_participacao);
+
+
+		}
+		
+		if ($status_trabalho AND $status_participacao) {
+			notify()->flash(trans('mensagens_gerais.mensagem_sucesso'),'success');
+			return redirect()->route('finalizar.inscricao');
+		}else{
+			notify()->flash(trans('mensagens_gerais.erro'),'error');
+			return redirect()->back();
+		}
 
 
 		
@@ -277,6 +303,6 @@ class SubmeterTrabalhoController extends BaseController
 		// 	$dados_academicos->update($cria_dados_academicos);
 		// }
 		dd("morreu aqui");
-		return redirect()->route('finalizar.inscricao');
+		
 	}
 }
