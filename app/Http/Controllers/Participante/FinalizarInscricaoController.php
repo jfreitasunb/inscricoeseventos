@@ -29,6 +29,7 @@ use InscricoesEventosMat\Http\Controllers\CidadeController;
 use InscricoesEventosMat\Http\Controllers\BaseController;
 use InscricoesEventosMat\Http\Controllers\RelatorioController;
 use InscricoesEventosMat\Http\Controllers\APIController;
+use InscricoesEventosMat\Http\Controllers\LatexTemplateController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use InscricoesEventosMat\Http\Requests;
 use Illuminate\Support\Facades\Response;
@@ -41,6 +42,7 @@ class FinalizarInscricaoController extends BaseController
 {
 
 	public function getFinalizarInscricao(){
+
 
 		$user = $this->SetUser();
 		
@@ -85,10 +87,11 @@ class FinalizarInscricaoController extends BaseController
 			
 			$novo_relatorio = new RelatorioController;
 
-			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_participante, $id_inscricao_evento, $locale_candidato);
+			$ficha_inscricao = $novo_relatorio->geraAbstract($id_participante, $id_inscricao_evento);
 
+			$ficha_inscricao = str_replace("/var/www/inscricoeseventosmat/", "storage/public/temp/", $ficha_inscricao);
 
-			return view('templates.partials.candidato.finalizar_inscricao',compact('ficha_inscricao','nome_candidato'));
+			return view('templates.partials.participante.finalizar_inscricao',compact('ficha_inscricao','nome_candidato'));
 
 		}else{
 			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');

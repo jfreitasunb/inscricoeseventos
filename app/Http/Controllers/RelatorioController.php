@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use InscricoesEventosMat\Mail\EmailVerification;
 use InscricoesEventosMat\Http\Controllers\Controller;
 use InscricoesEventosMat\Http\Controllers\AuthController;
+use InscricoesEventosMat\Http\Controllers\LatexTemplateController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use League\Csv\Writer;
 use Storage;
@@ -51,17 +52,6 @@ class RelatorioController extends BaseController
 
   }
 
-  public function ConsolidaArquivoTex($id_participante, $id_inscricao_evento)
-  {
-
-    $trabalho = new TrabalhoSubmetido();
-
-    $trabalho_submetido = $trabalho->retorna_trabalho_submetido($id_participante, $id_inscricao_evento);
-
-    dd($trabalho_submetido);
-  }
-
-
   public function ConsolidaCabecalhoCSV()
   {
 
@@ -84,6 +74,7 @@ class RelatorioController extends BaseController
     $locais_arquivos['local_documentos'] = storage_path('app/');
 
     $locais_arquivos['arquivo_zip'] = $locais_arquivos['local_relatorios'].'zip/';
+
 
     File::isDirectory($locais_arquivos['arquivos_temporarios']) or File::makeDirectory($locais_arquivos['arquivos_temporarios'],0775,true);
 
@@ -647,6 +638,27 @@ class RelatorioController extends BaseController
     $this->ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads);
 
     return str_replace($endereco_mudar,'storage/', $nome_arquivos['arquivo_relatorio_candidato_final']);
+  }
+
+  public function geraAbstract($id_participante, $id_inscricao_evento)
+  {
+
+    $trabalho = new TrabalhoSubmetido();
+
+    $trabalho_submetido = $trabalho->retorna_trabalho_submetido($id_participante, $id_inscricao_evento);
+
+    $local_abstrac = storage_path("app/latex_templates/");
+
+    $template_abstract = $local_abstrac.'template_abstract.tex';
+
+    $dados_para_template['titulotrabalho'] = $trabalho_submetido->titulo_trabalho;
+
+    $dados_para_template['autortrabalho'] = $trabalho_submetido->autor_trabalho;
+
+    $dados_para_template['abstractrabalho'] = $trabalho_submetido->abstract_trabalho;
+
+    return LatexTemplateController::download($dados_para_template, $template_abstract, 'submited_abstract.pdf');
+    
   }
 
 }

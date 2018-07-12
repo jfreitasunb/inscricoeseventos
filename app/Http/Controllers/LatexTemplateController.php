@@ -52,7 +52,10 @@ class LatexTemplateController extends BaseController
     if(!file_exists($template_file)) {
       throw new Exception("Could not open template");
     }
-    if(($f = tempnam(sys_get_temp_dir(), 'tex-')) === false) {
+
+    $local_temp = storage_path("app/public/temp/");
+
+    if(($f = tempnam($local_temp, 'tex-')) === false) {
       throw new Exception("Failed to create temporary file");
     }
   
@@ -69,14 +72,14 @@ class LatexTemplateController extends BaseController
     // Run xelatex (Used because of native unicode and TTF font support)
     $cmd = sprintf("xelatex -interaction nonstopmode -halt-on-error %s",
         escapeshellarg($tex_f));
-    chdir(sys_get_temp_dir());
+    chdir($local_temp);
     exec($cmd, $foo, $ret);
   
     // No need for these files anymore
-    @unlink($tex_f);
+    // @unlink($tex_f);
     @unlink($aux_f);
     @unlink($log_f);
-  
+    
     // Test here
     if(!file_exists($pdf_f)) {
       @unlink($f);
@@ -84,15 +87,18 @@ class LatexTemplateController extends BaseController
     }
   
     // Send through output
-    $fp = fopen($pdf_f, 'rb');
-    header('Content-Type: application/pdf');
-    header('Content-Disposition: attachment; filename="' . $outp_file . '"' );
-    header('Content-Length: ' . filesize($pdf_f));
-    fpassthru($fp);
+    
+    // $fp = fopen($pdf_f, 'rb');
+    // header('Content-Type: application/pdf');
+    // header('Content-Disposition: attachment; filename="' . $outp_file . '"' );
+    // header('Content-Length: ' . filesize($pdf_f));
+    // fpassthru($fp);
   
     // Final cleanup
     @unlink($pdf_f);
     @unlink($f);
+
+    return $pdf_f;
   }
   
   /**
