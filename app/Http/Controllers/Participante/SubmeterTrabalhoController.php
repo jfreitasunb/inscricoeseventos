@@ -63,6 +63,8 @@ class SubmeterTrabalhoController extends BaseController
 		$evento = new ConfiguraInscricaoEvento();
 
 		$evento_corrente = $evento->retorna_edital_vigente();
+
+		$id_area_evento = $evento_corrente->id_area_evento;
 		
 		$locale_candidato = Session::get('locale');
 
@@ -84,9 +86,9 @@ class SubmeterTrabalhoController extends BaseController
 
 		$dados_participacao = $participacao->retorna_participacao($evento_corrente->id_inscricao_evento, $id_participante);
 
-		if (count($dados_participacao) == 0) {
-			dd("sem dados");
-		}
+		// if (count($dados_participacao) == 0) {
+		// 	dd("sem dados");
+		// }
 
 		// $dados_academicos = new DadoAcademicoCandidato();
 
