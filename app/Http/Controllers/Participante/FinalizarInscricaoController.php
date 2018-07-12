@@ -75,7 +75,7 @@ class FinalizarInscricaoController extends BaseController
 			
 			$nome_candidato = User::find($id_participante)->nome;
 
-			if (is_null($dados_pessoais_candidato)) {
+			if (is_null($dados_pessoais_candidato) or !$dados_pessoais_candidato->atualizado) {
 				
 				notify()->flash(trans('tela_finalizar_inscricao.falta_dados_pessoais'),'warning');
 
