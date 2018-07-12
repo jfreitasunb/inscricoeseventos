@@ -45,7 +45,9 @@ class ConfiguraInscricaoEventoController extends CoordenadorController
 
         $area_pos = new AreaPosMat();
 
-        $secao = $area_pos->retorna_areas_pos($this->locale_default)->toArray();
+        $id_area_evento = null;
+
+        $secao = $area_pos->retorna_areas_evento($id_area_evento, $this->locale_default)->toArray();
 
         array_unshift($secao, "Todas");
 

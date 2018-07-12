@@ -141,7 +141,7 @@ class SubmeterTrabalhoController extends BaseController
 
 		$area_pos = new AreaPosMat();
 
-		$secao = $area_pos->retorna_areas_pos($locale_candidato);
+		$secao = $area_pos->retorna_areas_evento($id_area_evento, $locale_candidato);
 		
 		return view('templates.partials.participante.submete_trabalho')->with(compact('categorias', 'tipos_apresentacao', 'secao'));
 	}

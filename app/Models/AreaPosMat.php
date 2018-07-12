@@ -62,10 +62,15 @@ class AreaPosMat extends Model
         }   
     }
 
-    public function retorna_areas_pos($locale)
+    public function retorna_areas_evento($id_area_evento, $locale)
     {   
         $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
-        return $this->select('id_area_pos', $nome_coluna)->orderBy('id_area_pos')->get()->pluck($nome_coluna, 'id_area_pos');
+        if (is_null($id_area_evento)) {
+            return $this->select('id_area_pos', $nome_coluna)->orderBy('id_area_pos')->get()->pluck($nome_coluna, 'id_area_pos');
+        }else{
+            return $this->where('id_area_evento', $id_area_evento)->select('id_area_pos', $nome_coluna)->orderBy('id_area_pos')->get()->pluck($nome_coluna, 'id_area_pos');
+        }
+        
     }
 }
