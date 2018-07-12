@@ -69,7 +69,7 @@ class AreaPosMat extends Model
         if (is_null($id_area_evento)) {
             return $this->select('id_area_pos', $nome_coluna)->orderBy('id_area_pos')->get()->pluck($nome_coluna, 'id_area_pos');
         }else{
-            return $this->where('id_area_evento', $id_area_evento)->select('id_area_pos', $nome_coluna)->orderBy('id_area_pos')->get()->pluck($nome_coluna, 'id_area_pos');
+            return $this->where('id_area_pos', $id_area_evento)->select('id_area_pos', $nome_coluna)->orderBy('id_area_pos')->get()->pluck($nome_coluna, 'id_area_pos')->toArray();
         }
         
     }
