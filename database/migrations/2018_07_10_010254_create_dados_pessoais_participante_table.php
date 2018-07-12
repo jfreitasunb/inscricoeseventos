@@ -22,6 +22,7 @@ class CreateDadosPessoaisParticipanteTable extends Migration
             $table->string('instituicao',500)->nullable();
             $table->unsignedInteger('id_pais')->nullable();
             $table->foreign('id_pais')->references('id')->on('paises')->onDelete('cascade');
+            $table->boolean('atualizado')->default(0);
             $table->timestamps();
         });
     }

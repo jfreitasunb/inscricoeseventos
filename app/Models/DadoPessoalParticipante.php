@@ -18,6 +18,7 @@ class DadoPessoalParticipante extends Model
         'numero_documento',
         'instituicao',
         'pais',
+        'atualizado',
     ];
 
     public function retorna_dados_pessoais($id_participante)

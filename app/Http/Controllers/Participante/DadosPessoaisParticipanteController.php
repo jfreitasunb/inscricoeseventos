@@ -168,6 +168,7 @@ class DadosPessoaisParticipanteController extends BaseController
 			'numero_documento' => $numero_documento,
 			'instituicao' => $instituicao,
 			'id_pais' => $id_pais,
+			'atualizado' => True,
 		];
 
 		$participante =  DadoPessoalParticipante::find($id_participante);
@@ -183,6 +184,7 @@ class DadosPessoaisParticipanteController extends BaseController
 			$cria_participante->numero_documento = $numero_documento;
 			$cria_participante->instituicao = $instituicao;
 			$cria_participante->id_pais = $id_pais;
+			$cria_participante->atualizado = True;
 			$cria_participante->save($dados_pessoais);
 
 			$usuario->update($update_nome);
