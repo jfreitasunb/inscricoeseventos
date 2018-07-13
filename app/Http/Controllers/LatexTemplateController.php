@@ -101,7 +101,7 @@ class LatexTemplateController extends BaseController
     // @unlink($pdf_f);
     @unlink($f);
 
-    return str_replace("/var/www/InscricoesEventos/storage/app/public","storage",$pdf_f);
+    return str_replace("/var/www/inscricoeseventos/storage/app/public","storage",$pdf_f);
   }
   
   /**
