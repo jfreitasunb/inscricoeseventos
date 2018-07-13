@@ -55,7 +55,6 @@ class FinalizarInscricaoController extends BaseController
 		$id_inscricao_evento = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_evento;
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
-		$arquivos_editais = storage_path("/app/editais/");
 
 		if ($autoriza_inscricao) {
 
