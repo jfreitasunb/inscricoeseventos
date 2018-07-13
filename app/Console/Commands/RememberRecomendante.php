@@ -1,12 +1,12 @@
 <?php
 
-namespace InscricoesEventosMat\Console\Commands;
+namespace InscricoesEventos\Console\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Notification;
-use InscricoesEventosMat\Models\{User, ConfiguraInscricaoEvento, DadoRecomendante, CartaRecomendacao};
-use InscricoesEventosMat\Notifications\EmailRememberRecomendante;
+use InscricoesEventos\Models\{User, ConfiguraInscricaoEvento, DadoRecomendante, CartaRecomendacao};
+use InscricoesEventos\Notifications\EmailRememberRecomendante;
 
 use Illuminate\Console\Command;
 

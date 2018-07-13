@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Controllers\Participante;
+namespace InscricoesEventos\Http\Controllers\Participante;
 
 use Auth;
 use DB;
@@ -10,28 +10,28 @@ use Validator;
 use Purifier;
 use Notification;
 use Carbon\Carbon;
-use InscricoesEventosMat\Models\User;
-use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
-use InscricoesEventosMat\Models\AreaPosMat;
-use InscricoesEventosMat\Models\ProgramaPos;
-use InscricoesEventosMat\Models\DadoPessoalParticipante;
-use InscricoesEventosMat\Models\Formacao;
-use InscricoesEventosMat\Models\Estado;
-use InscricoesEventosMat\Models\FinalizaInscricao;
-use InscricoesEventosMat\Models\Paises;
-use InscricoesEventosMat\Models\Cidade;
-use InscricoesEventosMat\Notifications\NotificaCandidato;
+use InscricoesEventos\Models\User;
+use InscricoesEventos\Models\ConfiguraInscricaoEvento;
+use InscricoesEventos\Models\AreaPosMat;
+use InscricoesEventos\Models\ProgramaPos;
+use InscricoesEventos\Models\DadoPessoalParticipante;
+use InscricoesEventos\Models\Formacao;
+use InscricoesEventos\Models\Estado;
+use InscricoesEventos\Models\FinalizaInscricao;
+use InscricoesEventos\Models\Paises;
+use InscricoesEventos\Models\Cidade;
+use InscricoesEventos\Notifications\NotificaCandidato;
 use Illuminate\Http\Request;
-use InscricoesEventosMat\Mail\EmailVerification;
-use InscricoesEventosMat\Http\Controllers\Controller;
-use InscricoesEventosMat\Http\Controllers\AuthController;
-use InscricoesEventosMat\Http\Controllers\CidadeController;
-use InscricoesEventosMat\Http\Controllers\BaseController;
-use InscricoesEventosMat\Http\Controllers\RelatorioController;
-use InscricoesEventosMat\Http\Controllers\APIController;
-use InscricoesEventosMat\Http\Controllers\LatexTemplateController;
+use InscricoesEventos\Mail\EmailVerification;
+use InscricoesEventos\Http\Controllers\Controller;
+use InscricoesEventos\Http\Controllers\AuthController;
+use InscricoesEventos\Http\Controllers\CidadeController;
+use InscricoesEventos\Http\Controllers\BaseController;
+use InscricoesEventos\Http\Controllers\RelatorioController;
+use InscricoesEventos\Http\Controllers\APIController;
+use InscricoesEventos\Http\Controllers\LatexTemplateController;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use InscricoesEventosMat\Http\Requests;
+use InscricoesEventos\Http\Requests;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 

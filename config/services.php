@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => InscricoesEventosMat\User::class,
+        'model' => InscricoesEventos\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

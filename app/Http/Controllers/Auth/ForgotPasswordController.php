@@ -1,8 +1,8 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Controllers\Auth;
+namespace InscricoesEventos\Http\Controllers\Auth;
 
-use InscricoesEventosMat\Http\Controllers\Controller;
+use InscricoesEventos\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller

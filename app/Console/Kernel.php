@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Console;
+namespace InscricoesEventos\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;

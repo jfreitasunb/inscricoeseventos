@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Controllers\Admin;
+namespace InscricoesEventos\Http\Controllers\Admin;
 
 use Auth;
 use DB;
@@ -8,14 +8,14 @@ use Mail;
 use Session;
 use Notification;
 use Carbon\Carbon;
-use InscricoesEventosMat\Models\{User, ConfiguraInscricaoEvento, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoal, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
+use InscricoesEventos\Models\{User, ConfiguraInscricaoEvento, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoal, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
 use Illuminate\Http\Request;
-use InscricoesEventosMat\Mail\EmailVerification;
-use InscricoesEventosMat\Http\Controllers\Controller;
-use InscricoesEventosMat\Http\Controllers\AuthController;
-use InscricoesEventosMat\Http\Controllers\Coordenador\CoordenadorController;
-use InscricoesEventosMat\Http\Controllers\DataTable\UserController;
-use InscricoesEventosMat\Notifications\NotificaRecomendante;
+use InscricoesEventos\Mail\EmailVerification;
+use InscricoesEventos\Http\Controllers\Controller;
+use InscricoesEventos\Http\Controllers\AuthController;
+use InscricoesEventos\Http\Controllers\Coordenador\CoordenadorController;
+use InscricoesEventos\Http\Controllers\DataTable\UserController;
+use InscricoesEventos\Notifications\NotificaRecomendante;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Pagination\LengthAwarePaginator;

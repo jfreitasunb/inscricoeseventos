@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Exceptions;
+namespace InscricoesEventos\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;

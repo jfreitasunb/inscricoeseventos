@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Middleware\Admin;
+namespace InscricoesEventos\Http\Middleware\Admin;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;

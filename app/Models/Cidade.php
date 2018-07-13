@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Models;
+namespace InscricoesEventos\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,7 +15,7 @@ class Cidade extends Model
 
     public function estado()
     {
-        return $this->belongsTo('InscricoesEventosMat\Models\Estado');
+        return $this->belongsTo('InscricoesEventos\Models\Estado');
     }
 
     public function retorna_nome_cidade_por_id($id_cidade, $id_estado)

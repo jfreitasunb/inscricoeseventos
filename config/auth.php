@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => InscricoesEventosMat\Models\User::class,
+            'model' => InscricoesEventos\Models\User::class,
         ],
 
         // 'users' => [

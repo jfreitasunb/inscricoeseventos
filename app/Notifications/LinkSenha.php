@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Notifications;
+namespace InscricoesEventos\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;

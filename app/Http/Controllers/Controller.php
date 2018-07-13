@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Controllers;
+namespace InscricoesEventos\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

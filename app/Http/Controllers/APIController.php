@@ -1,5 +1,5 @@
 <?php
-namespace InscricoesEventosMat\Http\Controllers;
+namespace InscricoesEventos\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;

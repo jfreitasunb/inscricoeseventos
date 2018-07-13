@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Http;
+namespace InscricoesEventos\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -16,9 +16,9 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \InscricoesEventosMat\Http\Middleware\TrimStrings::class,
+        \InscricoesEventos\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \InscricoesEventosMat\Http\Middleware\LocaleMiddleware::class,
+        \InscricoesEventos\Http\Middleware\LocaleMiddleware::class,
     ];
 
     /**
@@ -28,12 +28,12 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \InscricoesEventosMat\Http\Middleware\EncryptCookies::class,
+            \InscricoesEventos\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \InscricoesEventosMat\Http\Middleware\VerifyCsrfToken::class,
+            \InscricoesEventos\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -55,12 +55,12 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \InscricoesEventosMat\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \InscricoesEventos\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'user.role' => \InscricoesEventosMat\Http\Middleware\UserRoles::class,
-        'autoriza.inscricao' => \InscricoesEventosMat\Http\Middleware\AutorizaLogin::class,
-        'define.locale' => \InscricoesEventosMat\Http\Middleware\LocaleMiddleware::class,
-        'impersonate.user' => \InscricoesEventosMat\Http\Middleware\Admin\Impersonate::class,
-        'validaassinatura' => \InscricoesEventosMat\Http\Middleware\ValidaSignature::class,
+        'user.role' => \InscricoesEventos\Http\Middleware\UserRoles::class,
+        'autoriza.inscricao' => \InscricoesEventos\Http\Middleware\AutorizaLogin::class,
+        'define.locale' => \InscricoesEventos\Http\Middleware\LocaleMiddleware::class,
+        'impersonate.user' => \InscricoesEventos\Http\Middleware\Admin\Impersonate::class,
+        'validaassinatura' => \InscricoesEventos\Http\Middleware\ValidaSignature::class,
     ];
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Controllers;
+namespace InscricoesEventos\Http\Controllers;
 
 use Auth;
 use DB;
@@ -11,17 +11,17 @@ use ZipArchive;
 use PDF;
 use Imagick;
 use Exception;
-use InscricoesEventosMat\Http\Controllers\FPDFController;
+use InscricoesEventos\Http\Controllers\FPDFController;
 use Carbon\Carbon;
-use InscricoesEventosMat\Models\User;
-use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
-use InscricoesEventosMat\Models\FinalizaInscricao;
-use InscricoesEventosMat\Models\DadoPessoalParticipante;
-use InscricoesEventosMat\Models\TrabalhoSubmetido;
+use InscricoesEventos\Models\User;
+use InscricoesEventos\Models\ConfiguraInscricaoEvento;
+use InscricoesEventos\Models\FinalizaInscricao;
+use InscricoesEventos\Models\DadoPessoalParticipante;
+use InscricoesEventos\Models\TrabalhoSubmetido;
 use Illuminate\Http\Request;
-use InscricoesEventosMat\Mail\EmailVerification;
-use InscricoesEventosMat\Http\Controllers\Controller;
-use InscricoesEventosMat\Http\Controllers\AuthController;
+use InscricoesEventos\Mail\EmailVerification;
+use InscricoesEventos\Http\Controllers\Controller;
+use InscricoesEventos\Http\Controllers\AuthController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use League\Csv\Writer;
 use Storage;
@@ -101,7 +101,7 @@ class LatexTemplateController extends BaseController
     // @unlink($pdf_f);
     @unlink($f);
 
-    return str_replace("/var/www/inscricoeseventosmat/storage/app/public","storage",$pdf_f);
+    return str_replace("/var/www/InscricoesEventos/storage/app/public","storage",$pdf_f);
   }
   
   /**

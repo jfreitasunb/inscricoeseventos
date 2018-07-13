@@ -1,8 +1,8 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Controllers;
+namespace InscricoesEventos\Http\Controllers;
 
-use InscricoesEventosMat\Models\{ConfiguraInscricaoEvento, User};
+use InscricoesEventos\Models\{ConfiguraInscricaoEvento, User};
 use Auth;
 use Session;
 

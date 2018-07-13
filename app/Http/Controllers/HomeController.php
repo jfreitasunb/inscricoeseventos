@@ -1,10 +1,10 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Controllers;
+namespace InscricoesEventos\Http\Controllers;
 
 use Auth;
 use Session;
-use InscricoesEventosMat\Models\User;
+use InscricoesEventos\Models\User;
 
 
 /**

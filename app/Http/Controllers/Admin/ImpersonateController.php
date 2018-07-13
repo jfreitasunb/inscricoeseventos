@@ -1,11 +1,11 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Controllers\Admin;
+namespace InscricoesEventos\Http\Controllers\Admin;
 
 use Auth;
 use Illuminate\Http\Request;
-use InscricoesEventosMat\Http\Controllers\Controller;
-use InscricoesEventosMat\Models\User;
+use InscricoesEventos\Http\Controllers\Controller;
+use InscricoesEventos\Models\User;
 
 class ImpersonateController extends Controller
 {   

@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Models;
+namespace InscricoesEventos\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +13,7 @@ class Estado extends Model
 
     public function cidades()
     {
-        return $this->hasMany('InscricoesEventosMat\Models\Cidade');
+        return $this->hasMany('InscricoesEventos\Models\Cidade');
     }
 
     public function retorna_nome_estados_por_id($id_pais, $id_estado)

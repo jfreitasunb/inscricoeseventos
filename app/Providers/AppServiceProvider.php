@@ -1,9 +1,9 @@
 <?php
 
-namespace InscricoesEventosMat\Providers;
+namespace InscricoesEventos\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
+use InscricoesEventos\Models\ConfiguraInscricaoEvento;
 use Validator;
 use Illuminate\Http\Request;
 

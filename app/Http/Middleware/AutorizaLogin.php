@@ -1,9 +1,9 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Middleware;
+namespace InscricoesEventos\Http\Middleware;
 
 use Closure;
-use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
+use InscricoesEventos\Models\ConfiguraInscricaoEvento;
 
 class AutorizaLogin
 {

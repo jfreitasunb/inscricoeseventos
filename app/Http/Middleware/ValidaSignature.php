@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Middleware;
+namespace InscricoesEventos\Http\Middleware;
 
 use Closure;
 

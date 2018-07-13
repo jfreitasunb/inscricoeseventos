@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Models;
+namespace InscricoesEventos\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

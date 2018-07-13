@@ -1,24 +1,24 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Controllers\Auth;
+namespace InscricoesEventos\Http\Controllers\Auth;
 
 use Auth;
 use DB;
 use Mail;
 use Session;
 use Purifier;
-use InscricoesEventosMat\Models\User;
-use InscricoesEventosMat\Models\Monitoria;
-use InscricoesEventosMat\Models\DadoPessoal;
+use InscricoesEventos\Models\User;
+use InscricoesEventos\Models\Monitoria;
+use InscricoesEventos\Models\DadoPessoal;
 use Illuminate\Http\Request;
-use InscricoesEventosMat\Mail\EmailVerification;
-use InscricoesEventosMat\Http\Controllers\Controller;
-use InscricoesEventosMat\Http\Controllers\BaseController;
-use InscricoesEventosMat\Http\Controllers\HomeController;
+use InscricoesEventos\Mail\EmailVerification;
+use InscricoesEventos\Http\Controllers\Controller;
+use InscricoesEventos\Http\Controllers\BaseController;
+use InscricoesEventos\Http\Controllers\HomeController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Notification;
 use Illuminate\Notifications\Messages\MailMessage;
-use InscricoesEventosMat\Notifications\AtivaConta;
+use InscricoesEventos\Notifications\AtivaConta;
 
 
 

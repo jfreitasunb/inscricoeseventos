@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Providers;
+namespace InscricoesEventos\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;

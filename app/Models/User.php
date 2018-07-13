@@ -1,12 +1,12 @@
 <?php
 
-namespace InscricoesEventosMat\Models;
+namespace InscricoesEventos\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use InscricoesEventosMat\Notifications\ResetPassword as ResetPasswordNotification;
+use InscricoesEventos\Notifications\ResetPassword as ResetPasswordNotification;
 use Notification;
-use InscricoesEventosMat\Notifications\LinkSenha;
+use InscricoesEventos\Notifications\LinkSenha;
 
 class User extends Authenticatable
 {

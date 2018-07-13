@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Controllers\Coordenador;
+namespace InscricoesEventos\Http\Controllers\Coordenador;
 
 use Auth;
 use DB;
@@ -11,20 +11,20 @@ use PDF;
 use Notification;
 use Purifier;
 use Carbon\Carbon;
-use InscricoesEventosMat\Models\User;
-use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
-use InscricoesEventosMat\Models\TipoEvento;
-use InscricoesEventosMat\Models\AreaPosMat;
-use InscricoesEventosMat\Models\OfertaCursoVerao;
-use InscricoesEventosMat\Models\Formacao;
-use InscricoesEventosMat\Models\ProgramaPos;
-use InscricoesEventosMat\Models\FinalizaInscricao;
-use InscricoesEventosMat\Notifications\NotificaNovaInscricao;
+use InscricoesEventos\Models\User;
+use InscricoesEventos\Models\ConfiguraInscricaoEvento;
+use InscricoesEventos\Models\TipoEvento;
+use InscricoesEventos\Models\AreaPosMat;
+use InscricoesEventos\Models\OfertaCursoVerao;
+use InscricoesEventos\Models\Formacao;
+use InscricoesEventos\Models\ProgramaPos;
+use InscricoesEventos\Models\FinalizaInscricao;
+use InscricoesEventos\Notifications\NotificaNovaInscricao;
 use Illuminate\Http\Request;
-use InscricoesEventosMat\Mail\EmailVerification;
-use InscricoesEventosMat\Http\Controllers\BaseController;
-use InscricoesEventosMat\Http\Controllers\CidadeController;
-use InscricoesEventosMat\Http\Controllers\AuthController;
+use InscricoesEventos\Mail\EmailVerification;
+use InscricoesEventos\Http\Controllers\BaseController;
+use InscricoesEventos\Http\Controllers\CidadeController;
+use InscricoesEventos\Http\Controllers\AuthController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 

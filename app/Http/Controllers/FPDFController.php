@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Http\Controllers;
+namespace InscricoesEventos\Http\Controllers;
 
 use Auth;
 use DB;
@@ -10,23 +10,23 @@ use File;
 use ZipArchive;
 use Fpdf;
 use Carbon\Carbon;
-use InscricoesEventosMat\Models\User;
-use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
-use InscricoesEventosMat\Models\FinalizaInscricao;
-use InscricoesEventosMat\Models\DadoPessoal;
-use InscricoesEventosMat\Models\Paises;
-use InscricoesEventosMat\Models\Estado;
-use InscricoesEventosMat\Models\Cidade;
-use InscricoesEventosMat\Models\DadoAcademico;
-use InscricoesEventosMat\Models\EscolhaCandidato;
-use InscricoesEventosMat\Models\ContatoRecomendante;
-use InscricoesEventosMat\Models\CartaMotivacao;
-use InscricoesEventosMat\Models\AreaPosMat;
-use InscricoesEventosMat\Models\ProgramaPos;
+use InscricoesEventos\Models\User;
+use InscricoesEventos\Models\ConfiguraInscricaoEvento;
+use InscricoesEventos\Models\FinalizaInscricao;
+use InscricoesEventos\Models\DadoPessoal;
+use InscricoesEventos\Models\Paises;
+use InscricoesEventos\Models\Estado;
+use InscricoesEventos\Models\Cidade;
+use InscricoesEventos\Models\DadoAcademico;
+use InscricoesEventos\Models\EscolhaCandidato;
+use InscricoesEventos\Models\ContatoRecomendante;
+use InscricoesEventos\Models\CartaMotivacao;
+use InscricoesEventos\Models\AreaPosMat;
+use InscricoesEventos\Models\ProgramaPos;
 use Illuminate\Http\Request;
-use InscricoesEventosMat\Mail\EmailVerification;
-use InscricoesEventosMat\Http\Controllers\Controller;
-use InscricoesEventosMat\Http\Controllers\AuthController;
+use InscricoesEventos\Mail\EmailVerification;
+use InscricoesEventos\Http\Controllers\Controller;
+use InscricoesEventos\Http\Controllers\AuthController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use League\Csv\Writer;
 use Storage;

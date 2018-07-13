@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesEventosMat\Providers;
+namespace InscricoesEventos\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'InscricoesEventosMat\Model' => 'InscricoesEventosMat\Policies\ModelPolicy',
+        'InscricoesEventos\Model' => 'InscricoesEventos\Policies\ModelPolicy',
     ];
 
     /**

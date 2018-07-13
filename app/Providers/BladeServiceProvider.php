@@ -1,9 +1,9 @@
 <?php
 
-namespace InscricoesEventosMat\Providers;
+namespace InscricoesEventos\Providers;
 
-use InscricoesEventosMat\Models\ConfiguraInscricaoEvento;
-use InscricoesEventosMat\Models\FinalizaInscricao;
+use InscricoesEventos\Models\ConfiguraInscricaoEvento;
+use InscricoesEventos\Models\FinalizaInscricao;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;

@@ -1,7 +1,7 @@
 <?php
 
-namespace InscricoesEventosMat\Mail;
-use InscricoesEventosMat\Models\User;
+namespace InscricoesEventos\Mail;
+use InscricoesEventos\Models\User;
 
 
 use Illuminate\Bus\Queueable;
