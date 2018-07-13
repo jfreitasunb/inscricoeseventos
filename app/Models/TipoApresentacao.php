@@ -44,8 +44,10 @@ class TipoApresentacao extends Model
         }
     }
 
-    public function pega_tipo_apresentacao()
-    {
-        return $this->get()->all();  
+    public function pega_tipo_apresentacao($locale)
+    {   
+        $nome_coluna = $this->define_nome_coluna_por_locale($locale);
+
+        return $this->select('id', 'tipo_apresentacao.'.$nome_coluna.' AS nome_apresentacao')->orderBy('id')->get();
     }
 }

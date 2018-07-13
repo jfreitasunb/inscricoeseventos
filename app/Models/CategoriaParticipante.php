@@ -44,8 +44,10 @@ class CategoriaParticipante extends Model
         }
     }
 
-    public function pega_nome_categoria()
+    public function pega_nome_categoria($locale)
     {
-        return $this->get()->all();  
+        $nome_coluna = $this->define_nome_coluna_por_locale($locale);
+
+        return $this->select('id', 'categoria_participante.'.$nome_coluna.' AS participante_categoria')->orderBy('id')->get(); 
     }
 }

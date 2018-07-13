@@ -13,7 +13,7 @@
   <legend class="scheduler-border">{{trans('tela_dados_academicos.categoria')}}</legend>
   <div class="col-md-6">
     @foreach ($categorias as $categoria)
-      <label class="radio-inline">{!! Form::radio('id_categoria_participante', $categoria->id, $dados['id_categoria_participante'] == $categoria->id ? : '', ['required' => '']) !!}{{ " ".$categoria->nome_categoria_ptbr }}</label>
+      <label class="radio-inline">{!! Form::radio('id_categoria_participante', $categoria->id, $dados['id_categoria_participante'] == $categoria->id ? : '', ['required' => '']) !!}{{ " ".$categoria->participante_categoria }}</label>
     @endforeach
   </div>
 </fieldset>
@@ -31,7 +31,7 @@
     <legend class="scheduler-border">{{trans('tela_dados_academicos.tipo_apresentacao')}}</legend>
     <div class="col-md-6">
       @foreach ($tipos_apresentacao as $tipo)
-        <label class="radio-inline">{!! Form::radio('id_tipo_apresentacao', $tipo->id, $dados['id_tipo_apresentacao'] == $tipo->id ? : '', []) !!}{{ " ".$tipo->nome_tipo_apresentacao_ptbr }}</label>
+        <label class="radio-inline">{!! Form::radio('id_tipo_apresentacao', $tipo->id, $dados['id_tipo_apresentacao'] == $tipo->id ? : '', []) !!}{{ " ".$tipo->nome_apresentacao }}</label>
       @endforeach
     </div>
   </fieldset>

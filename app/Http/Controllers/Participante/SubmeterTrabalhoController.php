@@ -57,33 +57,33 @@ class SubmeterTrabalhoController extends BaseController
 
 		$id_inscricao_evento = $evento_corrente->id_inscricao_evento;
 		
-		$locale_candidato = Session::get('locale');
+		$locale_participante = Session::get('locale');
 
-		switch ($locale_candidato) {
+		switch ($locale_participante) {
 		 	case 'en':
-		 		$nome_coluna = 'tipo_en';
+		 		$nome_coluna = 'nome_tipo_apresentacao_en';
 		 		break;
 
 		 	case 'es':
-		 		$nome_coluna = 'tipo_es';
+		 		$nome_coluna = 'nome_tipo_apresentacao_es';
 		 		break;
 		 	
 		 	default:
-		 		$nome_coluna = 'tipo_ptbr';
+		 		$nome_coluna = 'nome_tipo_apresentacao_ptbr';
 		 		break;
 		}
 
 		$categoria = new CategoriaParticipante();
 
-		$categorias = $categoria->pega_nome_categoria();
+		$categorias = $categoria->pega_nome_categoria($locale_participante);
 
 		$tipo_apresentacao = new TipoApresentacao();
 
-		$tipos_apresentacao = $tipo_apresentacao->pega_tipo_apresentacao();
+		$tipos_apresentacao = $tipo_apresentacao->pega_tipo_apresentacao($locale_participante);
 
 		$area_pos = new AreaPosMat();
 
-		$secao = $area_pos->retorna_areas_evento($id_area_evento, $locale_candidato);
+		$secao = $area_pos->retorna_areas_evento($id_area_evento, $locale_participante);
 
 		$participacao = new TipoParticipacao();
 
