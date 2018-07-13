@@ -100,6 +100,8 @@ class FinalizarInscricaoController extends BaseController
 
 	public function postFinalizarInscricao(Request $request){
 
+		@unlink($request->ficha_inscricao);
+
 		$user = $this->SetUser();
 		
 		$id_participante = $user->id_user;
