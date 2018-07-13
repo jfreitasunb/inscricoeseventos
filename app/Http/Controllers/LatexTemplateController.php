@@ -98,10 +98,8 @@ class LatexTemplateController extends BaseController
     // Final cleanup
     // @unlink($pdf_f);
     @unlink($f);
-    
-    return str_replace("/var/www/inscricoeseventosmat/storage/app/public","storage",$pdf_f);
-    
 
+    return str_replace("/var/www/inscricoeseventosmat/storage/app/public","storage",$pdf_f);
   }
   
   /**
