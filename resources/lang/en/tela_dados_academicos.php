@@ -17,7 +17,7 @@ return [
     'titulo_apresentacao' => 'Title',
     'autores' => 'Authors (separated by semicolons)',
     'abstract' => 'Abstract Form',
-    'abstract_text' => 'Copy and paste into this box your TeX/LaTeX file',
+    'abstract_text' => 'Copy and paste into this box your abstract in TeX/LaTeX format',
     'secao' => 'Session',
     'tipo_curso' => 'Type',
     'instituicao' => 'Institution',
