@@ -10,6 +10,7 @@ use File;
 use ZipArchive;
 use PDF;
 use Imagick;
+use Exception;
 use InscricoesEventosMat\Http\Controllers\FPDFController;
 use Carbon\Carbon;
 use InscricoesEventosMat\Models\User;
@@ -76,7 +77,7 @@ class LatexTemplateController extends BaseController
     exec($cmd, $foo, $ret);
   
     // No need for these files anymore
-    // @unlink($tex_f);
+    @unlink($tex_f);
     @unlink($aux_f);
     @unlink($log_f);
     
@@ -93,12 +94,14 @@ class LatexTemplateController extends BaseController
     // header('Content-Disposition: attachment; filename="' . $outp_file . '"' );
     // header('Content-Length: ' . filesize($pdf_f));
     // fpassthru($fp);
-  
+    
     // Final cleanup
-    @unlink($pdf_f);
+    // @unlink($pdf_f);
     @unlink($f);
+    
+    return str_replace("/var/www/inscricoeseventosmat/storage/app/public","storage",$pdf_f);
+    
 
-    return $pdf_f;
   }
   
   /**
