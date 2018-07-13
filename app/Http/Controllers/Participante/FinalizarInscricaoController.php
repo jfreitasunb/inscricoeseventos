@@ -89,8 +89,6 @@ class FinalizarInscricaoController extends BaseController
 
 			$ficha_inscricao = $novo_relatorio->geraAbstract($id_participante, $id_inscricao_evento);
 
-			$ficha_inscricao = str_replace("/var/www/inscricoeseventosmat/", "storage/public/temp/", $ficha_inscricao);
-
 			return view('templates.partials.participante.finalizar_inscricao',compact('ficha_inscricao','nome_candidato'));
 
 		}else{
