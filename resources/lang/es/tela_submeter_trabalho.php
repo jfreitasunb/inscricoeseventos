@@ -6,7 +6,7 @@
 
 
 return [
-	'tela_dados_academicos' => 'Registro',
+	'tela_submeter_trabalho' => 'Registro',
     'categoria' => 'Categoría',
     'apresentar_trabalho' => 'Deseja apresentar trabalho?',
     'sim' => 'Sí',

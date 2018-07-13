@@ -10,7 +10,7 @@
 {!! Form::open(array('route' => 'submeter.trabalho', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 
 <fieldset class="scheduler-border">
-  <legend class="scheduler-border">{{trans('tela_dados_academicos.categoria')}}</legend>
+  <legend class="scheduler-border">{{trans('tela_submeter_trabalho.categoria')}}</legend>
   <div class="col-md-6">
     @foreach ($categorias as $categoria)
       <label class="radio-inline">{!! Form::radio('id_categoria_participante', $categoria->id, $dados['id_categoria_participante'] == $categoria->id ? : '', ['required' => '']) !!}{{ " ".$categoria->participante_categoria }}</label>
@@ -19,16 +19,16 @@
 </fieldset>
 
 <fieldset class="scheduler-border">
-  <legend class="scheduler-border">{{trans('tela_dados_academicos.apresentar_trabalho')}}</legend>
+  <legend class="scheduler-border">{{trans('tela_submeter_trabalho.apresentar_trabalho')}}</legend>
   <div class="col-md-6">
-      <label class="radio-inline"><input type="radio" onclick="javascript:yesnoCheck();" name="apresentar_trabalho" id="yesCheck">{{trans('tela_dados_academicos.sim') }}</label>
-      <label class="radio-inline"><input type="radio" onclick="javascript:yesnoCheck();" name="apresentar_trabalho" id="noCheck">{{ " ".trans('tela_dados_academicos.nao') }}</label>
+      <label class="radio-inline"><input type="radio" onclick="javascript:yesnoCheck();" name="apresentar_trabalho" id="yesCheck">{{trans('tela_submeter_trabalho.sim') }}</label>
+      <label class="radio-inline"><input type="radio" onclick="javascript:yesnoCheck();" name="apresentar_trabalho" id="noCheck">{{ " ".trans('tela_submeter_trabalho.nao') }}</label>
   </div>
 </fieldset>
 
 <div id="ifYes" style="display:none">
   <fieldset class="scheduler-border">
-    <legend class="scheduler-border">{{trans('tela_dados_academicos.tipo_apresentacao')}}</legend>
+    <legend class="scheduler-border">{{trans('tela_submeter_trabalho.tipo_apresentacao')}}</legend>
     <div class="col-md-6">
       @foreach ($tipos_apresentacao as $tipo)
         <label class="radio-inline">{!! Form::radio('id_tipo_apresentacao', $tipo->id, $dados['id_tipo_apresentacao'] == $tipo->id ? : '', []) !!}{{ " ".$tipo->nome_apresentacao }}</label>
@@ -37,23 +37,23 @@
   </fieldset>
 
   <fieldset class="scheduler-border">
-    <legend class="scheduler-border">{{trans('tela_dados_academicos.area_trabalho')}}</legend>
+    <legend class="scheduler-border">{{trans('tela_submeter_trabalho.area_trabalho')}}</legend>
     <div class="row">
-      {!! Form::label('titulo_trabalho', trans('tela_dados_academicos.titulo_apresentacao'), ['class' => 'col-md-4 control-label'])!!}
+      {!! Form::label('titulo_trabalho', trans('tela_submeter_trabalho.titulo_apresentacao'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-8">
       {!! Form::text('titulo_trabalho', $dados['titulo_trabalho'] ? : '', ['class' => 'form-control input-md formhorizontal']) !!}
       </div>
     </div>
 
     <div class="row">
-      {!! Form::label('autor_trabalho', trans('tela_dados_academicos.autores'), ['class' => 'col-md-4 control-label', ])!!}
+      {!! Form::label('autor_trabalho', trans('tela_submeter_trabalho.autores'), ['class' => 'col-md-4 control-label', ])!!}
       <div class="col-md-8">
       {!! Form::text('autor_trabalho', $dados['autor_trabalho'] ? : '', ['class' => 'form-control input-md formhorizontal']) !!}
       </div>
     </div>
 
     <div class="row">
-      {!! Form::label('abstract_trabalho', trans('tela_dados_academicos.abstract_text'), ['class' => 'col-md-4 control-label'])!!}
+      {!! Form::label('abstract_trabalho', trans('tela_submeter_trabalho.abstract_text'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-8">
       {!! Form::textarea('abstract_trabalho', $dados['abstract_trabalho'] ? : '', ['class' => 'form-control input-md formhorizontal', 'rows' => '10']) !!}
       </div>
@@ -62,7 +62,7 @@
       {!! Form::hidden('id_area_trabalho', array_keys($secao)[0],  []) !!}
     @else
       <div class="row">
-      {!! Form::label('id_area_trabalho', trans('tela_dados_academicos.secao'), ['class' => 'col-md-4 control-label'])!!}
+      {!! Form::label('id_area_trabalho', trans('tela_submeter_trabalho.secao'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-4">
       <label class="radio">{!! Form::select('id_area_trabalho', $secao, $dados['id_area_trabalho'] ? : '',  ['class' => 'form-control col-md-6']) !!}</label>
       </div>
@@ -76,7 +76,7 @@
 <div class="form-group">
   <div class="row">
     <div class="col-md-6 col-md-offset-3 text-center">
-      {!! Form::submit(trans('tela_dados_academicos.menu_enviar'), ['class' => 'btn btn-primary btn-lg register-submit']) !!}
+      {!! Form::submit(trans('tela_submeter_trabalho.menu_enviar'), ['class' => 'btn btn-primary btn-lg register-submit']) !!}
     </div>
   </div>
 </div>

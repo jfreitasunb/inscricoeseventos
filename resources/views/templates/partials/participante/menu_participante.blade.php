@@ -12,7 +12,7 @@
       <ul class="nav navbar-nav">
         <li class="{{ Route::currentRouteNamed('dados.pessoais') ? 'active' : '' }}"><a href="{{ route('dados.pessoais') }}">{{trans('tela_dados_pessoais.tela_dados_pessoais')}}</a></li>
         @liberamenu(Auth()->user())
-        <li class="{{ Route::currentRouteNamed('submeter.trabalho') ? 'active' : '' }}"><a href="{{ route('submeter.trabalho') }}">{{ trans('tela_dados_academicos.tela_dados_academicos') }}</a></li>
+        <li class="{{ Route::currentRouteNamed('submeter.trabalho') ? 'active' : '' }}"><a href="{{ route('submeter.trabalho') }}">{{ trans('tela_submeter_trabalho.tela_submeter_trabalho') }}</a></li>
         @endliberamenu
         <li class="{{ Route::currentRouteNamed('auth.logout') ? 'active' : '' }}"><a href="{{ route('auth.logout') }}">{{ trans('tela_sair.sair') }}</a></li>
         @impersonating_candidato

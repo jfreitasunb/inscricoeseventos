@@ -6,7 +6,7 @@
 
 
 return [
-	'tela_dados_academicos' => 'Application',
+	'tela_submeter_trabalho' => 'Application',
     'categoria' => 'Category',
 	'curso' => 'Course',
     'apresentar_trabalho' => 'Deseja apresentar trabalho?',
