@@ -56,6 +56,8 @@ class LatexTemplateController extends BaseController
 
     $local_temp = storage_path("app/public/temp/");
 
+    File::isDirectory($local_temp) or File::makeDirectory($local_temp,0775,true);
+
     if(($f = tempnam($local_temp, 'tex-')) === false) {
       throw new Exception("Failed to create temporary file");
     }
