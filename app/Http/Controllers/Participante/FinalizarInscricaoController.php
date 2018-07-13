@@ -111,7 +111,7 @@ class FinalizarInscricaoController extends BaseController
 		$edital_ativo = new ConfiguraInscricaoEvento();
 
 		$id_inscricao_evento = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_evento;
-		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+		
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
 		if ($autoriza_inscricao) {
@@ -125,11 +125,6 @@ class FinalizarInscricaoController extends BaseController
 
 				return redirect()->back();
 			}
-
-			$dados_pessoais_candidato = User::find($id_participante);
-
-			
-			Notification::send(User::find($id_participante), new NotificaCandidato($dados_email_candidato));
 
 			$finalizar_inscricao = new FinalizaInscricao();
 
