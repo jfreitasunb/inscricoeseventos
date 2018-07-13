@@ -6,7 +6,7 @@
 
 
 return [
-	'tela_escolhas' => 'Escolha',
+	'tela_escolhas' => 'Inscrição',
     'texto_programa' => 'No quadro abaixo você deve selecionar o(s) curso(s) que deseja fazer no Verão.',
     'curso_verao' => "Curso de Verão:",
     'texto_cursos_verao' => 'Escolhas os cursos de Verão que deseja participar',

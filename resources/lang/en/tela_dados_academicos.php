@@ -6,9 +6,19 @@
 
 
 return [
-	'tela_dados_academicos' => 'Academic Data',
-    'curso_graduacao' => 'University Graduate',
+	'tela_dados_academicos' => 'Application',
+    'categoria' => 'Category',
 	'curso' => 'Course',
+    'apresentar_trabalho' => 'Deseja apresentar trabalho?',
+    'sim' => 'Yes',
+    'nao' => 'No',
+    'tipo_apresentacao' => 'Em que formato gostaria de apresentar seu trabalho?',
+    'area_trabalho' => 'Submissão do trabalho',
+    'titulo_apresentacao' => 'Title',
+    'autores' => 'Authors (separated by semicolons)',
+    'abstract' => 'Abstract Form',
+    'abstract_text' => 'Copy and paste into this box your TeX/LaTeX file',
+    'secao' => 'Session',
     'tipo_curso' => 'Type',
     'instituicao' => 'Institution',
     'ano_conclusao' => 'Year of conclusion (or forecast)',

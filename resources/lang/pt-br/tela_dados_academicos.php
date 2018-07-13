@@ -6,7 +6,7 @@
 
 
 return [
-	'tela_dados_academicos' => 'Dados Acadêmicos',
+	'tela_dados_academicos' => 'Inscrição',
     'categoria' => 'Categoria',
 	'apresentar_trabalho' => 'Deseja apresentar trabalho?',
     'sim' => 'Sim',
@@ -16,7 +16,7 @@ return [
     'titulo_apresentacao' => 'Título',
     'autores' => 'Autores (separados por ponto-e-vírgula)',
     'abstract' => 'Abstract Form',
-    'abstract_text' => 'Copy and paste into this box your TeX/LaTeX file',
+    'abstract_text' => 'Cole nesta caixa o resumo do seu trabalho',
     'secao' => 'Seção',
     'nivel' => 'Nivel',
     'menu_enviar' => 'Enviar',
