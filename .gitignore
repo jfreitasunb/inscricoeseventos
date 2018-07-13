@@ -1,4 +1,6 @@
-
 vendor/
-
 public/storage
+!storage/app/latex_templates
+storage/app/public
+storage/app/purifier
+
