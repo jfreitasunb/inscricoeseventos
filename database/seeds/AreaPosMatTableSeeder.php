@@ -98,6 +98,24 @@ class AreaPosMatTableSeeder extends Seeder
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
+            9 => 
+            array (
+                'id_area_pos' => 10,
+                'nome_ptbr' => 'Mecânica',
+                'nome_en' => 'Mechanics',
+                'nome_es' => 'Mecánica',
+                'created_at' => '2018-07-15 15:27:00',
+                'updated_at' => '2018-07-15 15:27:00',
+            ),
+            10 => 
+            array (
+                'id_area_pos' => 11,
+                'nome_ptbr' => 'Educação Matemática',
+                'nome_en' => 'Mathematical Education',
+                'nome_es' => 'Educación Matemática',
+                'created_at' => '2018-07-15 15:27:00',
+                'updated_at' => '2018-07-15 15:27:00',
+            ),
         ));
 
         $tableToCheck = 'area_pos_mat';
