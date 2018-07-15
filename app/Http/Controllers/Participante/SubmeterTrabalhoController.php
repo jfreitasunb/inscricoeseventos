@@ -224,12 +224,12 @@ class SubmeterTrabalhoController extends BaseController
 
 			$atualiza_participacao['id_tipo_apresentacao'] = $id_tipo_apresentacao;
 
-			$status_participacao = $submeteu_participacao->atualiza_trabalho_submetido($id_participacao, $id_inscricao_evento, $id_participante, $atualiza_participacao);
+			$status_participacao = $submeteu_participacao->atualiza_tipo_participacao($id_participacao, $id_inscricao_evento, $id_participante, $atualiza_participacao);
 
 
 		}
 		
-		if ($status_trabalho AND $status_participacao) {
+		if ($status_trabalho OR $status_participacao) {
 			notify()->flash(trans('mensagens_gerais.mensagem_sucesso'),'success');
 			return redirect()->route('finalizar.inscricao');
 		}else{
