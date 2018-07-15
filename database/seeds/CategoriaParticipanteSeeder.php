@@ -23,8 +23,8 @@ class CategoriaParticipanteSeeder extends Seeder
                 'nome_categoria_ptbr' => 'Professor',
                 'nome_categoria_en' => 'Professor',
                 'nome_categoria_es' => 'Profesor',
-                'created_at' => '2018-07-10 15:27:00',
-                'updated_at' => '2018-07-10 15:27:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ),
             1 => 
             array (
@@ -32,8 +32,8 @@ class CategoriaParticipanteSeeder extends Seeder
                 'nome_categoria_ptbr' => 'Estudante',
                 'nome_categoria_en' => 'Student',
                 'nome_categoria_es' => 'Estudiante',
-                'created_at' => '2018-07-10 15:27:00',
-                'updated_at' => '2018-07-10 15:27:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ),
         ));
         

@@ -23,8 +23,8 @@ class AreaPosMatTableSeeder extends Seeder
                 'nome_ptbr' => 'Álgebra',
                 'nome_en' => 'Algebra',
                 'nome_es' => 'Álgebra',
-                'created_at' => '2017-11-21 15:27:00',
-                'updated_at' => '2017-11-21 15:27:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ),
             1 => 
             array (
@@ -32,8 +32,8 @@ class AreaPosMatTableSeeder extends Seeder
                 'nome_ptbr' => 'Análise',
                 'nome_en' => 'Analysis',
                 'nome_es' => 'Análisis',
-                'created_at' => '2017-11-21 15:27:00',
-                'updated_at' => '2017-11-21 15:27:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ),
             2 => 
             array (
@@ -41,8 +41,8 @@ class AreaPosMatTableSeeder extends Seeder
                 'nome_ptbr' => 'Análise Numérica',
                 'nome_en' => 'Numerical Analysis',
                 'nome_es' => 'Análisis Numérico',
-                'created_at' => '2017-11-21 15:27:00',
-                'updated_at' => '2017-11-21 15:27:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ),
             3 => 
             array (
@@ -50,8 +50,8 @@ class AreaPosMatTableSeeder extends Seeder
                 'nome_ptbr' => 'Dinâmica de Fluidos',
                 'nome_en' => 'Fluid Dynamics',
                 'nome_es' => 'Dinamica de Fluidos',
-                'created_at' => '2017-11-21 15:27:00',
-                'updated_at' => '2017-11-21 15:27:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ),
             4 => 
             array (
@@ -59,8 +59,8 @@ class AreaPosMatTableSeeder extends Seeder
                 'nome_ptbr' => 'Geometria',
                 'nome_en' => 'Geometry',
                 'nome_es' => 'Geometría',
-                'created_at' => '2017-11-21 15:27:00',
-                'updated_at' => '2017-11-21 15:27:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ),
             5 => 
             array (
@@ -68,8 +68,8 @@ class AreaPosMatTableSeeder extends Seeder
                 'nome_ptbr' => 'Probabilidade',
                 'nome_en' => 'Probability',
                 'nome_es' => 'Probabilidad ',
-                'created_at' => '2017-11-21 15:27:00',
-                'updated_at' => '2017-11-21 15:27:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ),
             6 => 
             array (
@@ -77,8 +77,8 @@ class AreaPosMatTableSeeder extends Seeder
                 'nome_ptbr' => 'Sistemas Dinâmicos',
                 'nome_en' => 'Dynamical Systems',
                 'nome_es' => 'Sistemas Dinámicos',
-                'created_at' => '2017-11-21 15:27:00',
-                'updated_at' => '2017-11-21 15:27:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ),
             7 => 
             array (
@@ -86,8 +86,8 @@ class AreaPosMatTableSeeder extends Seeder
                 'nome_ptbr' => 'Teoria da Computação',
                 'nome_en' => 'Theory of Computation',
                 'nome_es' => 'Teoría de la Computación',
-                'created_at' => '2017-11-21 15:27:00',
-                'updated_at' => '2017-11-21 15:27:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ),
             8 => 
             array (
@@ -95,8 +95,8 @@ class AreaPosMatTableSeeder extends Seeder
                 'nome_ptbr' => 'Teoria dos Números',
                 'nome_en' => 'Number Theory',
                 'nome_es' => 'Teoría de los Números',
-                'created_at' => '2017-11-21 15:27:00',
-                'updated_at' => '2017-11-21 15:27:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ),
             9 => 
             array (
@@ -104,8 +104,8 @@ class AreaPosMatTableSeeder extends Seeder
                 'nome_ptbr' => 'Mecânica',
                 'nome_en' => 'Mechanics',
                 'nome_es' => 'Mecánica',
-                'created_at' => '2018-07-15 15:27:00',
-                'updated_at' => '2018-07-15 15:27:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ),
             10 => 
             array (
@@ -113,8 +113,8 @@ class AreaPosMatTableSeeder extends Seeder
                 'nome_ptbr' => 'Educação Matemática',
                 'nome_en' => 'Mathematical Education',
                 'nome_es' => 'Educación Matemática',
-                'created_at' => '2018-07-15 15:27:00',
-                'updated_at' => '2018-07-15 15:27:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ),
         ));
 

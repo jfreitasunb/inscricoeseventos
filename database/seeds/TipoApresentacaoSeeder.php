@@ -23,8 +23,8 @@ class TipoApresentacaoSeeder extends Seeder
                 'nome_tipo_apresentacao_ptbr' => 'Palestra',
                 'nome_tipo_apresentacao_en' => 'Lecture',
                 'nome_tipo_apresentacao_es' => 'Palestra',
-                'created_at' => '2018-07-10 15:27:00',
-                'updated_at' => '2018-07-10 15:27:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ),
             1 => 
             array (
@@ -32,8 +32,8 @@ class TipoApresentacaoSeeder extends Seeder
                 'nome_tipo_apresentacao_ptbr' => 'Poster',
                 'nome_tipo_apresentacao_en' => 'Poster',
                 'nome_tipo_apresentacao_es' => 'Poster',
-                'created_at' => '2018-07-10 15:27:00',
-                'updated_at' => '2018-07-10 15:27:00',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ),
         ));
         
