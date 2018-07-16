@@ -9,7 +9,7 @@
               <div class="col-sm-8 col-md-7 col-xs-12">  
                 <h1>{{ trans('mensagens_gerais.departamento') }}</h1>
                 <h2>{{ $nome_evento }}</h2>
-                <h3>{{$periodo_inscricao}}</h3>
+                <h3>{{ trans('tela_inicial.inscricao').$periodo_inscricao}}</h3>
               </div>
         </div>
       </div>

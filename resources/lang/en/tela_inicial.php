@@ -8,4 +8,6 @@
 return [
     'menu_login' => 'Login',
     'menu_registrar' => 'Register',
+    'inscricao' => 'Application: ',
+    'duracao' => ' to ',
 ];

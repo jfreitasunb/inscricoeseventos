@@ -44,6 +44,15 @@ class TipoApresentacao extends Model
         }
     }
 
+    public function retorna_nome_tipo_participacao_por_id($id_tipo_apresentacao, $locale)
+    {
+        $nome_coluna = $this->define_nome_coluna_por_locale($locale);
+
+        return $this->select($nome_coluna)
+            ->where('id', $id_tipo_apresentacao)
+            ->value($nome_coluna);
+    }
+
     public function pega_tipo_apresentacao($locale)
     {   
         $nome_coluna = $this->define_nome_coluna_por_locale($locale);

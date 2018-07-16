@@ -44,10 +44,19 @@ class CategoriaParticipante extends Model
         }
     }
 
+    public function retorna_nome_categoria_por_id($id_categoria_participante, $locale)
+    {
+        $nome_coluna = $this->define_nome_coluna_por_locale($locale);
+
+        return $this->select($nome_coluna)
+            ->where('id', $id_categoria_participante)
+            ->value($nome_coluna);
+    }
+
     public function pega_nome_categoria($locale)
     {
         $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
-        return $this->select('id', 'categoria_participante.'.$nome_coluna.' AS participante_categoria')->orderBy('id')->get(); 
+        return $this->select('id', 'categoria_participante.'.$nome_coluna.' AS participante_categoria')->orderBy('id')->get();
     }
 }

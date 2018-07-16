@@ -50,7 +50,7 @@
         </p>
        
         <h2>
-                {{ trans('tela_finalizar_inscricao.ficha_inscricao') }} - {{ $dados_candidato_para_relatorio['programa_pretendido'] }}</h2>
+                {{ trans('tela_finalizar_inscricao.ficha_inscricao') }} - {{ $dados_candidato_para_relatorio['nome_evento'] }}</h2>
 
         <div>
             <label class="control-label">{{ trans('tela_dados_pessoais.nome') }}: </label>{{ $dados_candidato_para_relatorio['nome'] }}
@@ -61,51 +61,35 @@
         </div>
 
         <div>
-            <label class="control-label">{{ trans('tela_dados_pessoais.data_nascimento') }}: </label>{{ $dados_candidato_para_relatorio['data_nascimento'] }}
+            <label class="control-label">{{ trans('tela_dados_pessoais.nome_cracha') }}: </label>{{ $dados_candidato_para_relatorio['nome_cracha'] }}
         </div>
-        <hr>
-        <h3>{{ trans('tela_dados_pessoais.endereco_pessoal') }}</h3>
+
         <div>
-            <label>{{ trans('tela_dados_pessoais.endereco') }}: </label>{{ $dados_candidato_para_relatorio['endereco'] }}
+            <label class="control-label">{{ trans('tela_dados_pessoais.numero_documento') }}: </label>{{ $dados_candidato_para_relatorio['numero_documento'] }}
         </div>
+
         <div>
-            <label>{{ trans('tela_dados_pessoais.celular') }}: </label>{{ $dados_candidato_para_relatorio['celular'] }}
+            <label class="control-label">{{ trans('tela_dados_pessoais.instituicao') }}: </label>{{ $dados_candidato_para_relatorio['instituicao'] }}
         </div>
+
         <div>
-            <label>{{ trans('tela_dados_pessoais.pais') }}: </label> {{ $dados_candidato_para_relatorio['nome_pais'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label> {{ trans('tela_dados_pessoais.estado') }}: </label>{{ $dados_candidato_para_relatorio['nome_estado'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>{{ trans('tela_dados_pessoais.cidade') }}: </label> {{ $dados_candidato_para_relatorio['nome_cidade'] }}
+            <label>{{ trans('tela_dados_pessoais.pais') }}: </label> {{ $dados_candidato_para_relatorio['nome_pais'] }}
         </div>
 
         <hr>
-        <h3>{{ trans('tela_dados_academicos.tela_dados_academicos') }}</h3>
+        <h3>{{ trans('tela_submeter_trabalho.dados_participacao') }}</h3>
         <div>
-            <label>{{ trans('tela_dados_academicos.curso_graduacao') }}: </label> {{ $dados_candidato_para_relatorio['curso_graduacao'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>{{ trans('tela_dados_academicos.tipo_curso') }}: </label> {{ $dados_candidato_para_relatorio['tipo_curso_graduacao'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label>{{ trans('tela_dados_academicos.instituicao') }}: </label> {{ $dados_candidato_para_relatorio['instituicao_graduacao'] }}
+            <label>{{ trans('tela_submeter_trabalho.categoria') }}: </label>{{ $dados_candidato_para_relatorio['categoria_participante'] }}
         </div>
-        <div>
-            <label>{{ trans('tela_dados_academicos.ano_conclusao') }}: </label> {{ $dados_candidato_para_relatorio['ano_conclusao_graduacao'] }}
-        </div>
-        @if ($dados_candidato_para_relatorio['curso_pos'])
-        <hr size="0">
-        <div>
-            <label>{{ trans('tela_dados_academicos.curso_pos') }}: </label> {{ $dados_candidato_para_relatorio['curso_pos'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>{{ trans('tela_dados_academicos.tipo_curso') }}: </label> {{ $dados_candidato_para_relatorio['tipo_curso_pos'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label>{{ trans('tela_dados_academicos.instituicao') }}: </label> {{ $dados_candidato_para_relatorio['instituicao_pos'] }}
-        </div>
-        <div>
-            <label>{{ trans('tela_dados_academicos.ano_conclusao') }}: </label> {{ $dados_candidato_para_relatorio['ano_conclusao_pos'] }}
-        </div>
-        @endif
 
-        <hr>
-        <h3>{{ trans('tela_escolha_candidato.tela_escolhas') }}</h3>
         <div>
-            <label>{{ trans('tela_escolha_candidato.programa_disponivel') }}: </label>{{ $dados_candidato_para_relatorio['programa_pretendido'] }}
+            <label>{{ trans('tela_submeter_trabalho.apresentar_trabalho') }} </label>{{ $dados_candidato_para_relatorio['apresentar_trabalho'] ? trans('tela_submeter_trabalho.sim') : trans('tela_submeter_trabalho.nao') }}
         </div>
-        @if ($dados_candidato_para_relatorio['curso_verao'])
-            <ul>
-                @foreach (explode("_", $dados_candidato_para_relatorio['curso_verao']) as $element)
-                    @if ($element<>"")
-                        <li>{!! $element !!}</li>
-                    @endif
-                @endforeach
-            </ul>
+
+        @if ($dados_candidato_para_relatorio['apresentar_trabalho'])
+            <div>
+            <label>{{ trans('tela_submeter_trabalho.tipo_apresentacao') }} </label>{{ $dados_candidato_para_relatorio['tipo_apresentacao'] }}
+        </div>
         @endif
         
     </body>

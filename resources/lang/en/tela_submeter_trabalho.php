@@ -7,6 +7,7 @@
 
 return [
 	'tela_submeter_trabalho' => 'Application',
+    'dados_participacao' => 'Dados de participação',
     'categoria' => 'Category',
 	'curso' => 'Course',
     'apresentar_trabalho' => 'Deseja apresentar trabalho?',

@@ -9,5 +9,7 @@ return [
 
     'menu_login' => 'Login',
     'menu_registrar' => 'Registrar',
+    'inscricao' => 'Registro: ',
+    'duracao' => ' à ',
 
 ];
