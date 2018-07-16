@@ -31,11 +31,6 @@ class TrabalhoSubmetido extends Model
 
     ];
 
-    public function pega_tipo_apresentacao()
-    {
-        return $this->get()->all();  
-    }
-
     public function retorna_trabalho_submetido($id_participante, $id_inscricao_evento)
     {
 
