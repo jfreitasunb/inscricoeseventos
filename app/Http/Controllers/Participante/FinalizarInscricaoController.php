@@ -91,7 +91,7 @@ class FinalizarInscricaoController extends BaseController
 
 			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_participante, $id_inscricao_evento, $locale_participante);
 
-			return view('templates.partials.participante.finalizar_inscricao',compact('ficha_inscricao','nome_candidato'));
+			return view('templates.partials.participante.finalizar_inscricao',compact('ficha_abstract', 'ficha_inscricao','nome_candidato'));
 
 		}else{
 			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');

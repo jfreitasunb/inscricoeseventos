@@ -18,7 +18,13 @@
     <legend class="scheduler-border">{{trans('tela_finalizar_inscricao.ficha_inscricao')}}</legend>
       <div class="row">
         <a href="{{ asset($ficha_inscricao) }}" target="_blank"><i class="fa fa-file-pdf-o fa-4x"></i>{{ $nome_candidato }}</a>
-          {{-- {{ link_to($ficha_inscricao,''.$nome_candidato, array('target' => '_blank' ) ) }} --}}
+      </div>
+  </fieldset>
+
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border">{{trans('tela_finalizar_inscricao.abstract_submetido')}}</legend>
+      <div class="row">
+        <a href="{{ asset($ficha_inscricao) }}" target="_blank"><i class="fa fa-file-pdf-o fa-4x"></i>{{ $nome_candidato }}</a>
       </div>
   </fieldset>
   {!! Form::hidden('ficha_inscricao', $ficha_inscricao, []) !!}

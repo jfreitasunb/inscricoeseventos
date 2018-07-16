@@ -45,7 +45,6 @@
             <img src="{!! public_path("/imagens/logo/logo_unb_para_relatorios.png") !!}" id="logo" style="float: left;" />
             <h4>
                 Departamento de Matemática<br>
-                Programa de Pós-Graduação do MAT/UnB
             </h4>
         </p>
        

@@ -9,6 +9,7 @@ return [
 	'tela_finaliza' => 'Finalizar Inscripción',
     'texto_finaliza' => 'En el link de abajo usted encontrará un archivo PDF con los datos de su inscripción. Compruebe que todos los datos estén correctos y en el caso de encontrar algún error regrese a la página correspondiente y haga la corrección. Después del envío definitivo de la inscripción no será posible realizar ningún cambio.',
     'ficha_inscricao' => 'Formulario de Inscripción',
+    'abstract_submetido' => 'Abstract Submetido',
     'falta_dados_pessoais' => 'Usted debe completar sus datos personales primero.',
     'falta_dados_academicos' => 'Usted debe completar sus datos académicos antes de finalizar la inscripción.',
     'falta_documentos' => 'Aún no ha enviado sus documentos.',
