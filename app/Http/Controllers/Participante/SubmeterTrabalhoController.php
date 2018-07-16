@@ -59,20 +59,6 @@ class SubmeterTrabalhoController extends BaseController
 		
 		$locale_participante = Session::get('locale');
 
-		switch ($locale_participante) {
-		 	case 'en':
-		 		$nome_coluna = 'nome_tipo_apresentacao_en';
-		 		break;
-
-		 	case 'es':
-		 		$nome_coluna = 'nome_tipo_apresentacao_es';
-		 		break;
-		 	
-		 	default:
-		 		$nome_coluna = 'nome_tipo_apresentacao_ptbr';
-		 		break;
-		}
-
 		$categoria = new CategoriaParticipante();
 
 		$categorias = $categoria->pega_nome_categoria($locale_participante);
@@ -125,9 +111,15 @@ class SubmeterTrabalhoController extends BaseController
 
 	public function postSubmeterTrabalho(Request $request)
 	{
+
 		$this->validate($request, [
 			'id_categoria_participante' => 'required',
 			'apresentar_trabalho' => 'required',
+			'id_tipo_apresentacao' => 'required_if:apresentar_trabalho,==,on',
+			'titulo_trabalho' => 'required_if:apresentar_trabalho,==,on',
+			'autor_trabalho' => 'required_if:apresentar_trabalho,==,on',
+			'abstract_trabalho' => 'required_if:apresentar_trabalho,==,on',
+			'id_area_trabalho' => 'required_if:apresentar_trabalho,==,on',
 		]);
 
 		$user = $this->SetUser();
@@ -142,26 +134,19 @@ class SubmeterTrabalhoController extends BaseController
 
 		$id_categoria_participante = (int)$request->id_categoria_participante;
 
-		$id_area_trabalho = (int)$request->id_area_trabalho;
-
-		$titulo_trabalho = Purifier::clean(trim($request->titulo_trabalho));
-
-		$id_tipo_apresentacao = (int)Purifier::clean(trim($request->id_tipo_apresentacao));
-
-		$autor_trabalho = Purifier::clean(trim($request->autor_trabalho));
-
-		$abstract_trabalho = Purifier::clean(trim($request->abstract_trabalho));
-
 		$apresentar_trabalho = $request->apresentar_trabalho;
 		
 		if ($apresentar_trabalho === "on") {
 
-			$this->validate($request, [
-				'id_area_trabalho' => 'required',
-				'titulo_trabalho' => 'required',
-				'autor_trabalho' => 'required',
-				'abstract_trabalho' => 'required',
-			]);
+			$id_area_trabalho = (int)$request->id_area_trabalho;
+
+			$titulo_trabalho = Purifier::clean(trim($request->titulo_trabalho));
+
+			$id_tipo_apresentacao = (int)Purifier::clean(trim($request->id_tipo_apresentacao));
+
+			$autor_trabalho = Purifier::clean(trim($request->autor_trabalho));
+
+			$abstract_trabalho = Purifier::clean(trim($request->abstract_trabalho));
 
 			$apresentar_trabalho = 1;
 
@@ -177,7 +162,7 @@ class SubmeterTrabalhoController extends BaseController
 				$submeter_trabalho->autor_trabalho = $autor_trabalho;
 				$submeter_trabalho->abstract_trabalho = $abstract_trabalho;
 
-				$submeter_trabalho->save();
+				$status_trabalho = $submeter_trabalho->save();
 			}else{
 				$atualiza_trabalho = [];
 				
@@ -211,7 +196,7 @@ class SubmeterTrabalhoController extends BaseController
 			$nova_participacao->apresentar_trabalho = $apresentar_trabalho;
 			$nova_participacao->id_tipo_apresentacao = $id_tipo_apresentacao;
 
-			$nova_participacao->save();
+			$status_participacao = $nova_participacao->save();
 		}else{
 
 			$atualiza_participacao = [];
