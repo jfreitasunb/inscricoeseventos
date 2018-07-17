@@ -37,6 +37,7 @@ class NotificaCandidato extends Notification
             ->from('verao@mat.unb.br', 'Coordinatos')
             ->subject(trans('mensagens_gerais.inscricao_mat').$this->dados_email['nome_evento'])
             ->line(trans('mensagens_gerais.inscricao_mat_1').$this->dados_email['nome_candidato'].',')
+            ->line(trans('mensagens_gerais.inscricao_mat_2'))
             ->attach($this->dados_email['ficha_inscricao'], [
                         'as' => 'Ficha_de_Inscrição.pdf',
                         'mime' => 'application/pdf'])
