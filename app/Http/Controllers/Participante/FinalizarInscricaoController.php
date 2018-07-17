@@ -102,9 +102,6 @@ class FinalizarInscricaoController extends BaseController
 
 	public function postFinalizarInscricao(Request $request){
 
-		// @unlink($request->ficha_inscricao);
-		// 
-
 		$user = $this->SetUser();
 		
 		$id_participante = $user->id_user;
@@ -117,30 +114,7 @@ class FinalizarInscricaoController extends BaseController
 
 		$nome_evento = $evento->nome_evento;
 		
-		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
-
-		$dados_pessoais = new DadoPessoalParticipante();
-
-		$dados_pessoais_candidato = $dados_pessoais->retorna_dados_pessoais($id_participante);
-			
-			$nome_candidato = User::find($id_participante)->nome;
-
-			$dados_email_candidato['nome_evento'] = $nome_evento;
-
-			$dados_email_candidato['ficha_inscricao'] = public_path().$request->ficha_inscricao;
-
-			$dados_email_candidato['ficha_abstract'] = public_path().'/'.$request->ficha_abstract;
-
-		$dados_email_candidato['nome_candidato'] = $dados_pessoais_candidato->nome;
-			$locale_fixo = 'en';
-			
-			Notification::send(User::find($id_participante), new NotificaCandidato($dados_email_candidato));
-
-			dd("aqui");
-
-		
-
-		
+		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();		
 
 		if ($autoriza_inscricao) {
 			
@@ -170,6 +144,27 @@ class FinalizarInscricaoController extends BaseController
 			}
 
 
+			$dados_pessoais = new DadoPessoalParticipante();
+
+			$dados_pessoais_candidato = $dados_pessoais->retorna_dados_pessoais($id_participante);
+				
+			$nome_candidato = User::find($id_participante)->nome;
+
+			$dados_email_candidato['nome_evento'] = $nome_evento;
+
+			$dados_email_candidato['ficha_inscricao'] = public_path().$request->ficha_inscricao;
+
+			$dados_email_candidato['ficha_abstract'] = public_path().'/'.$request->ficha_abstract;
+
+			$dados_email_candidato['nome_candidato'] = $dados_pessoais_candidato->nome;
+				$locale_fixo = 'en';
+				
+			Notification::send(User::find($id_participante), new NotificaCandidato($dados_email_candidato));
+
+			@unlink($dados_email_candidato['ficha_inscricao']);
+
+			@unlink($dados_email_candidato['ficha_abstract']);
+		
 
 			notify()->flash(trans('mensagens_gerais.envio_final'),'success');
 
