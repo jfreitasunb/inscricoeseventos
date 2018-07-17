@@ -34,12 +34,14 @@ class NotificaCandidato extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->from('posgrad@mat.unb.br', 'Coordenação de Pós-Graduação do MAT/UnB')
-            ->subject(trans('mensagens_gerais.inscricao_mat'))
+            ->from('verao@mat.unb.br', 'Coordinatos')
+            ->subject(trans('mensagens_gerais.inscricao_mat').$this->dados_email['nome_evento'])
             ->line(trans('mensagens_gerais.inscricao_mat_1').$this->dados_email['nome_candidato'].',')
-            ->line(trans('mensagens_gerais.inscricao_mat_2').$this->dados_email['programa'].trans('mensagens_gerais.inscricao_mat_3'))
             ->attach($this->dados_email['ficha_inscricao'], [
                         'as' => 'Ficha_de_Inscrição.pdf',
+                        'mime' => 'application/pdf'])
+            ->attach($this->dados_email['ficha_abstract'], [
+                        'as' => 'Abstract.pdf',
                         'mime' => 'application/pdf']);
     }
 }
