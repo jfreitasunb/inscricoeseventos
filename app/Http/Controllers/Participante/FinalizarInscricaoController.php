@@ -102,19 +102,45 @@ class FinalizarInscricaoController extends BaseController
 
 	public function postFinalizarInscricao(Request $request){
 
-		@unlink($request->ficha_inscricao);
+		// @unlink($request->ficha_inscricao);
+		// 
 
 		$user = $this->SetUser();
 		
 		$id_participante = $user->id_user;
 
-		$locale_fixo = 'en';
-
 		$edital_ativo = new ConfiguraInscricaoEvento();
 
-		$id_inscricao_evento = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_evento;
+		$evento = $edital_ativo->retorna_inscricao_ativa();
+
+		$id_inscricao_evento = $evento->id_inscricao_evento;
+
+		$nome_evento = $evento->nome_evento;
 		
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+
+		$dados_pessoais = new DadoPessoalParticipante();
+
+		$dados_pessoais_candidato = $dados_pessoais->retorna_dados_pessoais($id_participante);
+			
+			$nome_candidato = User::find($id_participante)->nome;
+
+			$dados_email_candidato['nome_evento'] = $nome_evento;
+
+			$dados_email_candidato['ficha_inscricao'] = public_path().$request->ficha_inscricao;
+
+			$dados_email_candidato['ficha_abstract'] = public_path().'/'.$request->ficha_abstract;
+
+		$dados_email_candidato['nome_candidato'] = $dados_pessoais_candidato->nome;
+			$locale_fixo = 'en';
+			
+			Notification::send(User::find($id_participante), new NotificaCandidato($dados_email_candidato));
+
+			dd("aqui");
+
+		
+
+		
 
 		if ($autoriza_inscricao) {
 			
