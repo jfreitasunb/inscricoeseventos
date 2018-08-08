@@ -56,6 +56,10 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::delete('contas/users/impersonate','\InscricoesEventos\Http\Controllers\Admin\ImpersonateController@destroy');
 
+	Route::get('contas/criar/coordenador','\InscricoesEventos\Http\Controllers\Admin\CriaCoordenadorController@getCriarCoordenador')->name('criar.coordenador');
+
+	Route::post('contas/criar/coordenador','\InscricoesEventos\Http\Controllers\Admin\CriaCoordenadorController@postCriarCoordenador')->name('criar.coordenador');
+
 	Route::get('contas/users/link/senha', '\InscricoesEventos\Http\Controllers\Admin\LinkSenhaController@getPesquisaLinkMudarSenha')->name('pesquisa.email.muda.senha');
 
 	Route::post('contas/users/link/senha', '\InscricoesEventos\Http\Controllers\Admin\LinkSenhaController@postPesquisaLinkMudarSenha')->name('pesquisa.email.muda.senha');
