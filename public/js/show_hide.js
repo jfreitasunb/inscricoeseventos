@@ -1,9 +1,12 @@
 function yesnoCheck() {
     if (document.getElementById('yesCheck').checked) {
         document.getElementById('ifYes').style.display = 'block';
-    }else{
+        document.getElementById('ifNo').style.display = 'none';
+    }
+
+    if (document.getElementById('noCheck').checked) {
+        document.getElementById('ifNo').style.display = 'block';
         document.getElementById('ifYes').style.display = 'none';
-        document.getElementById("noCheck").value = 0;
-    } 
+    }
 
 }

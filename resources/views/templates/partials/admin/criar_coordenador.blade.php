@@ -1,54 +1,68 @@
 @extends('templates.default')
 
 @section('stylesheets')
-  <link href="{{ asset('css/parsley.css') }}" rel="stylesheet">
+  {!! Html::style( asset('css/parsley.css') ) !!}
+  {!! Html::style( asset('bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') ) !!}
+  {!! Html::style( asset('bower_components/moment/locale/fr.js') ) !!}
 @endsection
 
 @section('criar_coordenador')
-  <div class="row">
-    <form action="{{ route('criar.coordenador') }}" method="POST" data-parsley-validate class="form-horizontal">
-      <fieldset class="scheduler-border">
-        <legend class="scheduler-border">Criar conta de Coordenador</legend>
-        
-        <div class="form-group" {{ $errors->has('email') ? ' has-error' : '' }}>
-          <div class="row">
-            <label class="col-md-2 control-label" for="email">Informe o e-mail do novo coordenador:</label>  
-            <div class="col-md-2">
-              <input id="email" name="email" type="text" class="form-control input-md" required="" data-parsley-type="email" value="{{Request::old('email') ?: '' }}">
-            </div>
-          </div>
-          @if ($errors->has('email'))
-            <span class="help-block">{{ $errors->first('email') }}</span>
-          @endif
-        </div>
+  {!! Form::open(array('route' => 'criar.coordenador', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 
-        <div class="form-group" {{ $errors->has('login') ? ' has-error' : '' }}>
-          <div class="row">
-            <label class="col-md-2 control-label" for="login">Login:</label>  
-            <div class="col-md-2">
-              <input id="login" name="login" type="text" class="form-control input-md" required="" value="{{Request::old('login') ?: '' }}">
-            </div>
-          </div>
-          @if ($errors->has('login'))
-            <span class="help-block">{{ $errors->first('login') }}</span>
-          @endif
-        </div>
-
-        <div class="col-xs-12" style="height:35px;"></div>
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-6 col-md-offset-3 text-center">
-              <input type="submit" name="registrar" id="register-submit" class="btn btn-primary btn-lg" tabindex="4" value="Criar conta">
-            </div>
-          </div>
-        </div>
-      </fieldset>
-      <input type="hidden" name="_token" value="{{ Session::token() }}">
-    </form>
+<fieldset class="scheduler-border">
+  <legend class="scheduler-border">{{trans('tela_submeter_trabalho.categoria')}}</legend>
+  <div class="col-md-6">
+    <label class="radio-inline"><input type="radio" onclick="javascript:yesnoCheck();" name="tipo_acao" id="yesCheck">Criar nova conta</label>
+    <label class="radio-inline"><input type="radio" onclick="javascript:yesnoCheck();" name="tipo_acao" id="noCheck">Usar conta existente</label>
   </div>
+</fieldset>
+
+{{-- <fieldset class="scheduler-border">
+  <legend class="scheduler-border">{{trans('tela_submeter_trabalho.apresentar_trabalho')}}</legend>
+  <div class="col-md-6">
+      <label class="radio-inline"><input type="radio" onclick="javascript:yesnoCheck();" name="apresentar_trabalho" id="yesCheck">{{trans('tela_submeter_trabalho.sim') }}</label>
+      <label class="radio-inline"><input type="radio" onclick="javascript:yesnoCheck();" name="apresentar_trabalho" id="noCheck">{{ " ".trans('tela_submeter_trabalho.nao') }}</label>
+  </div>
+</fieldset> --}}
+
+<div id="ifYes" style="display:none">
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border">{{trans('tela_submeter_trabalho.tipo_apresentacao')}}</legend>
+    <div class="col-md-6">
+      <label class="radio-inline">{!! Form::radio('id_tipo_apresentacao', 1, '', []) !!}fd</label>
+      <label class="radio-inline">{!! Form::radio('id_tipo_apresentacao', 1, '', []) !!}ghg</label>
+    </div>
+  </fieldset>
+</div>
+
+<div id="ifNo" style="display:none">
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border">{{trans('tela_submeter_trabalho.tipo_apresentacao')}}</legend>
+    <div class="col-md-6">
+      <label class="radio-inline">{!! Form::radio('id_tipo_apresentacao', 1, '', []) !!}essdfds</label>
+      <label class="radio-inline">{!! Form::radio('id_tipo_apresentacao', 1, '', []) !!}fgsdfg</label>
+    </div>
+  </fieldset>
+</div>
+
+
+<div class="form-group">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 text-center">
+      {!! Form::submit(trans('tela_submeter_trabalho.menu_enviar'), ['class' => 'btn btn-primary btn-lg register-submit']) !!}
+    </div>
+  </div>
+</div>
+{!! Form::close() !!}
 @endsection
 
 @section('scripts')
-  <script src="{{ asset('js/parsley.min.js') }}"></script>
-  <script src="{{ asset('i18n/pt-br.js') }}"></script>
+  {!! Html::script( asset('bower_components/moment/min/moment.min.js') ) !!}
+  {!! Html::script( asset('bower_components/moment/locale/pt-br.js') ) !!}
+  {!! Html::script( asset('bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') ) !!}
+  {!! Html::script( asset('bower_components/moment/locale/fr.js') ) !!}
+  {!! Html::script( asset('js/datepicker.js') ) !!}
+  {!! Html::script( asset('js/parsley.min.js') ) !!}
+  {!! Html::script( asset('js/show_hide.js') ) !!}
+ 
 @endsection

@@ -121,6 +121,7 @@
             <div class="menuadmin well">
                 @yield('admin_impersonate')
                 @yield('ativa_conta')
+                @yield('criar_coordenador')
                 @yield('link_muda_senha')
                 @yield('contas_inativas')
                 @yield('visualiza_associacoes')
