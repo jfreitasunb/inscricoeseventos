@@ -4,6 +4,9 @@ namespace InscricoesEventos\Http\Controllers\Auth;
 
 use InscricoesEventos\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Auth\Events\PasswordReset;
 
 class ResetPasswordController extends Controller
 {
@@ -36,5 +39,18 @@ class ResetPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
+    }
+
+    protected function resetPassword($user, $password)
+    {
+        $user->password = Hash::make(trim($password));
+
+        $user->setRememberToken(Str::random(60));
+
+        $user->save();
+
+        event(new PasswordReset($user));
+
+        $this->guard()->login($user);
     }
 }
