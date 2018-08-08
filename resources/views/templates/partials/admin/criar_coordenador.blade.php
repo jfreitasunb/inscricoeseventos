@@ -4,7 +4,7 @@
   <link href="{{ asset('css/parsley.css') }}" rel="stylesheet">
 @endsection
 
-@section('ativa_conta')
+@section('criar_coordenador')
   <div class="row">
     <form action="{{ route('criar.coordenador') }}" method="POST" data-parsley-validate class="form-horizontal">
       <fieldset class="scheduler-border">
