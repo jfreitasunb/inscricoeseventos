@@ -34,6 +34,11 @@ class CriaCoordenadorController extends AdminController
 
       	$evento_vigente = $evento->retorna_edital_vigente();
 
-      	return view('templates.partials.admin.cria_coordenador')->with(compact('evento_vigente'));
+      	return view('templates.partials.admin.criar_coordenador')->with(compact('evento_vigente'));
+	}
+
+	public function postCriarCoordenador(Request $request)
+	{
+		dd("Aqui");
 	}
 }
