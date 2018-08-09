@@ -42,4 +42,10 @@ class TipoCoordenador extends FuncoesModels
             ->where('id_inscricao_evento', $id_inscricao_evento)->where('id_coordenador', $id_coordenador)
             ->value('coordenador_geral');
     }
+
+    public function retorna_dados_coordenador($id_coordenador, $id_inscricao_evento)
+    {
+        return $this->where('id_inscricao_evento', $id_inscricao_evento)->where('id_coordenador', $id_coordenador)
+            ->get()->first();
+    }
 }
