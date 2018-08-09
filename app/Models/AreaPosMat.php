@@ -29,7 +29,7 @@ class AreaPosMat extends Model
 
     public function retorna_cursos_de_verao()
     {
-        return $this->where('id_area_pos','>', 1)->orderBy('id_area_pos')->get();
+        return $this->orderBy('id_area_pos')->get();
     }
 
     public function define_nome_coluna_por_locale($locale)
@@ -57,7 +57,7 @@ class AreaPosMat extends Model
             return null;
         }else{
             return $this->select($nome_coluna)
-            ->where('id_area_pos', $area_pos)->where('id_area_pos', '!=', 10)
+            ->where('id_area_pos', $area_pos)->where('id_area_pos')
             ->value($nome_coluna);
         }   
     }
@@ -67,7 +67,7 @@ class AreaPosMat extends Model
         $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
         if (is_null($id_area_evento)) {
-            return $this->where('id_area_pos', '!=', 3)->select('id_area_pos', $nome_coluna)->orderBy($nome_coluna)->get()->pluck($nome_coluna, 'id_area_pos');
+            return $this->where('id_area_pos')->select('id_area_pos', $nome_coluna)->orderBy($nome_coluna)->get()->pluck($nome_coluna, 'id_area_pos');
         }else{
             return $this->where('id_area_pos', $id_area_evento)->select('id_area_pos', $nome_coluna)->orderBy('id_area_pos')->get()->pluck($nome_coluna, 'id_area_pos')->toArray();
         }
