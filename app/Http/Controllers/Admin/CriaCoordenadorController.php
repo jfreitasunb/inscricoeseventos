@@ -9,7 +9,7 @@ use Session;
 use Notification;
 use Purifier;
 use Carbon\Carbon;
-use InscricoesEventos\Models\{User, ConfiguraInscricaoEvento, AreaPosMat, RelatorioController, FinalizaInscricao, DadoPessoal};
+use InscricoesEventos\Models\{User, TipoCoordenador, ConfiguraInscricaoEvento, AreaPosMat, RelatorioController, FinalizaInscricao, DadoPessoal};
 use Illuminate\Http\Request;
 use InscricoesEventos\Mail\EmailVerification;
 use InscricoesEventos\Http\Controllers\Controller;
@@ -59,6 +59,8 @@ class CriaCoordenadorController extends AdminController
 
         $coordenador_geral = (bool)$request->coordenador_geral;
 
+        $id_inscricao_evento = (int)$request->id_inscricao_evento;
+
         if (!$coordenador_geral) {
             $this->validate($request, [
                 'nome' => 'required',
@@ -89,9 +91,36 @@ class CriaCoordenadorController extends AdminController
 
             $user->save();
 
+            $id_novo_usuario = $user->id_user;
 
         }else{
-            dd("já existe");
+            $id_novo_usuario = $usuario_existe->id_user;
         }
+
+
+        $tipo_coordenador = new TipoCoordenador();
+
+        $tipo_coordenador->limpa_conta_criada($id_novo_usuario, $id_inscricao_evento);
+
+        $tipo_coordenador->id_coordenador = $id_novo_usuario;
+
+        $tipo_coordenador->coordenador_geral = $coordenador_geral;
+
+        $tipo_coordenador->coordenador_area = $coordenador_area;
+
+        $tipo_coordenador->id_inscricao_evento = $id_inscricao_evento;
+
+        $status_criacao_coordenador = $tipo_coordenador->save();
+
+        if ($status_criacao_coordenador) {
+            notify()->flash('Dados salvos com sucesso!','success');
+        }else{
+
+            notify()->flash('Tente novamente depois.','error');
+        }
+        
+            
+        return redirect()->back();
+
 	}
 }
