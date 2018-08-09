@@ -185,19 +185,9 @@ class RelatorioController extends BaseController
 
     $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
-    $oferta_verao = new OfertaCursoVerao();
+    $inscritos = new FinalizaInscricao();
 
-    $cursos_ofertados = $oferta_verao->retorna_cursos_ofertados($relatorio_disponivel->id_inscricao_evento, $locale_relatorio);
-
-    foreach ($cursos_ofertados as $curso) {
-      
-      $contagem[$curso->id_curso_verao] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_evento, $curso->id_curso_verao);
-
-    }
-
-    $total_inscritos = array_sum($contagem);
-
-    // $nome_programas = implode('/', $programa_para_inscricao);
+    $total_inscritos = $inscritos->retorna_total_inscritos($relatorio_disponivel->id_inscricao_evento);
 
     $arquivos_zipados_para_view = "";
 
@@ -207,7 +197,9 @@ class RelatorioController extends BaseController
 
     $monitoria = "";
 
-    return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','relatorio_disponivel', 'cursos_ofertados', 'total_inscritos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
+    // return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','relatorio_disponivel', 'cursos_ofertados', 'total_inscritos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
+    
+     return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','relatorio_disponivel', 'cursos_ofertados', 'total_inscritos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
   }
 
    public function getListaRelatoriosAnteriores()
