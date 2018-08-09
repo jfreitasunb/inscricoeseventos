@@ -129,11 +129,11 @@ class AuthController extends BaseController
 			return redirect()->intended('admin');
 		}
 
-		if ($user_type === 'candidato') {
+		if ($user_type === 'coordenador') {
 			notify()->flash(trans('mensagens_gerais.bem_vindo'),'success',[
 				'timer' => 1500,
 			]);
-			return redirect()->intended('candidato');
+			return redirect()->intended('coordenador');
 		}
 
 		if ($user_type === 'recomendante') {
