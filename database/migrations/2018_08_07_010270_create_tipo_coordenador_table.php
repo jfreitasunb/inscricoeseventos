@@ -20,8 +20,8 @@ class CreateTipoCoordenadorTable extends Migration
             $table->boolean('coordenador_geral')->default('False');
             $table->unsignedInteger('coordenador_area')->nullable();
             $table->foreign('coordenador_area')->references('id_area_pos')->on('area_pos_mat')->onDelete('cascade');
-            $table->unsignedInteger('id_evento');
-            $table->foreign('id_evento')->references('id_inscricao_evento')->on('configura_inscricao_evento')->onDelete('cascade');
+            $table->unsignedInteger('id_inscricao_evento');
+            $table->foreign('id_inscricao_evento')->references('id_inscricao_evento')->on('configura_inscricao_evento')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -27,8 +27,12 @@ class TipoCoordenador extends FuncoesModels
         'id_coordenador',
         'coordenador_geral',
         'coordenador_area',
-        'id_evento',
+        'id_inscricao_evento',
         'deleted_at',
     ];
 
+    public function limpa_conta_criada($id_coordenador, $id_inscricao_evento)
+    {
+        return $this->where('id_coordenador', $id_coordenador)->where('id_inscricao_evento', $id_inscricao_evento)->delete();
+    }
 }
