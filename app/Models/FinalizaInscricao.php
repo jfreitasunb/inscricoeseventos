@@ -40,9 +40,14 @@ class FinalizaInscricao extends FuncoesModels
         return $this->where('id_inscricao_evento', $id_inscricao_evento)->where('finalizada', true)->get();
     }
 
-    public function retorna_total_inscritos($id_inscricao_evento)
-    {
-        return $this->where('id_inscricao_evento', $id_inscricao_evento)->where('finalizada', true)->get()->count();
+    public function retorna_total_inscritos($id_inscricao_evento, $nivel_coordenador)
+    {   
+        if ($nivel_coordenador->coordenador_geral) {
+            return $this->where('id_inscricao_evento', $id_inscricao_evento)->where('finalizada', true)->get()->count();
+        }else{
+            return $this->where('finaliza_inscricao.id_inscricao_evento', $id_inscricao_evento)->where('finaliza_inscricao.finalizada', true)->join('trabalho_submetido', 'trabalho_submetido.id_inscricao_evento', 'finaliza_inscricao.id_inscricao_evento')->where('trabalho_submetido.id_area_trabalho', $nivel_coordenador->coordenador_area)->get()->count();
+        }
+        
     }
 
     public function retorna_usuario_inscricao_finalizada($id_inscricao_evento, $id_participante, $locale)
