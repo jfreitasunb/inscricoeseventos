@@ -60,6 +60,8 @@ class CriaCoordenadorController extends AdminController
         $coordenador_geral = (bool)$request->coordenador_geral;
 
         $id_inscricao_evento = (int)$request->id_inscricao_evento;
+        
+        $coordenador_area = null;
 
         if (!$coordenador_geral) {
             $this->validate($request, [
