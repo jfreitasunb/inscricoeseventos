@@ -117,7 +117,24 @@ class BladeServiceProvider extends ServiceProvider
             return $user->isCoordenador();
         });
 
-         Blade::if('participante', function ( $user = null ){
+        Blade::if('coordenador_area', function ( $user = null ){
+
+            if (!$user && auth()->check()) {
+                $user = auth()->user();
+            }
+
+            if (!$user) {
+                return false;
+            }
+
+            View::share('keep_open_accordion_inscricoes', $this->ativa_accordion_inscricoes());
+
+            View::share('keep_open_accordion_relatorios', $this->ativa_accordion_relatorios());
+            
+            return $user->isCoordenador_Area();
+        });
+
+        Blade::if('participante', function ( $user = null ){
 
             if (!$user && auth()->check()) {
                 $user = auth()->user();
