@@ -94,7 +94,52 @@ class User extends Authenticatable
     {
 
         if (auth()->user()->user_type === 'coordenador') {
-            return TRUE;
+            
+            $tipo_coordenador = new TipoCoordenador();
+            
+            $evento = new ConfiguraInscricaoEvento();
+
+            $evento_vigente = $evento->retorna_edital_vigente();
+
+            $id_inscricao_evento = $evento_vigente->id_inscricao_evento;
+
+            $coordenador_geral = $tipo_coordenador->retorna_nivel_coordenador(auth()->user()->id_user, $id_inscricao_evento);
+
+            if ($coordenador_geral) {
+                return TRUE;
+            }else{
+
+                return False;
+            }
+
+        }else{
+            return FALSE;
+        }
+    }
+
+    public function isCoordenador_Area()
+    {
+
+        if (auth()->user()->user_type === 'coordenador') {
+            
+            $tipo_coordenador = new TipoCoordenador();
+            
+            $evento = new ConfiguraInscricaoEvento();
+
+            $evento_vigente = $evento->retorna_edital_vigente();
+
+            $id_inscricao_evento = $evento_vigente->id_inscricao_evento;
+
+            $coordenador_geral = $tipo_coordenador->retorna_nivel_coordenador(auth()->user()->id_user, $id_inscricao_evento);
+
+            if ($coordenador_geral) {
+                return False;
+            }else{
+
+                return True;
+            }
+
+            
         }else{
             return FALSE;
         }
