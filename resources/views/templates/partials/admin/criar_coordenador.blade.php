@@ -17,7 +17,7 @@
   </div>
   <div class="col-md-8">
     {!! Form::label('email', 'E-mail: ', ['class' => 'control-label']) !!}
-    {!! Form::text('email_recomendante[]', '' , ['id' => 'email_recomendante', 'class' => 'form-control email', 'required' => '', 'data-parsley-type' => 'email']) !!}
+    {!! Form::text('email', '' , ['class' => 'form-control', 'required' => '', 'data-parsley-type' => 'email']) !!}
   </div>
 </fieldset>
 
