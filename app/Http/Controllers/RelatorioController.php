@@ -21,6 +21,7 @@ use InscricoesEventos\Models\Paises;
 use InscricoesEventos\Models\TipoParticipacao;
 use InscricoesEventos\Models\CategoriaParticipante;
 use InscricoesEventos\Models\TipoApresentacao;
+use InscricoesEventos\Models\TipoCoordenador;
 use Illuminate\Http\Request;
 use InscricoesEventos\Mail\EmailVerification;
 use InscricoesEventos\Http\Controllers\Controller;
@@ -179,15 +180,25 @@ class RelatorioController extends BaseController
   public function getListaRelatorios()
   {
 
+    $user = $this->SetUser();
+    
+    $id_coordenador = $user->id_user;
+
     $locale_relatorio = 'pt-br';
 
     $relatorio = new ConfiguraInscricaoEvento();
 
     $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
+    $id_inscricao_evento = $relatorio_disponivel->id_inscricao_evento;
+
+    $coordenador = new TipoCoordenador();
+
+    $nivel_coordenador = $coordenador->retorna_dados_coordenador($id_coordenador, $id_inscricao_evento);
+
     $inscritos = new FinalizaInscricao();
 
-    $total_inscritos = $inscritos->retorna_total_inscritos($relatorio_disponivel->id_inscricao_evento);
+    $total_inscritos = $inscritos->retorna_total_inscritos($id_inscricao_evento, $nivel_coordenador);
 
     $arquivos_zipados_para_view = "";
 
