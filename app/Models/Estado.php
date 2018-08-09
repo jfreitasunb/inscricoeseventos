@@ -4,7 +4,7 @@ namespace InscricoesEventos\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Estado extends Model
+class Estado extends FuncoesModels
 {
 
     protected $fillable = ['nome'];

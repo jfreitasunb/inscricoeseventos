@@ -4,7 +4,7 @@ namespace InscricoesEventos\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cidade extends Model
+class Cidade extends FuncoesModels
 {
 
     protected $table = 'cidades';

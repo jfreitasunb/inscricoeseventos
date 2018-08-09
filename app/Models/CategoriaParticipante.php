@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class CategoriaParticipante extends Model
+class CategoriaParticipante extends FuncoesModels
 {
     
 
@@ -27,26 +27,11 @@ class CategoriaParticipante extends Model
         'nome_categoria_es',
     ];
 
-    public function define_nome_coluna_por_locale($locale)
-    {
-        switch ($locale) {
-            case 'en':
-                return 'nome_categoria_en';
-                break;
-
-            case 'es':
-                return 'nome_categoria_es';
-                break;
-            
-            default:
-                return 'nome_categoria_ptbr';
-                break;
-        }
-    }
+    
 
     public function retorna_nome_categoria_por_id($id_categoria_participante, $locale)
     {
-        $nome_coluna = $this->define_nome_coluna_por_locale($locale);
+        $nome_coluna = $this->define_nome_coluna_categoria($locale);
 
         return $this->select($nome_coluna)
             ->where('id', $id_categoria_participante)
@@ -55,7 +40,7 @@ class CategoriaParticipante extends Model
 
     public function pega_nome_categoria($locale)
     {
-        $nome_coluna = $this->define_nome_coluna_por_locale($locale);
+        $nome_coluna = $this->define_nome_coluna_categoria($locale);
 
         return $this->select('id', 'categoria_participante.'.$nome_coluna.' AS participante_categoria')->orderBy('id')->get();
     }

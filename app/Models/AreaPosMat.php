@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class AreaPosMat extends Model
+class AreaPosMat extends FuncoesModels
 {
     
 
@@ -32,26 +32,9 @@ class AreaPosMat extends Model
         return $this->orderBy('id_area_pos')->get();
     }
 
-    public function define_nome_coluna_por_locale($locale)
-    {
-        switch ($locale) {
-            case 'en':
-                return 'nome_en';
-                break;
-
-            case 'es':
-                return 'nome_es';
-                break;
-            
-            default:
-                return 'nome_ptbr';
-                break;
-        }
-    }
-
     public function pega_area_pos_mat($area_pos, $locale)
     {
-        $nome_coluna = $this->define_nome_coluna_por_locale($locale);
+        $nome_coluna = $this->define_nome_coluna_area_pos_mat($locale);
 
         if ($area_pos == 0) {
             return null;
@@ -64,7 +47,7 @@ class AreaPosMat extends Model
 
     public function retorna_areas_evento($id_area_evento, $locale)
     {   
-        $nome_coluna = $this->define_nome_coluna_por_locale($locale);
+        $nome_coluna = $this->define_nome_coluna_area_pos_mat($locale);
 
         if (is_null($id_area_evento)) {
             return $this->where('id_area_pos')->select('id_area_pos', $nome_coluna)->orderBy($nome_coluna)->get()->pluck($nome_coluna, 'id_area_pos');

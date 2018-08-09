@@ -4,7 +4,7 @@ namespace InscricoesEventos\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Paises extends Model
+class Paises extends FuncoesModels
 {
 
     public function retorna_nome_pais_por_id($id_pais)

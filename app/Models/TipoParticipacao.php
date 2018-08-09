@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class TipoParticipacao extends Model
+class TipoParticipacao extends FuncoesModels
 {
     
 
