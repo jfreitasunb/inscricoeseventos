@@ -36,12 +36,14 @@
   </div>
 </fieldset>
 
-{{-- <fieldset class="scheduler-border">
+<fieldset class="scheduler-border">
   <legend class="scheduler-border">Em qual evento?</legend>
   <div class="col-md-6">
-    {!! Form::select('coordenador_evento', $evento, '',  ['class' => 'form-control col-md-6']) !!}
+    {!! Form::label('nome_evento', 'Nome do evento: ', ['class' => 'control-label']) !!}
+    {!! Form::text('nome_evento', $evento_vigente->nome_evento , ['class' => 'form-control', 'required' => '']) !!}
+    {!! Form::hidden('id_inscricao_evento', $evento_vigente->id_inscricao_evento) !!}
   </div>
-</fieldset> --}}
+</fieldset>
 
 
 <div class="form-group">
