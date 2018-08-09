@@ -50,7 +50,7 @@ class AreaPosMat extends FuncoesModels
         $nome_coluna = $this->define_nome_coluna_area_pos_mat($locale);
 
         if (is_null($id_area_evento)) {
-            return $this->where('id_area_pos')->select('id_area_pos', $nome_coluna)->orderBy($nome_coluna)->get()->pluck($nome_coluna, 'id_area_pos');
+            return $this->select('id_area_pos', $nome_coluna)->orderBy($nome_coluna)->get()->pluck($nome_coluna, 'id_area_pos');
         }else{
             return $this->where('id_area_pos', $id_area_evento)->select('id_area_pos', $nome_coluna)->orderBy('id_area_pos')->get()->pluck($nome_coluna, 'id_area_pos')->toArray();
         }
