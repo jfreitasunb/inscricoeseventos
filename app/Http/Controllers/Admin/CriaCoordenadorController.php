@@ -40,13 +40,18 @@ class CriaCoordenadorController extends AdminController
 
 		$secao = $area_pos->retorna_areas_evento($id_area_evento, $this->locale_default);
 
-		dd($id_area_evento);
-
       	return view('templates.partials.admin.criar_coordenador')->with(compact('evento_vigente', 'secao'));
 	}
 
 	public function postCriarCoordenador(Request $request)
 	{
-		dd("Aqui");
+		dd($request);
+
+        $this->validate($request, [
+            'nome' => 'required',
+            'email' => 'required|email',
+            'coordenador_geral' => 'required',
+            'id_inscricao_evento' => 'required',
+        ]);
 	}
 }
