@@ -35,4 +35,11 @@ class TipoCoordenador extends FuncoesModels
     {
         return $this->where('id_coordenador', $id_coordenador)->where('id_inscricao_evento', $id_inscricao_evento)->delete();
     }
+
+    public function retorna_nivel_coordenador($id_coordenador, $id_inscricao_evento)
+    {
+        return $this->select('coordenador_geral')
+            ->where('id_inscricao_evento', $id_inscricao_evento)->where('id_coordenador', $id_coordenador)
+            ->value('coordenador_geral');
+    }
 }
