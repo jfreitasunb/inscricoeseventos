@@ -45,13 +45,36 @@ class CriaCoordenadorController extends AdminController
 
 	public function postCriarCoordenador(Request $request)
 	{
-		dd($request);
-
+		
         $this->validate($request, [
             'nome' => 'required',
             'email' => 'required|email',
             'coordenador_geral' => 'required',
             'id_inscricao_evento' => 'required',
         ]);
+
+        $nome = Purifier::clean(trim($request->nome));
+
+        $email = Purifier::clean(strtolower(trim($request->email)));
+
+        $coordenador_geral = (bool)$request->coordenador_geral;
+
+        if (!$coordenador_geral) {
+            $this->validate($request, [
+                'nome' => 'required',
+                'email' => 'required|email',
+                'coordenador_geral' => 'required',
+                'id_inscricao_evento' => 'required',
+                'coordenador_area' => 'required',
+            ]);
+
+            $coordenador_area = (int)$request->coordenador_area;
+        }
+
+        $user = new User();
+
+        $usuario_existe = $user->retorna_user_por_email($email);
+
+        dd($usuario_existe);
 	}
 }
