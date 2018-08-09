@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesPos\Models;
+namespace InscricoesEventos\Models;
 
 use DB;
 use Carbon\Carbon;
