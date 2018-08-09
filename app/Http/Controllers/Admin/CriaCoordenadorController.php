@@ -75,6 +75,23 @@ class CriaCoordenadorController extends AdminController
 
         $usuario_existe = $user->retorna_user_por_email($email);
 
-        dd($usuario_existe);
+        if (is_null($usuario_existe)) {
+            
+            $user->nome = $nome;
+
+            $user->email = $email;
+
+            $user->password = bcrypt(date("d-m-Y H:i:s:u").str_random(20));
+
+            $user->user_type = 'coordenador';
+
+            $user->ativo = True;
+
+            $user->save();
+
+
+        }else{
+            dd("já existe");
+        }
 	}
 }
