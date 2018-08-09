@@ -10,40 +10,38 @@
   {!! Form::open(array('route' => 'criar.coordenador', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 
 <fieldset class="scheduler-border">
-  <legend class="scheduler-border">{{trans('tela_submeter_trabalho.categoria')}}</legend>
+  <legend class="scheduler-border">Dados básicos</legend>
+  <div class="col-md-4">
+    {!! Form::label('nome', 'Nome: ', ['class' => 'control-label']) !!}
+    {!! Form::text('nome', '' , ['class' => 'form-control', 'required' => '']) !!}
+  </div>
+  <div class="col-md-8">
+    {!! Form::label('email', 'E-mail: ', ['class' => 'control-label']) !!}
+    {!! Form::text('email_recomendante[]', '' , ['id' => 'email_recomendante', 'class' => 'form-control email', 'required' => '', 'data-parsley-type' => 'email']) !!}
+  </div>
+</fieldset>
+
+<fieldset class="scheduler-border">
+  <legend class="scheduler-border">Coordenador Geral do Evento?</legend>
   <div class="col-md-6">
-    <label class="radio-inline"><input type="radio" onclick="javascript:yesnoCheck();" name="tipo_acao" id="yesCheck">Criar nova conta</label>
-    <label class="radio-inline"><input type="radio" onclick="javascript:yesnoCheck();" name="tipo_acao" id="noCheck">Usar conta existente</label>
+    <label class="radio-inline">{!! Form::radio('coordenador_geral', 0, 1, []) !!}Não</label>
+    <label class="radio-inline">{!! Form::radio('coordenador_geral', 1, '', []) !!}Sim</label>
+  </div>
+</fieldset>
+
+<fieldset class="scheduler-border">
+  <legend class="scheduler-border">Coordenador de qual área?</legend>
+  <div class="col-md-6">
+    {!! Form::select('coordenador_area', $secao, '',  ['class' => 'form-control col-md-6']) !!}
   </div>
 </fieldset>
 
 {{-- <fieldset class="scheduler-border">
-  <legend class="scheduler-border">{{trans('tela_submeter_trabalho.apresentar_trabalho')}}</legend>
+  <legend class="scheduler-border">Em qual evento?</legend>
   <div class="col-md-6">
-      <label class="radio-inline"><input type="radio" onclick="javascript:yesnoCheck();" name="apresentar_trabalho" id="yesCheck">{{trans('tela_submeter_trabalho.sim') }}</label>
-      <label class="radio-inline"><input type="radio" onclick="javascript:yesnoCheck();" name="apresentar_trabalho" id="noCheck">{{ " ".trans('tela_submeter_trabalho.nao') }}</label>
+    {!! Form::select('coordenador_evento', $evento, '',  ['class' => 'form-control col-md-6']) !!}
   </div>
 </fieldset> --}}
-
-<div id="ifYes" style="display:none">
-  <fieldset class="scheduler-border">
-    <legend class="scheduler-border">{{trans('tela_submeter_trabalho.tipo_apresentacao')}}</legend>
-    <div class="col-md-6">
-      <label class="radio-inline">{!! Form::radio('id_tipo_apresentacao', 1, '', []) !!}fd</label>
-      <label class="radio-inline">{!! Form::radio('id_tipo_apresentacao', 1, '', []) !!}ghg</label>
-    </div>
-  </fieldset>
-</div>
-
-<div id="ifNo" style="display:none">
-  <fieldset class="scheduler-border">
-    <legend class="scheduler-border">{{trans('tela_submeter_trabalho.tipo_apresentacao')}}</legend>
-    <div class="col-md-6">
-      <label class="radio-inline">{!! Form::radio('id_tipo_apresentacao', 1, '', []) !!}essdfds</label>
-      <label class="radio-inline">{!! Form::radio('id_tipo_apresentacao', 1, '', []) !!}fgsdfg</label>
-    </div>
-  </fieldset>
-</div>
 
 
 <div class="form-group">
@@ -63,6 +61,4 @@
   {!! Html::script( asset('bower_components/moment/locale/fr.js') ) !!}
   {!! Html::script( asset('js/datepicker.js') ) !!}
   {!! Html::script( asset('js/parsley.min.js') ) !!}
-  {!! Html::script( asset('js/show_hide.js') ) !!}
- 
 @endsection
