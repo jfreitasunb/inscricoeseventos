@@ -31,6 +31,9 @@
         @coordenador(Auth()->user())
           @include('templates.partials.coordenador.menu_coordenador')
         @endcoordenador
+        @coordenador_area(Auth()->user())
+          @include('templates.partials.coordenador.menu_coordenador_area')
+        @endcoordenador_area
         @admin(Auth()->user())
           @include('templates.partials.admin.menu_admin')
           @impersonating_recomendante
