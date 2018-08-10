@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class TipoEvento extends FuncoesModels
+class ConfiguraTipoEvento extends FuncoesModels
 {
     
 
@@ -19,7 +19,7 @@ class TipoEvento extends FuncoesModels
     
     protected $primaryKey = 'id';
 
-    protected $table = 'tipo_evento';
+    protected $table = 'configura_tipo_evento';
 
     protected $fillable = [
         'tipo',

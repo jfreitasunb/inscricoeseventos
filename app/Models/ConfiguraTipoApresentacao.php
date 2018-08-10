@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class TipoApresentacao extends FuncoesModels
+class ConfiguraTipoApresentacao extends FuncoesModels
 {
     
 
@@ -19,7 +19,7 @@ class TipoApresentacao extends FuncoesModels
     
     protected $primaryKey = 'id';
 
-    protected $table = 'tipo_apresentacao';
+    protected $table = 'configura_tipo_apresentacao';
 
     protected $fillable = [
         'nome_tipo_apresentacao_ptbr',
@@ -40,6 +40,6 @@ class TipoApresentacao extends FuncoesModels
     {   
         $nome_coluna = $this->define_nome_coluna_tipo_apresentacao($locale);
 
-        return $this->select('id', 'tipo_apresentacao.'.$nome_coluna.' AS nome_apresentacao')->orderBy('id')->get();
+        return $this->select('id', 'configura_tipo_apresentacao.'.$nome_coluna.' AS nome_apresentacao')->orderBy('id')->get();
     }
 }

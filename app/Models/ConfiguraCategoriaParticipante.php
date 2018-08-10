@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class CategoriaParticipante extends FuncoesModels
+class ConfiguraCategoriaParticipante extends FuncoesModels
 {
     
 
@@ -19,7 +19,7 @@ class CategoriaParticipante extends FuncoesModels
     
     protected $primaryKey = 'id';
 
-    protected $table = 'categoria_participante';
+    protected $table = 'configura_categoria_participante';
 
     protected $fillable = [
         'nome_categoria_ptbr',

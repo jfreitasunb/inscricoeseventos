@@ -19,8 +19,8 @@ use InscricoesEventos\Models\DadoPessoalParticipante;
 use InscricoesEventos\Models\TrabalhoSubmetido;
 use InscricoesEventos\Models\Paises;
 use InscricoesEventos\Models\TipoParticipacao;
-use InscricoesEventos\Models\CategoriaParticipante;
-use InscricoesEventos\Models\TipoApresentacao;
+use InscricoesEventos\Models\ConfiguraCategoriaParticipante;
+use InscricoesEventos\Models\ConfiguraTipoApresentacao;
 use InscricoesEventos\Models\TipoCoordenador;
 use Illuminate\Http\Request;
 use InscricoesEventos\Mail\EmailVerification;
@@ -118,15 +118,15 @@ class RelatorioController extends BaseController
     return $consolida_dados;
   }
 
-  public function ConsolidaEscolhaCandidato($id_participante,$id_inscricao_evento, $locale_participante)
+  public function ConsolidaEscolhaCandidato($id_participante, $id_inscricao_evento, $locale_participante)
   {
     $consolida_escolha = [];
 
     $tipo_participacao = new TipoParticipacao();
 
-    $categoria_participacao = new CategoriaParticipante();
+    $categoria_participacao = new ConfiguraCategoriaParticipante();
 
-    $tipo_apresentacao = new TipoApresentacao();
+    $tipo_apresentacao = new ConfiguraTipoApresentacao();
 
 
     $escolha_participacao = $tipo_participacao->retorna_participacao($id_inscricao_evento, $id_participante);
@@ -323,8 +323,6 @@ class RelatorioController extends BaseController
          $dados_candidato_para_relatorio[$key] = $value;
       }
 
-      dd($dados_candidato_para_relatorio);
-
       $linha_arquivo['nome'] = $dados_candidato_para_relatorio['nome'];
 
       $linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_participante'])->email;
@@ -332,6 +330,8 @@ class RelatorioController extends BaseController
       foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
         $dados_candidato_para_relatorio[$key] = $value;
       }
+
+      dd($dados_candidato_para_relatorio);
 
       $linha_arquivo['programa_pretendido'] = $dados_candidato_para_relatorio['programa_pretendido'];
 

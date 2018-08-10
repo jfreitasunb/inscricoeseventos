@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriaParticipanteTable extends Migration
+class CreateConfiguraTipoApresentacaoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateCategoriaParticipanteTable extends Migration
      */
     public function up()
     {
-        Schema::create('categoria_participante', function (Blueprint $table){
+        Schema::create('configura_tipo_apresentacao', function (Blueprint $table){
             $table->increments('id');
-            $table->text('nome_categoria_ptbr', 15)->nulable();
-            $table->text('nome_categoria_en', 15)->nulable();
-            $table->text('nome_categoria_es', 15)->nulable();
+            $table->text('nome_tipo_apresentacao_ptbr', 15)->nulable();
+            $table->text('nome_tipo_apresentacao_en', 15)->nulable();
+            $table->text('nome_tipo_apresentacao_es', 15)->nulable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateCategoriaParticipanteTable extends Migration
      */
     public function down()
     {
-        Schema::drop('categoria_participante');
+        Schema::drop('configura_tipo_apresentacao');
     }
 }
