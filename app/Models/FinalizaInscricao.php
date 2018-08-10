@@ -35,9 +35,13 @@ class FinalizaInscricao extends FuncoesModels
         return $this->where('finaliza_inscricao.id_inscricao_evento', $id_inscricao_evento)->where('finaliza_inscricao.finalizada', true)->join('dados_pessoais_candidato', 'dados_pessoais_candidato.id_participante','finaliza_inscricao.id_participante')->join('users', 'users.id_user', 'finaliza_inscricao.id_participante')->join('escolhas_curso_verao', 'escolhas_curso_verao.id_participante', 'dados_pessoais_candidato.id_participante')->where('escolhas_curso_verao.id_inscricao_evento', $id_inscricao_evento)->join('programa_pos_mat', 'id_programa_pos', 'escolhas_curso_verao.programa_pretendido')->select('finaliza_inscricao.id_participante', 'finaliza_inscricao.id_inscricao_evento','users.nome', 'users.email', 'programa_pos_mat.'.$nome_coluna)->orderBy('escolhas_curso_verao.programa_pretendido' , 'desc')->orderBy('users.nome','asc');
     }
 
-    public function retorna_usuarios_relatorios($id_inscricao_evento)
+    public function retorna_usuarios_relatorios($id_inscricao_evento, $nivel_coordenador)
     {
-        return $this->where('id_inscricao_evento', $id_inscricao_evento)->where('finalizada', true)->get();
+        if ($nivel_coordenador->coordenador_geral) {
+            return $this->where('id_inscricao_evento', $id_inscricao_evento)->where('finalizada', true)->get();
+        }else{
+            return $this->where('finaliza_inscricao.id_inscricao_evento', $id_inscricao_evento)->where('finaliza_inscricao.finalizada', true)->join('trabalho_submetido', 'trabalho_submetido.id_inscricao_evento', 'finaliza_inscricao.id_inscricao_evento')->where('trabalho_submetido.id_area_trabalho', $nivel_coordenador->coordenador_area)->get();
+        }
     }
 
     public function retorna_total_inscritos($id_inscricao_evento, $nivel_coordenador)
