@@ -286,6 +286,13 @@ class RelatorioController extends BaseController
 
   public function geraRelatorio($id_inscricao_evento)
   {
+    $user = $this->SetUser();
+    
+    $id_coordenador = $user->id_user;
+
+    $coordenador = new TipoCoordenador();
+
+    $nivel_coordenador = $coordenador->retorna_dados_coordenador($id_coordenador, $id_inscricao_evento);
 
     $locale_relatorio = 'pt-br';
 
@@ -299,8 +306,9 @@ class RelatorioController extends BaseController
 
 
     $finaliza = new FinalizaInscricao();
-    $usuarios_finalizados = $finaliza->retorna_usuarios_relatorios($id_inscricao_evento);
 
+    $usuarios_finalizados = $finaliza->retorna_usuarios_relatorios($id_inscricao_evento, $nivel_coordenador);
+    
     foreach ($usuarios_finalizados as $candidato) {
 
       $linha_arquivo = [];
