@@ -330,10 +330,10 @@ class RelatorioController extends BaseController
       foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
         $dados_candidato_para_relatorio[$key] = $value;
       }
-
+      // dd($dados_candidato_para_relatorio);
       $nome_arquivos = [];
 
-      $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
+      $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
 
       
       $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
