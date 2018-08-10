@@ -331,10 +331,6 @@ class RelatorioController extends BaseController
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
-      dd($dados_candidato_para_relatorio);
-
-      $linha_arquivo['programa_pretendido'] = $dados_candidato_para_relatorio['programa_pretendido'];
-
       $nome_arquivos = [];
 
       $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
