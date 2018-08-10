@@ -53,7 +53,7 @@ class RelatorioController extends BaseController
   public function ContaInscricoes($id_inscricao_evento, $programa)
   {
      
-    return DB::table('escolhas_curso_verao')->where('escolhas_curso_verao.id_inscricao_evento', $id_inscricao_evento)->where('escolhas_curso_verao.curso_verao', $programa)->join('finaliza_inscricao', 'finaliza_inscricao.id_candidato', 'escolhas_curso_verao.id_candidato')->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_inscricao_evento', $id_inscricao_evento)->count();
+    return DB::table('escolhas_curso_verao')->where('escolhas_curso_verao.id_inscricao_evento', $id_inscricao_evento)->where('escolhas_curso_verao.curso_verao', $programa)->join('finaliza_inscricao', 'finaliza_inscricao.id_participante', 'escolhas_curso_verao.id_participante')->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_inscricao_evento', $id_inscricao_evento)->count();
 
   }
 
@@ -87,13 +87,13 @@ class RelatorioController extends BaseController
   }
 
 
-  public function ConsolidaDadosPessoais($id_candidato)
+  public function ConsolidaDadosPessoais($id_participante)
   {
     $consolida_dados = [];
 
     $dado_pessoal = new DadoPessoalParticipante();
 
-    $dados_pessoais_candidato = $dado_pessoal->retorna_dados_pessoais($id_candidato);
+    $dados_pessoais_candidato = $dado_pessoal->retorna_dados_pessoais($id_participante);
 
     $paises = new Paises();
 
@@ -317,17 +317,19 @@ class RelatorioController extends BaseController
 
       $dados_candidato_para_relatorio['ano_evento'] = $relatorio->ano_evento;
 
-      $dados_candidato_para_relatorio['id_candidato'] = $candidato->id_candidato;
+      $dados_candidato_para_relatorio['id_participante'] = $candidato->id_participante;
 
-      foreach ($this->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_candidato']) as $key => $value) {
+      foreach ($this->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_participante']) as $key => $value) {
          $dados_candidato_para_relatorio[$key] = $value;
       }
 
+      dd($dados_candidato_para_relatorio);
+
       $linha_arquivo['nome'] = $dados_candidato_para_relatorio['nome'];
 
-      $linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_candidato'])->email;
+      $linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_participante'])->email;
 
-      foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_candidato'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
+      foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
@@ -352,7 +354,7 @@ class RelatorioController extends BaseController
     return $this->getArquivosRelatorios($id_inscricao_evento,$arquivos_zipados_para_view, $locais_arquivos['arquivo_relatorio_csv']);
   }
 
-  public function geraFichaIndividual($id_candidato, $locale_relatorio)
+  public function geraFichaIndividual($id_participante, $locale_relatorio)
   {
 
       $relatorio = new ConfiguraInscricaoEvento();
@@ -365,13 +367,13 @@ class RelatorioController extends BaseController
 
       $dados_candidato_para_relatorio['ano_evento'] = $relatorio_disponivel->ano_evento;
 
-      $dados_candidato_para_relatorio['id_candidato'] = $id_candidato;
+      $dados_candidato_para_relatorio['id_participante'] = $id_participante;
 
-      foreach ($this->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_candidato']) as $key => $value) {
+      foreach ($this->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_participante']) as $key => $value) {
          $dados_candidato_para_relatorio[$key] = $value;
       }
 
-      foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_candidato'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
+      foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
@@ -427,17 +429,17 @@ class RelatorioController extends BaseController
 
       $dados_candidato_para_relatorio['ano_evento'] = $relatorio_disponivel->ano_evento;
 
-      $dados_candidato_para_relatorio['id_candidato'] = $candidato->id_candidato;
+      $dados_candidato_para_relatorio['id_participante'] = $candidato->id_participante;
 
-      foreach ($this->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_candidato']) as $key => $value) {
+      foreach ($this->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_participante']) as $key => $value) {
          $dados_candidato_para_relatorio[$key] = $value;
       }
 
       $linha_arquivo['nome'] = $dados_candidato_para_relatorio['nome'];
 
-      $linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_candidato'])->email;
+      $linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_participante'])->email;
 
-      foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_candidato'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
+      foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
