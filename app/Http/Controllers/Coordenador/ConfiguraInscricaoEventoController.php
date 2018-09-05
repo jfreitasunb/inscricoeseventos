@@ -13,7 +13,7 @@ use Purifier;
 use Carbon\Carbon;
 use InscricoesEventos\Models\User;
 use InscricoesEventos\Models\ConfiguraInscricaoEvento;
-use InscricoesEventos\Models\TipoEvento;
+use InscricoesEventos\Models\ConfiguraTipoEvento;
 use InscricoesEventos\Models\AreaPosMat;
 use InscricoesEventos\Models\OfertaCursoVerao;
 use InscricoesEventos\Models\Formacao;
@@ -39,7 +39,7 @@ class ConfiguraInscricaoEventoController extends CoordenadorController
 
 		$inscricao_pos = new ConfiguraInscricaoEvento();
 
-        $evento = new TipoEvento();
+        $evento = new ConfiguraTipoEvento();
 
         $eventos_mat = $evento->retorna_tipo_eventos();
 
