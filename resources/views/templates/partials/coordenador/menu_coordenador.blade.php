@@ -51,18 +51,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class= "{{ Route::currentRouteNamed('relatorio.anteriores') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-backward fa-fw"></span><a href="{{ route('relatorio.anteriores') }}">Edital Anterior</a>
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td class= "{{ Route::currentRouteNamed('gera.ficha.individual') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-file fa-fw"></span><a href="{{ route('gera.ficha.individual') }}">Por Candidato</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class= "{{ Route::currentRouteNamed('ver.charts') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-stats fa-fw"></span><a href="{{ route('ver.charts') }}">Gráficos</a>
                                     </td>
                                 </tr>
                             </table>
@@ -85,9 +75,7 @@
                 @yield('edita_area_pos')
                 @yield('nao_finalizadas')
                 @yield('relatorio_trabalhos_submetidos')
-                @yield('relatorio_pos_editais_anteriores')
                 @yield('ficha_individual')
-                @yield('graficos')
             </div>
         </div>
     </div>
