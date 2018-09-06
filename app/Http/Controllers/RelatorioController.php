@@ -143,7 +143,7 @@ class RelatorioController extends BaseController
 
       $consolida_escolha['area_trabalho'] = $area_pos->pega_area_pos_mat($id_area_trabalho, $locale_participante);
     }
-    
+
     $consolida_escolha['apresentar_trabalho'] = $escolha_participacao->apresentar_trabalho;
 
     $consolida_escolha['tipo_apresentacao'] = $tipo_apresentacao->retorna_nome_tipo_participacao_por_id($escolha_participacao->id_tipo_apresentacao, $locale_participante);
@@ -153,10 +153,9 @@ class RelatorioController extends BaseController
 
   public function ConsolidaNomeArquivos($local_arquivos_definitivos, $dados_candidato_para_relatorio)
   {
-    dd($dados_candidato_para_relatorio);
     $nome_arquivos = [];
     
-    $nome_arquivos['arquivo_relatorio_participante'] = $local_arquivos_definitivos.'Inscricao_'.str_replace('\'s','',str_replace(' ', '-', strtr($dados_candidato_para_relatorio['tipo_apresentacao'], $this->normalizeChars))).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_participante'].'.pdf';
+    $nome_arquivos['arquivo_relatorio_participante'] = $local_arquivos_definitivos.'Inscricao_'.str_replace('\'s','',str_replace(' ', '-', strtr($dados_candidato_para_relatorio['tipo_apresentacao'], $this->normalizeChars))).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['area_trabalho'], $this->normalizeChars)).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_participante'].'.pdf';
 
     return $nome_arquivos;
   }
