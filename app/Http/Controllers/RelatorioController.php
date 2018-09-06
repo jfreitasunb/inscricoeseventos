@@ -54,7 +54,7 @@ class RelatorioController extends BaseController
   public function ContaInscricoes($id_inscricao_evento, $programa)
   {
      
-    return DB::table('escolhas_curso_verao')->where('escolhas_curso_verao.id_inscricao_evento', $id_inscricao_evento)->where('escolhas_curso_verao.curso_verao', $programa)->join('finaliza_inscricao', 'finaliza_inscricao.id_participante', 'escolhas_curso_verao.id_participante')->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_inscricao_evento', $id_inscricao_evento)->count();
+    return DB::table('trabalho_submetido')->where('trabalho_submetido.id_inscricao_evento', $id_inscricao_evento)->where('trabalho_submetido.id_area_trabalho', $programa)->join('finaliza_inscricao', 'finaliza_inscricao.id_participante', 'trabalho_submetido.id_participante')->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_inscricao_evento', $id_inscricao_evento)->count();
 
   }
 
@@ -280,30 +280,45 @@ class RelatorioController extends BaseController
     $relatorio = new ConfiguraInscricaoEvento();
 
     $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+    
+    $id_inscricao_evento = $relatorio_disponivel->id_inscricao_evento;
 
     $programas_disponiveis = explode("_", $relatorio->retorna_inscricao_ativa()->tipo_evento);
 
-    // $oferta_verao = new OfertaCursoVerao();
+    $id_coordenador = $id_user;
 
-    // $cursos_ofertados = $oferta_verao->retorna_cursos_ofertados($relatorio_disponivel->id_inscricao_evento, $locale_relatorio);
+    $coordenador = new TipoCoordenador();
 
-    // foreach ($cursos_ofertados as $curso) {
+    $nivel_coordenador = $coordenador->retorna_dados_coordenador($id_coordenador, $id_inscricao_evento);
+
+    $coordenador_area = $nivel_coordenador->coordenador_area;
+
+    $trabalho_submetido = new TrabalhoSubmetido();
+
+    if ($nivel_coordenador->coordenador_geral) {
       
-    //   $contagem[$curso->id_curso_verao] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_evento, $curso->id_curso_verao);
+      $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
 
-    // }
+      foreach ($areas_com_trabalho as $area) {
+      
+        $contagem[$area] = $this->ContaInscricoes($id_inscricao_evento, $area);
+      }
 
-    // $nome_programa_pos = new ProgramaPos();
+      $total_inscritos = array_sum($contagem);
+    }else{
+      
+      $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
 
-    // foreach ($programas_disponiveis as $programa) {
-     
-    //  $programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa, $locale_relatorio);
-     
-    //  $contagem[$programa_para_inscricao[$programa]] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_evento, $programa);
-    // }
+      foreach ($areas_com_trabalho as $area) {
+      
+        $contagem[$area] = $this->ContaInscricoes($id_inscricao_evento, $area);
+      }
 
-    // $total_inscritos = array_sum($contagem);
-    $total_inscritos = 0;
+      $total_inscritos = array_sum($contagem);
+    }
+
+    
+    // $total_inscritos = 0;
     // $nome_programas = implode('/', $programa_para_inscricao);
     $nome_programas = "teste";
 
