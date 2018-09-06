@@ -337,9 +337,7 @@ class RelatorioController extends BaseController
 
       
       $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
-      $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
-
-      $this->ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads);
+      $pdf->save($nome_arquivos['arquivo_relatorio_participante']);
 
       $relatorio_csv->insertOne($linha_arquivo);
       
