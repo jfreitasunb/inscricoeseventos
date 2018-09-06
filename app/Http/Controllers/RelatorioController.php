@@ -191,7 +191,7 @@ class RelatorioController extends BaseController
     $arquivos_zipados_para_view[$programas] = $inscricoes_zipadas;
 
     $zip = new ZipArchive;
-
+    @unlink($arquivo_zip.$inscricoes_zipadas);
     if ( $zip->open( $arquivo_zip.$inscricoes_zipadas, ZipArchive::CREATE ) === true ){
       if ($nivel_coordenador->coordenador_geral) {
         foreach (glob( $local_relatorios.'Inscricao_*') as $fileName ){
@@ -208,6 +208,11 @@ class RelatorioController extends BaseController
 
      $zip->close();
     }
+
+    foreach (glob( $local_relatorios.'Inscricao_*.pdf') as $fileName ){
+      @unlink($fileName);
+    }
+    
     
     return $arquivos_zipados_para_view;
   }
