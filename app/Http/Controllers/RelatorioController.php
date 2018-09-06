@@ -167,11 +167,17 @@ class RelatorioController extends BaseController
     $coordenador = new TipoCoordenador();
 
     $nivel_coordenador = $coordenador->retorna_dados_coordenador($id_user, $id_inscricao_evento);
+    
+    $id_area_coordenador = $nivel_coordenador->coordenador_area;
 
     if ($nivel_coordenador->coordenador_geral) {
       $programa_para_relatorio = "Relatorio_Geral";
     }else{
-      $programa_para_relatorio = "Relatorio_de_Area";
+      $area_pos = new AreaPosMat();
+
+      $coordenador_nome_area = str_replace(' ', '-', strtr($area_pos->pega_area_pos_mat($id_area_coordenador, $locale_relatorio), $this->normalizeChars));
+
+      $programa_para_relatorio = "Relatorio_de_".$coordenador_nome_area;
     }
 
     // $nome_programa_pos = new ProgramaPos();
@@ -193,7 +199,7 @@ class RelatorioController extends BaseController
           $zip->addFile( $fileName, $file );
         }
       }else{
-        foreach (glob( $local_relatorios.'Inscricao_AREA_*') as $fileName ){
+        foreach (glob( $local_relatorios.'Inscricao_'.$coordenador_nome_area.'*') as $fileName ){
           $file = basename( $fileName );
           $zip->addFile( $fileName, $file );
         }
