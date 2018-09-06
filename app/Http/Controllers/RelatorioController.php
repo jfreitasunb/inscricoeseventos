@@ -69,6 +69,8 @@ class RelatorioController extends BaseController
 
     $locais_arquivos = [];
 
+    $locais_arquivos['arquivos_temporarios'] = storage_path("app/public/relatorios/evento_".$evento."/temporario/");
+    
     $locais_arquivos['ficha_inscricao'] = storage_path("app/public/relatorios/ficha_inscricao/");
 
     $locais_arquivos['local_relatorios'] = storage_path("app/public/relatorios/evento_".$evento."/");
@@ -77,6 +79,7 @@ class RelatorioController extends BaseController
 
     $locais_arquivos['arquivo_zip'] = $locais_arquivos['local_relatorios'].'zip/';
 
+    File::isDirectory($locais_arquivos['arquivos_temporarios']) or File::makeDirectory($locais_arquivos['arquivos_temporarios'],0775,true);
 
     File::isDirectory($locais_arquivos['ficha_inscricao']) or File::makeDirectory($locais_arquivos['ficha_inscricao'],0775,true);
 
@@ -155,10 +158,12 @@ class RelatorioController extends BaseController
     return $consolida_escolha;
   }
 
-  public function ConsolidaNomeArquivos($local_arquivos_definitivos, $dados_candidato_para_relatorio)
+  public function ConsolidaNomeArquivos($local_arquivos_temporarios, $local_arquivos_definitivos, $dados_candidato_para_relatorio)
   {
     $nome_arquivos = [];
     
+    $nome_arquivos['arquivo_relatorio_participante_temporario'] = $local_arquivos_temporarios.'Inscricao_'.str_replace('\'s','',str_replace(' ', '-', strtr($dados_candidato_para_relatorio['area_trabalho'], $this->normalizeChars))).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['tipo_apresentacao'], $this->normalizeChars)).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_participante'].'.pdf';
+
     $nome_arquivos['arquivo_relatorio_participante'] = $local_arquivos_definitivos.'Inscricao_'.str_replace('\'s','',str_replace(' ', '-', strtr($dados_candidato_para_relatorio['area_trabalho'], $this->normalizeChars))).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['tipo_apresentacao'], $this->normalizeChars)).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_participante'].'.pdf';
 
     return $nome_arquivos;
@@ -393,10 +398,10 @@ class RelatorioController extends BaseController
       
       $nome_arquivos = [];
 
-      $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
+      $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
       
       $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
-      $pdf->save($nome_arquivos['arquivo_relatorio_participante']);
+      $pdf->save($nome_arquivos['arquivo_relatorio_participante_temporario']);
 
       $relatorio_csv->insertOne($linha_arquivo);
       
