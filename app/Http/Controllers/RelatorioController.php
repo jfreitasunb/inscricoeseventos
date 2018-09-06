@@ -169,9 +169,12 @@ class RelatorioController extends BaseController
     return $nome_arquivos;
   }
 
-  public function ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads)
+  public function ConsolidaFichaRelatorio($id_participante, $id_inscricao_evento, $nome_arquivos)
   {
-    $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
+    
+    $arquivo_pdf_tex = str_replace("storage", "/var/www/inscricoeseventos/storage/app/public", $this->geraAbstract($id_participante, $id_inscricao_evento));
+    
+    $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_participante_temporario'].' '.$arquivo_pdf_tex.' cat output '.$nome_arquivos['arquivo_relatorio_participante']);
 
     $process->setTimeout(3600);
     
@@ -183,7 +186,7 @@ class RelatorioController extends BaseController
 
     @unlink($nome_arquivos['arquivo_relatorio_candidato_temporario']);
   }
-  
+
   public function ConsolidaArquivosZIP($id_user, $id_inscricao_evento, $edital, $arquivo_zip, $local_relatorios, $programas)
   {
     $locale_relatorio = 'pt-br';
@@ -418,7 +421,7 @@ class RelatorioController extends BaseController
       $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
       $pdf->save($nome_arquivos['arquivo_relatorio_participante_temporario']);
 
-      $this->ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads);
+      $this->ConsolidaFichaRelatorio($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $nome_arquivos);
 
       $relatorio_csv->insertOne($linha_arquivo);
       
