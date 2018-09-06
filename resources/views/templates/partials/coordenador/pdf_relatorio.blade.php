@@ -37,13 +37,9 @@
             }
         </script>
 
-        <h2>Ficha de Inscrição - {{ $dados_candidato_para_relatorio['programa_pretendido'] }}</h2>
+        <h2>Ficha de Inscrição</h2>
         <div>
             <label class="control-label">Nome: </label>{{ $dados_candidato_para_relatorio['nome'] }}
-        </div>
-        <div>
-            <label class="control-label">Data de nascimento: </label>{{ $dados_candidato_para_relatorio['data_nascimento'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            <label class="control-label">Idade: </label>{{ $dados_candidato_para_relatorio['idade'].' anos' }}
         </div>
         <hr>
         <h3>Endereço Pessoal</h3>
