@@ -154,9 +154,11 @@ class RelatorioController extends BaseController
   {
     $locale_relatorio = 'pt-br';
 
-    $nome_programa_pos = new ProgramaPos();
+    // $nome_programa_pos = new ProgramaPos();
 
-    $programa_para_relatorio = strtr($nome_programa_pos->pega_programa_pos_mat($programas, $locale_relatorio), $this->normalizeChars);
+    // $programa_para_relatorio = strtr($nome_programa_pos->pega_programa_pos_mat($programas, $locale_relatorio), $this->normalizeChars);
+    
+    $programa_para_relatorio = "Relatorio_Geral";
     
     $inscricoes_zipadas = 'Inscricoes_'.$programa_para_relatorio.'.zip';
     $arquivos_zipados_para_view[$programas] = $inscricoes_zipadas;
@@ -165,7 +167,7 @@ class RelatorioController extends BaseController
 
     if ( $zip->open( $arquivo_zip.$inscricoes_zipadas, ZipArchive::CREATE ) === true ){
 
-     foreach (glob( $local_relatorios.'Inscricao_'.$programa_para_relatorio.'*') as $fileName ){
+     foreach (glob( $local_relatorios.'Inscricao_*') as $fileName ){
         $file = basename( $fileName );
         $zip->addFile( $fileName, $file );
 
@@ -243,28 +245,29 @@ class RelatorioController extends BaseController
 
     $programas_disponiveis = explode("_", $relatorio->retorna_inscricao_ativa()->tipo_evento);
 
-    $oferta_verao = new OfertaCursoVerao();
+    // $oferta_verao = new OfertaCursoVerao();
 
-    $cursos_ofertados = $oferta_verao->retorna_cursos_ofertados($relatorio_disponivel->id_inscricao_evento, $locale_relatorio);
+    // $cursos_ofertados = $oferta_verao->retorna_cursos_ofertados($relatorio_disponivel->id_inscricao_evento, $locale_relatorio);
 
-    foreach ($cursos_ofertados as $curso) {
+    // foreach ($cursos_ofertados as $curso) {
       
-      $contagem[$curso->id_curso_verao] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_evento, $curso->id_curso_verao);
+    //   $contagem[$curso->id_curso_verao] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_evento, $curso->id_curso_verao);
 
-    }
+    // }
 
-    $nome_programa_pos = new ProgramaPos();
+    // $nome_programa_pos = new ProgramaPos();
 
-    foreach ($programas_disponiveis as $programa) {
+    // foreach ($programas_disponiveis as $programa) {
      
-     $programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa, $locale_relatorio);
+    //  $programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa, $locale_relatorio);
      
-     $contagem[$programa_para_inscricao[$programa]] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_evento, $programa);
-    }
+    //  $contagem[$programa_para_inscricao[$programa]] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_evento, $programa);
+    // }
 
-    $total_inscritos = array_sum($contagem);
-    
-    $nome_programas = implode('/', $programa_para_inscricao);
+    // $total_inscritos = array_sum($contagem);
+    $total_inscritos = 0;
+    // $nome_programas = implode('/', $programa_para_inscricao);
+    $nome_programas = "teste";
 
     $monitoria = $id_inscricao_evento;
 
