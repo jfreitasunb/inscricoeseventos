@@ -48,5 +48,14 @@ class TrabalhoSubmetido extends FuncoesModels
         }
     }
 
+    public function retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento)
+    {
+        if (is_null($coordenador_area)) {
+            return $this->where('id_inscricao_evento', $id_inscricao_evento)->distinct('id_area_trabalho')->pluck('id_area_trabalho');
+        }else{
+            return $this->where('id_inscricao_evento', $id_inscricao_evento)->where('id_area_trabalho', $coordenador_area)->distinct('id_area_trabalho')->pluck('id_area_trabalho');
+        }
+    }
+
     
 }
