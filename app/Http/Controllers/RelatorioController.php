@@ -171,17 +171,24 @@ class RelatorioController extends BaseController
     
     
     $inscricoes_zipadas = 'Inscricoes_'.$programa_para_relatorio.'.zip';
+    
     $arquivos_zipados_para_view[$programas] = $inscricoes_zipadas;
 
     $zip = new ZipArchive;
 
     if ( $zip->open( $arquivo_zip.$inscricoes_zipadas, ZipArchive::CREATE ) === true ){
-
-     foreach (glob( $local_relatorios.'Inscricao_*') as $fileName ){
-        $file = basename( $fileName );
-        $zip->addFile( $fileName, $file );
-
-     }
+      if ($nivel_coordenador->coordenador_geral) {
+        foreach (glob( $local_relatorios.'Inscricao_*') as $fileName ){
+          $file = basename( $fileName );
+          $zip->addFile( $fileName, $file );
+        }
+      }else{
+        foreach (glob( $local_relatorios.'Inscricao_AREA_*') as $fileName ){
+          $file = basename( $fileName );
+          $zip->addFile( $fileName, $file );
+        }
+      }
+     
 
      $zip->close();
     }
