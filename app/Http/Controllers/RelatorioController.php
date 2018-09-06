@@ -13,6 +13,7 @@ use Imagick;
 use InscricoesEventos\Http\Controllers\FPDFController;
 use Carbon\Carbon;
 use InscricoesEventos\Models\User;
+use InscricoesEventos\Models\AreaPosMat;
 use InscricoesEventos\Models\ConfiguraInscricaoEvento;
 use InscricoesEventos\Models\FinalizaInscricao;
 use InscricoesEventos\Models\DadoPessoalParticipante;
@@ -133,8 +134,17 @@ class RelatorioController extends BaseController
 
     $consolida_escolha['categoria_participante'] = $categoria_participacao->retorna_nome_categoria_por_id($escolha_participacao->id_categoria_participante, $locale_participante);
 
-    $consolida_escolha['apresentar_trabalho'] = $escolha_participacao->apresentar_trabalho;
+    if ($escolha_participacao->apresentar_trabalho) {
+      $trabalho = new TrabalhoSubmetido();
 
+      $id_area_trabalho = $trabalho->retorna_trabalho_submetido($id_participante, $id_inscricao_evento)->id_area_trabalho;
+
+      $area_pos = new AreaPosMat();
+
+      $consolida_escolha['area_trabalho'] = $area_pos->pega_area_pos_mat($id_area_trabalho, $locale_participante);
+    }
+    
+    $consolida_escolha['apresentar_trabalho'] = $escolha_participacao->apresentar_trabalho;
 
     $consolida_escolha['tipo_apresentacao'] = $tipo_apresentacao->retorna_nome_tipo_participacao_por_id($escolha_participacao->id_tipo_apresentacao, $locale_participante);
 
@@ -143,6 +153,7 @@ class RelatorioController extends BaseController
 
   public function ConsolidaNomeArquivos($local_arquivos_definitivos, $dados_candidato_para_relatorio)
   {
+    dd($dados_candidato_para_relatorio);
     $nome_arquivos = [];
     
     $nome_arquivos['arquivo_relatorio_participante'] = $local_arquivos_definitivos.'Inscricao_'.str_replace('\'s','',str_replace(' ', '-', strtr($dados_candidato_para_relatorio['tipo_apresentacao'], $this->normalizeChars))).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_participante'].'.pdf';
