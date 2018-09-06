@@ -278,6 +278,8 @@ class RelatorioController extends BaseController
         $contagem[$area] = $this->ContaInscricoes($id_inscricao_evento, $area);
       }
 
+      $area_trabalho = "Todas as Áreas";
+
       $total_inscritos = array_sum($contagem);
     }else{
       
@@ -286,6 +288,10 @@ class RelatorioController extends BaseController
       foreach ($areas_com_trabalho as $area) {
       
         $contagem[$area] = $this->ContaInscricoes($id_inscricao_evento, $area);
+
+        $area_pos = new AreaPosMat();
+
+        $area_trabalho = $area_pos->pega_area_pos_mat($area, $locale_relatorio);
       }
 
       $total_inscritos = array_sum($contagem);
@@ -299,9 +305,9 @@ class RelatorioController extends BaseController
 
     $monitoria = "";
 
-    // return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','relatorio_disponivel', 'cursos_ofertados', 'total_inscritos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
+    // return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('monitoria','relatorio_disponivel', 'cursos_ofertados', 'total_inscritos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
     
-     return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','relatorio_disponivel', 'cursos_ofertados', 'total_inscritos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
+     return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('area_trabalho', 'monitoria','relatorio_disponivel', 'cursos_ofertados', 'total_inscritos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
   }
 
    public function getListaRelatoriosAnteriores()
@@ -355,6 +361,8 @@ class RelatorioController extends BaseController
         $contagem[$area] = $this->ContaInscricoes($id_inscricao_evento, $area);
       }
 
+      $area_trabalho = "Todas as Áreas";
+
       $total_inscritos = array_sum($contagem);
     }else{
       
@@ -363,6 +371,10 @@ class RelatorioController extends BaseController
       foreach ($areas_com_trabalho as $area) {
       
         $contagem[$area] = $this->ContaInscricoes($id_inscricao_evento, $area);
+
+        $area_pos = new AreaPosMat();
+
+        $area_trabalho = $area_pos->pega_area_pos_mat($area, $locale_relatorio);
       }
 
       $total_inscritos = array_sum($contagem);
@@ -386,7 +398,7 @@ class RelatorioController extends BaseController
 
     $local_arquivos['arquivo_zip'] = str_replace($endereco_zip_mudar, 'storage/', $local_arquivos['arquivo_zip']);
 
-    return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','contagem', 'total_inscritos', 'cursos_ofertados', 'relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv','local_arquivos'));
+    return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('area_trabalho','monitoria','contagem', 'total_inscritos', 'cursos_ofertados', 'relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv','local_arquivos'));
 
   }
 
@@ -567,7 +579,7 @@ class RelatorioController extends BaseController
   public function getRelatorioPos()
   {
 
-    return view('templates.partials.coordenador.relatorio_pos_edital_vigente');
+    return view('templates.partials.coordenador.relatorio_trabalhos_submetidos');
   }
 
   public function geraFichaInscricao($id_participante, $id_inscricao_evento, $locale_participante)

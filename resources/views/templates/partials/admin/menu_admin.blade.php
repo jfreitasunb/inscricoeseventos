@@ -86,7 +86,7 @@
                             <table class="table">
                                 <tr>
                                     <td class= "{{ Route::currentRouteNamed('relatorio.atual') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-duplicate fa-fw"></span><a href="{{ route('relatorio.atual') }}">Edital Vigente</a>
+                                        <span class="glyphicon glyphicon-duplicate fa-fw"></span><a href="{{ route('relatorio.atual') }}">Trabalhos Submetidos</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -135,7 +135,7 @@
                 @yield('nao_finalizadas')
                 @yield('tabela_indicacoes')
                 @yield('altera_recomendantes')
-                @yield('relatorio_pos_edital_vigente')
+                @yield('relatorio_trabalhos_submetidos')
                 @yield('relatorio_pos_editais_anteriores')
                 @yield('datatable_users')
                 @yield('ficha_individual')
