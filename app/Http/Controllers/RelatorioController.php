@@ -139,9 +139,13 @@ class RelatorioController extends BaseController
 
       $id_area_trabalho = $trabalho->retorna_trabalho_submetido($id_participante, $id_inscricao_evento)->id_area_trabalho;
 
+      $titulo_trabalho = $trabalho->retorna_trabalho_submetido($id_participante, $id_inscricao_evento)->titulo_trabalho;
+
       $area_pos = new AreaPosMat();
 
       $consolida_escolha['area_trabalho'] = $area_pos->pega_area_pos_mat($id_area_trabalho, $locale_participante);
+
+      $consolida_escolha['titulo_trabalho'] = $titulo_trabalho;
     }
 
     $consolida_escolha['apresentar_trabalho'] = $escolha_participacao->apresentar_trabalho;
@@ -386,11 +390,10 @@ class RelatorioController extends BaseController
       foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
         $dados_candidato_para_relatorio[$key] = $value;
       }
-      // dd($dados_candidato_para_relatorio);
+      
       $nome_arquivos = [];
 
       $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
-
       
       $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
       $pdf->save($nome_arquivos['arquivo_relatorio_participante']);
