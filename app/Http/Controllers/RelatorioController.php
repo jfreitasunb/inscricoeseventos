@@ -273,7 +273,7 @@ class RelatorioController extends BaseController
 
     $local_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel->ano_evento);
 
-    $endereco_zip_mudar = '/var/www/inscricoesverao/storage/app/public/';
+    $endereco_zip_mudar = '/var/www/inscricoeseventos/storage/app/public/';
 
     //Para ser usado no MAT
     // $endereco_zip_mudar = '/var/www/inscricoesverao/storage/app/public/';
