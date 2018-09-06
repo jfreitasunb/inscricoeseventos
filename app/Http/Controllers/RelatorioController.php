@@ -150,9 +150,11 @@ class RelatorioController extends BaseController
     return $nome_arquivos;
   }
 
-  public function ConsolidaArquivosZIP($edital, $arquivo_zip, $local_relatorios, $programas)
+  public function ConsolidaArquivosZIP($id_user, $edital, $arquivo_zip, $local_relatorios, $programas)
   {
     $locale_relatorio = 'pt-br';
+
+
 
     // $nome_programa_pos = new ProgramaPos();
 
@@ -346,7 +348,7 @@ class RelatorioController extends BaseController
       
     }
 
-    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($relatorio->ano_evento, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio->tipo_evento);
+    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($user->id_user, $id_coordenador, $relatorio->ano_evento, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio->tipo_evento);
 
     return $this->getArquivosRelatorios($id_inscricao_evento,$arquivos_zipados_para_view, $locais_arquivos['arquivo_relatorio_csv']);
   }
@@ -453,7 +455,7 @@ class RelatorioController extends BaseController
       
     }
 
-    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($relatorio_disponivel->ano_evento, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio_disponivel->tipo_evento);
+    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($id_user,$relatorio_disponivel->ano_evento, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio_disponivel->tipo_evento);
 
     return $this->getArquivosRelatoriosAnteriores($id_inscricao_evento,$arquivos_zipados_para_view, $locais_arquivos['arquivo_relatorio_csv']);
   }
