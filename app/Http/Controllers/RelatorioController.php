@@ -173,7 +173,7 @@ class RelatorioController extends BaseController
   {
     
     $arquivo_pdf_tex = str_replace("storage", "/var/www/inscricoeseventos/storage/app/public", $this->geraAbstract($id_participante, $id_inscricao_evento));
-    
+
     $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_participante_temporario'].' '.$arquivo_pdf_tex.' cat output '.$nome_arquivos['arquivo_relatorio_participante']);
 
     $process->setTimeout(3600);
@@ -184,7 +184,9 @@ class RelatorioController extends BaseController
       throw new ProcessFailedException($process);
     }
 
-    @unlink($nome_arquivos['arquivo_relatorio_candidato_temporario']);
+    @unlink($nome_arquivos['arquivo_relatorio_participante_temporario']);
+
+    @unlink($arquivo_pdf_tex);
   }
 
   public function ConsolidaArquivosZIP($id_user, $id_inscricao_evento, $edital, $arquivo_zip, $local_relatorios, $programas)
