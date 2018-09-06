@@ -265,9 +265,31 @@ class RelatorioController extends BaseController
 
     $nivel_coordenador = $coordenador->retorna_dados_coordenador($id_coordenador, $id_inscricao_evento);
 
-    $inscritos = new FinalizaInscricao();
+    $coordenador_area = $nivel_coordenador->coordenador_area;
 
-    $total_inscritos = $inscritos->retorna_total_inscritos($id_inscricao_evento, $nivel_coordenador);
+    $trabalho_submetido = new TrabalhoSubmetido();
+
+    if ($nivel_coordenador->coordenador_geral) {
+      
+      $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
+
+      foreach ($areas_com_trabalho as $area) {
+      
+        $contagem[$area] = $this->ContaInscricoes($id_inscricao_evento, $area);
+      }
+
+      $total_inscritos = array_sum($contagem);
+    }else{
+      
+      $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
+
+      foreach ($areas_com_trabalho as $area) {
+      
+        $contagem[$area] = $this->ContaInscricoes($id_inscricao_evento, $area);
+      }
+
+      $total_inscritos = array_sum($contagem);
+    }
 
     $arquivos_zipados_para_view = "";
 
