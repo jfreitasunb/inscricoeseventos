@@ -41,6 +41,27 @@
         <div>
             <label class="control-label">Nome: </label>{{ $dados_candidato_para_relatorio['nome'] }}
         </div>
+        <div>
+            <label class="control-label">Instituição: </label>{{ $dados_candidato_para_relatorio['instituicao'] }}
+        </div>
+        <div>
+            <label class="control-label">Categoria do Participante: </label>{{ $dados_candidato_para_relatorio['categoria_participante'] }}
+        </div>
+        <div>
+            <label class="control-label">Deseja apresentar trabalho? </label>{{ $dados_candidato_para_relatorio['instituicao']? 'Sim' : 'Não' }}
+        </div>
+        @if ($dados_candidato_para_relatorio['apresentar_trabalho'])
+            <div>
+                <label class="control-label">Área: </label>{{ $dados_candidato_para_relatorio['area_trabalho'] }}
+            </div>
+            <div>
+                <label class="control-label">Tipo de apresentacao: </label>{{ $dados_candidato_para_relatorio['tipo_apresentacao'] }}
+            </div>
+            <div>
+                <label class="control-label">Título: </label>{{ $dados_candidato_para_relatorio['titulo_trabalho'] }}
+            </div>
+        @endif
+        
         <hr>
     </body>
 </html>
