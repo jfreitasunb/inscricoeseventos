@@ -60,7 +60,7 @@ class TrabalhoSubmetido extends FuncoesModels
     public function retorna_todos_trabalhos($area_trabalho, $id_inscricao_evento)
     {
         if (is_null($area_trabalho)) {
-            return $this->where('trabalho_submetido.id_inscricao_evento', $id_inscricao_evento)->join('finaliza_inscricao', 'finaliza_inscricao.id_participante', 'trabalho_submetido.id_participante')->get();
+            return $this->where('trabalho_submetido.id_inscricao_evento', $id_inscricao_evento)->join('finaliza_inscricao', 'finaliza_inscricao.id_participante', 'trabalho_submetido.id_participante')->join('area_pos_mat', 'area_pos_mat.id_area_pos', 'trabalho_submetido.id_area_trabalho')->join('users', 'users.id_user', 'trabalho_submetido.id_participante')->join('tipo_participacao', 'tipo_participacao.id_participante', 'trabalho_submetido.id_participante')->join('configura_tipo_apresentacao', 'configura_tipo_apresentacao.id', 'tipo_participacao.id_tipo_apresentacao')->join('configura_categoria_participante', 'configura_categoria_participante.id', 'tipo_participacao.id_categoria_participante')->select('trabalho_submetido.id_inscricao_evento', 'trabalho_submetido.id_participante', 'users.nome','trabalho_submetido.id_area_trabalho', 'area_pos_mat.nome_ptbr', 'trabalho_submetido.titulo_trabalho', 'configura_tipo_apresentacao.id AS id_tipo_apresentacao', 'configura_tipo_apresentacao.nome_tipo_apresentacao_ptbr', 'configura_categoria_participante.id AS id_categoria_participante', 'configura_categoria_participante.nome_categoria_ptbr')->get();
         }
     }
 
