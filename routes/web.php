@@ -135,6 +135,10 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 	Route::get('relatorios/anteriores', '\InscricoesEventos\Http\Controllers\RelatorioController@getListaRelatoriosAnteriores')->name('relatorio.anteriores');
 
 	Route::get('inscricoes/nao/finalizadas', '\InscricoesEventos\Http\Controllers\Admin\ListaInscricaoNaoFinalizadasController@getInscricoesNaoFinalizadas')->name('inscricoes.nao.finalizadas');
+
+	Route::get('selecionar/trabalhos', '\InscricoesEventos\Http\Controllers\Coordenador\SelecionaTrabalhosController@getSelecionarTrabalhos')->name('seleciona.trabalhos.submetidos');
+
+	Route::post('selecionar/trabalhos', '\InscricoesEventos\Http\Controllers\Coordenador\SelecionaTrabalhosController@postSelecionarTrabalhos')->name('seleciona.trabalhos.submetidos');
 });
 
 
