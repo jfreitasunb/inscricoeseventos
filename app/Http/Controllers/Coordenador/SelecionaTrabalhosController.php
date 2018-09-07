@@ -14,7 +14,9 @@ use InscricoesEventos\Models\Formacao;
 use InscricoesEventos\Models\ProgramaPos;
 use InscricoesEventos\Models\FinalizaInscricao;
 use InscricoesEventos\Models\TipoCoordenador;
+use InscricoesEventos\Models\TipoParticipacao;
 use InscricoesEventos\Models\TrabalhoSubmetido;
+use InscricoesEventos\Models\TrabalhoSelecionado;
 
 class SelecionaTrabalhosController extends CoordenadorController
 {
@@ -85,11 +87,37 @@ class SelecionaTrabalhosController extends CoordenadorController
         $this->validate($request, [
             'aceito' => 'required',
         ]);
-
-        $aceitos = $request->aceito;
+// dd($request);
+        $trabalhos_aceitos = $request->aceito;
         
-        $tipos_apresentacao = $request->muda_tipo_apresentacao;
+        $tipo_apresentacao = $request->muda_tipo_apresentacao;
 
-        dd($tipos_apresentacao);
+        foreach ($trabalhos_aceitos as $key => $aceito) {
+            if ($aceito) {
+                
+                $selecionado = new TrabalhoSelecionado();
+
+                $tipo_participacao = new TipoParticipacao();
+
+                $submentido = new TrabalhoSubmetido();
+
+                $dados_submissao = $submentido->retorna_trabalho_submetido($key, $id_inscricao_evento);
+
+                $dados_participacao = $tipo_participacao->retorna_participacao($id_inscricao_evento, $key);
+
+                $id_categoria_participante = $dados_participacao->id_categoria_participante;
+                
+                $id_area_trabalho = $dados_submissao->id_area_trabalho;
+                
+                $selecionado->id_participante = $key;
+                $selecionado->id_categoria_participante = $id_categoria_participante;
+                $selecionado->id_tipo_apresentacao = $tipo_apresentacao[$key];
+                $selecionado->id_area_trabalho = $id_area_trabalho;
+                $selecionado->id_coordenador = $id_coordenador;
+                $selecionado->id_inscricao_evento = $id_inscricao_evento;
+
+                $selecionado->save();
+            }
+        }
     }
 }
