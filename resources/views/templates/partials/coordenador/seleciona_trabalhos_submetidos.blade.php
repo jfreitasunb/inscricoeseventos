@@ -28,7 +28,7 @@
         <tbody>
           @foreach( $dados_para_selecao as $dados)
             <tr class="">
-              <td>{{ $dados['nome'] }} <br>{{"(".$dados['instituicao'].")" }}</td>
+              <td>{{ $dados['nome'] }} <br>{{"(".$dados['nome_categoria_ptbr']."-".$dados['instituicao'].")" }}</td>
               <td>{{ $dados['area_trabalho'] }}</td>
               <td>{{ $dados['titulo_trabalho'] }}</td>
               <td>{{ $dados['nome_tipo_apresentacao_ptbr'] }}</td>
