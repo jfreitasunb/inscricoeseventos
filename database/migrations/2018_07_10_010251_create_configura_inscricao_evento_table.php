@@ -25,6 +25,7 @@ class CreateConfiguraInscricaoEventoTable extends Migration
             $table->integer('ano_evento');
             $table->unsignedInteger('id_coordenador');
             $table->foreign('id_coordenador')->references('id_user')->on('users')->onDelete('cascade');
+            $table->boolean('selecao_trabalhos_finalizada')->default('0');
             $table->timestamps();
         });
     }
