@@ -60,7 +60,7 @@ class TrabalhoSubmetido extends FuncoesModels
     public function retorna_todos_trabalhos($area_trabalho, $id_inscricao_evento)
     {
         if (is_null($area_trabalho)) {
-            return $this->where('id_inscricao_evento', $id_inscricao_evento)->get();
+            return $this->where('trabalho_submetido.id_inscricao_evento', $id_inscricao_evento)->join('finaliza_inscricao', 'finaliza_inscricao.id_participante', 'trabalho_submetido.id_participante')->get();
         }
     }
 
