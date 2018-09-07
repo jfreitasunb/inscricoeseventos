@@ -31,4 +31,10 @@ class TrabalhoSelecionado extends FuncoesModels
         'id_inscricao_evento',
         'id_coordenador',
     ];
+
+
+    public function limpa_selecoes_anteriores($id_coordenador, $id_inscricao_evento)
+    {
+        return $this->where('id_coordenador', $id_coordenador)->where('id_inscricao_evento', $id_inscricao_evento)->delete();
+    }
 }
