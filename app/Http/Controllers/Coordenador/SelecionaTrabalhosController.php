@@ -45,7 +45,7 @@ class SelecionaTrabalhosController extends CoordenadorController
           
         }else{
           
-          $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
+          dd($trabalho_submetido->retorna_todos_trabalhos($coordenador_area, $id_inscricao_evento));
         }
 
         foreach ($areas_com_trabalho as $area) {
