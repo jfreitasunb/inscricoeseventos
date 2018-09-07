@@ -57,7 +57,24 @@ class SelecionaTrabalhosController extends CoordenadorController
     }
 
     public function postSelecionarTrabalhos(Request $request)
-    {
-        # code...
+    {   
+        $user = $this->SetUser();
+    
+        $id_coordenador = $user->id_user;
+
+        $locale_relatorio = 'pt-br';
+
+        $relatorio = new ConfiguraInscricaoEvento();
+
+        $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+        $id_inscricao_evento = $relatorio_disponivel->id_inscricao_evento;
+
+        if ($request->id_inscricao_evento != $id_inscricao_evento) {
+            notify()->flash('Você está tentando selecionar trabalhos para evento não configurado!','error');
+        
+            return redirect()->back();
+        }
+        dd($request);
     }
 }
