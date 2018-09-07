@@ -46,9 +46,13 @@
           <div class="row">
             <p>Caso marque o opção 'SIM' essa tela de selação ficará bloqueada e nenhum outro coordenador terá acesso a ela.</p>
           </div>
-          <div class="row">
-            {!!  Form::radio('encerrar_selecao_trabalhos', '1', false, ['class' => 'form-horizontal', 'required' => '']) !!}<label class="form-label">Sim</label>
-          {!!  Form::radio('encerrar_selecao_trabalhos', '0', false, ['class' => 'form-horizontal', 'required' => '']) !!}<label>Não</label>
+          <div class="col-sm-6">
+            <label class="radio-inline">
+              {!!  Form::radio('encerrar_selecao_trabalhos', '1', false, ['class' => 'form-horizontal', 'required' => '']) !!} Sim
+            </label>
+            <label class="radio-inline">
+              {!!  Form::radio('encerrar_selecao_trabalhos', '0', false, ['class' => 'form-horizontal', 'required' => '']) !!} Não
+            </label>
           </div>
           
         </fieldset>
