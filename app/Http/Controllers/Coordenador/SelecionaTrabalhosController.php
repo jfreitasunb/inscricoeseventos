@@ -75,6 +75,12 @@ class SelecionaTrabalhosController extends CoordenadorController
         
             return redirect()->back();
         }
+
+        if ($request->id_coordenador != $id_coordenador) {
+            notify()->flash('Você não tem permissão para executar essa operação!','error');
+        
+            return redirect()->back();
+        }
         dd($request);
     }
 }
