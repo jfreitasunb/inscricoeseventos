@@ -92,6 +92,10 @@ class SelecionaTrabalhosController extends CoordenadorController
         
         $tipo_apresentacao = $request->muda_tipo_apresentacao;
 
+        $limpa_selecao = new TrabalhoSelecionado();
+
+        $limpa_selecao->limpa_selecoes_anteriores($id_coordenador, $id_inscricao_evento);
+
         foreach ($trabalhos_aceitos as $key => $aceito) {
             if ($aceito) {
                 
@@ -119,5 +123,9 @@ class SelecionaTrabalhosController extends CoordenadorController
                 $selecionado->save();
             }
         }
+        
+        notify()->flash('Dados salvos com sucesso!','success');
+        
+        return redirect()->back();
     }
 }
