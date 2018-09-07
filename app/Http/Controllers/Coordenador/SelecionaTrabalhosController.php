@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use InscricoesEventos\Models\User;
 use InscricoesEventos\Models\ConfiguraInscricaoEvento;
 use InscricoesEventos\Models\ConfiguraTipoEvento;
+use InscricoesEventos\Models\ConfiguraTipoApresentacao;
 use InscricoesEventos\Models\AreaPosMat;
 use InscricoesEventos\Models\OfertaCursoVerao;
 use InscricoesEventos\Models\Formacao;
@@ -39,6 +40,10 @@ class SelecionaTrabalhosController extends CoordenadorController
 
         $trabalho_submetido = new TrabalhoSubmetido();
 
+        $tipo_apresentacao = new ConfiguraTipoApresentacao();
+
+        $tipos_de_apresentacao = $tipo_apresentacao->pega_tipo_apresentacao($locale_relatorio);
+
         if ($nivel_coordenador->coordenador_geral) {
           
           $dados_para_selecao = $trabalho_submetido->retorna_todos_trabalhos(Null, $id_inscricao_evento);
@@ -48,7 +53,7 @@ class SelecionaTrabalhosController extends CoordenadorController
           $dados_para_selecao = $trabalho_submetido->retorna_todos_trabalhos($coordenador_area, $id_inscricao_evento);
         }
 
-        return view('templates.partials.coordenador.seleciona_trabalhos_submetidos')->with(compact('dados_para_selecao'));
+        return view('templates.partials.coordenador.seleciona_trabalhos_submetidos')->with(compact('dados_para_selecao', 'tipos_de_apresentacao', 'id_coordenador', 'id_inscricao_evento'));
     }
 
     public function postSelecionarTrabalhos(Request $request)
