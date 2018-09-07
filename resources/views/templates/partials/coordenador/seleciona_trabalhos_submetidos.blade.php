@@ -11,36 +11,42 @@
 <fieldset class="scheduler-border">
   <legend class="scheduler-border">Selecionar Trabalhos</legend>
   {!! Form::open(array('route' => 'seleciona.trabalhos.submetidos', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
-    {!! Form::hidden('id_inscricao_evento', 1, []) !!}
+    {!! Form::hidden('id_inscricao_evento', $id_inscricao_evento, []) !!}
+    {!! Form::hidden('id_coordenador', $id_coordenador, []) !!}
     <div class="table-responsive">
       <table class="table table-bordered table-hover">
         <thead>
           <tr>
             <th scope="col">Nome</th>
             <th scope="col">Área</th>
-            <th scope="col">Instituição</th>
+            <th scope="coll">Título</th>
             <th scope="col">Tipo de Apresentação</th>
             <th scope="col">Aceito?</th>
             <th scope="col">Mudar tipo de apresentação?</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="">
+          {{-- <tr class="">
             <td>NomeNomeNomeNomeNomeNomeNomeNomeNomeNomeNome</td>
             <td>Área</td>
             <td>Instituição</td>
             <td>Tipo Apresentação</td>
             <td><input type="radio" name="aceito" value="1">Sim <input type="radio" name="aceito" value="0">Não</td>
             <td><input type="radio" name="muda_tipo_apresentacao" value="PA">Palestra <input type="radio" name="muda_tipo_apresentacao" value="PO">Poster</td>
-          </tr>
-          {{-- @foreach( $inscricoes_finalizadas as $finalizada)
+          </tr> --}}
+          @foreach( $dados_para_selecao as $dados)
+          {{-- {{ dd($dados) }} --}}
             <tr class="">
-              {!! Form::hidden('id_area_pos', $finalizada['id_area_pos'], []) !!}
-              <td>{{ $finalizada['nome'] }}</td>
-              <td>{{ $finalizada['tipo_programa_pos_ptbr'] }}</td>
-              <td>{!! Form::radio('selecionar['.$finalizada['id_participante'].']','1_'.$finalizada['id_area_pos'],true) !!} Sim {!! Form::radio('selecionar['.$finalizada['id_participante'].']','0_'.$finalizada['id_area_pos'],false) !!} Não</td>
+              <td>{{ $dados['nome'] }} <br>{{"(".$dados['instituicao'].")" }}</td>
+              <td>{{ $dados['area_trabalho'] }}</td>
+              <td>{{ $dados['titulo_trabalho'] }}</td>
+              <td>{{ $dados['nome_tipo_apresentacao_ptbr'] }}</td>
+              <td><input type="radio" name={!! "aceito[".$dados['id_participante']."]" !!} value="1">Sim <br> <input type="radio" name={!! "aceito[".$dados['id_participante']."]" !!}  value="0">Não</td>
+              <td>@foreach ($tipos_de_apresentacao as $element)
+                <input type="radio" name={!! "muda_tipo_apresentacao[".$dados['id_participante']."]" !!} value="{{ $element['id'] }}" {{ $dados['id_tipo_apresentacao']===$element['id']? 'checked':'' }}> {{ $element['nome_apresentacao'] }} <br>
+              @endforeach</td>
             </tr>
-          @endforeach --}}
+          @endforeach
         </tbody>
         
       </table>
