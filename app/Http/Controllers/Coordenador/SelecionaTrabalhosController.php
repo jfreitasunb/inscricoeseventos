@@ -54,13 +54,17 @@ class SelecionaTrabalhosController extends CoordenadorController
             if ($nivel_coordenador->coordenador_geral) {
               
               $dados_para_selecao = $trabalho_submetido->retorna_todos_trabalhos(Null, $id_inscricao_evento);
+
+              $coord_geral = True;
               
             }else{
               
               $dados_para_selecao = $trabalho_submetido->retorna_todos_trabalhos($coordenador_area, $id_inscricao_evento);
+
+              $coord_geral = False;
             }
 
-            return view('templates.partials.coordenador.seleciona_trabalhos_submetidos')->with(compact('dados_para_selecao', 'tipos_de_apresentacao', 'id_coordenador', 'id_inscricao_evento'));
+            return view('templates.partials.coordenador.seleciona_trabalhos_submetidos')->with(compact('dados_para_selecao', 'tipos_de_apresentacao', 'id_coordenador', 'id_inscricao_evento', 'coord_geral'));
         }
     }
 
@@ -134,6 +138,8 @@ class SelecionaTrabalhosController extends CoordenadorController
                     $selecionado->save();
                 }
             }
+
+
             
             notify()->flash('Dados salvos com sucesso!','success');
             
