@@ -35,7 +35,7 @@ class SelecionaTrabalhosController extends CoordenadorController
         if ($relatorio_disponivel->selecao_trabalhos_finalizada) {
             notify()->flash('O período de seleção de trabalhos já encerrou!','warning');
         
-            return redirect()->back();
+            return redirect()->route('home');
         }else{
             $id_inscricao_evento = $relatorio_disponivel->id_inscricao_evento;
 
