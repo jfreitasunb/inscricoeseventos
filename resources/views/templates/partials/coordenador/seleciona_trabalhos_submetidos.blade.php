@@ -48,7 +48,7 @@
           </div>
           <div class="row">
             {!!  Form::radio('encerrar_selecao_trabalhos', '1', false, ['class' => 'form-horizontal', 'required' => '']) !!}<label class="form-label">Sim</label>
-          {!!  Form::radio('encerrar_selecao_trabalhos', '1', false, ['class' => 'form-horizontal', 'required' => '']) !!}<label>Não</label>
+          {!!  Form::radio('encerrar_selecao_trabalhos', '0', false, ['class' => 'form-horizontal', 'required' => '']) !!}<label>Não</label>
           </div>
           
         </fieldset>
