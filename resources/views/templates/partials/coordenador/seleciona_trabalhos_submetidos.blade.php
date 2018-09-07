@@ -6,12 +6,12 @@
   {!! Html::style( asset('bower_components/moment/locale/fr.js') ) !!}
 @endsection
 
-@section('seleciona_candidatos')
+@section('seleciona_trabalhos_submentidos')
 
 <fieldset class="scheduler-border">
-  <legend class="scheduler-border">Seleciona candidatos</legend>
-  {!! Form::open(array('route' => 'seleciona.candidatos', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
-    {!! Form::hidden('id_inscricao_pos', $relatorio_disponivel->id_inscricao_pos, []) !!}
+  <legend class="scheduler-border">Selecionar Trabalhos</legend>
+  {!! Form::open(array('route' => 'seleciona.trabalhos.submetidos', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+    {!! Form::hidden('id_inscricao_evento', $relatorio_disponivel->id_inscricao_evento, []) !!}
     <div class="table-responsive">
       <table class="table table-bordered table-hover">
         <thead>
