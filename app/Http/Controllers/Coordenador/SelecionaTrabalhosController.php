@@ -81,6 +81,15 @@ class SelecionaTrabalhosController extends CoordenadorController
         
             return redirect()->back();
         }
-        dd($request);
+        
+        $this->validate($request, [
+            'aceito' => 'required',
+        ]);
+
+        $aceitos = $request->aceito;
+        
+        $tipos_apresentacao = $request->muda_tipo_apresentacao;
+
+        dd($tipos_apresentacao);
     }
 }
