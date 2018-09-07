@@ -25,10 +25,10 @@
         <tbody>
           @foreach( $inscricoes_finalizadas as $finalizada)
             <tr class="">
-              {!! Form::hidden('id_programa_pos', $finalizada['id_programa_pos'], []) !!}
+              {!! Form::hidden('id_area_pos', $finalizada['id_area_pos'], []) !!}
               <td>{{ $finalizada['nome'] }}</td>
               <td>{{ $finalizada['tipo_programa_pos_ptbr'] }}</td>
-              <td>{!! Form::radio('selecionar['.$finalizada['id_candidato'].']','1_'.$finalizada['id_programa_pos'],true) !!} Sim {!! Form::radio('selecionar['.$finalizada['id_candidato'].']','0_'.$finalizada['id_programa_pos'],false) !!} Não</td>
+              <td>{!! Form::radio('selecionar['.$finalizada['id_candidato'].']','1_'.$finalizada['id_area_pos'],true) !!} Sim {!! Form::radio('selecionar['.$finalizada['id_candidato'].']','0_'.$finalizada['id_area_pos'],false) !!} Não</td>
             </tr>
           @endforeach
         </tbody>
