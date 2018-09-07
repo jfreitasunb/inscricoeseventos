@@ -39,8 +39,20 @@
             </tr>
           @endforeach
         </tbody>
-        
       </table>
+      @if ($coord_geral)
+        <fieldset class="scheduler-border">
+          <legend class="scheduler-border">Encerrar seleção de trabalhos?</legend>
+          <div class="row">
+            <p>Caso marque o opção 'SIM' essa tela de selação ficará bloqueada e nenhum outro coordenador terá acesso a ela.</p>
+          </div>
+          <div class="row">
+            {!!  Form::radio('encerrar_selecao_trabalhos', '1', false, ['class' => 'form-horizontal', 'required' => '']) !!}<label class="form-label">Sim</label>
+          {!!  Form::radio('encerrar_selecao_trabalhos', '1', false, ['class' => 'form-horizontal', 'required' => '']) !!}<label>Não</label>
+          </div>
+          
+        </fieldset>
+      @endif
     </div>
     <div class="col-md-10 text-center"> 
       {!! Form::submit('Enviar', array('class' => 'register-submit btn btn-primary btn-lg', 'id' => 'register-submit', 'tabindex' => '4')) !!}
