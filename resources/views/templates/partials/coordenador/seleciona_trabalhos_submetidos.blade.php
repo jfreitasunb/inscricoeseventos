@@ -28,7 +28,7 @@
               {!! Form::hidden('id_area_pos', $finalizada['id_area_pos'], []) !!}
               <td>{{ $finalizada['nome'] }}</td>
               <td>{{ $finalizada['tipo_programa_pos_ptbr'] }}</td>
-              <td>{!! Form::radio('selecionar['.$finalizada['id_candidato'].']','1_'.$finalizada['id_area_pos'],true) !!} Sim {!! Form::radio('selecionar['.$finalizada['id_candidato'].']','0_'.$finalizada['id_area_pos'],false) !!} Não</td>
+              <td>{!! Form::radio('selecionar['.$finalizada['id_participante'].']','1_'.$finalizada['id_area_pos'],true) !!} Sim {!! Form::radio('selecionar['.$finalizada['id_participante'].']','0_'.$finalizada['id_area_pos'],false) !!} Não</td>
             </tr>
           @endforeach
         </tbody>
