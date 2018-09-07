@@ -90,8 +90,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class= "{{ Route::currentRouteNamed('relatorio.anteriores') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-backward fa-fw"></span><a href="{{ route('relatorio.anteriores') }}">Edital Anterior</a>
+                                    <td class= "{{ Route::currentRouteNamed('seleciona.trabalhos.submetidos') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-backward fa-fw"></span><a href="{{ route('seleciona.trabalhos.submetidos') }}">Selecionar Trabalhos</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -136,7 +136,7 @@
                 @yield('tabela_indicacoes')
                 @yield('altera_recomendantes')
                 @yield('relatorio_trabalhos_submetidos')
-                @yield('relatorio_pos_editais_anteriores')
+                @yield('seleciona_trabalhos_submentidos')
                 @yield('datatable_users')
                 @yield('ficha_individual')
                 @yield('graficos')
