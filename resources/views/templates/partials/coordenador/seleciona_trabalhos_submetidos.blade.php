@@ -16,9 +16,10 @@
       <table class="table table-bordered table-hover">
         <thead>
           <tr>
-            <th scope="col">{{ trans('tela_cartas_pendentes.nome_candidato') }}</th>
-            <th scope="col">{{ trans('tela_cartas_pendentes.tipo_programa') }}</th>
-            <th>Candidato foi selecionado?</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Área</th>
+            <th scope="col">Instituição</th>
+            <th scope="col">Tipo de Apresentação</th>
           </tr>
         </thead>
         <tbody>
