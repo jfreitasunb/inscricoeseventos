@@ -11,7 +11,7 @@
 <fieldset class="scheduler-border">
   <legend class="scheduler-border">Selecionar Trabalhos</legend>
   {!! Form::open(array('route' => 'seleciona.trabalhos.submetidos', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
-    {!! Form::hidden('id_inscricao_evento', $relatorio_disponivel->id_inscricao_evento, []) !!}
+    {!! Form::hidden('id_inscricao_evento', 1, []) !!}
     <div class="table-responsive">
       <table class="table table-bordered table-hover">
         <thead>
@@ -20,14 +20,18 @@
             <th scope="col">Área</th>
             <th scope="col">Instituição</th>
             <th scope="col">Tipo de Apresentação</th>
+            <th scope="col">Aceito?</th>
+            <th scope="col">Mudar tipo de apresentação?</th>
           </tr>
         </thead>
         <tbody>
           <tr class="">
-            <td>Nome</td>
+            <td>NomeNomeNomeNomeNomeNomeNomeNomeNomeNomeNome</td>
             <td>Área</td>
             <td>Instituição</td>
             <td>Tipo Apresentação</td>
+            <td><input type="radio" name="aceito" value="1">Sim <input type="radio" name="aceito" value="0">Não</td>
+            <td><input type="radio" name="muda_tipo_apresentacao" value="PA">Palestra <input type="radio" name="muda_tipo_apresentacao" value="PO">Poster</td>
           </tr>
           {{-- @foreach( $inscricoes_finalizadas as $finalizada)
             <tr class="">
