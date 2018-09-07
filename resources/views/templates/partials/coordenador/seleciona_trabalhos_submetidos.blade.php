@@ -26,16 +26,7 @@
           </tr>
         </thead>
         <tbody>
-          {{-- <tr class="">
-            <td>NomeNomeNomeNomeNomeNomeNomeNomeNomeNomeNome</td>
-            <td>Área</td>
-            <td>Instituição</td>
-            <td>Tipo Apresentação</td>
-            <td><input type="radio" name="aceito" value="1">Sim <input type="radio" name="aceito" value="0">Não</td>
-            <td><input type="radio" name="muda_tipo_apresentacao" value="PA">Palestra <input type="radio" name="muda_tipo_apresentacao" value="PO">Poster</td>
-          </tr> --}}
           @foreach( $dados_para_selecao as $dados)
-          {{-- {{ dd($dados) }} --}}
             <tr class="">
               <td>{{ $dados['nome'] }} <br>{{"(".$dados['instituicao'].")" }}</td>
               <td>{{ $dados['area_trabalho'] }}</td>
