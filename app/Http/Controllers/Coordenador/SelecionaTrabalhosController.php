@@ -32,30 +32,36 @@ class SelecionaTrabalhosController extends CoordenadorController
 
         $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
-        $id_inscricao_evento = $relatorio_disponivel->id_inscricao_evento;
-
-        $coordenador = new TipoCoordenador();
-
-        $nivel_coordenador = $coordenador->retorna_dados_coordenador($id_coordenador, $id_inscricao_evento);
-
-        $coordenador_area = $nivel_coordenador->coordenador_area;
-
-        $trabalho_submetido = new TrabalhoSubmetido();
-
-        $tipo_apresentacao = new ConfiguraTipoApresentacao();
-
-        $tipos_de_apresentacao = $tipo_apresentacao->pega_tipo_apresentacao($locale_relatorio);
-
-        if ($nivel_coordenador->coordenador_geral) {
-          
-          $dados_para_selecao = $trabalho_submetido->retorna_todos_trabalhos(Null, $id_inscricao_evento);
-          
+        if ($relatorio_disponivel->selecao_trabalhos_finalizada) {
+            notify()->flash('O período de seleção de trabalhos já encerrou!','warning');
+        
+            return redirect()->back();
         }else{
-          
-          $dados_para_selecao = $trabalho_submetido->retorna_todos_trabalhos($coordenador_area, $id_inscricao_evento);
-        }
+            $id_inscricao_evento = $relatorio_disponivel->id_inscricao_evento;
 
-        return view('templates.partials.coordenador.seleciona_trabalhos_submetidos')->with(compact('dados_para_selecao', 'tipos_de_apresentacao', 'id_coordenador', 'id_inscricao_evento'));
+            $coordenador = new TipoCoordenador();
+
+            $nivel_coordenador = $coordenador->retorna_dados_coordenador($id_coordenador, $id_inscricao_evento);
+
+            $coordenador_area = $nivel_coordenador->coordenador_area;
+
+            $trabalho_submetido = new TrabalhoSubmetido();
+
+            $tipo_apresentacao = new ConfiguraTipoApresentacao();
+
+            $tipos_de_apresentacao = $tipo_apresentacao->pega_tipo_apresentacao($locale_relatorio);
+
+            if ($nivel_coordenador->coordenador_geral) {
+              
+              $dados_para_selecao = $trabalho_submetido->retorna_todos_trabalhos(Null, $id_inscricao_evento);
+              
+            }else{
+              
+              $dados_para_selecao = $trabalho_submetido->retorna_todos_trabalhos($coordenador_area, $id_inscricao_evento);
+            }
+
+            return view('templates.partials.coordenador.seleciona_trabalhos_submetidos')->with(compact('dados_para_selecao', 'tipos_de_apresentacao', 'id_coordenador', 'id_inscricao_evento'));
+        }
     }
 
     public function postSelecionarTrabalhos(Request $request)
