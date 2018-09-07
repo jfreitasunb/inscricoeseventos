@@ -4,6 +4,17 @@ namespace InscricoesEventos\Http\Controllers\Coordenador;
 
 use Illuminate\Http\Request;
 
+use InscricoesEventos\Models\User;
+use InscricoesEventos\Models\ConfiguraInscricaoEvento;
+use InscricoesEventos\Models\ConfiguraTipoEvento;
+use InscricoesEventos\Models\AreaPosMat;
+use InscricoesEventos\Models\OfertaCursoVerao;
+use InscricoesEventos\Models\Formacao;
+use InscricoesEventos\Models\ProgramaPos;
+use InscricoesEventos\Models\FinalizaInscricao;
+use InscricoesEventos\Models\TipoCoordenador;
+use InscricoesEventos\Models\TrabalhoSubmetido;
+
 class SelecionaTrabalhosController extends CoordenadorController
 {
     public function getSelecionarTrabalhos()
@@ -27,6 +38,15 @@ class SelecionaTrabalhosController extends CoordenadorController
         $coordenador_area = $nivel_coordenador->coordenador_area;
 
         $trabalho_submetido = new TrabalhoSubmetido();
+
+        if ($nivel_coordenador->coordenador_geral) {
+          
+          $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
+          
+        }else{
+          
+          $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
+        }
 
         return view('templates.partials.coordenador.seleciona_trabalhos_submetidos');
     }
