@@ -29,6 +29,7 @@ class ConfiguraInscricaoEvento extends Model
         'ano_evento',
         'ano_evento',
         'id_coordenador',
+        'selecao_trabalhos_finalizada',
     ];
 
     public function retorna_lista_para_relatorio()
