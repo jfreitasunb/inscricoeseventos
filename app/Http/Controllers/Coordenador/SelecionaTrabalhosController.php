@@ -41,13 +41,20 @@ class SelecionaTrabalhosController extends CoordenadorController
 
         if ($nivel_coordenador->coordenador_geral) {
           
-          $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
+          dd($trabalho_submetido->retorna_todos_trabalhos(Null, $id_inscricao_evento));
           
         }else{
           
           $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
         }
 
+        foreach ($areas_com_trabalho as $area) {
+          
+
+            $area_pos = new AreaPosMat();
+
+            $area_trabalho = $area_pos->pega_area_pos_mat($area, $locale_relatorio);
+          }
         return view('templates.partials.coordenador.seleciona_trabalhos_submetidos');
     }
 
