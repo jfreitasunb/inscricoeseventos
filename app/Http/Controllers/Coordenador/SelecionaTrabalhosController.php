@@ -102,7 +102,17 @@ class SelecionaTrabalhosController extends CoordenadorController
             $this->validate($request, [
                 'aceito' => 'required',
             ]);
-    // dd($request);
+            
+            $coordenador = new TipoCoordenador();
+
+            $nivel_coordenador = $coordenador->retorna_dados_coordenador($id_coordenador, $id_inscricao_evento);
+
+            if ($nivel_coordenador->coordenador_geral) {
+                $this->validate($request, [
+                    'encerrar_selecao_trabalhos' => 'required',
+                ]);
+            }
+
             $trabalhos_aceitos = $request->aceito;
             
             $tipo_apresentacao = $request->muda_tipo_apresentacao;
@@ -139,11 +149,30 @@ class SelecionaTrabalhosController extends CoordenadorController
                 }
             }
 
+            if ($nivel_coordenador->coordenador_geral) {
+                
+                $encerrar_selecao_trabalhos = (int)$request->encerrar_selecao_trabalhos;
 
+                $evento = ConfiguraInscricaoEvento::find($id_inscricao_evento);
+
+                $fecha_selecao['selecao_trabalhos_finalizada'] = $encerrar_selecao_trabalhos;
+
+                $evento->update($fecha_selecao);
+                
+                if ($encerrar_selecao_trabalhos) {
+                    notify()->flash('Dados salvos com sucesso! Tela de seleção fechada!','success');
             
-            notify()->flash('Dados salvos com sucesso!','success');
+                    return redirect()->route('home');
+                }else{
+                    notify()->flash('Dados salvos com sucesso!','success');
             
-            return redirect()->back();
+                    return redirect()->back();
+                }
+            }else{
+                notify()->flash('Dados salvos com sucesso!','success');
+            
+                return redirect()->back();
+            }
         }
     }
 }
