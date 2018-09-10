@@ -39,9 +39,7 @@ class AreaPosMat extends FuncoesModels
         if ($area_pos == 0) {
             return null;
         }else{
-            return $this->select($nome_coluna)
-            ->where('id_area_pos', $area_pos)->where('id_area_pos')
-            ->value($nome_coluna);
+            return $this->select($nome_coluna)->where('id_area_pos', $area_pos)->value($nome_coluna);
         }   
     }
 

@@ -37,54 +37,31 @@
             }
         </script>
 
-        <h2>Ficha de Inscrição - {{ $dados_candidato_para_relatorio['programa_pretendido'] }}</h2>
+        <h2>Ficha de Inscrição</h2>
         <div>
             <label class="control-label">Nome: </label>{{ $dados_candidato_para_relatorio['nome'] }}
         </div>
         <div>
-            <label class="control-label">Data de nascimento: </label>{{ $dados_candidato_para_relatorio['data_nascimento'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            <label class="control-label">Idade: </label>{{ $dados_candidato_para_relatorio['idade'].' anos' }}
-        </div>
-        <hr>
-        <h3>Endereço Pessoal</h3>
-        <div>
-            <label>Endereço: </label>{{ $dados_candidato_para_relatorio['endereco'] }}
+            <label class="control-label">Instituição: </label>{{ $dados_candidato_para_relatorio['instituicao'] }}
         </div>
         <div>
-            <label>Celular: </label>{{ $dados_candidato_para_relatorio['celular'] }}
+            <label class="control-label">Categoria do Participante: </label>{{ $dados_candidato_para_relatorio['categoria_participante'] }}
         </div>
         <div>
-            <label>País: </label> {{ $dados_candidato_para_relatorio['nome_pais'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label> Estado: </label>{{ $dados_candidato_para_relatorio['nome_estado'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>Cidade: </label> {{ $dados_candidato_para_relatorio['nome_cidade'] }}
+            <label class="control-label">Deseja apresentar trabalho? </label>{{ $dados_candidato_para_relatorio['instituicao']? 'Sim' : 'Não' }}
         </div>
-
-        <hr>
-        <h3>Dados Acadêmicos</h3>
-        <div>
-            <label>Graduação: </label> {{ $dados_candidato_para_relatorio['curso_graduacao'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>Tipo: </label> {{ $dados_candidato_para_relatorio['tipo_curso_graduacao'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label>Instituição: </label> {{ $dados_candidato_para_relatorio['instituicao_graduacao'] }}
-        </div>
-        <div>
-            <label>Ano de Conclusão (ou previsão): </label> {{ $dados_candidato_para_relatorio['ano_conclusao_graduacao'] }}
-        </div>
-        @if ($dados_candidato_para_relatorio['curso_pos'])
-        <hr size="0">
-        <div>
-            <label>Pós-Graduação: </label> {{ $dados_candidato_para_relatorio['curso_pos'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>Tipo: </label> {{ $dados_candidato_para_relatorio['tipo_curso_pos'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label>Instituição: </label> {{ $dados_candidato_para_relatorio['instituicao_pos'] }}
-        </div>
-        <div>
-            <label>Ano de Conclusão (ou previsão): </label> {{ $dados_candidato_para_relatorio['ano_conclusao_pos'] }}
-        </div>
+        @if ($dados_candidato_para_relatorio['apresentar_trabalho'])
+            <div>
+                <label class="control-label">Área: </label>{{ $dados_candidato_para_relatorio['area_trabalho'] }}
+            </div>
+            <div>
+                <label class="control-label">Tipo de apresentacao: </label>{{ $dados_candidato_para_relatorio['tipo_apresentacao'] }}
+            </div>
+            <div>
+                <label class="control-label">Título: </label>{{ $dados_candidato_para_relatorio['titulo_trabalho'] }}
+            </div>
         @endif
-
+        
         <hr>
-        <h3>Curso solicitados:</h3>
-        @if ($dados_candidato_para_relatorio['curso_verao'])
-            <ul>
-                @foreach (explode("_", $dados_candidato_para_relatorio['curso_verao']) as $element)
-                    @if ($element<>"")
-                        <li>{!! $element !!}</li>
-                    @endif
-                @endforeach
-            </ul>
-        @endif
     </body>
 </html>

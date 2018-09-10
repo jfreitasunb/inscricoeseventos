@@ -13,6 +13,7 @@ use Imagick;
 use InscricoesEventos\Http\Controllers\FPDFController;
 use Carbon\Carbon;
 use InscricoesEventos\Models\User;
+use InscricoesEventos\Models\AreaPosMat;
 use InscricoesEventos\Models\ConfiguraInscricaoEvento;
 use InscricoesEventos\Models\FinalizaInscricao;
 use InscricoesEventos\Models\DadoPessoalParticipante;
@@ -53,7 +54,7 @@ class RelatorioController extends BaseController
   public function ContaInscricoes($id_inscricao_evento, $programa)
   {
      
-    return DB::table('escolhas_curso_verao')->where('escolhas_curso_verao.id_inscricao_evento', $id_inscricao_evento)->where('escolhas_curso_verao.curso_verao', $programa)->join('finaliza_inscricao', 'finaliza_inscricao.id_participante', 'escolhas_curso_verao.id_participante')->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_inscricao_evento', $id_inscricao_evento)->count();
+    return DB::table('trabalho_submetido')->where('trabalho_submetido.id_inscricao_evento', $id_inscricao_evento)->where('trabalho_submetido.id_area_trabalho', $programa)->join('finaliza_inscricao', 'finaliza_inscricao.id_participante', 'trabalho_submetido.id_participante')->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_inscricao_evento', $id_inscricao_evento)->count();
 
   }
 
@@ -68,6 +69,8 @@ class RelatorioController extends BaseController
 
     $locais_arquivos = [];
 
+    $locais_arquivos['arquivos_temporarios'] = storage_path("app/public/relatorios/evento_".$evento."/temporario/");
+    
     $locais_arquivos['ficha_inscricao'] = storage_path("app/public/relatorios/ficha_inscricao/");
 
     $locais_arquivos['local_relatorios'] = storage_path("app/public/relatorios/evento_".$evento."/");
@@ -76,6 +79,7 @@ class RelatorioController extends BaseController
 
     $locais_arquivos['arquivo_zip'] = $locais_arquivos['local_relatorios'].'zip/';
 
+    File::isDirectory($locais_arquivos['arquivos_temporarios']) or File::makeDirectory($locais_arquivos['arquivos_temporarios'],0775,true);
 
     File::isDirectory($locais_arquivos['ficha_inscricao']) or File::makeDirectory($locais_arquivos['ficha_inscricao'],0775,true);
 
@@ -133,46 +137,111 @@ class RelatorioController extends BaseController
 
     $consolida_escolha['categoria_participante'] = $categoria_participacao->retorna_nome_categoria_por_id($escolha_participacao->id_categoria_participante, $locale_participante);
 
-    $consolida_escolha['apresentar_trabalho'] = $escolha_participacao->apresentar_trabalho;
+    if ($escolha_participacao->apresentar_trabalho) {
+      $trabalho = new TrabalhoSubmetido();
 
+      $id_area_trabalho = $trabalho->retorna_trabalho_submetido($id_participante, $id_inscricao_evento)->id_area_trabalho;
+
+      $titulo_trabalho = $trabalho->retorna_trabalho_submetido($id_participante, $id_inscricao_evento)->titulo_trabalho;
+
+      $area_pos = new AreaPosMat();
+
+      $consolida_escolha['area_trabalho'] = $area_pos->pega_area_pos_mat($id_area_trabalho, $locale_participante);
+
+      $consolida_escolha['titulo_trabalho'] = $titulo_trabalho;
+    }
+
+    $consolida_escolha['apresentar_trabalho'] = $escolha_participacao->apresentar_trabalho;
 
     $consolida_escolha['tipo_apresentacao'] = $tipo_apresentacao->retorna_nome_tipo_participacao_por_id($escolha_participacao->id_tipo_apresentacao, $locale_participante);
 
     return $consolida_escolha;
   }
 
-  public function ConsolidaNomeArquivos($local_arquivos_definitivos, $dados_candidato_para_relatorio)
+  public function ConsolidaNomeArquivos($local_arquivos_temporarios, $local_arquivos_definitivos, $dados_candidato_para_relatorio)
   {
     $nome_arquivos = [];
     
-    $nome_arquivos['arquivo_relatorio_participante'] = $local_arquivos_definitivos.'Inscricao_'.str_replace('\'s','',str_replace(' ', '-', strtr($dados_candidato_para_relatorio['tipo_apresentacao'], $this->normalizeChars))).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_participante'].'.pdf';
+    $nome_arquivos['arquivo_relatorio_participante_temporario'] = $local_arquivos_temporarios.'Inscricao_'.str_replace('\'s','',str_replace(' ', '-', strtr($dados_candidato_para_relatorio['area_trabalho'], $this->normalizeChars))).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['tipo_apresentacao'], $this->normalizeChars)).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_participante'].'.pdf';
+
+    $nome_arquivos['arquivo_relatorio_participante'] = $local_arquivos_definitivos.'Inscricao_'.str_replace('\'s','',str_replace(' ', '-', strtr($dados_candidato_para_relatorio['area_trabalho'], $this->normalizeChars))).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['tipo_apresentacao'], $this->normalizeChars)).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_participante'].'.pdf';
 
     return $nome_arquivos;
   }
 
-  public function ConsolidaArquivosZIP($edital, $arquivo_zip, $local_relatorios, $programas)
+  public function ConsolidaFichaRelatorio($id_participante, $id_inscricao_evento, $nome_arquivos)
+  {
+    
+    $arquivo_pdf_tex = str_replace("storage", "/var/www/inscricoeseventos/storage/app/public", $this->geraAbstract($id_participante, $id_inscricao_evento));
+
+    $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_participante_temporario'].' '.$arquivo_pdf_tex.' cat output '.$nome_arquivos['arquivo_relatorio_participante']);
+
+    $process->setTimeout(3600);
+    
+    $process->run();
+
+    if (!$process->isSuccessful()) {
+      throw new ProcessFailedException($process);
+    }
+
+    @unlink($nome_arquivos['arquivo_relatorio_participante_temporario']);
+
+    @unlink($arquivo_pdf_tex);
+  }
+
+  public function ConsolidaArquivosZIP($id_user, $id_inscricao_evento, $edital, $arquivo_zip, $local_relatorios, $programas)
   {
     $locale_relatorio = 'pt-br';
 
-    $nome_programa_pos = new ProgramaPos();
+    $coordenador = new TipoCoordenador();
 
-    $programa_para_relatorio = strtr($nome_programa_pos->pega_programa_pos_mat($programas, $locale_relatorio), $this->normalizeChars);
+    $nivel_coordenador = $coordenador->retorna_dados_coordenador($id_user, $id_inscricao_evento);
+    
+    $id_area_coordenador = $nivel_coordenador->coordenador_area;
+
+    if ($nivel_coordenador->coordenador_geral) {
+      $programa_para_relatorio = "Relatorio_Geral";
+    }else{
+      $area_pos = new AreaPosMat();
+
+      $coordenador_nome_area = str_replace(' ', '-', strtr($area_pos->pega_area_pos_mat($id_area_coordenador, $locale_relatorio), $this->normalizeChars));
+
+      $programa_para_relatorio = "Relatorio_de_".$coordenador_nome_area;
+    }
+
+    // $nome_programa_pos = new ProgramaPos();
+
+    // $programa_para_relatorio = strtr($nome_programa_pos->pega_programa_pos_mat($programas, $locale_relatorio), $this->normalizeChars);
+    
+    
     
     $inscricoes_zipadas = 'Inscricoes_'.$programa_para_relatorio.'.zip';
+    
     $arquivos_zipados_para_view[$programas] = $inscricoes_zipadas;
 
     $zip = new ZipArchive;
-
+    @unlink($arquivo_zip.$inscricoes_zipadas);
     if ( $zip->open( $arquivo_zip.$inscricoes_zipadas, ZipArchive::CREATE ) === true ){
-
-     foreach (glob( $local_relatorios.'Inscricao_'.$programa_para_relatorio.'*') as $fileName ){
-        $file = basename( $fileName );
-        $zip->addFile( $fileName, $file );
-
-     }
+      if ($nivel_coordenador->coordenador_geral) {
+        foreach (glob( $local_relatorios.'Inscricao_*') as $fileName ){
+          $file = basename( $fileName );
+          $zip->addFile( $fileName, $file );
+        }
+      }else{
+        foreach (glob( $local_relatorios.'Inscricao_'.$coordenador_nome_area.'*') as $fileName ){
+          $file = basename( $fileName );
+          $zip->addFile( $fileName, $file );
+        }
+      }
+     
 
      $zip->close();
     }
+
+    foreach (glob( $local_relatorios.'Inscricao_*.pdf') as $fileName ){
+      @unlink($fileName);
+    }
+    
     
     return $arquivos_zipados_para_view;
   }
@@ -196,9 +265,37 @@ class RelatorioController extends BaseController
 
     $nivel_coordenador = $coordenador->retorna_dados_coordenador($id_coordenador, $id_inscricao_evento);
 
-    $inscritos = new FinalizaInscricao();
+    $coordenador_area = $nivel_coordenador->coordenador_area;
 
-    $total_inscritos = $inscritos->retorna_total_inscritos($id_inscricao_evento, $nivel_coordenador);
+    $trabalho_submetido = new TrabalhoSubmetido();
+
+    if ($nivel_coordenador->coordenador_geral) {
+      
+      $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
+
+      foreach ($areas_com_trabalho as $area) {
+      
+        $contagem[$area] = $this->ContaInscricoes($id_inscricao_evento, $area);
+      }
+
+      $area_trabalho = "Todas as Áreas";
+
+      $total_inscritos = array_sum($contagem);
+    }else{
+      
+      $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
+
+      foreach ($areas_com_trabalho as $area) {
+      
+        $contagem[$area] = $this->ContaInscricoes($id_inscricao_evento, $area);
+
+        $area_pos = new AreaPosMat();
+
+        $area_trabalho = $area_pos->pega_area_pos_mat($area, $locale_relatorio);
+      }
+
+      $total_inscritos = array_sum($contagem);
+    }
 
     $arquivos_zipados_para_view = "";
 
@@ -208,9 +305,9 @@ class RelatorioController extends BaseController
 
     $monitoria = "";
 
-    // return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','relatorio_disponivel', 'cursos_ofertados', 'total_inscritos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
+    // return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('monitoria','relatorio_disponivel', 'cursos_ofertados', 'total_inscritos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
     
-     return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','relatorio_disponivel', 'cursos_ofertados', 'total_inscritos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
+     return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('area_trabalho', 'monitoria','relatorio_disponivel', 'cursos_ofertados', 'total_inscritos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
   }
 
    public function getListaRelatoriosAnteriores()
@@ -232,7 +329,7 @@ class RelatorioController extends BaseController
  }
 
 
-  public function getArquivosRelatorios($id_inscricao_evento,$arquivos_zipados_para_view,$relatorio_csv)
+  public function getArquivosRelatorios($id_user, $id_inscricao_evento,$arquivos_zipados_para_view,$relatorio_csv)
   {
 
     $locale_relatorio = 'pt-br';
@@ -240,37 +337,59 @@ class RelatorioController extends BaseController
     $relatorio = new ConfiguraInscricaoEvento();
 
     $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+    
+    $id_inscricao_evento = $relatorio_disponivel->id_inscricao_evento;
 
     $programas_disponiveis = explode("_", $relatorio->retorna_inscricao_ativa()->tipo_evento);
 
-    $oferta_verao = new OfertaCursoVerao();
+    $id_coordenador = $id_user;
 
-    $cursos_ofertados = $oferta_verao->retorna_cursos_ofertados($relatorio_disponivel->id_inscricao_evento, $locale_relatorio);
+    $coordenador = new TipoCoordenador();
 
-    foreach ($cursos_ofertados as $curso) {
+    $nivel_coordenador = $coordenador->retorna_dados_coordenador($id_coordenador, $id_inscricao_evento);
+
+    $coordenador_area = $nivel_coordenador->coordenador_area;
+
+    $trabalho_submetido = new TrabalhoSubmetido();
+
+    if ($nivel_coordenador->coordenador_geral) {
       
-      $contagem[$curso->id_curso_verao] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_evento, $curso->id_curso_verao);
+      $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
 
+      foreach ($areas_com_trabalho as $area) {
+      
+        $contagem[$area] = $this->ContaInscricoes($id_inscricao_evento, $area);
+      }
+
+      $area_trabalho = "Todas as Áreas";
+
+      $total_inscritos = array_sum($contagem);
+    }else{
+      
+      $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
+
+      foreach ($areas_com_trabalho as $area) {
+      
+        $contagem[$area] = $this->ContaInscricoes($id_inscricao_evento, $area);
+
+        $area_pos = new AreaPosMat();
+
+        $area_trabalho = $area_pos->pega_area_pos_mat($area, $locale_relatorio);
+      }
+
+      $total_inscritos = array_sum($contagem);
     }
 
-    $nome_programa_pos = new ProgramaPos();
-
-    foreach ($programas_disponiveis as $programa) {
-     
-     $programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa, $locale_relatorio);
-     
-     $contagem[$programa_para_inscricao[$programa]] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_evento, $programa);
-    }
-
-    $total_inscritos = array_sum($contagem);
     
-    $nome_programas = implode('/', $programa_para_inscricao);
+    // $total_inscritos = 0;
+    // $nome_programas = implode('/', $programa_para_inscricao);
+    $nome_programas = "teste";
 
     $monitoria = $id_inscricao_evento;
 
     $local_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel->ano_evento);
 
-    $endereco_zip_mudar = '/var/www/inscricoesverao/storage/app/public/';
+    $endereco_zip_mudar = '/var/www/inscricoeseventos/storage/app/public/';
 
     //Para ser usado no MAT
     // $endereco_zip_mudar = '/var/www/inscricoesverao/storage/app/public/';
@@ -279,7 +398,7 @@ class RelatorioController extends BaseController
 
     $local_arquivos['arquivo_zip'] = str_replace($endereco_zip_mudar, 'storage/', $local_arquivos['arquivo_zip']);
 
-    return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','contagem', 'total_inscritos', 'cursos_ofertados', 'relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv','local_arquivos'));
+    return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('area_trabalho','monitoria','contagem', 'total_inscritos', 'cursos_ofertados', 'relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv','local_arquivos'));
 
   }
 
@@ -330,24 +449,23 @@ class RelatorioController extends BaseController
       foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
         $dados_candidato_para_relatorio[$key] = $value;
       }
-      // dd($dados_candidato_para_relatorio);
+      
       $nome_arquivos = [];
 
-      $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
-
+      $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
       
       $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
-      $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
+      $pdf->save($nome_arquivos['arquivo_relatorio_participante_temporario']);
 
-      $this->ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads);
+      $this->ConsolidaFichaRelatorio($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $nome_arquivos);
 
       $relatorio_csv->insertOne($linha_arquivo);
       
     }
 
-    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($relatorio->ano_evento, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio->tipo_evento);
+    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($user->id_user, $id_inscricao_evento, $relatorio->ano_evento, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio->tipo_evento);
 
-    return $this->getArquivosRelatorios($id_inscricao_evento,$arquivos_zipados_para_view, $locais_arquivos['arquivo_relatorio_csv']);
+    return $this->getArquivosRelatorios($id_coordenador, $id_inscricao_evento, $arquivos_zipados_para_view, $locais_arquivos['arquivo_relatorio_csv']);
   }
 
   public function geraFichaIndividual($id_participante, $locale_relatorio)
@@ -452,7 +570,7 @@ class RelatorioController extends BaseController
       
     }
 
-    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($relatorio_disponivel->ano_evento, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio_disponivel->tipo_evento);
+    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($id_user, $id_inscricao_evento, $relatorio_disponivel->ano_evento, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio_disponivel->tipo_evento);
 
     return $this->getArquivosRelatoriosAnteriores($id_inscricao_evento,$arquivos_zipados_para_view, $locais_arquivos['arquivo_relatorio_csv']);
   }
@@ -461,7 +579,7 @@ class RelatorioController extends BaseController
   public function getRelatorioPos()
   {
 
-    return view('templates.partials.coordenador.relatorio_pos_edital_vigente');
+    return view('templates.partials.coordenador.relatorio_trabalhos_submetidos');
   }
 
   public function geraFichaInscricao($id_participante, $id_inscricao_evento, $locale_participante)

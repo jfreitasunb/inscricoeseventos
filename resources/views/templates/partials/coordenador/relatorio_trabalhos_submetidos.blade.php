@@ -1,8 +1,8 @@
 @extends('templates.default')
 
-@section('relatorio_pos_edital_vigente')
+@section('relatorio_trabalhos_submetidos')
   <form action="" method="POST">
-    <legend>Relatório de inscritos</legend>
+    <legend>Trabalhos Submentidos: {{ $area_trabalho }}</legend>
 	<strong>Total de Inscritos: </strong> {{ $total_inscritos }} <br>
 	{{-- @foreach ($cursos_ofertados as $programa)
 

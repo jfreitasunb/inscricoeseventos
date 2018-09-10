@@ -86,12 +86,12 @@
                             <table class="table">
                                 <tr>
                                     <td class= "{{ Route::currentRouteNamed('relatorio.atual') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-duplicate fa-fw"></span><a href="{{ route('relatorio.atual') }}">Edital Vigente</a>
+                                        <span class="glyphicon glyphicon-duplicate fa-fw"></span><a href="{{ route('relatorio.atual') }}">Trabalhos Submetidos</a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class= "{{ Route::currentRouteNamed('relatorio.anteriores') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-backward fa-fw"></span><a href="{{ route('relatorio.anteriores') }}">Edital Anterior</a>
+                                    <td class= "{{ Route::currentRouteNamed('seleciona.trabalhos.submetidos') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-backward fa-fw"></span><a href="{{ route('seleciona.trabalhos.submetidos') }}">Selecionar Trabalhos</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -135,8 +135,8 @@
                 @yield('nao_finalizadas')
                 @yield('tabela_indicacoes')
                 @yield('altera_recomendantes')
-                @yield('relatorio_pos_edital_vigente')
-                @yield('relatorio_pos_editais_anteriores')
+                @yield('relatorio_trabalhos_submetidos')
+                @yield('seleciona_trabalhos_submentidos')
                 @yield('datatable_users')
                 @yield('ficha_individual')
                 @yield('graficos')

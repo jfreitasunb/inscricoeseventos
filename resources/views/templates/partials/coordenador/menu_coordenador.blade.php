@@ -47,22 +47,12 @@
                             <table class="table">
                                 <tr>
                                     <td class= "{{ Route::currentRouteNamed('relatorio.atual') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-duplicate fa-fw"></span><a href="{{ route('relatorio.atual') }}">Edital Vigente</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class= "{{ Route::currentRouteNamed('relatorio.anteriores') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-backward fa-fw"></span><a href="{{ route('relatorio.anteriores') }}">Edital Anterior</a>
+                                        <span class="glyphicon glyphicon-duplicate fa-fw"></span><a href="{{ route('relatorio.atual') }}">Trabalhos Submetidos</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class= "{{ Route::currentRouteNamed('gera.ficha.individual') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-file fa-fw"></span><a href="{{ route('gera.ficha.individual') }}">Por Candidato</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class= "{{ Route::currentRouteNamed('ver.charts') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-stats fa-fw"></span><a href="{{ route('ver.charts') }}">Gráficos</a>
                                     </td>
                                 </tr>
                             </table>
@@ -84,10 +74,8 @@
                 @yield('configura_inscricao')
                 @yield('edita_area_pos')
                 @yield('nao_finalizadas')
-                @yield('relatorio_pos_edital_vigente')
-                @yield('relatorio_pos_editais_anteriores')
+                @yield('relatorio_trabalhos_submetidos')
                 @yield('ficha_individual')
-                @yield('graficos')
             </div>
         </div>
     </div>
