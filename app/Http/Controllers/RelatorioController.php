@@ -160,7 +160,13 @@ class RelatorioController extends BaseController
 
   public function ConsolidaNomeArquivos($local_arquivos_temporarios, $local_arquivos_definitivos, $dados_candidato_para_relatorio)
   {
+
+    
     $nome_arquivos = [];
+
+    if (!$dados_candidato_para_relatorio['apresentar_trabalho']) {
+      $dados_candidato_para_relatorio['area_trabalho'] = "";
+    }
     
     $nome_arquivos['arquivo_relatorio_participante_temporario'] = $local_arquivos_temporarios.'Inscricao_'.str_replace('\'s','',str_replace(' ', '-', strtr($dados_candidato_para_relatorio['area_trabalho'], $this->normalizeChars))).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['tipo_apresentacao'], $this->normalizeChars)).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_participante'].'.pdf';
 
@@ -607,7 +613,7 @@ class RelatorioController extends BaseController
       $dados_candidato_para_relatorio[$key] = $value;
     }
 
-    $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['ficha_inscricao'], $dados_candidato_para_relatorio);
+    $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['ficha_inscricao'], $dados_candidato_para_relatorio);
     
     $pdf = PDF::loadView('templates.partials.participante.pdf_ficha_inscricao', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
     $pdf->save($nome_arquivos['arquivo_relatorio_participante']);

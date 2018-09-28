@@ -13,8 +13,8 @@ use Carbon\Carbon;
 use InscricoesEventos\Models\User;
 use InscricoesEventos\Models\ConfiguraInscricaoEvento;
 use InscricoesEventos\Models\AreaPosMat;
-use InscricoesEventos\Models\CategoriaParticipante;
-use InscricoesEventos\Models\TipoApresentacao;
+use InscricoesEventos\Models\ConfiguraCategoriaParticipante;
+use InscricoesEventos\Models\ConfiguraTipoApresentacao;
 use InscricoesEventos\Models\TipoParticipacao;
 use InscricoesEventos\Models\TrabalhoSubmetido;
 use InscricoesEventos\Models\ProgramaPos;
@@ -59,11 +59,11 @@ class SubmeterTrabalhoController extends BaseController
 		
 		$locale_participante = Session::get('locale');
 
-		$categoria = new CategoriaParticipante();
+		$categoria = new ConfiguraCategoriaParticipante();
 
 		$categorias = $categoria->pega_nome_categoria($locale_participante);
 
-		$tipo_apresentacao = new TipoApresentacao();
+		$tipo_apresentacao = new ConfiguraTipoApresentacao();
 
 		$tipos_apresentacao = $tipo_apresentacao->pega_tipo_apresentacao($locale_participante);
 
@@ -183,6 +183,7 @@ class SubmeterTrabalhoController extends BaseController
 		}else{
 			$apresentar_trabalho = 0;
 			$id_tipo_apresentacao = null;
+			$status_trabalho = false;
 		}	
 
 		$nova_participacao = new TipoParticipacao();
@@ -190,6 +191,8 @@ class SubmeterTrabalhoController extends BaseController
 		$submeteu_participacao = $nova_participacao->retorna_participacao($id_inscricao_evento, $id_participante);
 
 		if (is_null($submeteu_participacao)) {
+
+
 			$nova_participacao->id_participante = $id_participante;
 			$nova_participacao->id_categoria_participante = $id_categoria_participante;
 			$nova_participacao->id_inscricao_evento = $id_inscricao_evento;
@@ -210,7 +213,6 @@ class SubmeterTrabalhoController extends BaseController
 			$atualiza_participacao['id_tipo_apresentacao'] = $id_tipo_apresentacao;
 
 			$status_participacao = $submeteu_participacao->atualiza_tipo_participacao($id_participacao, $id_inscricao_evento, $id_participante, $atualiza_participacao);
-
 
 		}
 		

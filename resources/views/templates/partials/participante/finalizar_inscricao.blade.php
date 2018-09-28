@@ -20,13 +20,14 @@
         <a href="{{ asset($ficha_inscricao) }}" target="_blank"><i class="fa fa-file-pdf-o fa-4x"></i>{{ $nome_candidato }}</a>
       </div>
   </fieldset>
-
-  <fieldset class="scheduler-border">
-    <legend class="scheduler-border">{{trans('tela_finalizar_inscricao.abstract_submetido')}}</legend>
-      <div class="row">
-        <a href="{{ asset($ficha_abstract) }}" target="_blank"><i class="fa fa-file-pdf-o fa-4x"></i>{{ $nome_candidato }}</a>
-      </div>
-  </fieldset>
+  @if (!$sem_abstract)
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">{{trans('tela_finalizar_inscricao.abstract_submetido')}}</legend>
+        <div class="row">
+          <a href="{{ asset($ficha_abstract) }}" target="_blank"><i class="fa fa-file-pdf-o fa-4x"></i>{{ $nome_candidato }}</a>
+        </div>
+    </fieldset>
+  @endif
   {!! Form::hidden('ficha_inscricao', $ficha_inscricao, []) !!}
   {!! Form::hidden('ficha_abstract', $ficha_abstract, []) !!}
       <div class="form-group">

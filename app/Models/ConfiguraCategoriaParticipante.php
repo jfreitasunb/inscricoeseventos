@@ -42,6 +42,6 @@ class ConfiguraCategoriaParticipante extends FuncoesModels
     {
         $nome_coluna = $this->define_nome_coluna_categoria($locale);
 
-        return $this->select('id', 'categoria_participante.'.$nome_coluna.' AS participante_categoria')->orderBy('id')->get();
+        return $this->select('id', 'configura_categoria_participante.'.$nome_coluna.' AS participante_categoria')->orderBy('id')->get();
     }
 }

@@ -20,6 +20,7 @@ use InscricoesEventos\Models\Estado;
 use InscricoesEventos\Models\FinalizaInscricao;
 use InscricoesEventos\Models\Paises;
 use InscricoesEventos\Models\Cidade;
+use InscricoesEventos\Models\TipoParticipacao;
 use InscricoesEventos\Notifications\NotificaCandidato;
 use Illuminate\Http\Request;
 use InscricoesEventos\Mail\EmailVerification;
@@ -76,6 +77,10 @@ class FinalizarInscricaoController extends BaseController
 			
 			$nome_candidato = User::find($id_participante)->nome;
 
+			$tipo_participacao = new TipoParticipacao();
+
+			$apresenta_trabalho = $tipo_participacao->retorna_participacao($id_inscricao_evento, $id_participante)->apresentar_trabalho;
+
 			if (is_null($dados_pessoais_candidato) or !$dados_pessoais_candidato->atualizado) {
 				
 				notify()->flash(trans('tela_finalizar_inscricao.falta_dados_pessoais'),'warning');
@@ -86,12 +91,17 @@ class FinalizarInscricaoController extends BaseController
 			
 			$novo_relatorio = new RelatorioController;
 
-			$ficha_abstract = $novo_relatorio->geraAbstract($id_participante, $id_inscricao_evento);
-
-
+			if ($apresenta_trabalho) {
+				$ficha_abstract = $novo_relatorio->geraAbstract($id_participante, $id_inscricao_evento);
+				$sem_abstract = false;
+			}else{
+				$ficha_abstract = "";
+				$sem_abstract = true;
+			}
+			
 			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_participante, $id_inscricao_evento, $locale_participante);
 
-			return view('templates.partials.participante.finalizar_inscricao',compact('ficha_abstract', 'ficha_inscricao','nome_candidato'));
+			return view('templates.partials.participante.finalizar_inscricao',compact('sem_abstract', 'ficha_abstract', 'ficha_inscricao','nome_candidato'));
 
 		}else{
 			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
