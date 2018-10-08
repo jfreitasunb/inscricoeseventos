@@ -148,7 +148,7 @@ class SubmeterTrabalhoController extends BaseController
 
 			$abstract_trabalho = Purifier::clean(trim($request->abstract_trabalho));
 
-			$apresentar_trabalho = 1;
+			$apresentar_trabalho = true;
 
 			$submeter_trabalho = new TrabalhoSubmetido();
 
@@ -181,7 +181,7 @@ class SubmeterTrabalhoController extends BaseController
 			}
 
 		}else{
-			$apresentar_trabalho = 0;
+			$apresentar_trabalho = false;
 			$id_tipo_apresentacao = null;
 			$status_trabalho = false;
 		}	
