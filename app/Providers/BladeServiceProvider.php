@@ -70,7 +70,7 @@ class BladeServiceProvider extends ServiceProvider
         Blade::if('impersonating_candidato', function () {
 
             if (session()->has('impersonate') || session()->has('impersonate_user_type')) {
-                if (session()->get('impersonate_user_type') === 'candidato') {
+                if (session()->get('impersonate_user_type') === 'participante') {
                     return true;
                 }else{
                     return false;
