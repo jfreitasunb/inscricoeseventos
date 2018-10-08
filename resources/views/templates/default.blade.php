@@ -44,11 +44,8 @@
           @endimpersonating_recomendante
           @impersonating_candidato
             @yield('dados_pessoais')
-            @yield('dados_academicos')
-            @yield('escolha_monitoria')
-            @yield('motivacao_documentos')
+            @yield('submete_trabalho')
             @yield('finaliza_inscricao')
-            @yield('status_cartas')
           @endimpersonating_candidato
         @endadmin
       @else
