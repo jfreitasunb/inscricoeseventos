@@ -286,7 +286,7 @@ class RelatorioController extends BaseController
 
       $area_trabalho = "Todas as Áreas";
 
-      $total_inscritos = array_sum($contagem);
+      $tota_trabalhos_submetidos = array_sum($contagem);
     }else{
       
       $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
@@ -300,7 +300,7 @@ class RelatorioController extends BaseController
         $area_trabalho = $area_pos->pega_area_pos_mat($area, $locale_relatorio);
       }
 
-      $total_inscritos = array_sum($contagem);
+      $tota_trabalhos_submetidos = array_sum($contagem);
     }
 
     $arquivos_zipados_para_view = "";
@@ -311,9 +311,9 @@ class RelatorioController extends BaseController
 
     $monitoria = "";
 
-    // return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('monitoria','relatorio_disponivel', 'cursos_ofertados', 'total_inscritos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
+    // return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('monitoria','relatorio_disponivel', 'cursos_ofertados', 'tota_trabalhos_submetidos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
     
-     return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('area_trabalho', 'monitoria','relatorio_disponivel', 'cursos_ofertados', 'total_inscritos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
+     return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('area_trabalho', 'monitoria','relatorio_disponivel', 'cursos_ofertados', 'tota_trabalhos_submetidos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
   }
 
    public function getListaRelatoriosAnteriores()
@@ -369,7 +369,7 @@ class RelatorioController extends BaseController
 
       $area_trabalho = "Todas as Áreas";
 
-      $total_inscritos = array_sum($contagem);
+      $tota_trabalhos_submetidos = array_sum($contagem);
     }else{
       
       $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
@@ -383,11 +383,11 @@ class RelatorioController extends BaseController
         $area_trabalho = $area_pos->pega_area_pos_mat($area, $locale_relatorio);
       }
 
-      $total_inscritos = array_sum($contagem);
+      $tota_trabalhos_submetidos = array_sum($contagem);
     }
 
     
-    // $total_inscritos = 0;
+    // $tota_trabalhos_submetidos = 0;
     // $nome_programas = implode('/', $programa_para_inscricao);
     $nome_programas = "teste";
 
@@ -404,7 +404,7 @@ class RelatorioController extends BaseController
 
     $local_arquivos['arquivo_zip'] = str_replace($endereco_zip_mudar, 'storage/', $local_arquivos['arquivo_zip']);
 
-    return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('area_trabalho','monitoria','contagem', 'total_inscritos', 'cursos_ofertados', 'relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv','local_arquivos'));
+    return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('area_trabalho','monitoria','contagem', 'tota_trabalhos_submetidos', 'cursos_ofertados', 'relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv','local_arquivos'));
 
   }
 
