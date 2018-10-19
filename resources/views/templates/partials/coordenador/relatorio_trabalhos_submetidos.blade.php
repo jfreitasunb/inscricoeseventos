@@ -2,8 +2,8 @@
 
 @section('relatorio_trabalhos_submetidos')
   <form action="" method="POST">
-    <legend>Trabalhos Submetidos: {{ $area_trabalho }}</legend>
-	<strong>Total de Trabalhos Submetidos: </strong> {{ $total_inscritos }} <br>
+    <legend>Trabalhos Submetidos: {{ $area_trabalho }} {{ $total_trabalhos_submetidos }}</legend>
+	<strong>Total de Inscritos no Evento:</strong> {{ $total_inscricoes_recebidas }}<br>
     	<div class="table-responsive">
 		    <table class="table table-striped">
 			  	<thead>

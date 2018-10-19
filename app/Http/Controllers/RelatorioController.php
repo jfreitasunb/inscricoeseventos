@@ -267,6 +267,10 @@ class RelatorioController extends BaseController
 
     $id_inscricao_evento = $relatorio_disponivel->id_inscricao_evento;
 
+    $finalizada = new FinalizaInscricao();
+
+    $total_inscricoes_recebidas = $finalizada->total_inscritos($id_inscricao_evento);
+
     $coordenador = new TipoCoordenador();
 
     $nivel_coordenador = $coordenador->retorna_dados_coordenador($id_coordenador, $id_inscricao_evento);
@@ -286,7 +290,7 @@ class RelatorioController extends BaseController
 
       $area_trabalho = "Todas as Áreas";
 
-      $tota_trabalhos_submetidos = array_sum($contagem);
+      $total_trabalhos_submetidos = array_sum($contagem);
     }else{
       
       $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
@@ -300,7 +304,7 @@ class RelatorioController extends BaseController
         $area_trabalho = $area_pos->pega_area_pos_mat($area, $locale_relatorio);
       }
 
-      $tota_trabalhos_submetidos = array_sum($contagem);
+      $total_trabalhos_submetidos = array_sum($contagem);
     }
 
     $arquivos_zipados_para_view = "";
@@ -311,9 +315,9 @@ class RelatorioController extends BaseController
 
     $monitoria = "";
 
-    // return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('monitoria','relatorio_disponivel', 'cursos_ofertados', 'tota_trabalhos_submetidos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
+    // return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('monitoria','relatorio_disponivel', 'cursos_ofertados', 'total_trabalhos_submetidos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
     
-     return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('area_trabalho', 'monitoria','relatorio_disponivel', 'cursos_ofertados', 'tota_trabalhos_submetidos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
+     return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('area_trabalho', 'monitoria','relatorio_disponivel', 'cursos_ofertados', 'total_trabalhos_submetidos', 'total_inscricoes_recebidas', 'arquivos_zipados_para_view','relatorio_csv'));
   }
 
    public function getListaRelatoriosAnteriores()
@@ -346,6 +350,10 @@ class RelatorioController extends BaseController
     
     $id_inscricao_evento = $relatorio_disponivel->id_inscricao_evento;
 
+    $finalizada = new FinalizaInscricao();
+
+    $total_inscricoes_recebidas = $finalizada->total_inscritos($id_inscricao_evento);
+
     $programas_disponiveis = explode("_", $relatorio->retorna_inscricao_ativa()->tipo_evento);
 
     $id_coordenador = $id_user;
@@ -369,7 +377,7 @@ class RelatorioController extends BaseController
 
       $area_trabalho = "Todas as Áreas";
 
-      $tota_trabalhos_submetidos = array_sum($contagem);
+      $total_trabalhos_submetidos = array_sum($contagem);
     }else{
       
       $areas_com_trabalho = $trabalho_submetido->retorna_area_com_trabalho_submentido($coordenador_area, $id_inscricao_evento);
@@ -383,11 +391,11 @@ class RelatorioController extends BaseController
         $area_trabalho = $area_pos->pega_area_pos_mat($area, $locale_relatorio);
       }
 
-      $tota_trabalhos_submetidos = array_sum($contagem);
+      $total_trabalhos_submetidos = array_sum($contagem);
     }
 
     
-    // $tota_trabalhos_submetidos = 0;
+    // $total_trabalhos_submetidos = 0;
     // $nome_programas = implode('/', $programa_para_inscricao);
     $nome_programas = "teste";
 
@@ -404,7 +412,7 @@ class RelatorioController extends BaseController
 
     $local_arquivos['arquivo_zip'] = str_replace($endereco_zip_mudar, 'storage/', $local_arquivos['arquivo_zip']);
 
-    return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('area_trabalho','monitoria','contagem', 'tota_trabalhos_submetidos', 'cursos_ofertados', 'relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv','local_arquivos'));
+    return view('templates.partials.coordenador.relatorio_trabalhos_submetidos')->with(compact('area_trabalho','monitoria','total_inscricoes_recebidas', 'total_trabalhos_submetidos', 'cursos_ofertados', 'relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv','local_arquivos'));
 
   }
 
