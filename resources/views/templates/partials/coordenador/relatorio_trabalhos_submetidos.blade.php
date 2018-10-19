@@ -3,11 +3,7 @@
 @section('relatorio_trabalhos_submetidos')
   <form action="" method="POST">
     <legend>Trabalhos Submentidos: {{ $area_trabalho }}</legend>
-	<strong>Total de Inscritos: </strong> {{ $total_inscritos }} <br>
-	{{-- @foreach ($cursos_ofertados as $programa)
-
-		Total de inscritos para: <strong> {{ $programa->nome_ptbr }}  {{ $contagem[$programa->id_curso_verao] }}</strong><br>
-	@endforeach --}}
+	<strong>Total de Trabalhos Submetidos: </strong> {{ $total_inscritos }} <br>
     	<div class="table-responsive">
 		    <table class="table table-striped">
 			  	<thead>
