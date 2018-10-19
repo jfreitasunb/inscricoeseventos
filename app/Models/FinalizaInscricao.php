@@ -44,6 +44,13 @@ class FinalizaInscricao extends FuncoesModels
         }
     }
 
+    public function total_inscritos($id_inscricao_evento)
+    {   
+        return $this->where('id_inscricao_evento', $id_inscricao_evento)->where('finalizada', true)->get()->count();
+        
+    }
+
+
     public function retorna_total_inscritos($id_inscricao_evento, $nivel_coordenador)
     {   
         if ($nivel_coordenador->coordenador_geral) {
