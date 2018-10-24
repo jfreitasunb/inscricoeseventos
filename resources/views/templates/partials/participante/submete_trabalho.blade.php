@@ -21,8 +21,8 @@
 <fieldset class="scheduler-border">
   <legend class="scheduler-border">{{trans('tela_submeter_trabalho.apresentar_trabalho')}}</legend>
   <div class="col-md-6">
-      <label class="radio-inline"><input type="radio" onclick="javascript:yesnoCheck();" name="apresentar_trabalho" id="yesCheck">{{ trans('tela_submeter_trabalho.sim') }}</label>
-      <label class="radio-inline"><input type="radio" onclick="javascript:yesnoCheck();" name="apresentar_trabalho" id="noCheck">{{ trans('tela_submeter_trabalho.nao') }}</label>
+      <label class="radio-inline"><input type="radio" name="apresentar_trabalho" value="on" onclick="javascript:yesnoCheck();" id="yesCheck">{{ trans('tela_submeter_trabalho.sim') }}</label>
+      <label class="radio-inline"><input type="radio" name="apresentar_trabalho" value="off" onclick="javascript:yesnoCheck();" id="noCheck">{{ trans('tela_submeter_trabalho.nao') }}</label>
   </div>
 </fieldset>
 
