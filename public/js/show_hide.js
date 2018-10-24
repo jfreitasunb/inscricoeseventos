@@ -5,7 +5,6 @@ function yesnoCheck() {
     }
 
     if (document.getElementById('noCheck').checked) {
-        document.getElementById('ifNo').style.display = 'block';
         document.getElementById('ifYes').style.display = 'none';
     }
 
