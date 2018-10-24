@@ -110,8 +110,7 @@ class SubmeterTrabalhoController extends BaseController
 	}
 
 	public function postSubmeterTrabalho(Request $request)
-	{
-
+	{	
 		$this->validate($request, [
 			'id_categoria_participante' => 'required',
 			'apresentar_trabalho' => 'required',
