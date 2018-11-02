@@ -9,6 +9,7 @@ return [
 	'tela_submeter_trabalho' => 'Inscrição',
     'categoria' => 'Categoria',
 	'apresentar_trabalho' => 'Deseja apresentar trabalho?',
+    'participante_convidado' => 'Você foi convidado para o evento?',
     'sim' => 'Sim',
     'nao' => 'Não',
     'tipo_apresentacao' => 'Em que formato gostaria de apresentar seu trabalho?',

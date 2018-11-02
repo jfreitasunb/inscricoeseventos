@@ -113,6 +113,7 @@ class SubmeterTrabalhoController extends BaseController
 	{	
 		$this->validate($request, [
 			'id_categoria_participante' => 'required',
+			'participante_convidado' => 'required',
 			'apresentar_trabalho' => 'required',
 			'id_tipo_apresentacao' => 'required_if:apresentar_trabalho,==,on',
 			'titulo_trabalho' => 'required_if:apresentar_trabalho,==,on',
@@ -132,6 +133,8 @@ class SubmeterTrabalhoController extends BaseController
 		$id_participante = $user->id_user;
 
 		$id_categoria_participante = (int)$request->id_categoria_participante;
+
+		$participante_convidado = (int)$request->participante_convidado;
 
 		$apresentar_trabalho = $request->apresentar_trabalho;
 		
@@ -197,6 +200,7 @@ class SubmeterTrabalhoController extends BaseController
 			$nova_participacao->id_inscricao_evento = $id_inscricao_evento;
 			$nova_participacao->apresentar_trabalho = $apresentar_trabalho;
 			$nova_participacao->id_tipo_apresentacao = $id_tipo_apresentacao;
+			$nova_participacao->participante_convidado = $participante_convidado;
 
 			$status_participacao = $nova_participacao->save();
 		}else{
@@ -210,6 +214,8 @@ class SubmeterTrabalhoController extends BaseController
 			$atualiza_participacao['apresentar_trabalho'] = $apresentar_trabalho;
 
 			$atualiza_participacao['id_tipo_apresentacao'] = $id_tipo_apresentacao;
+
+			$atualiza_participacao['participante_convidado'] = $participante_convidado;
 
 			$status_participacao = $submeteu_participacao->atualiza_tipo_participacao($id_participacao, $id_inscricao_evento, $id_participante, $atualiza_participacao);
 

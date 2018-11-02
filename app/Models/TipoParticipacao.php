@@ -26,6 +26,7 @@ class TipoParticipacao extends FuncoesModels
         'id_categoria_participante',
         'id_inscricao_evento',
         'apresentar_trabalho',
+        'participante_convidado',
         'id_tipo_apresentacao',
     ];
 
