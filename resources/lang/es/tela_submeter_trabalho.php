@@ -7,13 +7,14 @@
 
 return [
 	'tela_submeter_trabalho' => 'Registro',
+    'dados_participacao' => 'Datos de participación',
     'categoria' => 'Categoría',
-    'apresentar_trabalho' => 'Deseja apresentar trabalho?',
+    'apresentar_trabalho' => '¿Deseas presentar tu trabajo?',
     'participante_convidado' => 'Você foi convidado para o evento?',
     'sim' => 'Sí',
     'nao' => 'No',
-    'tipo_apresentacao' => 'Em que formato gostaria de apresentar seu trabalho?',
-    'area_trabalho' => 'Submissão do trabalho',
+    'tipo_apresentacao' => '¿En qué forma le gustaría presentarlo (por ejemplo: conferencia, póster, mini curso)?',
+    'area_trabalho' => 'Sumisión de trabajo',
     'titulo_apresentacao' => 'Título',
     'autores' => 'Autores (separados por punto y coma)',
     'abstract' => 'Abstract Form',
