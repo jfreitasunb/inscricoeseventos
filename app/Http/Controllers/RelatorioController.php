@@ -61,7 +61,7 @@ class RelatorioController extends BaseController
   public function ConsolidaCabecalhoCSV()
   {
 
-    return $cabecalho = ["Nome","E-mail","Área do Trabalho", "Título do Trabalho", "Tipo de Apresentação"];
+    return $cabecalho = ["Nome","E-mail", "Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
   }
 
   public function ConsolidaLocaisArquivos($evento)
@@ -464,13 +464,14 @@ class RelatorioController extends BaseController
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
-      $linha_arquivo['tipo_apresentacao'] = $dados_candidato_para_relatorio['tipo_apresentacao'];
+      $linha_arquivo['categoria_participante'] = $dados_candidato_para_relatorio['categoria_participante'];
 
       $linha_arquivo['area_trabalho'] = $dados_candidato_para_relatorio['area_trabalho'];
 
+      $linha_arquivo['tipo_apresentacao'] = $dados_candidato_para_relatorio['tipo_apresentacao'];
+
       $linha_arquivo['titulo_trabalho'] = $dados_candidato_para_relatorio['titulo_trabalho'];
 
-      $linha_arquivo['categoria_participante'] = $dados_candidato_para_relatorio['categoria_participante'];
       
       $nome_arquivos = [];
 
