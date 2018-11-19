@@ -441,8 +441,6 @@ class RelatorioController extends BaseController
     $finaliza = new FinalizaInscricao();
 
     $usuarios_finalizados = $finaliza->retorna_usuarios_relatorios($id_inscricao_evento, $nivel_coordenador);
-
-    // dd($usuarios_finalizados);
     
     foreach ($usuarios_finalizados as $candidato) {
 
@@ -465,6 +463,14 @@ class RelatorioController extends BaseController
       foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
         $dados_candidato_para_relatorio[$key] = $value;
       }
+
+      $linha_arquivo['tipo_apresentacao'] = $dados_candidato_para_relatorio['tipo_apresentacao'];
+
+      $linha_arquivo['area_trabalho'] = $dados_candidato_para_relatorio['area_trabalho'];
+
+      $linha_arquivo['titulo_trabalho'] = $dados_candidato_para_relatorio['titulo_trabalho'];
+
+      $linha_arquivo['categoria_participante'] = $dados_candidato_para_relatorio['categoria_participante'];
       
       $nome_arquivos = [];
 
