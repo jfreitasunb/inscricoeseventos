@@ -25,7 +25,7 @@
 			      		 	<a target="_blank" href="{{ asset($local_arquivos['arquivo_zip'].$zip_relatorio) }}" >{{$zip_relatorio}}</a>
 			      		@endforeach
 			      		@endif</td>
-			      	<td>{{-- @if($monitoria == $relatorio_disponivel['id_inscricao_evento'] || isset($local_arquivos)) <a target="_blank" href="{{asset($local_arquivos['local_relatorios'].$relatorio_csv)}}">{{$relatorio_csv}}</a> @endif --}}</td>
+			      	<td>@if($monitoria == $relatorio_disponivel['id_inscricao_evento'] || isset($local_arquivos)) <a target="_blank" href="{{asset($local_arquivos['local_relatorios'].$relatorio_csv)}}">{{$relatorio_csv}}</a> @endif</td>
 			    	</tr>
 			  	</tbody>
 			</table>
