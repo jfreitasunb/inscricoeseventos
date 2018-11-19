@@ -61,7 +61,7 @@ class RelatorioController extends BaseController
   public function ConsolidaCabecalhoCSV()
   {
 
-    return $cabecalho = ["Nome","E-mail","Programa Pretendido"];
+    return $cabecalho = ["Nome","E-mail","Área do Trabalho", "Título do Trabalho", "Tipo de Apresentação"];
   }
 
   public function ConsolidaLocaisArquivos($evento)
@@ -478,6 +478,66 @@ class RelatorioController extends BaseController
     }
 
     $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($user->id_user, $id_inscricao_evento, $relatorio->ano_evento, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio->tipo_evento);
+
+    return $this->getArquivosRelatorios($id_coordenador, $id_inscricao_evento, $arquivos_zipados_para_view, $locais_arquivos['arquivo_relatorio_csv']);
+  }
+
+  public function geraRelatorioCSV($id_inscricao_evento)
+  {
+    $user = $this->SetUser();
+    
+    $id_coordenador = $user->id_user;
+
+    $coordenador = new TipoCoordenador();
+
+    $nivel_coordenador = $coordenador->retorna_dados_coordenador($id_coordenador, $id_inscricao_evento);
+
+    $locale_relatorio = 'pt-br';
+
+    $relatorio = ConfiguraInscricaoEvento::find($id_inscricao_evento);
+
+    $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio->ano_evento);
+
+    $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
+
+    $relatorio_csv->insertOne($this->ConsolidaCabecalhoCSV());
+
+
+    $finaliza = new FinalizaInscricao();
+
+    $usuarios_finalizados = $finaliza->retorna_usuarios_relatorios($id_inscricao_evento, $nivel_coordenador);
+    
+    foreach ($usuarios_finalizados as $candidato) {
+
+      $linha_arquivo = [];
+
+      $dados_candidato_para_relatorio = [];
+
+      $dados_candidato_para_relatorio['ano_evento'] = $relatorio->ano_evento;
+
+      $dados_candidato_para_relatorio['id_participante'] = $candidato->id_participante;
+
+      foreach ($this->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_participante']) as $key => $value) {
+         $dados_candidato_para_relatorio[$key] = $value;
+      }
+
+      $linha_arquivo['nome'] = $dados_candidato_para_relatorio['nome'];
+
+      $linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_participante'])->email;
+
+      foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
+        $dados_candidato_para_relatorio[$key] = $value;
+      }
+      
+      $nome_arquivos = [];
+
+      $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);    
+
+      $relatorio_csv->insertOne($linha_arquivo);
+      
+    }
+
+    $arquivos_zipados_para_view = '';
 
     return $this->getArquivosRelatorios($id_coordenador, $id_inscricao_evento, $arquivos_zipados_para_view, $locais_arquivos['arquivo_relatorio_csv']);
   }
