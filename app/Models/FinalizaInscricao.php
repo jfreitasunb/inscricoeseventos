@@ -38,9 +38,9 @@ class FinalizaInscricao extends FuncoesModels
     public function retorna_usuarios_relatorios($id_inscricao_evento, $nivel_coordenador)
     {
         if ($nivel_coordenador->coordenador_geral) {
-            return $this->where('finaliza_inscricao.id_inscricao_evento', $id_inscricao_evento)->join('tipo_participacao','tipo_participacao.id_inscricao_evento', 'finaliza_inscricao.id_inscricao_evento')->where('tipo_participacao.apresentar_trabalho', true)->where('finaliza_inscricao.finalizada', true)->get();
+            return $this->where('finaliza_inscricao.id_inscricao_evento', $id_inscricao_evento)->join('tipo_participacao','tipo_participacao.id_inscricao_evento', 'finaliza_inscricao.id_inscricao_evento')->where('tipo_participacao.apresentar_trabalho', true)->where('finaliza_inscricao.finalizada', true)->get()->unique('id_participante');
         }else{
-            return $this->where('finaliza_inscricao.id_inscricao_evento', $id_inscricao_evento)->where('finaliza_inscricao.finalizada', true)->join('tipo_participacao','tipo_participacao.id_inscricao_evento', 'finaliza_inscricao.id_inscricao_evento')->where('tipo_participacao.apresentar_trabalho', true)->join('trabalho_submetido', 'trabalho_submetido.id_inscricao_evento', 'finaliza_inscricao.id_inscricao_evento')->where('trabalho_submetido.id_area_trabalho', $nivel_coordenador->coordenador_area)->get();
+            return $this->where('finaliza_inscricao.id_inscricao_evento', $id_inscricao_evento)->where('finaliza_inscricao.finalizada', true)->join('tipo_participacao','tipo_participacao.id_inscricao_evento', 'finaliza_inscricao.id_inscricao_evento')->where('tipo_participacao.apresentar_trabalho', true)->join('trabalho_submetido', 'trabalho_submetido.id_inscricao_evento', 'finaliza_inscricao.id_inscricao_evento')->where('trabalho_submetido.id_area_trabalho', $nivel_coordenador->coordenador_area)->get()->unique('id_participante');
         }
     }
 
