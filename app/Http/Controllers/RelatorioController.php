@@ -61,7 +61,7 @@ class RelatorioController extends BaseController
   public function ConsolidaCabecalhoCSV($escolha_cabecalho)
   {
 
-    switch (escolha_cabecalho) {
+    switch ($escolha_cabecalho) {
       case 'cracha':
         return $cabecalho = ["Nome","E-mail", "Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
         break;
@@ -452,8 +452,9 @@ class RelatorioController extends BaseController
 
     $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
 
-    $relatorio_csv->insertOne($this->ConsolidaCabecalhoCSV());
+    $tipo_cabecalho = "lista_trabalhos_submetidos";
 
+    $relatorio_csv->insertOne($this->ConsolidaCabecalhoCSV($tipo_cabecalho));
 
     $finaliza = new FinalizaInscricao();
 
