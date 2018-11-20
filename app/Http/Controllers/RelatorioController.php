@@ -58,6 +58,26 @@ class RelatorioController extends BaseController
 
   }
 
+  public function ConsolidaCamposCSV($escolha_cabecalho)
+  {
+    switch ($escolha_cabecalho) {
+      case 'cracha':
+        return $campos = ["nome", "instituicao", "nome_cracha"];
+        break;
+
+      case 'lista_trabalhos_submetidos':
+        return $campos = ["nome","email", "categoria_participante", "area_trabalho", "tipo_apresentacao",  "titulo_trabalho"];
+        break;
+
+      case 'lista_trabalhos_aceitos':
+        return $campos = ["nome","email", "categoria_participante", "area_trabalho", "tipo_apresentacao",  "titulo_trabalho"];
+        break;
+      
+      default:
+        return $campos = ["nome","email", "categoria_participante", "instituicao", "nome_cracha"];
+        break;
+    }
+  }
   public function ConsolidaCabecalhoCSV($escolha_cabecalho)
   {
 
