@@ -58,10 +58,27 @@ class RelatorioController extends BaseController
 
   }
 
-  public function ConsolidaCabecalhoCSV()
+  public function ConsolidaCabecalhoCSV($escolha_cabecalho)
   {
 
-    return $cabecalho = ["Nome","E-mail", "Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
+    switch (escolha_cabecalho) {
+      case 'cracha':
+        return $cabecalho = ["Nome","E-mail", "Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
+        break;
+
+      case 'lista_trabalhos_submetidos':
+        return $cabecalho = ["Nome","E-mail", "Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
+        break;
+
+      case 'lista_trabalhos_aceitos':
+        return $cabecalho = ["Nome","E-mail", "Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
+        break;
+      
+      default:
+        return $cabecalho = ["Nome","E-mail", "Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
+        break;
+    }
+    
   }
 
   public function ConsolidaLocaisArquivos($evento)
