@@ -33,7 +33,15 @@ class RelatorioEventoController extends CoordenadorController
 
 	public function getGeraArquivosDiversos()
 	{
-		return view('templates.partials.coordenador.relatorio_arquivos_diversos');
+		$tipo_de_arquivo_disponivel['cracha'] = "Arquivos para gerar os crachás";
+		
+		$tipo_de_arquivo_disponivel['lista_participante'] = "Arquivos com a lista de todos os participantes inscritos";
+		
+		$tipo_de_arquivo_disponivel['lista_trabalhos_submetidos'] = "Arquivos com a lista de trablhos submetidos";
+
+		$tipo_de_arquivo_disponivel['lista_trabalhos_aceitos'] = "Arquivos com a lista dos trablhos aceitos";
+
+		return view('templates.partials.coordenador.relatorio_arquivos_diversos')->with(compact('tipo_de_arquivo_disponivel'));
 	}
 
 	public function postGeraArquivosDiversos(Request $request)
