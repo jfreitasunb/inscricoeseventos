@@ -37,4 +37,15 @@ class TrabalhoSelecionado extends FuncoesModels
     {
         return $this->where('id_coordenador', $id_coordenador)->where('id_inscricao_evento', $id_inscricao_evento)->delete();
     }
+
+    public function existe_trabalho_selecionado($id_inscricao_evento)
+    {
+        $trabalhos_selecionados = $this->where('id_inscricao_evento', $id_inscricao_evento)->get();
+
+        if (sizeof($trabalhos_selecionados) > 0) {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
 }
