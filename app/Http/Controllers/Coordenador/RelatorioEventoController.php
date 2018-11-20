@@ -33,6 +33,11 @@ class RelatorioEventoController extends CoordenadorController
 
 	public function getGeraArquivosDiversos()
 	{
-		return view('templates.partials.coordenador.relatorio_pos');
+		return view('templates.partials.coordenador.relatorio_arquivos_diversos');
+	}
+
+	public function postGeraArquivosDiversos(Request $request)
+	{
+		dd($request);
 	}
 }
