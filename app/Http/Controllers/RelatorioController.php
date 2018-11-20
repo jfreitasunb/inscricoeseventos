@@ -94,6 +94,12 @@ class RelatorioController extends BaseController
     
     $locais_arquivos['arquivo_relatorio_csv'] = 'Inscricoes_Evento_'.$evento.'.csv';
 
+    $locais_arquivos['arquivo_gera_cracha_csv'] = 'Crachas_Evento_'.$evento.'.csv';
+
+    $locais_arquivos['arquivo_lista_trabalhos_submetidos_csv'] = 'Trabalhos_Submetidos_Evento_'.$evento.'.csv';
+
+    $locais_arquivos['arquivo_lista_trabalhos_aceitos_csv'] = 'Trabalhos_Aceitos_Evento_'.$evento.'.csv';
+
     $locais_arquivos['arquivo_zip'] = $locais_arquivos['local_relatorios'].'zip/';
 
     File::isDirectory($locais_arquivos['arquivos_temporarios']) or File::makeDirectory($locais_arquivos['arquivos_temporarios'],0775,true);
