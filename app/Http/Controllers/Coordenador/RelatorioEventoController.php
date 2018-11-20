@@ -46,6 +46,27 @@ class RelatorioEventoController extends CoordenadorController
 
 	public function postGeraArquivosDiversos(Request $request)
 	{
-		dd($request);
+		
+		$this->validate($request, [
+			'arquivos_para_gerar' => 'required',
+		]);
+
+		$user = $this->SetUser();
+	    
+	    $id_coordenador = $user->id_user;
+
+	    $locale_relatorio = 'pt-br';
+
+	    $relatorio = new ConfiguraInscricaoEvento();
+
+	    $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+	    $id_inscricao_evento = $relatorio_disponivel->id_inscricao_evento;
+
+	    $finalizada = new FinalizaInscricao();
+
+	    $total_inscricoes_recebidas = $finalizada->total_inscritos($id_inscricao_evento);
+
+
 	}
 }
