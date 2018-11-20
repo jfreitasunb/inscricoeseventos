@@ -46,6 +46,11 @@
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
+                                    <td class= "{{ Route::currentRouteNamed('relatorio.arquivos.diversos') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-duplicate fa-fw"></span><a href="{{ route('relatorio.arquivos.diversos') }}">Arquivos Diversos</a>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class= "{{ Route::currentRouteNamed('relatorio.atual') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-duplicate fa-fw"></span><a href="{{ route('relatorio.atual') }}">Trabalhos Submetidos</a>
                                     </td>
@@ -74,6 +79,7 @@
                 @yield('configura_inscricao')
                 @yield('edita_area_pos')
                 @yield('nao_finalizadas')
+                @yield('arquivos_diversos')
                 @yield('relatorio_trabalhos_submetidos')
                 @yield('ficha_individual')
             </div>
