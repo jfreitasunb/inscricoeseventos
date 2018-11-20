@@ -75,7 +75,7 @@ class RelatorioController extends BaseController
         break;
       
       default:
-        return $cabecalho = ["Nome","E-mail", "Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
+        return $cabecalho = ["Nome","E-mail", "Categoria Participante", "Instituição", "Nome para Crachá"];
         break;
     }
     
