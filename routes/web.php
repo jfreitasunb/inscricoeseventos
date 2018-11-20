@@ -118,6 +118,10 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::post('editar/formacao', '\InscricoesEventos\Http\Controllers\Coordenador\EditarFormacaoController@postEditarFormacao');
 
+	Route::get('relatorio/arquivos/diversos', '\InscricoesEventos\Http\Controllers\Coordenador\RelatorioEventoController@getGeraArquivosDiversos')->name('relatorio.arquivos.diversos');
+
+	Route::post('relatorio/arquivos/diversos', '\InscricoesEventos\Http\Controllers\Coordenador\RelatorioEventoController@postGeraArquivosDiversos')->name('relatorio.arquivos.diversos');
+
 	Route::get('relatorio/{id_monitoria}', '\InscricoesEventos\Http\Controllers\RelatorioController@geraRelatorio')->name('gera.relatorio');
 
 	Route::get('relatorio', '\InscricoesEventos\Http\Controllers\RelatorioController@getListaRelatorios')->name('relatorio.atual');
