@@ -67,11 +67,17 @@ class RelatorioEventoController extends CoordenadorController
 			'arquivos_para_gerar' => 'required',
 		]);
 
+		$arquivos_para_gerar = $request->arquivos_para_gerar;
+
 		$user = $this->SetUser();
 	    
 	    $id_coordenador = $user->id_user;
 
 	    $locale_relatorio = 'pt-br';
+
+	    $coordenador = new TipoCoordenador();
+
+    	$nivel_coordenador = $coordenador->retorna_dados_coordenador($id_coordenador, $id_inscricao_evento);
 
 	    $relatorio = new ConfiguraInscricaoEvento();
 
@@ -79,9 +85,47 @@ class RelatorioEventoController extends CoordenadorController
 
 	    $id_inscricao_evento = $relatorio_disponivel->id_inscricao_evento;
 
+	    $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio->ano_evento);
+
 	    $finalizada = new FinalizaInscricao();
 
-	    $total_inscricoes_recebidas = $finalizada->total_inscritos($id_inscricao_evento);
+	    $finaliza = new FinalizaInscricao();
+
+	    $usuarios_finalizados = $finaliza->retorna_usuarios_relatorios($id_inscricao_evento, $nivel_coordenador);
+	    
+	    foreach ($usuarios_finalizados as $candidato) {
+
+			$linha_arquivo = [];
+
+			$dados_candidato_para_relatorio = [];
+
+			$dados_candidato_para_relatorio['ano_evento'] = $relatorio->ano_evento;
+
+			$dados_candidato_para_relatorio['id_participante'] = $candidato->id_participante;
+
+			foreach ($this->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_participante']) as $key => $value) {
+			 $dados_candidato_para_relatorio[$key] = $value;
+			}
+
+			$linha_arquivo['nome'] = $dados_candidato_para_relatorio['nome'];
+
+			$linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_participante'])->email;
+
+			foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
+			$dados_candidato_para_relatorio[$key] = $value;
+			}
+
+			$linha_arquivo['categoria_participante'] = $dados_candidato_para_relatorio['categoria_participante'];
+
+			$linha_arquivo['area_trabalho'] = $dados_candidato_para_relatorio['area_trabalho'];
+
+			$linha_arquivo['tipo_apresentacao'] = $dados_candidato_para_relatorio['tipo_apresentacao'];
+
+			$linha_arquivo['titulo_trabalho'] = $dados_candidato_para_relatorio['titulo_trabalho'];
+
+
+			$relatorio_csv->insertOne($linha_arquivo);     
+	    }
 
 
 	}
