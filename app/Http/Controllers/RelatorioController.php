@@ -63,7 +63,7 @@ class RelatorioController extends BaseController
 
     switch ($escolha_cabecalho) {
       case 'cracha':
-        return $cabecalho = ["Nome","E-mail", "Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
+        return $cabecalho = ["Nome", "Instituição", "Nome para Crachá"];
         break;
 
       case 'lista_trabalhos_submetidos':
