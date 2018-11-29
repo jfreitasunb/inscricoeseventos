@@ -14,6 +14,7 @@ use InscricoesEventos\Models\User;
 use InscricoesEventos\Models\ConfiguraInscricaoEvento;
 use InscricoesEventos\Models\FinalizaInscricao;
 use InscricoesEventos\Models\TrabalhoSelecionado;
+use InscricoesEventos\Models\TipoCoordenador;
 use InscricoesEventos\Notifications\NotificaNovaInscricao;
 use Illuminate\Http\Request;
 use InscricoesEventos\Mail\EmailVerification;
@@ -69,15 +70,15 @@ class RelatorioEventoController extends CoordenadorController
 
 		$arquivos_para_gerar = $request->arquivos_para_gerar;
 
+		// dd($arquivos_para_gerar);
+
+		$relatorio_controller = new RelatorioController();
+
 		$user = $this->SetUser();
 	    
 	    $id_coordenador = $user->id_user;
 
 	    $locale_relatorio = 'pt-br';
-
-	    $coordenador = new TipoCoordenador();
-
-    	$nivel_coordenador = $coordenador->retorna_dados_coordenador($id_coordenador, $id_inscricao_evento);
 
 	    $relatorio = new ConfiguraInscricaoEvento();
 
@@ -85,48 +86,58 @@ class RelatorioEventoController extends CoordenadorController
 
 	    $id_inscricao_evento = $relatorio_disponivel->id_inscricao_evento;
 
-	    $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio->ano_evento);
+	    $coordenador = new TipoCoordenador();
 
-	    $finalizada = new FinalizaInscricao();
+    	$nivel_coordenador = $coordenador->retorna_dados_coordenador($id_coordenador, $id_inscricao_evento);
 
-	    $finaliza = new FinalizaInscricao();
+	    $locais_arquivos = $relatorio_controller->ConsolidaLocaisArquivos($relatorio_disponivel->ano_evento);
 
-	    $usuarios_finalizados = $finaliza->retorna_usuarios_relatorios($id_inscricao_evento, $nivel_coordenador);
-	    
-	    foreach ($usuarios_finalizados as $candidato) {
+	    dd($locais_arquivos);
 
-			$linha_arquivo = [];
+	    foreach ($arquivos_para_gerar as $tipo_arquivo) {
+	    	if ($tipo_arquivo == "cracha" OR $tipo_arquivo == "lista_participante") {
+	    		
+	    		$finaliza = new FinalizaInscricao();
 
-			$dados_candidato_para_relatorio = [];
+			    $usuarios_finalizados = $finaliza->retorna_usuarios_relatorios($id_inscricao_evento, $nivel_coordenador);
+			    
+			    foreach ($usuarios_finalizados as $candidato) {
 
-			$dados_candidato_para_relatorio['ano_evento'] = $relatorio->ano_evento;
+					$linha_arquivo = [];
 
-			$dados_candidato_para_relatorio['id_participante'] = $candidato->id_participante;
+					$dados_candidato_para_relatorio = [];
 
-			foreach ($this->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_participante']) as $key => $value) {
-			 $dados_candidato_para_relatorio[$key] = $value;
-			}
+					$dados_candidato_para_relatorio['ano_evento'] = $relatorio->ano_evento;
 
-			$linha_arquivo['nome'] = $dados_candidato_para_relatorio['nome'];
+					$dados_candidato_para_relatorio['id_participante'] = $candidato->id_participante;
 
-			$linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_participante'])->email;
+					foreach ($relatorio_controller->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_participante']) as $key => $value) {
+					 $dados_candidato_para_relatorio[$key] = $value;
+					}
 
-			foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
-			$dados_candidato_para_relatorio[$key] = $value;
-			}
+					$linha_arquivo['nome'] = $dados_candidato_para_relatorio['nome'];
 
-			$linha_arquivo['categoria_participante'] = $dados_candidato_para_relatorio['categoria_participante'];
+					$linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_participante'])->email;
 
-			$linha_arquivo['area_trabalho'] = $dados_candidato_para_relatorio['area_trabalho'];
+					foreach ($relatorio_controller->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
+					$dados_candidato_para_relatorio[$key] = $value;
+					}
 
-			$linha_arquivo['tipo_apresentacao'] = $dados_candidato_para_relatorio['tipo_apresentacao'];
+					$linha_arquivo['categoria_participante'] = $dados_candidato_para_relatorio['categoria_participante'];
 
-			$linha_arquivo['titulo_trabalho'] = $dados_candidato_para_relatorio['titulo_trabalho'];
+					$linha_arquivo['area_trabalho'] = $dados_candidato_para_relatorio['area_trabalho'];
 
+					$linha_arquivo['tipo_apresentacao'] = $dados_candidato_para_relatorio['tipo_apresentacao'];
 
-			$relatorio_csv->insertOne($linha_arquivo);     
+					$linha_arquivo['titulo_trabalho'] = $dados_candidato_para_relatorio['titulo_trabalho'];
+
+					dd($dados_candidato_para_relatorio);
+			    }
+	    	}
+
+	    	if ($tipo_arquivo == "lista_trabalhos_submetidos") {
+	    		# code...
+	    	}
 	    }
-
-
 	}
 }
