@@ -112,11 +112,11 @@ class RelatorioController extends BaseController
 
     $locais_arquivos['local_relatorios'] = storage_path("app/public/relatorios/evento_".$evento."/");
     
-    $locais_arquivos['arquivo_relatorio_csv'] = 'Inscricoes_Evento_'.$evento.'.csv';
+    $locais_arquivos['lista_participante'] = 'Inscricoes_Evento_'.$evento.'.csv';
 
-    $locais_arquivos['arquivo_gera_cracha_csv'] = 'Crachas_Evento_'.$evento.'.csv';
+    $locais_arquivos['cracha'] = 'Crachas_Evento_'.$evento.'.csv';
 
-    $locais_arquivos['arquivo_lista_trabalhos_submetidos_csv'] = 'Trabalhos_Submetidos_Evento_'.$evento.'.csv';
+    $locais_arquivos['lista_trabalhos_submetidos'] = 'Trabalhos_Submetidos_Evento_'.$evento.'.csv';
 
     $locais_arquivos['arquivo_lista_trabalhos_aceitos_csv'] = 'Trabalhos_Aceitos_Evento_'.$evento.'.csv';
 
