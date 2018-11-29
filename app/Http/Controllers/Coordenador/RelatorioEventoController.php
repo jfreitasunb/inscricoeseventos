@@ -124,20 +124,29 @@ class RelatorioEventoController extends CoordenadorController
 					}
 
 					$linha_arquivo['nome'] = $dados_candidato_para_relatorio['nome'];
+					
+					$linha_arquivo['instituicao'] = $dados_candidato_para_relatorio['instituicao'];
+					
+					$linha_arquivo['nome_cracha'] = $dados_candidato_para_relatorio['nome_cracha'];
 
-					$linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_participante'])->email;
+					if ($tipo_arquivo == "lista_participante") {
+						
+						$linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_participante'])->email;
 
-					foreach ($relatorio_controller->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
-					$dados_candidato_para_relatorio[$key] = $value;
+						foreach ($relatorio_controller->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
+								$dados_candidato_para_relatorio[$key] = $value;
+						}
+
+						$linha_arquivo['categoria_participante'] = $dados_candidato_para_relatorio['categoria_participante'];
+
+						$linha_arquivo['area_trabalho'] = $dados_candidato_para_relatorio['area_trabalho'];
+
+						$linha_arquivo['tipo_apresentacao'] = $dados_candidato_para_relatorio['tipo_apresentacao'];
+
+						$linha_arquivo['titulo_trabalho'] = $dados_candidato_para_relatorio['titulo_trabalho'];
 					}
-
-					$linha_arquivo['categoria_participante'] = $dados_candidato_para_relatorio['categoria_participante'];
-
-					$linha_arquivo['area_trabalho'] = $dados_candidato_para_relatorio['area_trabalho'];
-
-					$linha_arquivo['tipo_apresentacao'] = $dados_candidato_para_relatorio['tipo_apresentacao'];
-
-					$linha_arquivo['titulo_trabalho'] = $dados_candidato_para_relatorio['titulo_trabalho'];
+					
+					$relatorio_csv->insertOne($linha_arquivo);
 
 					// dd($dados_candidato_para_relatorio);
 			    }
