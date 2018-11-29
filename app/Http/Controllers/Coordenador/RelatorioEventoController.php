@@ -22,6 +22,7 @@ use InscricoesEventos\Http\Controllers\BaseController;
 use InscricoesEventos\Http\Controllers\AuthController;
 use InscricoesEventos\Http\Controllers\RelatorioController;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use League\Csv\Writer;
 
 
 /**
@@ -92,9 +93,16 @@ class RelatorioEventoController extends CoordenadorController
 
 	    $locais_arquivos = $relatorio_controller->ConsolidaLocaisArquivos($relatorio_disponivel->ano_evento);
 
-	    dd($locais_arquivos);
-
 	    foreach ($arquivos_para_gerar as $tipo_arquivo) {
+
+	    	$relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos[$tipo_arquivo], 'w+');
+
+	    	$linha_arquivo = [];
+
+	    	$linha_arquivo = $relatorio_controller->ConsolidaCabecalhoCSV($tipo_arquivo);
+
+	    	$relatorio_csv->insertOne($linha_arquivo);
+
 	    	if ($tipo_arquivo == "cracha" OR $tipo_arquivo == "lista_participante") {
 	    		
 	    		$finaliza = new FinalizaInscricao();
@@ -131,7 +139,7 @@ class RelatorioEventoController extends CoordenadorController
 
 					$linha_arquivo['titulo_trabalho'] = $dados_candidato_para_relatorio['titulo_trabalho'];
 
-					dd($dados_candidato_para_relatorio);
+					// dd($dados_candidato_para_relatorio);
 			    }
 	    	}
 
