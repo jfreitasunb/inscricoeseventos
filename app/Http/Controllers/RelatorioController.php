@@ -91,11 +91,11 @@ class RelatorioController extends BaseController
         break;
 
       case 'lista_trabalhos_aceitos':
-        return $cabecalho = ["Nome", "E-mail", "Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
+        return $cabecalho = ["Nome","E-mail", "Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
         break;
       
       default:
-        return $cabecalho = ["Nome","E-mail", "Categoria Participante", "Instituição", "Nome para Crachá"];
+        return $cabecalho = ["Nome","Instituição", "Nome para Crachá", "E-mail", "Deseja apresentar trabalho?","Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
         break;
     }
     
@@ -143,6 +143,10 @@ class RelatorioController extends BaseController
     $dados_pessoais_candidato = $dado_pessoal->retorna_dados_pessoais($id_participante);
 
     $paises = new Paises();
+
+    if (!isset($dados_pessoais_candidato->nome)) {
+      dd($id_participante);
+    }
 
     $data_hoje = (new Carbon())->format('Y-m-d');
 
