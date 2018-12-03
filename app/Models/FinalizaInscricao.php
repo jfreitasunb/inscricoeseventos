@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FinalizaInscricao extends FuncoesModels
 {
-    protected $primaryKey = 'id_participante';
+    protected $primaryKey = 'id';
 
     protected $table = 'finaliza_inscricao';
 
@@ -33,6 +33,11 @@ class FinalizaInscricao extends FuncoesModels
         $nome_coluna = $this->define_nome_coluna_tipo_programa_pos($locale);
 
         return $this->where('finaliza_inscricao.id_inscricao_evento', $id_inscricao_evento)->where('finaliza_inscricao.finalizada', true)->join('dados_pessoais_candidato', 'dados_pessoais_candidato.id_participante','finaliza_inscricao.id_participante')->join('users', 'users.id_user', 'finaliza_inscricao.id_participante')->join('escolhas_curso_verao', 'escolhas_curso_verao.id_participante', 'dados_pessoais_candidato.id_participante')->where('escolhas_curso_verao.id_inscricao_evento', $id_inscricao_evento)->join('programa_pos_mat', 'id_programa_pos', 'escolhas_curso_verao.programa_pretendido')->select('finaliza_inscricao.id_participante', 'finaliza_inscricao.id_inscricao_evento','users.nome', 'users.email', 'programa_pos_mat.'.$nome_coluna)->orderBy('escolhas_curso_verao.programa_pretendido' , 'desc')->orderBy('users.nome','asc');
+    }
+
+    public function retorna_usuarios_inscritos($id_inscricao_evento, $nivel_coordenador)
+    {
+        return $this->where('finaliza_inscricao.id_inscricao_evento', $id_inscricao_evento)->where('finaliza_inscricao.finalizada', true)->get()->unique('id_participante');
     }
 
     public function retorna_usuarios_relatorios($id_inscricao_evento, $nivel_coordenador)
