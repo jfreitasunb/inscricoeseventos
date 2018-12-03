@@ -97,6 +97,8 @@ class RelatorioEventoController extends CoordenadorController
 	    foreach ($arquivos_para_gerar as $tipo_arquivo) {
 
 	    	$arquivo_a_ser_gerado = $locais_arquivos['local_relatorios'].$locais_arquivos[$tipo_arquivo];
+
+	    	@unlink($arquivo_a_ser_gerado);
 	    	
 	    	$relatorio_csv = Writer::createFromPath($arquivo_a_ser_gerado, 'w+');
 
@@ -110,12 +112,12 @@ class RelatorioEventoController extends CoordenadorController
 	    		
 	    		$finaliza = new FinalizaInscricao();
 
-			    $usuarios_finalizados = $finaliza->retorna_usuarios_relatorios($id_inscricao_evento, $nivel_coordenador);
+			    $usuarios_finalizados = $finaliza->retorna_usuarios_inscritos($id_inscricao_evento, $nivel_coordenador);
 			    
 			    foreach ($usuarios_finalizados as $candidato) {
 
 					$linha_arquivo = [];
-
+					
 					$dados_candidato_para_relatorio = [];
 
 					$dados_candidato_para_relatorio['ano_evento'] = $relatorio->ano_evento;
@@ -123,7 +125,7 @@ class RelatorioEventoController extends CoordenadorController
 					$dados_candidato_para_relatorio['id_participante'] = $candidato->id_participante;
 
 					foreach ($relatorio_controller->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_participante']) as $key => $value) {
-					 $dados_candidato_para_relatorio[$key] = $value;
+					 	$dados_candidato_para_relatorio[$key] = $value;
 					}
 
 					$linha_arquivo['nome'] = $dados_candidato_para_relatorio['nome'];
