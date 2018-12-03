@@ -140,13 +140,29 @@ class RelatorioEventoController extends CoordenadorController
 								$dados_candidato_para_relatorio[$key] = $value;
 						}
 
-						$linha_arquivo['categoria_participante'] = $dados_candidato_para_relatorio['categoria_participante'];
+						if ($dados_candidato_para_relatorio['apresentar_trabalho']) {
 
-						$linha_arquivo['area_trabalho'] = $dados_candidato_para_relatorio['area_trabalho'];
+							$linha_arquivo['Deseja apresentar trabalho?'] = "Sim";
 
-						$linha_arquivo['tipo_apresentacao'] = $dados_candidato_para_relatorio['tipo_apresentacao'];
+							$linha_arquivo['categoria_participante'] = $dados_candidato_para_relatorio['categoria_participante'];
 
-						$linha_arquivo['titulo_trabalho'] = $dados_candidato_para_relatorio['titulo_trabalho'];
+							$linha_arquivo['area_trabalho'] = $dados_candidato_para_relatorio['area_trabalho'];
+
+							$linha_arquivo['tipo_apresentacao'] = $dados_candidato_para_relatorio['tipo_apresentacao'];
+
+							$linha_arquivo['titulo_trabalho'] = $dados_candidato_para_relatorio['titulo_trabalho'];
+						}else{
+							$linha_arquivo['Deseja apresentar trabalho?'] = "Não";
+
+							$linha_arquivo['categoria_participante'] = null;
+
+							$linha_arquivo['area_trabalho'] = null;
+
+							$linha_arquivo['tipo_apresentacao'] = null;
+
+							$linha_arquivo['titulo_trabalho'] = null;
+						}
+						
 					}
 					
 					$relatorio_csv->insertOne($linha_arquivo);
