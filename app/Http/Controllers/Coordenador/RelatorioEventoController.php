@@ -23,7 +23,8 @@ use InscricoesEventos\Http\Controllers\AuthController;
 use InscricoesEventos\Http\Controllers\RelatorioController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use League\Csv\Writer;
-
+use Response;
+use ZipArchive;
 
 /**
 * Classe para visualização da página inicial.
@@ -95,7 +96,9 @@ class RelatorioEventoController extends CoordenadorController
 
 	    foreach ($arquivos_para_gerar as $tipo_arquivo) {
 
-	    	$relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos[$tipo_arquivo], 'w+');
+	    	$arquivo_a_ser_gerado = $locais_arquivos['local_relatorios'].$locais_arquivos[$tipo_arquivo];
+	    	
+	    	$relatorio_csv = Writer::createFromPath($arquivo_a_ser_gerado, 'w+');
 
 	    	$linha_arquivo = [];
 
@@ -193,5 +196,34 @@ class RelatorioEventoController extends CoordenadorController
 			    }
 	    	}
 	    }
+	    
+	    if (sizeof($arquivos_para_gerar) > 1) {
+	    	
+	    	$zip = new ZipArchive;
+		    
+		    $inscricoes_zipadas = 'Arquivos_Diversos_Evento_'.$relatorio_disponivel->ano_evento.'.zip';
+
+		    @unlink($locais_arquivos['arquivo_zip'].$inscricoes_zipadas);
+		    
+		    if ( $zip->open( $locais_arquivos['arquivo_zip'].$inscricoes_zipadas, ZipArchive::CREATE ) === true ){
+
+		        foreach (glob( $locais_arquivos['local_relatorios'].'*.csv') as $fileName ){
+		          $file = basename( $fileName );
+		          $zip->addFile( $fileName, $file );
+		        }  
+		    }
+
+		    $zip->close();
+
+		    return Response::download($locais_arquivos['arquivo_zip'].$inscricoes_zipadas, $inscricoes_zipadas);
+
+	    }else{
+	    	
+	    	return Response::download($locais_arquivos['local_relatorios'].$locais_arquivos[$arquivos_para_gerar[0]], $locais_arquivos[$arquivos_para_gerar[0]]);
+	    }
+
+	    notify()->flash('Dados salvos com sucesso!','success');
+
+	    return redirect()->back();
 	}
 }
