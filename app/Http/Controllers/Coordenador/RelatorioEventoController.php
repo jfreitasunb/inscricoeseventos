@@ -340,7 +340,7 @@ class RelatorioEventoController extends CoordenadorController
 			    $str=str_replace("mes_realizacao_evento", $mes_realizacao_evento, $str);
 
 			    file_put_contents($arquivo_capa_creditos, $str);
-
+			    
 			    foreach ($trabalhos_aceitos as $aceito) {
 
 			    	$total_aceitos_por_area = $aceitos->total_trabalhos_por_area($id_inscricao_evento, $aceito->id_area_trabalho);
@@ -383,14 +383,15 @@ class RelatorioEventoController extends CoordenadorController
 
 						$str = str_replace("titulo_trabalho", $titulo_trabalho, $str);
 
-						$str .= "\n%inicio_bloco_repetir".$parsed."\n%fim_bloco_repetir";
-
 						if (substr_count ( $str , "%fim_bloco_repetir" ) == $total_aceitos_por_area ) {
-			    			$str .= "\n\clearpage";
+			    			$str .= "\n\\clearpage";
+			    		}else{
+			    			$str .= "\n%inicio_bloco_repetir".$parsed."\n%fim_bloco_repetir";
 			    		};
 
 						file_put_contents($arquivo_area, $str);
 			    	}
+dd(substr_count ( $str , "%fim_bloco_repetir" ));
 			    }
 	    	}
 	    }
