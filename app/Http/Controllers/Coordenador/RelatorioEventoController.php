@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use InscricoesEventos\Models\User;
 use InscricoesEventos\Models\AreaPosMat;
 use InscricoesEventos\Models\ConfiguraInscricaoEvento;
+use InscricoesEventos\Models\ConfiguraDetalhesEvento;
 use InscricoesEventos\Models\FinalizaInscricao;
 use InscricoesEventos\Models\TrabalhoSubmetido;
 use InscricoesEventos\Models\TrabalhoSelecionado;
@@ -267,6 +268,18 @@ class RelatorioEventoController extends CoordenadorController
 	    		$aceitos = new TrabalhoSelecionado();
 
 	    		$trabalhos_aceitos = $aceitos->retorna_trabalhos_selecionados($id_inscricao_evento);
+
+	    		$detalhes = new ConfiguraDetalhesEvento();
+
+	    		$detalhes_evento_corrente = $detalhes->retorna_detalhes_evento($id_inscricao_evento);
+
+	    		$edicao = explode("_", $detalhes_evento_corrente->titulo_evento);
+
+	    		$edicao_verao = explode(" ", $edicao[0])[0];
+
+	    		$edicao_workshop = explode(" ", $edicao[1])[0];
+
+	    		dd($edicao_workshop);
 			    
 			    foreach ($trabalhos_aceitos as $aceito) {
 
