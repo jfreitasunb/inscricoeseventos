@@ -369,30 +369,51 @@ class RelatorioEventoController extends CoordenadorController
 
 						$dados_resumo[$nome]['titulo_trabalho'] = $trabalho->titulo_trabalho;
 
-						// if (substr_count ( $str , "%fim_bloco_repetir" ) == $total_aceitos_por_area ) {
-
-						// 	$str = str_replace("nome_autor", $nome_autor, $str);
-
-						// $str = str_replace("email_autor", $email_autor, $str);
+						$dados_resumo[$nome]['abstract_trabalho'] = $trabalho->abstract_trabalho;
 						
-						// $str = str_replace("instituicao_autor", $instituicao_autor, $str);
-
-						// $str = str_replace("autor_trabalho", $autor_trabalho, $str);
-
-						// $str = str_replace("titulo_trabalho", $titulo_trabalho, $str);
-
-						// 	$str=file_get_contents($arquivo_area);
-					
-						// 	$parsed = $this->get_string_between($str, '%inicio_bloco_repetir', '%fim_bloco_repetir');
-
-			   //  			$str .= "\n\\clearpage";
-
-			   //  			file_put_contents($arquivo_area, $str);
-			    		// }
 			    		if (sizeof($dados_resumo) == $total_aceitos_por_area) {
+			    			
 			    			ksort($dados_resumo);
+			    			
+			    			$str=file_get_contents($arquivo_area);
+
+			    			$parsed = $this->get_string_between($str, '%inicio_bloco_repetir', '%fim_bloco_repetir');
+			    			
+			    			foreach ($dados_resumo as $key => $value) {
+			    				
+								$words = explode(" ", $key);
+								
+								$label_autor = "";
+								
+								foreach ($words as $letter) {
+    								$label_autor .= strtolower(substr($letter, 0, 1));
+								}
+
+			    				$str = str_replace("nome_autor", $key, $str);
+
+			    				$str = str_replace("email_autor", $value['email_autor'], $str);
+
+			    				$str = str_replace("instituicao_autor", $value['instituicao_autor'], $str);
+
+			    				$str = str_replace("autor_trabalho", $value['autor_trabalho'], $str);
+
+			    				$str = str_replace("titulo_trabalho", $value['titulo_trabalho'], $str);
+
+			    				$str = str_replace("texto_trabalho", $value['abstract_trabalho'], $str);
+
+			    				$str = str_replace("label_autor", $label_autor, $str);
+
+			    				$str .= "%inicio_bloco_repetir\n".$parsed."%fim_bloco_repetir\n";
+
+			    				file_put_contents($arquivo_area, $str);
+			    			}
+
+			    			$str .= "\n\\clearpage";
+
+			    			file_put_contents($arquivo_area, $str);
+
 			    			dd($dados_resumo);
-			    			$dados_resumo = [];
+			    			
 			    		}
 			    		
 			    	}
