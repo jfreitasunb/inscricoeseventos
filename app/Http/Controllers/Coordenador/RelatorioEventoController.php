@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use InscricoesEventos\Models\User;
 use InscricoesEventos\Models\ConfiguraInscricaoEvento;
 use InscricoesEventos\Models\FinalizaInscricao;
+use InscricoesEventos\Models\TrabalhoSubmetido;
 use InscricoesEventos\Models\TrabalhoSelecionado;
 use InscricoesEventos\Models\TipoCoordenador;
 use InscricoesEventos\Notifications\NotificaNovaInscricao;
