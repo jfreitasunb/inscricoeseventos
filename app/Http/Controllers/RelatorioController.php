@@ -91,11 +91,11 @@ class RelatorioController extends BaseController
         break;
 
       case 'lista_trabalhos_aceitos':
-        return $cabecalho = ["Nome", "E-mail", "Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
+        return $cabecalho = ["Nome", "Instituição", "E-mail", "Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
         break;
       
       default:
-        return $cabecalho = ["Nome","Instituição", "Nome para Crachá", "E-mail", "Deseja apresentar trabalho?","Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
+        return $cabecalho = ["Nome", "Instituição", "Nome para Crachá", "E-mail", "Deseja apresentar trabalho?","Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
         break;
     }
     
