@@ -123,7 +123,7 @@ class RelatorioController extends BaseController
 
     $locais_arquivos['lista_trabalhos_aceitos'] = 'Trabalhos_Aceitos_Evento_'.$evento.'.csv';
 
-    $locais_arquivos['caderno_de_resumos'] = 'Caderno_de_Resumos_Evento_'.$evento.'.tex';
+    $locais_arquivos['caderno_de_resumos'] = $locais_arquivos['local_relatorios']."caderno_de_resumos/";
 
     $locais_arquivos['arquivo_zip'] = $locais_arquivos['local_relatorios'].'zip/';
 
