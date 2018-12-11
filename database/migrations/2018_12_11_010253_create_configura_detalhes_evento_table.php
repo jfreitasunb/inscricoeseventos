@@ -18,9 +18,8 @@ class CreateConfiguraDetalhesEventoTable extends Migration
             $table->unsignedInteger('id_inscricao_evento');
             $table->foreign('id_inscricao_evento')->references('id_inscricao_evento')->on('configura_inscricao_evento')->onDelete('cascade');
             $table->text('titulo_evento')->nullable();
-            $table->date('periodo_realizacao');
-
-            
+            $table->date('inicio_evento');
+            $table->date('fim_evento');
             $table->timestamps();
         });
     }
