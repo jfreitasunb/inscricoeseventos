@@ -1,4 +1,4 @@
-!storage/app/latex_templates/
+!storage/app/latex_templates/*
 vendor/
 public/storage
 storage/app/public/*
