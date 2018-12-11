@@ -1,8 +1,8 @@
 vendor/
 public/storage
 !storage/app/latex_templates
-storage/app/public
-storage/app/purifier
+storage/app/public/*
+storage/app/purifier/*
 
 
 storage/app/latex_templates/template_abstract\.synctex\.gz
