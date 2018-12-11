@@ -1,0 +1,227 @@
+%====================================================================
+%	Resumos de Teoria da Computacao
+%====================================================================
+
+\pagestyle{fancy}
+
+\lhead{}
+\chead{{X Workshop de Ver\~{a}o em  Matem\'{a}tica - MAT/UnB}}
+\rhead{}
+%P\'{a}gina \arabic{page} de \pageref{ultimapagina}
+
+\lfoot{Teoria da Computa\c{c}\~{a}o}
+\cfoot{\arabic{page}}
+\rfoot{Ver\~{a}o \ano}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+%====================================================================
+%====================================================================
+
+\begin{center}
+	%\vspace{1cm}
+	\huge{{\bf Teoria da Computa\c{c}\~{a}o}}
+	\vspace{1cm}
+\end{center}
+
+%====================================================================
+%	Inicio dos Resumos de Teoria da Computacao
+%====================================================================
+	\talktitle[Ariane Alves Almeida]{Formalização de equivalência entre noções de terminação em PVS}
+%	
+	\authorinfo[arianealvesalmeida@gmail.com]{Ariane Alves Almeida}{Universidade de Bras\'{i}lia (CIC)}
+%	
+	\noindent\textbf{Resumo}.\index{Ariane A. Almeida}\label{aaa} 
+	Terminação é uma propriedade essencial para provar a corretude de programas (e sistemas de reescrita), já que inicialmente é necessário garantir que um programa produza resultados sempre que for executado. No entanto, a verificação da terminação é, em geral, um problema indecidível, diretamente relacionado com o problema da parada. Todavia, abordagens de semi-decisão podem ser utilizadas para essa análise. Apesar da indecidibilidade, boas técnicas utilizadas para analizar terminação deveriam completas, no sentido de que, sendo o programa analisado terminante, seja possível demonstrar a existência de parâmetros associados à técnica, como por exemplo, medidas de terminação que permitam a utilização de tal técnica (para esse programa).
+
+Como abordagens distintas fornecem meios diversos para atestar terminação, a aplicação de uma ou outra abordagem se faz mais adequada (ou menos laboriosa) a determinado programa. Contudo, a completude das técnicas garante que elas devem também prover o mesmo resultado obtido com outra abordagem. Assim, é desejável relacionar as diferentes abordagens e atestar sua equivalência.
+
+A corretude de programas é frequentemente formalizada com o auxílio de assistentes de prova, como o Prototype Verification System (PVS). Para tal, inicialmente é formalizada  sua terminação, que deve ser atestada segundo uma técnica também formalizada para garantir um resultado correto. PVS garante terminação de funções recursivas ao requerer sua totalidade por meio de terminação segundo ranking functions, dadas como Condições de Correção de Tipo para terminação (Termination Type Correcteness Conditions - TCCs). Para isso, é necessário garantir um decrescimento segundo uma ordem bem fundada entre argumentos da função e cada um de seus chamados recursivos, dadas verdadeiras as condições para execução destes chamados. Deste modo, o usuário do assistente deve fornecer uma função de medida sobre os argumentos que ateste esse decrescimento.
+
+A fim de analisar a completude de diversos critérios de terminação para incrementar o grau de automação da análise de terminação neste assistente, uma linguagem funcional de especificação simplificada, chamada PVS0, foi especificada. Sobre essa linguagem, abordagens de análise de terminação foram especificadas, como definições semânticas de terminação (existência de um número finito de chamados recursivos aninhados e existência de uma resposta para toda possível entrada); existência de funções de ranking; inexistência de ciclos de computação infinitos em Grafos de Contextos de Chamados (Calling Context Graphs - CCGs) e Grafos com Matrizes de Medidas (Matrix Weighted Graphs - MWG), que implementam a noção do Princípio de Mudança de Tamanho (Size Change Principle - SCP); e inexistência de cadeias infinitas de Pares Dependentes (Dependency Pairs - DP).
+
+A formalização de provas de equivalência entre essas técnicas de análise de terminação para programas PVS0 será abordada nessa apresentação, bem como detalhes da especificação da técnica de DPs, que foi inicialmente desenvolvida para sistemas de reescrita, sendo necessária a sua adaptação para ser utilizada sobre os programas PVS0. Peculiaridades dessa formalização são o uso dos contextos de chamados utilizados para a definição dos CCGs como parte dos pares dependentes. Contextos de chamados são utilizados pois o processo de matching presente na aplicação de regras de reescrita implicitamente contém as condições necessárias para aplicação da redução via reescrita, que devem ser explícitas ao lidar com programas funcionais.
+
+%	
+	\begin{thebibliography}{999}
+	
+	\bibitem{} Arts, T. and Giesl, J. (2000). Termination of Term Rewriting using Dependency Pairs. Theoretical Computer Science,Vol. 236, 133–178.
+
+	\bibitem{} Avelar, A. B., 2014. Formalização da Automação da Terminação Através de Grafos com Matrizes de Medida. Ph.D. thesis, Universidade de Brasília.  
+
+	\bibitem{} Vroon, D. (2007). Automatically Proving The Termination of Functional Programs. PhD thesis, Georgia Institute of Technology.
+
+	\bibitem{} nasalib (2017). Versão em Desenvolvimento de NASA PVS Library. https://github.com/nasa/pvslib . Disponível na página oficial da NASA PVS Library: http://shemesh.larc.nasa.gov/ fm/ftp/larc/PVS-library/ pvslib.html.
+	\end{thebibliography}
+	\vspace{24pt}
+    
+%====================================================================
+
+	\talktitle[Bruno de Assis Delboni]{Correspondência entre $\lambda$-termos Lineares e Grafos Trivalentes Com Raíz}
+	
+	\authorinfo[bruno.delboni@gmail.com]{Bruno de Assis Delboni}{Universidade de Bras\'{i}lia (Mat)}
+	
+	\noindent\textbf{Resumo}.\index{Bruno A. Delboni}\label{bad} 
+	Pela sua inflexibilidade sintática, cada $\lambda$-termo linear possui uma representação diagramática unívoca e bem intuitiva que leva cada $\lambda$-termo em um grafo trivalente, não necessariamente planar.        
+	Assim apresentaremos uma relação biunívoca entre as classes de $\alpha$-equivalência dos $\lambda$-termos lineares, considerando contextos das variáveis livres, com o conjunto dos grafos trivalentes, com raízes e orientados, sobre superfícies compactas e sem fronteira.
+	
+	\begin{thebibliography}{999}
+		\bibitem{Barendregt} Barendregt, H. P. (1984)  - \newblock{The Lambda Calculus: Its Syntax and Semantics} \newblock{PhD Thesis, 2012 \emph{Studies in Logic 103, second, revised edition, North-Holland, Amsterdam}}
+		
+		\bibitem{noam1} Zeilberger, N. - \newblock{Linear lambda terms as invariants
+			of rooted trivalent maps} \newblock{\emph{Journal of Functional Programming 26, Cambridge University Press, 2016 }}
+		
+		\bibitem{noam2} Zeilberger, N. - \newblock{ A correspondence between rooted planar maps and normal
+			planar lambda terms.} \newblock{\emph{Logical Methods in Computer Science, 11(3:22):1–39}}
+	\end{thebibliography}
+
+	\vspace{24pt}
+%====================================================================
+	\talktitle[Bruno Lopes Vieira]{Towards reasoning about Petri nets: a Propositional Dynamic Logic based approach}
+
+	\authorinfo[bruno@ic.uff.br]{Bruno Lopes Vieira}{Universidade Federal Fluminense}
+
+	\noindent\textbf{Resumo}.\index{Bruno L. Vieira}\label{blv} 
+	We present the last results over a Dynamic Logic approach with iteration to reason about Petri nets. This new operator allows for representing more general networks and thus enhancing the former propositional logic for Petri nets. We discuss an axiomatization and a new semantics with soundness and completeness, some complexity results and a linear model checking algorithm.
+
+\vspace{24pt}
+%====================================================================
+	\talktitle[Daniel Saad]{A Grammar Compression Algorithm Based on Induced Suffix Sorting}
+	
+	\authorinfo[daniel.saad.nunes@gmail.com ]{Daniel Saad}{Universidade de Bras\'ilia (CIC)}
+	
+	\noindent\textbf{Resumo}.\index{Daniel Saad}\label{ds} 
+	We introduce GCIS, a grammar compression algorithm based on the induced suffix sorting algorithm SAIS, presented by Nong et al. in 2009. Our solution builds on the factorization performed by SAIS during suffix sorting. We construct a context-free grammar on the input string which can be further reduced into a shorter string by substituting each substring by its correspondent factor. The resulting grammar is encoded by exploring some redundancies, such as common prefixes between suffix rules, which are sorted according to SAIS framework. When compared to well-known compression tools such as Re-Pair and 7-zip under repetitive sequences, our algorithm is faster at compressing, presents a close compression ratio to Re-Pair, at the cost of being the slowest at decompressing.
+	
+	\vspace{24pt}
+%====================================================================
+	\talktitle[Deivid Vale]{O Problema de Unificação sobre $ACUN_p(h)$ e Grupos Abelianos}
+	
+	\authorinfo[deividrodriguesvale@gmail.com]{Deivid Vale}{Universidade de Bras\'{i}lia (Mat)}
+	
+	\noindent\textbf{Resumo}.\index{Deivid Vale}\label{dv} 	Neste trabalho uma extensão do algoritmo de unificação $ACUN_2(h)$ para a teoria $ACUN_p(h)$, $ACUN$ com um homomorfismo h, ($p$ um primo qualquer) é estudada. Mostramos que um problema de $ACUN_p(h)$-unificação elementar com constantes é decidível em tempo polinomial e estudamos ainda a decidibilidade, correção e completude 	do Problema de Unificação para Grupos Abelianos com Homomorfismos (AGh) no caso geral. 
+	
+	\begin{thebibliography}{999}
+		\bibitem{a1} Baader, Franz. Unification in Commutative Theories. Institut für Mathematische und Datenverarbeitung (Informatik), 1989 Academic Press.
+		
+		\bibitem{a2} D. Lankford; G. Butler and B. Brady . Abelian Group Unification Algorithms for Elementary Terms. American Mathematical Society, 1984.
+		
+		\bibitem{a3} Z. Liu. Dealing Efficiently with Exclusive OR, Abelian Groups and Homomorphism in Cryptographic Protocol Analysis. PhD Thesis, 2012.Department of Mathematics and Computer Science - Clarkson University.
+	\end{thebibliography}
+
+	\vspace{24pt}
+%====================================================================
+
+	\talktitle[Edward Hermann Hausler]{Tamanho de Provas Lógicas e Complexidade Computacional}
+
+	\authorinfo[hermann@inf.puc-rio.br]{Edward Hermann Hausler}{Pontifícia Universidade Católica do Rio de Janeiro}
+
+	\noindent\textbf{Resumo}.\index{Edward H. Hausler}\label{ehh} 
+	Discutiremos a relação entre o tamanho de provas lógicas sob o ponto de vista da Complexidade Computacional. Métodos baseados em Teoria da Prova para a obtenção de provas curtas serão apresentados e discutidas as implicações de sua abrangência. 
+
+
+\vspace{24pt}
+
+%====================================================================
+	\talktitle[Kaliana dos Santos Dias de Freitas]{Estudo em Variações do Cálculo-$\lambda$ Substituições Explícitas}
+%	
+	\authorinfo[email@unb.br]{Kaliana dos Santos Dias de Freitas}{Universidade de Bras\'{i}lia (CIC)}
+%	
+	\noindent\textbf{Resumo}.\index{Kaliana S. D. Freitas}\label{ksdf} 
+	O Cálculo-$\lambda$ foi criado por Alonzo Church como um formalismo para resolver questões de decibilidade de problemas, na mesma época que outro formalismo em Teoria da Computação estava sendo implantado: as máquinas de Turing. A primeira versão do Cálculo-$\lambda$ mostrou-se paradoxal, porém extensões desse cálculo veio a ser eficiente nesta questão: As substituições explícitas constituem modelos mais próximos da computação. Além disso, o cálculo-$\lambda$ atua com um papel importante para a Matemática Construtiva, em que demonstrações aceitas são aquelas construídas por argumentos verificáveis, sendo forte sua contribuição a provas por computadores e em implementações em linguagens de programação. Apresentaremos algumas propriedades importante do Cálculo-$\lambda$ extensional que estuda propriedades da $\beta\eta$-redução e algumas ideias para o Cálculo-$\lambda\sigma$ onde substituições são abordadas explicitamente.
+%	
+	\begin{thebibliography}{999}
+	
+	\bibitem{} Alexandre Lyaletsky, Fundamental Theorems of Extensional Untyped $\lambda$-Calculus Revisited. Computer Science Journal of Moldova, vol.23,no.2(68), 2015.
+
+	\bibitem{} Martin Abadi [et all], Explicit Substituitions. Systems Research Center, February 6, 1990.
+	\end{thebibliography}
+	\vspace{24pt}
+%%====================================================================
+	\talktitle[Luiz A. B. Martins]{Sequential  x Concurrent Processes}
+	
+	\authorinfo[mario@cos.ufrj.br]{Luiz A. B. Martins}{Universidade de Bras\'{i}lia (Mat)}
+	
+	\noindent\textbf{Resumo}.\index{Luiz A. B. Martins}\label{labm} 
+	A study about sequential process via Labelled Transition Systems (LTS) will be presented. In sequence, we show the Calculus of Communicating Systems (CCS) introduced by Milner in [2] as well as some properties and applications that can be related with Digital Systems like modelling snack vending machine (sequential process) and traffic signal (concurrent process).
+
+	\begin{thebibliography}{999}
+		\bibitem{a1} Milner, R. A Calculus of Communicating Systems. In Lecture Notes in Computer Science, volume 92, Springer, 1980.
+		
+		\bibitem{a2} Milner, R. Communicating and Mobile Systems: the $\pi$-Calculus. Computer Laboratory, Univerity of Cambridge.
+		
+		\bibitem{a3} Aceto, L.,   Ingolfsdottir, A.,   Larsen, Kim G. and  Srba, Jiri. Reactive Systems: Modelling, Specification and Verification.
+	\end{thebibliography}
+
+	\vspace{24pt}
+%====================================================================
+
+	\talktitle[Marcelo Finger]{Quantitative Logic Reasoning}
+
+	\authorinfo[mfinger@ime.usp.br]{Marcelo Finger}{Universidade de São Paulo (IME-USP)}
+
+	\noindent\textbf{Resumo}.\index{Marcelo Finger}\label{mf} 
+	We present a research program which investigates the intersection of deductive reasoning with explicit quantitative capabilities.  These quantitative capabilities encompass probabilistic reasoning, counting and counting quantifiers, and similar systems.
+
+	The need to have a combined reasoning system that enables a unified way to reason with quantities has always been recognized in modern logic, as proposals of logic probabilistic reasoning are present in the work of Boole [1854]. Equally ubiquitous is the need to deal with cardinality restrictions on finite sets.
+
+	We show that there is a common way to deal with these several deductive quantitative capabilities, involving a framework based on Linear Algebras and Linear Programming, and the distinction between probabilistic and cardinality reasoning arising from the different family of algebras employed.
+
+	The quantitative logic systems are particularly amenable to the introduction of inconsistency measurements, which quantify the degree of inconsistency of a given quantitative logic theory, following some basic principles of inconsistency measurements.
+
+\vspace{24pt}
+%====================================================================
+	\talktitle[Mario Benevides]{Some Extensions of Propositional Dynamic Logic}
+	
+	\authorinfo[mario@cos.ufrj.br]{Mario Benevides}{Universidade Federal do Rio de Janeiro}
+	
+	\noindent\textbf{Resumo}.\index{Mario Benevides}\label{mb} 
+	 In this talk we present some extension of Propositional Dynamic Logic. First we introduce a Dynamic Logic in which the programs are CCS (Calculus for Communicating Systems) and pi-Calculus specifications. We discuss how to match the notion of bisimulation between two processes in  CCS  with the notion of logically equivalent processes in PDL. Second, we introduce another Dynamic Logic for reasoning about Petri Nets. Finally, we briefly discuss other possibilities to extend PDL, for instance adding data structure  to PDL.
+
+	\vspace{24pt}
+
+
+%%====================================================================
+	\talktitle[Thiago M. Ferreira Ramos]{Formalization of the Undecidability of the Halting Problem for a Functional Language}
+	
+	\authorinfo[thiagomendoncaferreiraramos@yahoo.com.br]{Thiago M. Ferreira Ramos}{Universidade de Bras\'ilia (CIC)}
+	
+	\noindent\textbf{Resumo}.\index{Thiago M. F. Ramos}\label{tmfr} 
+	A formalization of the proof of undecidability of the halting problem for a functional programming language is presented. The computational model consists of a minimal, but Turing complete, first-order functional  language called PVSo whose operational semantics was specified in the proof assistant PVS. The formalization is developed over a PVS theory for termination in which several notions of termination were specified and proved 
+	equivalent. The proof of undecidability required classical 	constructions such as adequate mappings between naturals and PVS0 programs and inputs, that are used to hypothesize the existence of a PVS0 program that decides termination of other programs, giving rise to a contradiction.
+	
+	\vspace{24pt}
+
+%%====================================================================
+	\talktitle[Washington Carvalho Segundo]{Nominal matching modulo A, C and AC}
+	
+	\authorinfo[wtonribeiro@gmail.com] {Washington Carvalho Segundo}{Universidade de Bras\'ilia (CIC)}
+	
+	\noindent\textbf{Resumo}.\index{ Washington C. Segundo}\label{wcs} 
+	Nominal unification is first order unification with binders. Inside the class of first order equational problems, the case where no substitution is applied on the right-hand side (resp. both sides) of equations is denominated matching (resp. equational checking). Efficient algorithms for equational checking, matching and unification within the nominal approach were already developed. Nominal unification and nominal matching are both quadraticaly bounded, whereas equational checking is log-linearly bounded.  In addition, reasoning modulo equational theories is a very basic and recurrent issue in algebraic and logic systems. For instance, appending lists and evaluating a sequence of disjuctions are, respectively, associative (A) and associative-commutative (AC) operations. For this reason, standard fist order unification and matching modulo A, C and AC where extensively investigated since the late 1970s. We have explored equivalence checking within the nominal approach, on signatures with A, C and AC function symbols, and nominal unification with C function symbols. Now, we are presenting a work in progress formalisation (in Coq) of a nominal matching algorithm with A, C and AC function symbols.
+	
+	\begin{thebibliography}{999}
+	\bibitem{} M. Ayala-Rincón, W. Carvalho-Segundo, M. Fernández, and D. Nantes-Sobrinho.	Formalisation of Nominal Equivalence with Associative-Commutative Function Symbols. ENTCS, 332:21--38, 2017.
+	
+	\bibitem{}  M.Ayala-Rincón, W. Carvalho-Segundo, M. Fernández, and D. Nantes-Sobrinho. On Solving Nominal Fixpoint Equations.  In Proc. of the 11th Int. Symp. on Frontiers of Combining  Systems (FroCoS), volume 10483 of  LNCS, pages 209--226. Springer, 2017.
+	
+	\bibitem{}  M.Ayala-Rincón, W. Carvalho-Segundo, M. Fernández, and D. Nantes-Sobrinho. Nominal C-Unification. In Pre-proc. of the 27th Int. Symp. Logic-based Program Synthesis and Transformation (LOPSTR), pages 1--15, 2017.
+		
+	\bibitem{}  C.F. Calvès and  M.~Fernández. Matching and Alpha-Equivalence Check for  Nominal Terms.  J. of Computer and System Sciences, 76(5): 283--301, 2010.
+		
+	\bibitem{} E. Contejean. A Certified AC Matching Algorithm. In Proc. of the 15th Int. Conf. on Rewriting Techniques and Applications, (RTA), 	volume 3091 of LNCS, pages 70--84. Springer,  2004.
+	
+	\bibitem{}  D.Kapur and P.Narendran.  Matching, Unification and Complexity. SIGSAM Bulletin, 21(4):6--9, 1987.
+	
+	\bibitem{}  C. Urban, A. M. Pitts, and M.J. Gabbay.  Nominal Unification. Theoretical Computer Science, 323(1-3):473--497, 2004.
+	\end{thebibliography}
+
+	\vspace{24pt}
+	
+%====================================================================
+%	Fim dos Resumos de Teoria da Computacao
+%====================================================================	
+
+
+\clearpage	

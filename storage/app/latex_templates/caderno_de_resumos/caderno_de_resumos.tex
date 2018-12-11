@@ -1,0 +1,77 @@
+%====================================================================
+%	Modified by Marcos Duarte in 2018, mardua13@gmail.com
+%====================================================================
+%====================================================================
+% Livro de Resumos Workshop Mat/UnB
+%====================================================================
+%
+%====================================================================
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%====================================================================
+
+\documentclass[12pt,a4paper,table]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[brazil]{babel}
+\usepackage[brazil,english]{babel}
+\usepackage{geometry}
+\usepackage{latexsym,amssymb,amscd,amstext,amssymb,amsmath,amsfonts,mathtools}
+\usepackage{bussproofs}
+\usepackage{makeidx}
+\usepackage{pdfpages}
+    \usepackage[pdftex]{hyperref} %coloca barra lateral com indice e links nas referencias do texto
+\usepackage{fancyhdr}
+\usepackage{pdflscape}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{tabulary}
+\usepackage{longtable}
+\usepackage{footnote}
+\usepackage{xcolor}
+\usepackage{tablefootnote}%footnotes inside tables
+\usepackage{scrextend}% same footnote in diferent places
+\usepackage{color}
+\usepackage{lscape}
+\usepackage{breakurl}
+\usepackage{dsfont}
+\geometry{a4paper,tmargin=25mm,bmargin=20mm,lmargin=15mm,rmargin=15mm}
+\newcommand{\authorinfo}[3][]{\noindent\textbf{#2} (\texttt{#1})\par\noindent\textsf{#3}\\\medskip}
+\newcommand{\talktitle}[2][]{\noindent {\Large \textbf{#2}} \\\medskip}
+
+%====================================================================
+%	Caderno de Resumos
+%====================================================================
+	\makeindex
+	
+\begin{document}
+	
+	\includepdf{obj/capa1.pdf} %basta atualizar o arquivo "capa1.pdf"
+
+	\include{obj/cap-cred-pref} %atualize as informacoes (reitor, coordenadores, etc.) do arquivo "creditos"
+							%basta mudar os arquivos "capa1.pdf"
+	
+%====================================================================
+%						Resumos
+%====================================================================	
+	\include{resumos/algebratn}
+	\include{resumos/analise}
+	\include{resumos/educacaomatematica}
+	\include{resumos/geometria}
+%	\include{resumos/matematicaaplicada}
+	\include{resumos/probabilidade}
+	\include{resumos/sistemasdinamicos}
+	\include{resumos/teoriadacomputacao}
+	\include{resumos/minicursos}
+%====================================================================
+%					Index e Capa final
+%====================================================================	
+
+		\newpage
+	\printindex
+			
+	\includepdf{obj/capa2.pdf} %basta atualizar o arquivo "capa2.pdf"
+%
+%====================================================================
+%	Fim do Caderno de Resumos
+%====================================================================		
+	\end{document}
