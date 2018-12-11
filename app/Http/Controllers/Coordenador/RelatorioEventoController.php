@@ -36,6 +36,19 @@ use Storage;
 class RelatorioEventoController extends CoordenadorController
 {
 
+	protected $array_arquivos_resumos = array(
+		1 => "resumos/algebratn.tex",
+		2 => "resumos/analise.tex",
+		3 => "resumos/analisenumerica.tex",
+		4 => "resumos/dinamicafluidos.tex",
+		5 => "resumos/geometria.tex",
+		6 => "resumos/probabilidade.tex",
+		7 => "resumos/sistemasdinamicos.tex",
+		8 => "resumos/teoriacomputacao.tex",
+		9 => "resumos/mecanica.tex",
+		9 => "resumos/educacaomatematica.tex",
+	);
+
 	public function getGeraArquivosDiversos()
 	{
 		$user = $this->SetUser();
@@ -313,41 +326,37 @@ class RelatorioEventoController extends CoordenadorController
 
 			    file_put_contents($arquivo_capa_creditos, $str);
 
-			    dd($str);
-
 			    foreach ($trabalhos_aceitos as $aceito) {
 
-					$linha_arquivo = [];
+			    	dd($this->array_arquivos_resumos[$aceito->id_area_trabalho]);
 
-					$dados_candidato_para_relatorio = [];
+			    	$linha_arquivo = [];
 
-					$dados_candidato_para_relatorio['ano_evento'] = $relatorio->ano_evento;
+			    	if ($aceito->id_tipo_apresentacao == 1) {
+			    		$dados_candidato_para_relatorio['ano_evento'] = $relatorio->ano_evento;
 
-					$dados_candidato_para_relatorio['id_participante'] = $aceito->id_participante;
+						$dados_candidato_para_relatorio['id_participante'] = $aceito->id_participante;
 
-					foreach ($relatorio_controller->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_participante']) as $key => $value) {
-					 $dados_candidato_para_relatorio[$key] = $value;
-					}
+						foreach ($relatorio_controller->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_participante']) as $key => $value) {
+						 $dados_candidato_para_relatorio[$key] = $value;
+						}
 
-					$linha_arquivo['nome'] = $dados_candidato_para_relatorio['nome'];
-					
-					$linha_arquivo['instituicao'] = $dados_candidato_para_relatorio['instituicao'];
+						$linha_arquivo['nome'] = $dados_candidato_para_relatorio['nome'];
 						
-					$linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_participante'])->email;
+						$linha_arquivo['instituicao'] = $dados_candidato_para_relatorio['instituicao'];
+							
+						$linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_participante'])->email;
 
-					$trabalho_enviado = new TrabalhoSubmetido();
+						$trabalho_enviado = new TrabalhoSubmetido();
 
-					$trabalho = $trabalho_enviado->retorna_trabalho_submetido($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento);
+						$trabalho = $trabalho_enviado->retorna_trabalho_submetido($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento);
 
-					dd($trabalho);
+						$linha_arquivo['titulo_trabalho'] = $dados_candidato_para_relatorio['titulo_trabalho'];
+			    	}
 
-					$linha_arquivo['categoria_participante'] = $dados_candidato_para_relatorio['categoria_participante'];
+					
 
-					$linha_arquivo['area_trabalho'] = $dados_candidato_para_relatorio['area_trabalho'];
-
-					$linha_arquivo['tipo_apresentacao'] = $dados_candidato_para_relatorio['tipo_apresentacao'];
-
-					$linha_arquivo['titulo_trabalho'] = $dados_candidato_para_relatorio['titulo_trabalho'];
+					
 			    }
 	    	}
 	    }
