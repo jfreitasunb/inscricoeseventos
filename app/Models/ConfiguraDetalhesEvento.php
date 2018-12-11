@@ -25,8 +25,8 @@ class ConfiguraDetalhesEvento extends FuncoesModels
         'titulo_evento', 'periodo_realizacao'
     ];
 
-    public function retorna_tipo_eventos()
+    public function retorna_detalhes_evento($id_inscricao_evento)
     {
-        return $this->all();
+        return $this->where('id_inscricao_evento', $id_inscricao_evento)->get()->first();
     }
 }
