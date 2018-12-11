@@ -11,6 +11,7 @@ use PDF;
 use Notification;
 use Carbon\Carbon;
 use InscricoesEventos\Models\User;
+use InscricoesEventos\Models\AreaPosMat;
 use InscricoesEventos\Models\ConfiguraInscricaoEvento;
 use InscricoesEventos\Models\FinalizaInscricao;
 use InscricoesEventos\Models\TrabalhoSubmetido;
@@ -289,7 +290,7 @@ class RelatorioEventoController extends CoordenadorController
 
 					$trabalho_enviado = new TrabalhoSubmetido();
 
-					$trabalho = $trabalho_enviado->retorna_trabalho_submetido($$dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento);
+					$trabalho = $trabalho_enviado->retorna_trabalho_submetido($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento);
 
 					dd($trabalho);
 
@@ -300,8 +301,6 @@ class RelatorioEventoController extends CoordenadorController
 					$linha_arquivo['tipo_apresentacao'] = $dados_candidato_para_relatorio['tipo_apresentacao'];
 
 					$linha_arquivo['titulo_trabalho'] = $dados_candidato_para_relatorio['titulo_trabalho'];
-					
-					$relatorio_csv->insertOne($linha_arquivo);
 			    }
 	    	}
 	    }
