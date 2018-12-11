@@ -93,6 +93,9 @@ class RelatorioController extends BaseController
       case 'lista_trabalhos_aceitos':
         return $cabecalho = ["Nome", "Instituição", "E-mail", "Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
         break;
+
+      case 'caderno_de_resumos':
+        break;
       
       default:
         return $cabecalho = ["Nome", "Instituição", "Nome para Crachá", "E-mail", "Deseja apresentar trabalho?","Categoria Participante", "Área do Trabalho", "Tipo de Apresentação",  "Título do Trabalho"];
@@ -119,6 +122,8 @@ class RelatorioController extends BaseController
     $locais_arquivos['lista_trabalhos_submetidos'] = 'Trabalhos_Submetidos_Evento_'.$evento.'.csv';
 
     $locais_arquivos['lista_trabalhos_aceitos'] = 'Trabalhos_Aceitos_Evento_'.$evento.'.csv';
+
+    $locais_arquivos['caderno_de_resumos'] = 'Caderno_de_Resumos_Evento_'.$evento.'.tex';
 
     $locais_arquivos['arquivo_zip'] = $locais_arquivos['local_relatorios'].'zip/';
 
