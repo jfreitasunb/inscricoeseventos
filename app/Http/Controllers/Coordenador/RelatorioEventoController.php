@@ -98,17 +98,19 @@ class RelatorioEventoController extends CoordenadorController
 
 	    foreach ($arquivos_para_gerar as $tipo_arquivo) {
 
-	    	$arquivo_a_ser_gerado = $locais_arquivos['local_relatorios'].$locais_arquivos[$tipo_arquivo];
+	    	if ($tipo_arquivo != "caderno_de_resumos") {
+	    		$arquivo_a_ser_gerado = $locais_arquivos['local_relatorios'].$locais_arquivos[$tipo_arquivo];
 
-	    	@unlink($arquivo_a_ser_gerado);
-	    	
-	    	$relatorio_csv = Writer::createFromPath($arquivo_a_ser_gerado, 'w+');
+		    	@unlink($arquivo_a_ser_gerado);
+		    	
+		    	$relatorio_csv = Writer::createFromPath($arquivo_a_ser_gerado, 'w+');
 
-	    	$linha_arquivo = [];
+		    	$linha_arquivo = [];
 
-	    	$linha_arquivo = $relatorio_controller->ConsolidaCabecalhoCSV($tipo_arquivo);
+		    	$linha_arquivo = $relatorio_controller->ConsolidaCabecalhoCSV($tipo_arquivo);
 
-	    	$relatorio_csv->insertOne($linha_arquivo);
+		    	$relatorio_csv->insertOne($linha_arquivo);
+	    	}
 
 	    	if ($tipo_arquivo == "cracha" OR $tipo_arquivo == "lista_participante") {
 	    		
@@ -259,6 +261,7 @@ class RelatorioEventoController extends CoordenadorController
 	    	}
 
 	    	if ($tipo_arquivo == "caderno_de_resumos") {
+	    		
 	    		$aceitos = new TrabalhoSelecionado();
 
 	    		$trabalhos_aceitos = $aceitos->retorna_trabalhos_selecionados($id_inscricao_evento);
@@ -283,9 +286,11 @@ class RelatorioEventoController extends CoordenadorController
 						
 					$linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_participante'])->email;
 
-					foreach ($relatorio_controller->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento, $locale_relatorio) as $key => $value) {
-							$dados_candidato_para_relatorio[$key] = $value;
-					}
+					$trabalho_enviado = new TrabalhoSubmetido();
+
+					$trabalho = $trabalho_enviado->retorna_trabalho_submetido($$dados_candidato_para_relatorio['id_participante'], $id_inscricao_evento);
+
+					dd($trabalho);
 
 					$linha_arquivo['categoria_participante'] = $dados_candidato_para_relatorio['categoria_participante'];
 
