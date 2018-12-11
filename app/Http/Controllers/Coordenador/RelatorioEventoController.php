@@ -340,6 +340,8 @@ class RelatorioEventoController extends CoordenadorController
 			    $str=str_replace("mes_realizacao_evento", $mes_realizacao_evento, $str);
 
 			    file_put_contents($arquivo_capa_creditos, $str);
+
+			    $dados_resumo = [];
 			    
 			    foreach ($trabalhos_aceitos as $aceito) {
 
@@ -347,51 +349,53 @@ class RelatorioEventoController extends CoordenadorController
 
 			    	$arquivo_area = $locais_arquivos['caderno_de_resumos'].$this->array_arquivos_resumos[$aceito->id_area_trabalho];
 
-			    	$str=file_get_contents($arquivo_area);
-					
-					$parsed = $this->get_string_between($str, '%inicio_bloco_repetir', '%fim_bloco_repetir');
-
 			    	if ($aceito->id_tipo_apresentacao == 1) {
 
 						foreach ($relatorio_controller->ConsolidaDadosPessoais($aceito->id_participante) as $key => $value) {
 						 $dados_candidato_para_relatorio[$key] = $value;
 						}
 
-						$nome_autor = $dados_candidato_para_relatorio['nome'];
+						$nome = $this->titleCase($dados_candidato_para_relatorio['nome']);
 
-						$email_autor = $dados_candidato_para_relatorio['email'];
+						$dados_resumo[$nome]['email_autor'] = $dados_candidato_para_relatorio['email'];
 
-						$instituicao_autor = $dados_candidato_para_relatorio['instituicao'];
+						$dados_resumo[$nome]['instituicao_autor'] = $dados_candidato_para_relatorio['instituicao'];
 
 						$trabalho_enviado = new TrabalhoSubmetido();
 
 						$trabalho = $trabalho_enviado->retorna_trabalho_submetido($aceito->id_participante, $id_inscricao_evento);
 
-						$autor_trabalho = $trabalho->autor_trabalho;
+						$dados_resumo[$nome]['autor_trabalho'] = $trabalho->autor_trabalho;
+
+						$dados_resumo[$nome]['titulo_trabalho'] = $trabalho->titulo_trabalho;
+
+						// if (substr_count ( $str , "%fim_bloco_repetir" ) == $total_aceitos_por_area ) {
+
+						// 	$str = str_replace("nome_autor", $nome_autor, $str);
+
+						// $str = str_replace("email_autor", $email_autor, $str);
 						
-						$linha_arquivo['instituicao'] = $dados_candidato_para_relatorio['instituicao'];
+						// $str = str_replace("instituicao_autor", $instituicao_autor, $str);
 
-						$titulo_trabalho = $trabalho->titulo_trabalho;
+						// $str = str_replace("autor_trabalho", $autor_trabalho, $str);
 
-						$str = str_replace("nome_autor", $nome_autor, $str);
+						// $str = str_replace("titulo_trabalho", $titulo_trabalho, $str);
 
-						$str = str_replace("email_autor", $email_autor, $str);
-						
-						$str = str_replace("instituicao_autor", $instituicao_autor, $str);
+						// 	$str=file_get_contents($arquivo_area);
+					
+						// 	$parsed = $this->get_string_between($str, '%inicio_bloco_repetir', '%fim_bloco_repetir');
 
-						$str = str_replace("autor_trabalho", $autor_trabalho, $str);
+			   //  			$str .= "\n\\clearpage";
 
-						$str = str_replace("titulo_trabalho", $titulo_trabalho, $str);
-
-						if (substr_count ( $str , "%fim_bloco_repetir" ) == $total_aceitos_por_area ) {
-			    			$str .= "\n\\clearpage";
-			    		}else{
-			    			$str .= "\n%inicio_bloco_repetir".$parsed."\n%fim_bloco_repetir";
-			    		};
-
-						file_put_contents($arquivo_area, $str);
+			   //  			file_put_contents($arquivo_area, $str);
+			    		// }
+			    		if (sizeof($dados_resumo) == $total_aceitos_por_area) {
+			    			ksort($dados_resumo);
+			    			dd($dados_resumo);
+			    			$dados_resumo = [];
+			    		}
+			    		
 			    	}
-dd(substr_count ( $str , "%fim_bloco_repetir" ));
 			    }
 	    	}
 	    }
