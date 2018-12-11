@@ -28,6 +28,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use League\Csv\Writer;
 use Response;
 use ZipArchive;
+use Storage;
 
 /**
 * Classe para visualização da página inicial.
@@ -102,6 +103,7 @@ class RelatorioEventoController extends CoordenadorController
 	    foreach ($arquivos_para_gerar as $tipo_arquivo) {
 
 	    	if ($tipo_arquivo != "caderno_de_resumos") {
+
 	    		$arquivo_a_ser_gerado = $locais_arquivos['local_relatorios'].$locais_arquivos[$tipo_arquivo];
 
 		    	@unlink($arquivo_a_ser_gerado);
@@ -264,7 +266,15 @@ class RelatorioEventoController extends CoordenadorController
 	    	}
 
 	    	if ($tipo_arquivo == "caderno_de_resumos") {
+
+	    		File::deleteDirectory($locais_arquivos['caderno_de_resumos']);
+
+	    		File::isDirectory($locais_arquivos['caderno_de_resumos']) or File::makeDirectory($locais_arquivos['caderno_de_resumos'],0775,true);
+
+	    		File::copyDirectory( storage_path("app/latex_templates/caderno_de_resumos/"), $locais_arquivos['caderno_de_resumos']);
 	    		
+	    		$arquivo_capa_creditos = $locais_arquivos['caderno_de_resumos']."/obj/cap-cred-pref.tex";
+
 	    		$aceitos = new TrabalhoSelecionado();
 
 	    		$trabalhos_aceitos = $aceitos->retorna_trabalhos_selecionados($id_inscricao_evento);
@@ -273,14 +283,38 @@ class RelatorioEventoController extends CoordenadorController
 
 	    		$detalhes_evento_corrente = $detalhes->retorna_detalhes_evento($id_inscricao_evento);
 
+	    		$data_inicio_evento = explode("-", $detalhes_evento_corrente->inicio_evento)[2];
+
+	    		$data_fim_evento = explode("-", $detalhes_evento_corrente->fim_evento)[2];
+
+	    		$ano_realizacao_evento = explode("-", $detalhes_evento_corrente->inicio_evento)[0];
+
+	    		$mes_realizacao_evento = $this->array_meses[ltrim(explode("-", $detalhes_evento_corrente->inicio_evento)[1], '0')];
+
 	    		$edicao = explode("_", $detalhes_evento_corrente->titulo_evento);
 
 	    		$edicao_verao = explode(" ", $edicao[0])[0];
 
 	    		$edicao_workshop = explode(" ", $edicao[1])[0];
-
-	    		dd($edicao_workshop);
 			    
+			    $str=file_get_contents($arquivo_capa_creditos);
+
+			    $str=str_replace("edicao_verao", $edicao_verao, $str);
+
+			    $str=str_replace("edicao_workshop", $edicao_workshop, $str);
+
+			    $str=str_replace("data_inicio_evento", $data_inicio_evento, $str);
+
+			    $str=str_replace("data_fim_evento", $data_fim_evento, $str);
+
+			    $str=str_replace("ano_realizacao_evento", $ano_realizacao_evento, $str);
+
+			    $str=str_replace("mes_realizacao_evento", $mes_realizacao_evento, $str);
+
+			    file_put_contents($arquivo_capa_creditos, $str);
+
+			    dd($str);
+
 			    foreach ($trabalhos_aceitos as $aceito) {
 
 					$linha_arquivo = [];
