@@ -65,11 +65,11 @@
                                         <span class="glyphicon glyphicon-refresh fa-fw"></span><a href="{{ route('reativar.candidato') }}">Reativar Inscrição Candidato</a>
                                     </td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <td class= "{{ Route::currentRouteNamed('inscricoes.nao.finalizadas') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('inscricoes.nao.finalizadas') }}">Inscrições Não Finalizadas</a>
                                     </td>
-                                </tr>
+                                </tr> --}}
                             </table>
                         </div>
                     </div>
@@ -104,11 +104,11 @@
                                         <span class="glyphicon glyphicon-file fa-fw"></span><a href="{{ route('caderno.resumos') }}">Criar Caderno de Resumos</a>
                                     </td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <td class= "{{ Route::currentRouteNamed('ver.charts') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-stats fa-fw"></span><a href="{{ route('ver.charts') }}">Gráficos</a>
                                     </td>
-                                </tr>
+                                </tr> --}}
                             </table>
                         </div>
                     </div>
