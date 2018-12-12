@@ -109,27 +109,15 @@ class CadernoResumoController extends CoordenadorController
 
         $arquivo_caderno_resumos = $locais_arquivos['caderno_de_resumos']."caderno_de_resumos.tex";
 
-        $nome_area = [];
-
         foreach ($areas as $area) {
             
-            $temp = str_replace("resumos/","",$this->array_arquivos_resumos[$area->id_area_trabalho]);
+            $nome_area = str_replace("resumos/","",$this->array_arquivos_resumos[$area->id_area_trabalho]);
             
-            $nome_area[] = str_replace(".tex", "", $temp);
+            $nome_area = str_replace(".tex", "", $nome_area);
+
+            exec('sed -i "s/%%\include\{resumos/'.$nome_area.'}/\include\{resumos/'.$nome_area.'}/g" '.$arquivo_caderno_resumos);
 
         }
-$str=file_get_contents($arquivo_caderno_resumos);
-
-        for ($i=0; $i < sizeof($nome_area); $i++) {
-
-            $str = str_replace("%%\include\{resumos/".$nome_area[$i]."}", "\include\{resumos/".$nome_area[$i]."}", $str);
-        }
-
-        file_put_contents($arquivo_caderno_resumos, $str);
-
-// $str=file_get_contents($arquivo_caderno_resumos);
-// // dd($nome_area);
-
 
         $existe_selecao = $aceitos->existe_trabalho_selecionado($id_inscricao_evento);
 
