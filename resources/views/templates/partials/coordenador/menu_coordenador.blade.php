@@ -26,11 +26,11 @@
                                         <span class="glyphicon glyphicon-refresh fa-fw"></span><a href="{{ route('editar.area.pos') }}">Editar Formação</a>
                                     </td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <td class= "{{ Route::currentRouteNamed('inscricoes.nao.finalizadas') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('inscricoes.nao.finalizadas') }}">Inscrições Não Finalizadas</a>
                                     </td>
-                                </tr>
+                                </tr> --}}
                             </table>
                         </div>
                     </div>
@@ -56,10 +56,20 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class= "{{ Route::currentRouteNamed('seleciona.trabalhos.submetidos') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-backward fa-fw"></span><a href="{{ route('seleciona.trabalhos.submetidos') }}">Selecionar Trabalhos</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class= "{{ Route::currentRouteNamed('caderno.resumos') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-file fa-fw"></span><a href="{{ route('caderno.resumos') }}">Criar Caderno de Resumos</a>
+                                    </td>
+                                </tr>
+                                {{-- <tr>
                                     <td class= "{{ Route::currentRouteNamed('gera.ficha.individual') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-file fa-fw"></span><a href="{{ route('gera.ficha.individual') }}">Por Candidato</a>
                                     </td>
-                                </tr>
+                                </tr> --}}
                             </table>
                         </div>
                     </div>
@@ -81,6 +91,7 @@
                 @yield('nao_finalizadas')
                 @yield('arquivos_diversos')
                 @yield('relatorio_trabalhos_submetidos')
+                @yield('seleciona_trabalhos_submentidos')
                 @yield('ficha_individual')
             </div>
         </div>
