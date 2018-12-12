@@ -50,6 +50,17 @@ class RelatorioEventoController extends CoordenadorController
 		11 => "resumos/educacaomatematica.tex",
 	);
 
+	protected $normalize_to_tex = array(
+      'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+      'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+      'Ï'=>'I', 'Ñ'=>'N', 'Ń'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+      'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'\'a', 'á'=>'\`a', 'â'=>'\^a', 'ã'=>'\~a', 'ä'=>'a',
+      'å'=>'a', 'æ'=>'a', 'ç'=>'\c c', 'è'=>'\`e', 'é'=>'\'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+      'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ń'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+      'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+      'ă'=>'a', 'î'=>'i', 'â'=>'a', 'ș'=>'s', 'ț'=>'t', 'Ă'=>'A', 'Î'=>'I', 'Â'=>'A', 'Ș'=>'S', 'Ț'=>'T',
+    );
+
 	public function get_string_between($string, $start, $end)
 	{
 	    $string = ' ' . $string;
@@ -389,17 +400,17 @@ class RelatorioEventoController extends CoordenadorController
     								$label_autor .= strtolower(substr($letter, 0, 1));
 								}
 
-			    				$str = str_replace("nome_autor", $key, $str);
+			    				$str = str_replace("nome_autor", strtr($key, $this->normalize_to_tex), $str);
 
 			    				$str = str_replace("email_autor", $value['email_autor'], $str);
 
-			    				$str = str_replace("instituicao_autor", $value['instituicao_autor'], $str);
+			    				$str = str_replace("instituicao_autor", strtr($value['instituicao_autor'], $this->normalize_to_tex), $str);
 
-			    				$str = str_replace("autor_trabalho", $value['autor_trabalho'], $str);
+			    				$str = str_replace("autor_trabalho", strtr($value['autor_trabalho'], $this->normalize_to_tex), $str);
 
-			    				$str = str_replace("titulo_trabalho", $value['titulo_trabalho'], $str);
+			    				$str = str_replace("titulo_trabalho", strtr($value['titulo_trabalho'], $this->normalize_to_tex), $str);
 
-			    				$str = str_replace("texto_trabalho", $value['abstract_trabalho'], $str);
+			    				$str = str_replace("texto_trabalho", strtr($value['abstract_trabalho'], $this->normalize_to_tex), $str);
 
 			    				$str = str_replace("label_autor", $label_autor, $str);
 
@@ -411,9 +422,6 @@ class RelatorioEventoController extends CoordenadorController
 			    			$str .= "\n\\clearpage";
 
 			    			file_put_contents($arquivo_area, $str);
-
-			    			dd($dados_resumo);
-			    			
 			    		}
 			    		
 			    	}
