@@ -128,17 +128,17 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::get('relatorio/caderno/resumos', '\InscricoesEventos\Http\Controllers\Coordenador\CadernoResumoController@getCadernoResumo')->name('caderno.resumos');
 
-	Route::post('relatorio/link/acesso', '\InscricoesEventos\Http\Controllers\Coordenador\LinkAcessoController@postLinkAcesso')->name('link.acesso');
+	// Route::post('relatorio/link/acesso', '\InscricoesEventos\Http\Controllers\Coordenador\LinkAcessoController@postLinkAcesso')->name('link.acesso');
 
-	Route::get('gera/ficha/individual', '\InscricoesEventos\Http\Controllers\Coordenador\RelatorioPosController@getFichaInscricaoPorCandidato')->name('gera.ficha.individual');
+	// Route::get('gera/ficha/individual', '\InscricoesEventos\Http\Controllers\Coordenador\RelatorioPosController@getFichaInscricaoPorCandidato')->name('gera.ficha.individual');
 
-	Route::get('ver/ficha/individual', '\InscricoesEventos\Http\Controllers\Coordenador\RelatorioPosController@GeraPdfFichaIndividual')->name('ver.ficha.individual');
+	// Route::get('ver/ficha/individual', '\InscricoesEventos\Http\Controllers\Coordenador\RelatorioPosController@GeraPdfFichaIndividual')->name('ver.ficha.individual');
 
-	Route::get('relatorios/anteriores/{id_monitoria}', '\InscricoesEventos\Http\Controllers\RelatorioController@geraRelatoriosAnteriores')->name('gera.anteriores');
+	// Route::get('relatorios/anteriores/{id_monitoria}', '\InscricoesEventos\Http\Controllers\RelatorioController@geraRelatoriosAnteriores')->name('gera.anteriores');
 
-	Route::get('relatorios/anteriores', '\InscricoesEventos\Http\Controllers\RelatorioController@getListaRelatoriosAnteriores')->name('relatorio.anteriores');
+	// Route::get('relatorios/anteriores', '\InscricoesEventos\Http\Controllers\RelatorioController@getListaRelatoriosAnteriores')->name('relatorio.anteriores');
 
-	Route::get('inscricoes/nao/finalizadas', '\InscricoesEventos\Http\Controllers\Admin\ListaInscricaoNaoFinalizadasController@getInscricoesNaoFinalizadas')->name('inscricoes.nao.finalizadas');
+	// Route::get('inscricoes/nao/finalizadas', '\InscricoesEventos\Http\Controllers\Admin\ListaInscricaoNaoFinalizadasController@getInscricoesNaoFinalizadas')->name('inscricoes.nao.finalizadas');
 
 	Route::get('selecionar/trabalhos', '\InscricoesEventos\Http\Controllers\Coordenador\SelecionaTrabalhosController@getSelecionarTrabalhos')->name('seleciona.trabalhos.submetidos');
 
