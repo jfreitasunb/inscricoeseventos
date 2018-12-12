@@ -100,8 +100,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class= "{{ Route::currentRouteNamed('gera.ficha.individual') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-file fa-fw"></span><a href="{{ route('gera.ficha.individual') }}">Por Candidato</a>
+                                    <td class= "{{ Route::currentRouteNamed('caderno.resumos') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-file fa-fw"></span><a href="{{ route('caderno.resumos') }}">Criar Caderno de Resumos</a>
                                     </td>
                                 </tr>
                                 <tr>
