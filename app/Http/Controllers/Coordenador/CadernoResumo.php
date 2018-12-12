@@ -36,9 +36,68 @@ use RecursiveDirectoryIterator;
 */
 class CadernoResumoController extends CoordenadorController
 {
+    protected $array_arquivos_resumos = array(
+        1 => "resumos/algebratn.tex",
+        2 => "resumos/analise.tex",
+        3 => "resumos/analisenumerica.tex",
+        4 => "resumos/dinamicafluidos.tex",
+        5 => "resumos/geometria.tex",
+        6 => "resumos/probabilidade.tex",
+        7 => "resumos/sistemasdinamicos.tex",
+        8 => "resumos/teoriacomputacao.tex",
+        9 => "resumos/algebratn.tex",
+        10 => "resumos/mecanica.tex",
+        11 => "resumos/educacaomatematica.tex",
+    );
+
+    protected $normalize_to_tex = array(
+      'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'\^A', 'Ã'=>'\~A', 'Ä'=>'\"A',
+      'Å'=>'A', 'Æ'=>'A', 'Ç'=>'\c C', 'È'=>'\`E', 'É'=>'\'E', 'Ê'=>'\^E', 'Ë'=>'\"E', 'Ì'=>'\`I', 'Í'=>'\'I', 'Î'=>'I',
+      'Ï'=>'I', 'Ñ'=>'N', 'Ń'=>'N', 'Ò'=>'\`O', 'Ó'=>'\'O', 'Ô'=>'\^O', 'Õ'=>'\~O', 'Ö'=>'\"O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+      'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'\'a', 'á'=>'\`a', 'â'=>'\^a', 'ã'=>'\~a', 'ä'=>'a',
+      'å'=>'a', 'æ'=>'a', 'ç'=>'\c c', 'è'=>'\`e', 'é'=>'\'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+      'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ń'=>'n', 'ò'=>'\`o', 'ó'=>'\'o', 'ô'=>'\^o', 'õ'=>'\~o', 'ö'=>'\"o', 'ø'=>'o', 'ù'=>'u',
+      'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+      'ă'=>'a', 'î'=>'i', 'â'=>'a', 'ș'=>'s', 'ț'=>'t', 'Ă'=>'A', 'Î'=>'I', 'Â'=>'A', 'Ș'=>'S', 'Ț'=>'T',
+    );
+
+    public function get_string_between($string, $start, $end)
+    {
+        $string = ' ' . $string;
+
+        $ini = strpos($string, $start);
+
+        if ($ini == 0) return '';
+
+        $ini += strlen($start);
+
+        $len = strpos($string, $end, $ini) - $ini;
+
+        return substr($string, $ini, $len);
+    }
 
     public function getCadernoResumo()
     {
+        $relatorio_controller = new RelatorioController();
+
+        $user = $this->SetUser();
+        
+        $id_coordenador = $user->id_user;
+
+        $locale_relatorio = 'pt-br';
+
+        $relatorio = new ConfiguraInscricaoEvento();
+
+        $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+        $id_inscricao_evento = $relatorio_disponivel->id_inscricao_evento;
+
+        $coordenador = new TipoCoordenador();
+
+        $nivel_coordenador = $coordenador->retorna_dados_coordenador($id_coordenador, $id_inscricao_evento);
+
+        $locais_arquivos = $relatorio_controller->ConsolidaLocaisArquivos($relatorio_disponivel->ano_evento);
+        
         File::deleteDirectory($locais_arquivos['caderno_de_resumos']);
 
         File::isDirectory($locais_arquivos['caderno_de_resumos']) or File::makeDirectory($locais_arquivos['caderno_de_resumos'],0775,true);
@@ -172,9 +231,9 @@ class CadernoResumoController extends CoordenadorController
 
         @unlink($locais_arquivos['arquivo_zip'].$caderno_resumo_zipado);
 
-        $source = $locais_arquivos['arquivo_zip']."caderno_de_resumos/";
+        $source = $locais_arquivos['local_relatorios']."caderno_de_resumos/";
         
-        if ( $zip->open( $locais_arquivos['local_relatorios'].$caderno_resumo_zipado, ZipArchive::CREATE ) === true ){
+        if ( $zip->open( $locais_arquivos['arquivo_zip'].$caderno_resumo_zipado, ZipArchive::CREATE ) === true ){
 
             $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
 
@@ -200,5 +259,7 @@ class CadernoResumoController extends CoordenadorController
         }
 
         $zip->close();
+
+        return Response::download($locais_arquivos['arquivo_zip'].$caderno_resumo_zipado, $caderno_resumo_zipado);
     }
 }
