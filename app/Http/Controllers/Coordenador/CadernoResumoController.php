@@ -37,7 +37,7 @@ use RecursiveDirectoryIterator;
 class CadernoResumoController extends CoordenadorController
 {
     protected $array_arquivos_resumos = array(
-        1 => "resumos/algebratn.tex",
+        1 => "resumos/algebra.tex",
         2 => "resumos/analise.tex",
         3 => "resumos/analisenumerica.tex",
         4 => "resumos/dinamicafluidos.tex",
@@ -45,7 +45,7 @@ class CadernoResumoController extends CoordenadorController
         6 => "resumos/probabilidade.tex",
         7 => "resumos/sistemasdinamicos.tex",
         8 => "resumos/teoriacomputacao.tex",
-        9 => "resumos/algebratn.tex",
+        9 => "resumos/teorianumeros.tex",
         10 => "resumos/mecanica.tex",
         11 => "resumos/educacaomatematica.tex",
     );
@@ -96,6 +96,41 @@ class CadernoResumoController extends CoordenadorController
 
         $trabalhos_aceitos = $aceitos->retorna_trabalhos_selecionados($id_inscricao_evento);
 
+        $areas = $aceitos->retorna_areas_trabalhos_selecionados($id_inscricao_evento);
+
+        $locais_arquivos = $relatorio_controller->ConsolidaLocaisArquivos($relatorio_disponivel->ano_evento);
+
+        File::deleteDirectory($locais_arquivos['caderno_de_resumos']);
+
+        File::isDirectory($locais_arquivos['caderno_de_resumos']) or File::makeDirectory($locais_arquivos['caderno_de_resumos'],0775,true);
+
+        File::copyDirectory( storage_path("app/latex_templates/caderno_de_resumos/"), $locais_arquivos['caderno_de_resumos']);
+
+
+        $arquivo_caderno_resumos = $locais_arquivos['caderno_de_resumos']."caderno_de_resumos.tex";
+
+        $nome_area = [];
+
+        foreach ($areas as $area) {
+            
+            $temp = str_replace("resumos/","",$this->array_arquivos_resumos[$area->id_area_trabalho]);
+            
+            $nome_area[] = str_replace(".tex", "", $temp);
+
+        }
+$str=file_get_contents($arquivo_caderno_resumos);
+
+        for ($i=0; $i < sizeof($nome_area); $i++) {
+
+            $str = str_replace("%%\include\{resumos/".$nome_area[$i]."}", "\include\{resumos/".$nome_area[$i]."}", $str);
+        }
+
+        file_put_contents($arquivo_caderno_resumos, $str);
+
+// $str=file_get_contents($arquivo_caderno_resumos);
+// // dd($nome_area);
+
+
         $existe_selecao = $aceitos->existe_trabalho_selecionado($id_inscricao_evento);
 
         if (!$existe_selecao) {
@@ -109,14 +144,6 @@ class CadernoResumoController extends CoordenadorController
         $coordenador = new TipoCoordenador();
 
         $nivel_coordenador = $coordenador->retorna_dados_coordenador($id_coordenador, $id_inscricao_evento);
-
-        $locais_arquivos = $relatorio_controller->ConsolidaLocaisArquivos($relatorio_disponivel->ano_evento);
-
-        File::deleteDirectory($locais_arquivos['caderno_de_resumos']);
-
-        File::isDirectory($locais_arquivos['caderno_de_resumos']) or File::makeDirectory($locais_arquivos['caderno_de_resumos'],0775,true);
-
-        File::copyDirectory( storage_path("app/latex_templates/caderno_de_resumos/"), $locais_arquivos['caderno_de_resumos']);
         
         $arquivo_capa_creditos = $locais_arquivos['caderno_de_resumos']."/obj/cap-cred-pref.tex";
 
@@ -234,41 +261,13 @@ class CadernoResumoController extends CoordenadorController
                 
             }
         }
-
-        $zip = new ZipArchive;
         
         $caderno_resumo_zipado = 'Caderno_de_Resumos_Evento_'.$relatorio_disponivel->ano_evento.'.zip';
 
         @unlink($locais_arquivos['arquivo_zip'].$caderno_resumo_zipado);
 
         $source = $locais_arquivos['local_relatorios']."caderno_de_resumos/";
-        
-        if ( $zip->open( $locais_arquivos['arquivo_zip'].$caderno_resumo_zipado, ZipArchive::CREATE ) === true ){
-
-            $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
-
-            foreach ($files as $file)
-            {
-                $file = str_replace('\\', '/', $file);
-
-                // Ignore "." and ".." folders
-                if( in_array(substr($file, strrpos($file, '/')+1), array('.', '..')) )
-                    continue;
-
-                $file = realpath($file);
-
-                if (is_dir($file) === true)
-                {
-                    $zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
-                }
-                else if (is_file($file) === true)
-                {
-                    $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
-                }
-            }
-        }
-
-        $zip->close();
+        exec('cd '.$locais_arquivos['local_relatorios'].' && zip -r '.$locais_arquivos['arquivo_zip'].$caderno_resumo_zipado.' caderno_de_resumos/');
 
         return Response::download($locais_arquivos['arquivo_zip'].$caderno_resumo_zipado, $caderno_resumo_zipado);
     }
