@@ -384,6 +384,8 @@ class RelatorioEventoController extends CoordenadorController
 						
 			    		if (sizeof($dados_resumo) == $total_aceitos_por_area) {
 			    			
+			    			$i = 1;
+
 			    			ksort($dados_resumo);
 			    			
 			    			$str=file_get_contents($arquivo_area);
@@ -392,6 +394,8 @@ class RelatorioEventoController extends CoordenadorController
 			    			
 			    			foreach ($dados_resumo as $key => $value) {
 			    				
+			    				$i++;
+
 								$words = explode(" ", $key);
 								
 								$label_autor = "";
@@ -414,8 +418,10 @@ class RelatorioEventoController extends CoordenadorController
 
 			    				$str = str_replace("label_autor", $label_autor, $str);
 
-			    				$str .= "%inicio_bloco_repetir\n".$parsed."%fim_bloco_repetir\n";
-
+			    				if ($i < $total_aceitos_por_area) {
+			    					$str .= "%inicio_bloco_repetir\n".$parsed."%fim_bloco_repetir\n";
+			    				}
+			    				
 			    				file_put_contents($arquivo_area, $str);
 			    			}
 
