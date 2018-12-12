@@ -37,45 +37,6 @@ use RecursiveDirectoryIterator;
 class RelatorioEventoController extends CoordenadorController
 {
 
-	protected $array_arquivos_resumos = array(
-		1 => "resumos/algebratn.tex",
-		2 => "resumos/analise.tex",
-		3 => "resumos/analisenumerica.tex",
-		4 => "resumos/dinamicafluidos.tex",
-		5 => "resumos/geometria.tex",
-		6 => "resumos/probabilidade.tex",
-		7 => "resumos/sistemasdinamicos.tex",
-		8 => "resumos/teoriacomputacao.tex",
-		9 => "resumos/algebratn.tex",
-		10 => "resumos/mecanica.tex",
-		11 => "resumos/educacaomatematica.tex",
-	);
-
-	protected $normalize_to_tex = array(
-      'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'\^A', 'Ã'=>'\~A', 'Ä'=>'\"A',
-      'Å'=>'A', 'Æ'=>'A', 'Ç'=>'\c C', 'È'=>'\`E', 'É'=>'\'E', 'Ê'=>'\^E', 'Ë'=>'\"E', 'Ì'=>'\`I', 'Í'=>'\'I', 'Î'=>'I',
-      'Ï'=>'I', 'Ñ'=>'N', 'Ń'=>'N', 'Ò'=>'\`O', 'Ó'=>'\'O', 'Ô'=>'\^O', 'Õ'=>'\~O', 'Ö'=>'\"O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
-      'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'\'a', 'á'=>'\`a', 'â'=>'\^a', 'ã'=>'\~a', 'ä'=>'a',
-      'å'=>'a', 'æ'=>'a', 'ç'=>'\c c', 'è'=>'\`e', 'é'=>'\'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
-      'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ń'=>'n', 'ò'=>'\`o', 'ó'=>'\'o', 'ô'=>'\^o', 'õ'=>'\~o', 'ö'=>'\"o', 'ø'=>'o', 'ù'=>'u',
-      'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
-      'ă'=>'a', 'î'=>'i', 'â'=>'a', 'ș'=>'s', 'ț'=>'t', 'Ă'=>'A', 'Î'=>'I', 'Â'=>'A', 'Ș'=>'S', 'Ț'=>'T',
-    );
-
-	public function get_string_between($string, $start, $end)
-	{
-	    $string = ' ' . $string;
-
-	    $ini = strpos($string, $start);
-
-	    if ($ini == 0) return '';
-
-	    $ini += strlen($start);
-
-	    $len = strpos($string, $end, $ini) - $ini;
-
-	    return substr($string, $ini, $len);
-	}
 	public function getGeraArquivosDiversos()
 	{
 		$user = $this->SetUser();
@@ -329,9 +290,5 @@ class RelatorioEventoController extends CoordenadorController
 	    	
 	    	return Response::download($locais_arquivos['local_relatorios'].$locais_arquivos[$arquivos_para_gerar[0]], $locais_arquivos[$arquivos_para_gerar[0]]);
 	    }
-
-	    notify()->flash('Dados salvos com sucesso!','success');
-
-	    return redirect()->back();
 	}
 }
