@@ -63,8 +63,6 @@ class RelatorioEventoController extends CoordenadorController
 
 		if ($existe_selecao) {
 			$tipo_de_arquivo_disponivel['lista_trabalhos_aceitos'] = "Arquivos com a lista dos trabalhos aceitos";
-
-			$tipo_de_arquivo_disponivel['caderno_de_resumos'] = "Caderno de Resumos";
 		}
 
 		return view('templates.partials.coordenador.relatorio_arquivos_diversos')->with(compact('tipo_de_arquivo_disponivel'));
