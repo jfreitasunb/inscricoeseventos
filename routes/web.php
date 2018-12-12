@@ -126,7 +126,7 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::get('relatorio', '\InscricoesEventos\Http\Controllers\RelatorioController@getListaRelatorios')->name('relatorio.atual');
 
-	Route::get('relatorio/link/acesso', '\InscricoesEventos\Http\Controllers\Coordenador\LinkAcessoController@getLinkAcesso')->name('link.acesso');
+	Route::get('relatorio/caderno/resumos', '\InscricoesEventos\Http\Controllers\Coordenador\CadernoResumoController@getCadernoResumo')->name('caderno.resumos');
 
 	Route::post('relatorio/link/acesso', '\InscricoesEventos\Http\Controllers\Coordenador\LinkAcessoController@postLinkAcesso')->name('link.acesso');
 
