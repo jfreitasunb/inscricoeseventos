@@ -77,8 +77,6 @@ class RelatorioEventoController extends CoordenadorController
 
 		$arquivos_para_gerar = $request->arquivos_para_gerar;
 
-		// dd($arquivos_para_gerar);
-
 		$relatorio_controller = new RelatorioController();
 
 		$user = $this->SetUser();
@@ -172,7 +170,6 @@ class RelatorioEventoController extends CoordenadorController
 
 							$linha_arquivo['titulo_trabalho'] = null;
 						}
-						
 					}
 					
 					$relatorio_csv->insertOne($linha_arquivo);
