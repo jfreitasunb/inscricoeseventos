@@ -115,7 +115,7 @@ class CadernoResumoController extends CoordenadorController
             
             $nome_area = str_replace(".tex", "", $nome_area);
 
-            exec('sed -i "s/%%\include\{resumos/'.$nome_area.'}/\include\{resumos/'.$nome_area.'}/g" '.$arquivo_caderno_resumos);
+            exec('sed -i "s/\%\%\\\\\include{resumos\/'.$nome_area.'}/\\\\include{resumos/'.$nome_area.'}/g" '.$arquivo_caderno_resumos);
 
         }
 
