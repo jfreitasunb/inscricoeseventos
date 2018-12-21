@@ -485,7 +485,7 @@ class RelatorioController extends BaseController
 
     $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio->ano_evento);
 
-    $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
+    $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['lista_trabalhos_submetidos'], 'w+');
 
     $tipo_cabecalho = "lista_trabalhos_submetidos";
 
@@ -541,7 +541,7 @@ class RelatorioController extends BaseController
 
     $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($user->id_user, $id_inscricao_evento, $relatorio->ano_evento, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio->tipo_evento);
 
-    return $this->getArquivosRelatorios($id_coordenador, $id_inscricao_evento, $arquivos_zipados_para_view, $locais_arquivos['arquivo_relatorio_csv']);
+    return $this->getArquivosRelatorios($id_coordenador, $id_inscricao_evento, $arquivos_zipados_para_view, $locais_arquivos['lista_trabalhos_submetidos']);
   }
 
   public function geraRelatorioCSV($id_inscricao_evento)
@@ -560,7 +560,7 @@ class RelatorioController extends BaseController
 
     $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio->ano_evento);
 
-    $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
+    $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['lista_trabalhos_submetidos'], 'w+');
 
     $relatorio_csv->insertOne($this->ConsolidaCabecalhoCSV());
 
@@ -601,7 +601,7 @@ class RelatorioController extends BaseController
 
     $arquivos_zipados_para_view = '';
 
-    return $this->getArquivosRelatorios($id_coordenador, $id_inscricao_evento, $arquivos_zipados_para_view, $locais_arquivos['arquivo_relatorio_csv']);
+    return $this->getArquivosRelatorios($id_coordenador, $id_inscricao_evento, $arquivos_zipados_para_view, $locais_arquivos['lista_trabalhos_submetidos']);
   }
 
   public function geraFichaIndividual($id_participante, $locale_relatorio)
@@ -662,7 +662,7 @@ class RelatorioController extends BaseController
 
     $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel['ano_evento']);
 
-    $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
+    $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['lista_trabalhos_submetidos'], 'w+');
 
     $relatorio_csv->insertOne($this->ConsolidaCabecalhoCSV());
 
@@ -708,7 +708,7 @@ class RelatorioController extends BaseController
 
     $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($id_user, $id_inscricao_evento, $relatorio_disponivel->ano_evento, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio_disponivel->tipo_evento);
 
-    return $this->getArquivosRelatoriosAnteriores($id_inscricao_evento,$arquivos_zipados_para_view, $locais_arquivos['arquivo_relatorio_csv']);
+    return $this->getArquivosRelatoriosAnteriores($id_inscricao_evento,$arquivos_zipados_para_view, $locais_arquivos['lista_trabalhos_submetidos']);
   }
 
 
