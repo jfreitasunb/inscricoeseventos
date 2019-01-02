@@ -115,6 +115,7 @@ class SubmeterTrabalhoController extends BaseController
 			'id_categoria_participante' => 'required',
 			'participante_convidado' => 'required',
 			'apresentar_trabalho' => 'required',
+			'participante_convidado' => 'required_if:apresentar_trabalho,==,on',
 			'id_tipo_apresentacao' => 'required_if:apresentar_trabalho,==,on',
 			'titulo_trabalho' => 'required_if:apresentar_trabalho,==,on',
 			'autor_trabalho' => 'required_if:apresentar_trabalho,==,on',
