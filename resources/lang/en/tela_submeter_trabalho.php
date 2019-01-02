@@ -11,7 +11,7 @@ return [
     'categoria' => 'Category',
 	'curso' => 'Course',
     'apresentar_trabalho' => 'Do you wish to present your work?',
-    'participante_convidado' => 'Você foi convidado para o evento?',
+    'participante_convidado' => 'Are you an invited speaker?',
     'sim' => 'Yes',
     'nao' => 'No',
     'tipo_apresentacao' => 'In which form would you like to present it (eg: lecture, poster, mini course)?',

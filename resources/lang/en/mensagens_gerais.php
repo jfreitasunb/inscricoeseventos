@@ -6,7 +6,7 @@
 
 
 return [
-
+    'mensagem_fim_prazo' => 'Submission period is closed.',
     'inscricao_inativa' => 'Application period is already closed or has not been opened.',
     'inscricao_finalizada' => 'You have already completed your application. You can not change this data. Only personal data can now be changed.',
     'informe_area' => 'You must inform the research area.',

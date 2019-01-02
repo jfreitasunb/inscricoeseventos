@@ -6,7 +6,7 @@
 
 
 return [
-
+    'mensagem_fim_prazo' => 'El período de presentación está cerrado.',
     'inscricao_inativa' => 'El período de inscripción ya ha finalizado o aún no ha comenzado.',
     'inscricao_finalizada' => 'Usted ha concluido su inscripción. No es posible modificar estos datos. Solamente los datos personales.',
     'informe_area' => 'Debe comunicarse con el área de doctorado.',

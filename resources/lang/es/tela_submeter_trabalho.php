@@ -10,7 +10,7 @@ return [
     'dados_participacao' => 'Datos de participación',
     'categoria' => 'Categoría',
     'apresentar_trabalho' => '¿Deseas presentar tu trabajo?',
-    'participante_convidado' => 'Você foi convidado para o evento?',
+    'participante_convidado' => '¿Eres un orador invitado?',
     'sim' => 'Sí',
     'nao' => 'No',
     'tipo_apresentacao' => '¿En qué forma le gustaría presentarlo (por ejemplo: conferencia, póster, mini curso)?',
