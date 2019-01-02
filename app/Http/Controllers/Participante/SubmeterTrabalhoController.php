@@ -141,6 +141,10 @@ class SubmeterTrabalhoController extends BaseController
 		
 		if ($apresentar_trabalho === "on") {
 
+			if (!$participante_convidado) {
+				notify()->flash(trans('mensagens_gerais.mensagem_fim_prazo'),'error');
+				return redirect()->back();
+			}
 			$id_area_trabalho = (int)$request->id_area_trabalho;
 
 			$titulo_trabalho = Purifier::clean(trim($request->titulo_trabalho));
