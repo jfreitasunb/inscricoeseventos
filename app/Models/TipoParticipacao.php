@@ -50,4 +50,15 @@ class TipoParticipacao extends FuncoesModels
             return False;
         }
     }
+
+    public function retorna_problemas_finalizacao($id_inscricao_evento)
+    {   
+        return DB::table("tipo_participacao")->select('*')->where('id_inscricao_evento', $id_inscricao_evento)->whereNotIn('id_participante',function($query) {
+
+            $query->select('id_participante')->from('finaliza_inscricicao')->where('id_inscricao_evento', $id_inscricao_evento);
+
+            })->get();
+
+        // return $this->where('id_inscricao_evento', $id_inscricao_evento)->whereNotIn('finaliza_inscricicao',)
+    }
 }
