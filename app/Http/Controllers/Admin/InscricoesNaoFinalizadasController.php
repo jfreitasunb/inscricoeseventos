@@ -37,11 +37,26 @@ class InscricoesNaoFinalizadasController extends AdminController
 
 		$nao_finalizadas = (new FinalizaInscricao())->retorna_nao_finalizadas($id_inscricao_evento);
 
-		// $problemas_na_finalizacao = (new TipoParticipacao())->retorna_problemas_finalizacao($id_inscricao_evento);
+		$problemas_na_finalizacao = (new TipoParticipacao())->retorna_problemas_finalizacao($id_inscricao_evento);
 
-		dd($nao_finalizadas);
+		$array_nao_finalizadas = [];
 
-		dd($problemas_na_finalizacao);
+		$array_problemas_na_finalizacao = [];
+
+		foreach ($nao_finalizadas as $nao_finalizou) {
+			$array_nao_finalizadas[] = $nao_finalizou->id_participante;
+		}
+
+		foreach ($problemas_na_finalizacao as $problema) {
+			$array_problemas_na_finalizacao[] = $problema->id_participante;
+		}
+
+
+		$inscricoes_para_analise = array_unique(array_merge($array_problemas_na_finalizacao,$array_nao_finalizadas), SORT_REGULAR);
+
+		foreach ($inscricoes_para_analise as $potencial) {
+			dd($potencial);
+		}
 
 		return view('templates.partials.admin.inscricoes_com_problemas')->with(compact());
 	}
