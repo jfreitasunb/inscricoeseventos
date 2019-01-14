@@ -15,23 +15,31 @@
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
-          <th scope="col">Nome do candidato</th>
-          <th scope="col">Programa</th>
+          <th scope="col">Nome do participante</th>
+          <th scope="col">Deseja apresentar trabalho</th>
+          <th scope="col">Finalizar Inscrição?</th>
         </tr>
       </thead>
       <tbody>
-        @foreach( $inscricoes_nao_finalizadas as $nao_finalizada)
+        {!! Form::open(array('route' => 'inscricoes.com.problemas', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+        {!! Form::hidden('id_inscricao_evento', $id_inscricao_evento, []) !!}
+        @foreach( $contas_para_finalizar as $key => $nao_finalizada)
           <tr>
             <td>{{ $nao_finalizada['nome'] }}</td>
-            <td>{{ $nao_finalizada['tipo_programa_pos_ptbr'] }}</td>
+            <td>{{ $nao_finalizada['apresentar_trabalho'] }}</td>
+            <td><input type="radio" name="finalizar_manualmente[{{ $key }}]" value=1>Sim <input type="radio" name="finalizar_manualmente[{{ $key }}]" value="0" checked>Não</td>
           </tr>
         @endforeach
       </tbody>
     </table>
   </div>
-  <div class="text-center">
-    {{ $inscricoes_nao_finalizadas->render() }}
+  <div class="form-group">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 text-center">
+      {!! Form::submit('Finalizar Inscrição', ['class' => 'btn btn-primary btn-lg register-submit']) !!}
+    </div>
   </div>
+</div>
 </fieldset>
 
 @endsection
