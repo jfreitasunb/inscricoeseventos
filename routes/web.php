@@ -80,7 +80,7 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::get('inscricao/problemas', '\InscricoesEventos\Http\Controllers\Admin\InscricoesNaoFinalizadasController@getInscricoesComProblemas')->name('inscricoes.com.problemas');
 
-	Route::post('inscricao/problemas', '\InscricoesEventos\Http\Controllers\Admin\InscricoesNaoFinalizadasController@getInscricoesComProblemas');
+	Route::post('inscricao/problemas', '\InscricoesEventos\Http\Controllers\Admin\InscricoesNaoFinalizadasController@postInscricoesComProblemas');
 
 	Route::get('inscricao/reativar/candidato', '\InscricoesEventos\Http\Controllers\Admin\ReativarInscricaoCandidatoController@getReativarInscricaoCandidato')->name('reativar.candidato');
 
