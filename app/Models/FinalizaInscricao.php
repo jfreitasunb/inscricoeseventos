@@ -82,4 +82,9 @@ class FinalizaInscricao extends FuncoesModels
     {
         return $this->select('finalizada')->where('id_participante',$id_participante)->where('id_inscricao_evento',$id_inscricao_evento)->value('finalizada');
     }
+
+    public function retorna_nao_finalizadas($id_inscricao_evento)
+    {
+        return $this->where('id_inscricao_evento', $id_inscricao_evento)->where('finalizada', FALSE)->get();
+    }
 }
