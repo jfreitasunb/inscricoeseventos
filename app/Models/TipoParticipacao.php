@@ -55,7 +55,7 @@ class TipoParticipacao extends FuncoesModels
     {   
         return DB::table("tipo_participacao")->select('*')->where('id_inscricao_evento', $id_inscricao_evento)->whereNotIn('id_participante', function($query) use ($id_inscricao_evento) {
 
-            $query->select('id_participante')->from('finaliza_inscricicao')->where('id_inscricao_evento', $id_inscricao_evento);
+            $query->select('id_participante')->from('finaliza_inscricao')->where('id_inscricao_evento', $id_inscricao_evento);
 
             })->get();
 
