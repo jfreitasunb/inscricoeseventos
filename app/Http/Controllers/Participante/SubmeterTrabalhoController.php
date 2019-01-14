@@ -133,6 +133,17 @@ class SubmeterTrabalhoController extends BaseController
 		
 		$id_participante = $user->id_user;
 
+		$inicializa_finalizacao = new FinalizaInscricao();
+
+		$inicializa_finalizacao->id_inscricao_evento = $id_inscricao_evento;
+
+		$inicializa_finalizacao->id_participante = $id_participante;
+
+		$inicializa_finalizacao->finalizada = False;
+
+		$inicializa_finalizacao->save();
+
+
 		$id_categoria_participante = (int)$request->id_categoria_participante;
 
 		$participante_convidado = (int)$request->participante_convidado;
