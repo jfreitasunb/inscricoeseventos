@@ -58,7 +58,5 @@ class TipoParticipacao extends FuncoesModels
             $query->select('id_participante')->from('finaliza_inscricao')->where('id_inscricao_evento', $id_inscricao_evento);
 
             })->get();
-
-        // return $this->where('id_inscricao_evento', $id_inscricao_evento)->whereNotIn('finaliza_inscricicao',)
     }
 }
