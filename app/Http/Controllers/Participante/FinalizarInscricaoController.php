@@ -144,7 +144,7 @@ class FinalizarInscricaoController extends BaseController
 
 			if (count($id_finalizada_anteriormente)>0){
 
-				DB::table('finaliza_inscricao')->where('id', $id_finalizada_anteriormente[0])->where('id_participante', $id_participante)->where('id_inscricao_evento', $id_inscricao_evento)->update(['finalizada' => True]);
+				DB::table('finaliza_inscricao')->where('id', $id_finalizada_anteriormente[0])->where('id_participante', $id_participante)->where('id_inscricao_evento', $id_inscricao_evento)->update(['finalizada' => True, 'updated_at' => date('Y-m-d H:i:s')]);
 			}else{
 				
 				$finalizar_inscricao->id_participante = $id_participante;

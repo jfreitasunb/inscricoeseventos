@@ -92,7 +92,39 @@ class InscricoesNaoFinalizadasController extends AdminController
 
 	public function postInscricoesComProblemas(Request $request)
 	{
-		dd("aqui");
+		$this->validate($request, [
+			'finalizar_manualmente' => 'required',
+		]);
+
+		$finalizar_manualmente = $request->finalizar_manualmente;
+
+		$id_inscricao_evento = $request->id_inscricao_evento;
+
+		foreach ($finalizar_manualmente as $key => $finalizar) {
+			
+			if ($finalizar) {
+				
+				$existe = (new FinalizaInscricao())->retorna_se_finalizou($key,$id_inscricao_evento);
+
+				if (is_null($existe)) {
+					$finaliza_inscricao = new FinalizaInscricao();
+
+					$finaliza_inscricao->id_participante = $key;
+
+					$finaliza_inscricao->id_inscricao_evento = $id_inscricao_evento;
+
+					$finaliza_inscricao->finalizada = True;
+
+					$finaliza_inscricao->save();
+				}else{
+					DB::table('finaliza_inscricao')->where('id_participante', $key)->where('id_inscricao_evento', $id_inscricao_evento)->update(['finalizada' => True, 'updated_at' => date('Y-m-d H:i:s')]);
+				}
+			}
+		}
+
+		notify()->flash('Inscrições finalizadas corretamente.','success');
+
+		return redirect()->route('inscricoes.com.problemas');
 
 	}
 }
