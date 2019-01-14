@@ -65,11 +65,11 @@
                                         <span class="glyphicon glyphicon-refresh fa-fw"></span><a href="{{ route('reativar.candidato') }}">Reativar Inscrição Candidato</a>
                                     </td>
                                 </tr>
-                                {{-- <tr>
-                                    <td class= "{{ Route::currentRouteNamed('inscricoes.nao.finalizadas') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('inscricoes.nao.finalizadas') }}">Inscrições Não Finalizadas</a>
+                                <tr>
+                                    <td class= "{{ Route::currentRouteNamed('inscricoes.com.problemas') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('inscricoes.com.problemas') }}">Inscrições Não Finalizadas</a>
                                     </td>
-                                </tr> --}}
+                                </tr>
                             </table>
                         </div>
                     </div>
