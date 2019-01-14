@@ -78,10 +78,6 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('inscricao/editar', '\InscricoesEventos\Http\Controllers\Admin\EditarInscricaoController@postEditarInscricao');
 
-	Route::get('inscricao/problemas', '\InscricoesEventos\Http\Controllers\Admin\InscricoesNaoFinalizadasController@getInscricoesComProblemas')->name('inscricoes.com.problemas');
-
-	Route::post('inscricao/problemas', '\InscricoesEventos\Http\Controllers\Admin\InscricoesNaoFinalizadasController@postInscricoesComProblemas');
-
 	Route::get('inscricao/reativar/candidato', '\InscricoesEventos\Http\Controllers\Admin\ReativarInscricaoCandidatoController@getReativarInscricaoCandidato')->name('reativar.candidato');
 
 	Route::post('inscricao/pesquisa/candidato', '\InscricoesEventos\Http\Controllers\Admin\ReativarInscricaoCandidatoController@postInscricaoParaReativar')->name('pesquisa.candidato');
@@ -132,11 +128,15 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::get('relatorio/caderno/resumos', '\InscricoesEventos\Http\Controllers\Coordenador\CadernoResumoController@getCadernoResumo')->name('caderno.resumos');
 
+	Route::get('inscricao/problemas', '\InscricoesEventos\Http\Controllers\Admin\InscricoesNaoFinalizadasController@getInscricoesComProblemas')->name('inscricoes.com.problemas');
+
+	Route::post('inscricao/problemas', '\InscricoesEventos\Http\Controllers\Admin\InscricoesNaoFinalizadasController@postInscricoesComProblemas');
+
 	// Route::post('relatorio/link/acesso', '\InscricoesEventos\Http\Controllers\Coordenador\LinkAcessoController@postLinkAcesso')->name('link.acesso');
 
-	// Route::get('gera/ficha/individual', '\InscricoesEventos\Http\Controllers\Coordenador\RelatorioPosController@getFichaInscricaoPorCandidato')->name('gera.ficha.individual');
+	Route::get('gera/ficha/individual', '\InscricoesEventos\Http\Controllers\Coordenador\RelatorioPosController@getFichaInscricaoPorCandidato')->name('gera.ficha.individual');
 
-	// Route::get('ver/ficha/individual', '\InscricoesEventos\Http\Controllers\Coordenador\RelatorioPosController@GeraPdfFichaIndividual')->name('ver.ficha.individual');
+	Route::get('ver/ficha/individual', '\InscricoesEventos\Http\Controllers\Coordenador\RelatorioPosController@GeraPdfFichaIndividual')->name('ver.ficha.individual');
 
 	// Route::get('relatorios/anteriores/{id_monitoria}', '\InscricoesEventos\Http\Controllers\RelatorioController@geraRelatoriosAnteriores')->name('gera.anteriores');
 
