@@ -17,8 +17,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class= "{{ Route::currentRouteNamed('gera.ficha.individual') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-file fa-fw"></span><a href="{{ route('gera.ficha.individual') }}">Por Candidato</a>
+                                    <td class= "{{ Route::currentRouteNamed('seleciona.trabalhos.submetidos') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-backward fa-fw"></span><a href="{{ route('seleciona.trabalhos.submetidos') }}">Selecionar Trabalhos</a>
                                     </td>
                                 </tr>
                             </table>
@@ -37,7 +37,7 @@
         <div class="col-sm-9 col-md-10">
             <div class="menuadmin well">
                 @yield('relatorio_trabalhos_submetidos')
-                @yield('ficha_individual')
+                @yield('seleciona_trabalhos_submentidos')
             </div>
         </div>
     </div>

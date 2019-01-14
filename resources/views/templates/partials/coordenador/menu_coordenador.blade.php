@@ -22,8 +22,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class= "{{ Route::currentRouteNamed('editar.area.pos') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-refresh fa-fw"></span><a href="{{ route('editar.area.pos') }}">Editar Formação</a>
+                                    <td class= "{{ Route::currentRouteNamed('inscricoes.com.problemas') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('inscricoes.com.problemas') }}">Inscrições Não Finalizadas</a>
                                     </td>
                                 </tr>
                                 {{-- <tr>
