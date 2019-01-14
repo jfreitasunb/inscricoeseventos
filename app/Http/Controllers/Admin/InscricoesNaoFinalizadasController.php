@@ -8,7 +8,7 @@ use Mail;
 use Session;
 use Notification;
 use Carbon\Carbon;
-use InscricoesEventos\Models\{User, ConfiguraInscricaoEvento, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, TipoParticipacao};
+use InscricoesEventos\Models\{User, ConfiguraInscricaoEvento, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, TipoParticipacao, TrabalhoSubmetido};
 use Illuminate\Http\Request;
 use InscricoesEventos\Mail\EmailVerification;
 use InscricoesEventos\Http\Controllers\Controller;
@@ -39,30 +39,60 @@ class InscricoesNaoFinalizadasController extends AdminController
 
 		$problemas_na_finalizacao = (new TipoParticipacao())->retorna_problemas_finalizacao($id_inscricao_evento);
 
-		$array_nao_finalizadas = [];
-
-		$array_problemas_na_finalizacao = [];
-
 		foreach ($nao_finalizadas as $nao_finalizou) {
-			$array_nao_finalizadas[] = $nao_finalizou->id_participante;
+			$temporario = (new TipoParticipacao())->retorna_participacao($id_inscricao_evento, $nao_finalizou->id_participante);
+
+			if ($temporario->apresentar_trabalho) {
+				
+				if (!is_null((new TrabalhoSubmetido())->retorna_trabalho_submetido($nao_finalizou->id_participante, $id_inscricao_evento))) {
+
+					$contas_para_finalizar[$nao_finalizou->id_participante]['nome'] = User::find($nao_finalizou->id_participante)->nome;
+
+					$contas_para_finalizar[$nao_finalizou->id_participante]['apresentar_trabalho'] = "Sim";
+					
+				}
+				
+			}else{
+				$contas_para_finalizar[$nao_finalizou->id_participante]['nome'] = User::find($nao_finalizou->id_participante)->nome;
+
+				$contas_para_finalizar[$nao_finalizou->id_participante]['apresentar_trabalho'] = "Não";
+			}
 		}
 
 		foreach ($problemas_na_finalizacao as $problema) {
-			$array_problemas_na_finalizacao[] = $problema->id_participante;
+			
+			if ($problema->apresentar_trabalho) {
+				
+				if (!is_null((new TrabalhoSubmetido())->retorna_trabalho_submetido($problema->id_participante, $id_inscricao_evento))) {
+
+					$contas_para_finalizar[$problema->id_participante]['nome'] = User::find($problema->id_participante)->nome;
+
+					$contas_para_finalizar[$problema->id_participante]['apresentar_trabalho'] = "Sim";
+					
+				}
+				
+			}else{
+				$contas_para_finalizar[$problema->id_participante]['nome'] = User::find($problema->id_participante)->nome;
+
+				$contas_para_finalizar[$problema->id_participante]['apresentar_trabalho'] = "Não";
+			}
+		}
+
+		if (!isset($contas_para_finalizar)) {
+			
+			notify()->flash('Não há inscrições com problemas na finalização!','warning');
+
+			return redirect()->route('home');
 		}
 
 
-		$inscricoes_para_analise = array_unique(array_merge($array_problemas_na_finalizacao,$array_nao_finalizadas), SORT_REGULAR);
 
-		foreach ($inscricoes_para_analise as $potencial) {
-			dd($potencial);
-		}
-
-		return view('templates.partials.admin.inscricoes_com_problemas')->with(compact());
+		return view('templates.partials.admin.inscricoes_com_problemas')->with(compact('contas_para_finalizar', 'id_inscricao_evento'));
 	}
 
 	public function postInscricoesComProblemas(Request $request)
 	{
+		dd("aqui");
 
 	}
 }
