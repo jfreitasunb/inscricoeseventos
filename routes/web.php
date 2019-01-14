@@ -78,6 +78,10 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('inscricao/editar', '\InscricoesEventos\Http\Controllers\Admin\EditarInscricaoController@postEditarInscricao');
 
+	Route::get('inscricao/problemas', '\InscricoesEventos\Http\Controllers\Admin\InscricoesNaoFinalizadasController@getInscricoesComProblemas')->name('inscricoes.com.problemas');
+
+	Route::post('inscricao/problemas', '\InscricoesEventos\Http\Controllers\Admin\InscricoesNaoFinalizadasController@getInscricoesComProblemas');
+
 	Route::get('inscricao/reativar/candidato', '\InscricoesEventos\Http\Controllers\Admin\ReativarInscricaoCandidatoController@getReativarInscricaoCandidato')->name('reativar.candidato');
 
 	Route::post('inscricao/pesquisa/candidato', '\InscricoesEventos\Http\Controllers\Admin\ReativarInscricaoCandidatoController@postInscricaoParaReativar')->name('pesquisa.candidato');
