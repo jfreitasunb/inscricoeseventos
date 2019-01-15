@@ -14,6 +14,7 @@
   <div class="row">
   
     {!! Form::open(array('route' => 'inscricoes.manual', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+    {!! Form::hidden('id_inscricao_evento', $id_inscricao_evento, []) !!}
           <div class="row">
             {!! Form::label('nome', trans('tela_dados_pessoais.nome'), ['class' => 'col-md-4 control-label'])!!}
             <div class="col-md-4">
@@ -23,7 +24,7 @@
           <div class="row">
             {!! Form::label('email', trans('tela_dados_pessoais.email'), ['class' => 'col-md-4 control-label'])!!}
             <div class="col-md-4">
-              {!! Form::text('email', '', ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+              {!! Form::text('email', '', ['class' => 'form-control input-md formhorizontal', 'required' => '', 'ata-parsley-type' => 'email']) !!}
             </div>
           </div>
           <div class="row">
