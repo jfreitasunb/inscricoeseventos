@@ -13,7 +13,7 @@
 
   <div class="row">
   
-    {!! Form::open(array('route' => 'inscricoes.manual', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+    {!! Form::open(array('route' => 'inscricao.manual', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
     {!! Form::hidden('id_inscricao_evento', $id_inscricao_evento, []) !!}
           <div class="row">
             {!! Form::label('nome', trans('tela_dados_pessoais.nome'), ['class' => 'col-md-4 control-label'])!!}

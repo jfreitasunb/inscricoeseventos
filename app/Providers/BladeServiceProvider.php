@@ -19,7 +19,7 @@ class BladeServiceProvider extends ServiceProvider
     
     private $accordion_contas = ['pesquisa.email.muda.senha', 'admin.impersonate', 'pesquisa.usuario', 'criar.coordenador', 'lista.inativos', 'associa.recomendantes', 'visualiza.associacoes'];
 
-    private $accordion_inscricoes = ['configura.inscricao', 'pesquisa.candidato', 'editar.inscricao', 'reativar.candidato', 'inscricoes.com.problemas', 'inscricoes.manual'];
+    private $accordion_inscricoes = ['configura.inscricao', 'pesquisa.candidato', 'editar.inscricao', 'reativar.candidato', 'inscricoes.com.problemas', 'inscricao.manual'];
 
     private $accordion_relatorios = ['relatorio.arquivos.diversos', 'relatorio.atual', 'seleciona.trabalhos.submetidos', 'relatorio.anteriores', 'gera.ficha.individual', 'ver.charts'];
 

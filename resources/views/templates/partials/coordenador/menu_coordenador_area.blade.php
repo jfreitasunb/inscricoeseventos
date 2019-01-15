@@ -12,8 +12,8 @@
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
-                                    <td class= "{{ Route::currentRouteNamed('inscricoes.manual') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('inscricoes.manual') }}">Inscrição Manual</a>
+                                    <td class= "{{ Route::currentRouteNamed('inscricao.manual') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('inscricao.manual') }}">Inscrição Manual</a>
                                     </td>
                                 </tr>
                                 <tr>
