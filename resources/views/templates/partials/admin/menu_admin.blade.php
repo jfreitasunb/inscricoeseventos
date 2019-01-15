@@ -70,6 +70,11 @@
                                         <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('inscricoes.com.problemas') }}">Inscrições Não Finalizadas</a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class= "{{ Route::currentRouteNamed('inscricoes.manual') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('inscricoes.manual') }}">Inscrição Manual</a>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
@@ -146,6 +151,7 @@
                 @yield('datatable_users')
                 @yield('ficha_individual')
                 @yield('graficos')
+                @yield('inscricao_manual')
             </div>
         </div>
     </div>

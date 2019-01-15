@@ -26,6 +26,11 @@
                                         <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('inscricoes.com.problemas') }}">Inscrições Não Finalizadas</a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class= "{{ Route::currentRouteNamed('inscricoes.manual') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('inscricoes.manual') }}">Inscrição Manual</a>
+                                    </td>
+                                </tr>
                                 {{-- <tr>
                                     <td class= "{{ Route::currentRouteNamed('inscricoes.nao.finalizadas') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('inscricoes.nao.finalizadas') }}">Inscrições Não Finalizadas</a>
@@ -93,6 +98,7 @@
                 @yield('relatorio_trabalhos_submetidos')
                 @yield('seleciona_trabalhos_submentidos')
                 @yield('ficha_individual')
+                @yield('inscricao_manual')
             </div>
         </div>
     </div>

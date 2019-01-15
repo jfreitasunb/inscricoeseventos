@@ -12,6 +12,11 @@
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
+                                    <td class= "{{ Route::currentRouteNamed('inscricoes.manual') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('inscricoes.manual') }}">Inscrição Manual</a>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class= "{{ Route::currentRouteNamed('relatorio.atual') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-duplicate fa-fw"></span><a href="{{ route('relatorio.atual') }}">Trabalhos Submetidos</a>
                                     </td>
@@ -36,6 +41,7 @@
         </div>
         <div class="col-sm-9 col-md-10">
             <div class="menuadmin well">
+                @yield('inscricao_manual')
                 @yield('relatorio_trabalhos_submetidos')
                 @yield('seleciona_trabalhos_submentidos')
             </div>
