@@ -259,14 +259,21 @@ class InscricaoManualController extends AdminController
 				$submeteu_trabalho = $submeter_trabalho->retorna_trabalho_submetido($id_participante, $id_inscricao_evento);
 
 				if (is_null($submeteu_trabalho)) {
+					
 					$submeter_trabalho->id_participante = $id_participante;
+					
 					$submeter_trabalho->id_area_trabalho = $id_area_trabalho;
+					
 					$submeter_trabalho->id_inscricao_evento = $id_inscricao_evento;
+					
 					$submeter_trabalho->titulo_trabalho = $titulo_trabalho;
+					
 					$submeter_trabalho->autor_trabalho = $autor_trabalho;
+					
 					$submeter_trabalho->abstract_trabalho = $abstract_trabalho;
 
 					$status_trabalho = $submeter_trabalho->save();
+
 				}else{
 					$atualiza_trabalho = [];
 					
@@ -285,8 +292,11 @@ class InscricaoManualController extends AdminController
 				}
 
 			}else{
+				
 				$apresentar_trabalho = false;
+				
 				$id_tipo_apresentacao = null;
+				
 				$status_trabalho = false;
 			}	
 
@@ -296,12 +306,16 @@ class InscricaoManualController extends AdminController
 
 			if (is_null($submeteu_participacao)) {
 
-
 				$nova_participacao->id_participante = $id_participante;
+				
 				$nova_participacao->id_categoria_participante = $id_categoria_participante;
+				
 				$nova_participacao->id_inscricao_evento = $id_inscricao_evento;
+				
 				$nova_participacao->apresentar_trabalho = $apresentar_trabalho;
+				
 				$nova_participacao->id_tipo_apresentacao = $id_tipo_apresentacao;
+				
 				$nova_participacao->participante_convidado = $participante_convidado;
 
 				$status_participacao = $nova_participacao->save();
