@@ -26,7 +26,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class InscricaoManualController extends AdminController
 {
 
-	public function getInscricManual()
+	public function getInscricaoManual()
 	{
 
 		$evento = new ConfiguraInscricaoEvento();
@@ -38,7 +38,7 @@ class InscricaoManualController extends AdminController
 		return view('templates.partials.admin.inscricao_manual')->with(compact('id_inscricao_evento'));
 	}
 
-	public function postInscricManual(Request $request)
+	public function postInscricaoManual(Request $request)
 	{
 		$this->validate($request, [
 			'finalizar_manualmente' => 'required',
