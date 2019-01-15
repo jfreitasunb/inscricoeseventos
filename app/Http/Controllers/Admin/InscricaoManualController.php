@@ -6,6 +6,7 @@ use Auth;
 use DB;
 use Mail;
 use Session;
+use Purifier;
 use Notification;
 use Carbon\Carbon;
 use InscricoesEventos\Models\{User, ConfiguraInscricaoEvento, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, TipoParticipacao, TrabalhoSubmetido, ConfiguraCategoriaParticipante, ConfiguraTipoApresentacao};
@@ -19,6 +20,7 @@ use InscricoesEventos\Http\Controllers\APIController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Str;
 
 /**
 * Classe para visualização da página inicial.
@@ -63,7 +65,6 @@ class InscricaoManualController extends AdminController
 
 	public function postInscricaoManual(Request $request)
 	{	
-		dd($request);
 		$this->validate($request, [
 			'id_inscricao_evento' => 'required',
 			'nome' => 'required',
@@ -84,6 +85,8 @@ class InscricaoManualController extends AdminController
 		]);
 
 		$nome = Purifier::clean(trim($request->input('nome')));
+
+		$email = strtolower(trim($request->input('email')));
 		
 		$nome_cracha = Purifier::clean(trim($request->input('nome_cracha')));
 		
@@ -98,5 +101,25 @@ class InscricaoManualController extends AdminController
 		$participante_convidado = (int)$request->participante_convidado;
 
 		$apresentar_trabalho = $request->apresentar_trabalho;
+
+		$email_existe = (new User())->retorna_user_por_email($email);
+
+		if (is_null($email_existe)) {
+			$registra_novo_usuario = new User();
+
+			$registra_novo_usuario->nome = $nome;
+
+			$registra_novo_usuario->email = $email;
+
+			$registra_novo_usuario->password = bcrypt(Str::random(32));
+
+			$registra_novo_usuario->ativo = TRUE;
+
+			$registra_novo_usuario->save();
+
+			$id_user = $registra_novo_usuario->id_user;
+
+			dd($id_user);
+		}
 	}
 }
