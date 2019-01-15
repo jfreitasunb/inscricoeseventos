@@ -83,11 +83,20 @@ class InscricaoManualController extends AdminController
 			'id_area_trabalho' => 'required_if:apresentar_trabalho,==,on',
 		]);
 
-		// $finalizar_manualmente = $request->finalizar_manualmente;
-
-		// $id_inscricao_evento = $request->id_inscricao_evento;
-
+		$nome = Purifier::clean(trim($request->input('nome')));
 		
+		$nome_cracha = Purifier::clean(trim($request->input('nome_cracha')));
+		
+		$numero_documento = Purifier::clean(trim($request->input('numero_documento')));
+		
+		$instituicao = Purifier::clean(trim($request->input('instituicao')));
+		
+		$id_pais = (int) Purifier::clean($request->input('id_pais'));
+		
+		$id_categoria_participante = (int)$request->id_categoria_participante;
 
+		$participante_convidado = (int)$request->participante_convidado;
+
+		$apresentar_trabalho = $request->apresentar_trabalho;
 	}
 }
