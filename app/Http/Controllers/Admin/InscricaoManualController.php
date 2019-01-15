@@ -9,7 +9,7 @@ use Session;
 use Purifier;
 use Notification;
 use Carbon\Carbon;
-use InscricoesEventos\Models\{User, ConfiguraInscricaoEvento, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, TipoParticipacao, TrabalhoSubmetido, ConfiguraCategoriaParticipante, ConfiguraTipoApresentacao};
+use InscricoesEventos\Models\{User, ConfiguraInscricaoEvento, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, TipoParticipacao, TrabalhoSubmetido, ConfiguraCategoriaParticipante, ConfiguraTipoApresentacao, DadoPessoalParticipante};
 use Illuminate\Http\Request;
 use InscricoesEventos\Mail\EmailVerification;
 use InscricoesEventos\Http\Controllers\Controller;
@@ -117,9 +117,23 @@ class InscricaoManualController extends AdminController
 
 			$registra_novo_usuario->save();
 
-			$id_user = $registra_novo_usuario->id_user;
+			$id_participante = $registra_novo_usuario->id_user;
 
-			dd($id_user);
+			$cria_participante = new DadoPessoalParticipante();
+			
+			$cria_participante->id_participante = $id_participante;
+			
+			$cria_participante->nome_cracha = $nome_cracha;
+			
+			$cria_participante->numero_documento = $numero_documento;
+			
+			$cria_participante->instituicao = $instituicao;
+			
+			$cria_participante->id_pais = $id_pais;
+			
+			$cria_participante->atualizado = True;
+			
+			$cria_participante->save();
 		}
 	}
 }
