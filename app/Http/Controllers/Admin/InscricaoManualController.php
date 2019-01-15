@@ -35,8 +35,7 @@ class InscricaoManualController extends AdminController
 
 		$id_inscricao_evento = $evento_corrente->id_inscricao_evento;
 
-		
-		return view('templates.partials.admin.inscricoes_com_problemas')->with(compact('contas_para_finalizar', 'id_inscricao_evento'));
+		return view('templates.partials.admin.inscricao_manual')->with(compact('id_inscricao_evento'));
 	}
 
 	public function postInscricManual(Request $request)
