@@ -7,9 +7,9 @@
 @endsection
 
 @section('inscricao_manual')
-
+<h4>Realizar inscrição manualmente</h4>
 <fieldset class="scheduler-border">
-  <legend class="scheduler-border">Realizar inscrição manualmente</legend>
+  <legend class="scheduler-border">Dados Pessoais</legend>
 
   <div class="row">
   
