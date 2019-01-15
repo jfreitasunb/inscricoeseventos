@@ -104,6 +104,8 @@ class InscricaoManualController extends AdminController
 
 		$email_existe = (new User())->retorna_user_por_email($email);
 
+		$id_inscricao_evento = (int)$request->id_inscricao_evento;
+
 		if (is_null($email_existe)) {
 			$registra_novo_usuario = new User();
 
@@ -134,6 +136,71 @@ class InscricaoManualController extends AdminController
 			$cria_participante->atualizado = True;
 			
 			$cria_participante->save();
+
+			if ($apresentar_trabalho === "on") {
+
+				$id_area_trabalho = (int)$request->id_area_trabalho;
+
+				$titulo_trabalho = Purifier::clean(trim($request->titulo_trabalho));
+
+				$id_tipo_apresentacao = (int)Purifier::clean(trim($request->id_tipo_apresentacao));
+
+				$autor_trabalho = Purifier::clean(trim($request->autor_trabalho));
+
+				$abstract_trabalho = Purifier::clean(trim($request->abstract_trabalho));
+
+				$apresentar_trabalho = true;
+
+				$submeter_trabalho = new TrabalhoSubmetido();
+
+				$submeter_trabalho->id_participante = $id_participante;
+				
+				$submeter_trabalho->id_area_trabalho = $id_area_trabalho;
+				
+				$submeter_trabalho->id_inscricao_evento = $evento_corrente->id_inscricao_evento;
+				
+				$submeter_trabalho->titulo_trabalho = $titulo_trabalho;
+				
+				$submeter_trabalho->autor_trabalho = $autor_trabalho;
+				
+				$submeter_trabalho->abstract_trabalho = $abstract_trabalho;
+
+				$status_trabalho = $submeter_trabalho->save();
+			}else{
+				$apresentar_trabalho = false;
+				
+				$id_tipo_apresentacao = null;
+			
+				$status_trabalho = false;
+
+				$nova_participacao = new TipoParticipacao();
+
+				$nova_participacao->id_participante = $id_participante;
+				
+				$nova_participacao->id_categoria_participante = $id_categoria_participante;
+				
+				$nova_participacao->id_inscricao_evento = $id_inscricao_evento;
+				
+				$nova_participacao->apresentar_trabalho = $apresentar_trabalho;
+				
+				$nova_participacao->id_tipo_apresentacao = $id_tipo_apresentacao;
+			
+				$nova_participacao->participante_convidado = $participante_convidado;
+
+				$status_participacao = $nova_participacao->save();
+			}
+
+			$inicializa_finalizacao = new FinalizaInscricao();
+
+			$inicializa_finalizacao->id_inscricao_evento = $id_inscricao_evento;
+
+			$inicializa_finalizacao->id_participante = $id_participante;
+
+			$inicializa_finalizacao->finalizada = True;
+
+			$inicializa_finalizacao->save();
+
+
 		}
 	}
 }
