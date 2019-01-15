@@ -172,23 +172,23 @@ class InscricaoManualController extends AdminController
 				$id_tipo_apresentacao = null;
 			
 				$status_trabalho = false;
-
-				$nova_participacao = new TipoParticipacao();
-
-				$nova_participacao->id_participante = $id_participante;
-				
-				$nova_participacao->id_categoria_participante = $id_categoria_participante;
-				
-				$nova_participacao->id_inscricao_evento = $id_inscricao_evento;
-				
-				$nova_participacao->apresentar_trabalho = $apresentar_trabalho;
-				
-				$nova_participacao->id_tipo_apresentacao = $id_tipo_apresentacao;
-			
-				$nova_participacao->participante_convidado = $participante_convidado;
-
-				$status_participacao = $nova_participacao->save();
 			}
+
+			$nova_participacao = new TipoParticipacao();
+
+			$nova_participacao->id_participante = $id_participante;
+			
+			$nova_participacao->id_categoria_participante = $id_categoria_participante;
+			
+			$nova_participacao->id_inscricao_evento = $id_inscricao_evento;
+			
+			$nova_participacao->apresentar_trabalho = $apresentar_trabalho;
+			
+			$nova_participacao->id_tipo_apresentacao = $id_tipo_apresentacao;
+		
+			$nova_participacao->participante_convidado = $participante_convidado;
+
+			$status_participacao = $nova_participacao->save();
 
 			$inicializa_finalizacao = new FinalizaInscricao();
 
@@ -275,6 +275,7 @@ class InscricaoManualController extends AdminController
 					$status_trabalho = $submeter_trabalho->save();
 
 				}else{
+					
 					$atualiza_trabalho = [];
 					
 					$id = $submeteu_trabalho->id;
