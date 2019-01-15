@@ -15,7 +15,7 @@ use InscricoesEventos\Http\Controllers\Controller;
 use InscricoesEventos\Http\Controllers\AuthController;
 use InscricoesEventos\Http\Controllers\CoordenadorController;
 use InscricoesEventos\Http\Controllers\DataTable\UserController;
-use InscricoesEventos\Notifications\NotificaRecomendante;
+use InscricoesEventos\Http\Controllers\APIController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -35,7 +35,12 @@ class InscricaoManualController extends AdminController
 
 		$id_inscricao_evento = $evento_corrente->id_inscricao_evento;
 
-		return view('templates.partials.admin.inscricao_manual')->with(compact('id_inscricao_evento'));
+		$getcountries = new APIController();
+
+		$countries = $getcountries->index();
+
+
+		return view('templates.partials.admin.inscricao_manual')->with(compact('countries', 'id_inscricao_evento'));
 	}
 
 	public function postInscricaoManual(Request $request)
