@@ -200,7 +200,130 @@ class InscricaoManualController extends AdminController
 
 			$inicializa_finalizacao->save();
 
+		}else{
 
+			$id_participante = $email_existe->id_user;
+
+			$participante =  DadoPessoalParticipante::find($id_participante);
+
+			if (is_null($participante)) {
+				
+				$cria_participante = new DadoPessoalParticipante();
+				
+				$cria_participante->id_participante = $id_participante;
+				
+				$cria_participante->nome_cracha = $nome_cracha;
+				
+				$cria_participante->numero_documento = $numero_documento;
+				
+				$cria_participante->instituicao = $instituicao;
+				
+				$cria_participante->id_pais = $id_pais;
+				
+				$cria_participante->atualizado = True;
+				
+				$cria_participante->save();
+
+			}else{
+				
+				$dados_pessoais = [
+					'id_participante' => $id_participante,
+					'nome' => $nome,
+					'nome_cracha' => $nome_cracha,
+					'numero_documento' => $numero_documento,
+					'instituicao' => $instituicao,
+					'id_pais' => $id_pais,
+					'atualizado' => True,
+				];
+
+				$participante->update($dados_pessoais);
+
+			}
+
+			if ($apresentar_trabalho === "on") {
+
+				$id_area_trabalho = (int)$request->id_area_trabalho;
+
+				$titulo_trabalho = Purifier::clean(trim($request->titulo_trabalho));
+
+				$id_tipo_apresentacao = (int)Purifier::clean(trim($request->id_tipo_apresentacao));
+
+				$autor_trabalho = Purifier::clean(trim($request->autor_trabalho));
+
+				$abstract_trabalho = Purifier::clean(trim($request->abstract_trabalho));
+
+				$apresentar_trabalho = true;
+
+				$submeter_trabalho = new TrabalhoSubmetido();
+
+				$submeteu_trabalho = $submeter_trabalho->retorna_trabalho_submetido($id_participante, $id_inscricao_evento);
+
+				if (is_null($submeteu_trabalho)) {
+					$submeter_trabalho->id_participante = $id_participante;
+					$submeter_trabalho->id_area_trabalho = $id_area_trabalho;
+					$submeter_trabalho->id_inscricao_evento = $evento_corrente->id_inscricao_evento;
+					$submeter_trabalho->titulo_trabalho = $titulo_trabalho;
+					$submeter_trabalho->autor_trabalho = $autor_trabalho;
+					$submeter_trabalho->abstract_trabalho = $abstract_trabalho;
+
+					$status_trabalho = $submeter_trabalho->save();
+				}else{
+					$atualiza_trabalho = [];
+					
+					$id = $submeteu_trabalho->id;
+
+					$atualiza_trabalho['id_area_trabalho'] = $submeteu_trabalho->id_area_trabalho;
+
+					$atualiza_trabalho['titulo_trabalho'] = $titulo_trabalho;
+
+					$atualiza_trabalho['autor_trabalho'] = $autor_trabalho;
+
+					$atualiza_trabalho['abstract_trabalho'] = $abstract_trabalho;
+
+					$status_trabalho = $submeteu_trabalho->atualiza_trabalho_submetido($id, $id_inscricao_evento, $id_participante, $atualiza_trabalho);
+					
+				}
+
+			}else{
+				$apresentar_trabalho = false;
+				$id_tipo_apresentacao = null;
+				$status_trabalho = false;
+			}	
+
+			$nova_participacao = new TipoParticipacao();
+
+			$submeteu_participacao = $nova_participacao->retorna_participacao($id_inscricao_evento, $id_participante);
+
+			if (is_null($submeteu_participacao)) {
+
+
+				$nova_participacao->id_participante = $id_participante;
+				$nova_participacao->id_categoria_participante = $id_categoria_participante;
+				$nova_participacao->id_inscricao_evento = $id_inscricao_evento;
+				$nova_participacao->apresentar_trabalho = $apresentar_trabalho;
+				$nova_participacao->id_tipo_apresentacao = $id_tipo_apresentacao;
+				$nova_participacao->participante_convidado = $participante_convidado;
+
+				$status_participacao = $nova_participacao->save();
+			}else{
+
+				$atualiza_participacao = [];
+
+				$id_participacao = $submeteu_participacao->id;
+
+				$atualiza_participacao['id_categoria_participante'] = $id_categoria_participante;
+
+				$atualiza_participacao['apresentar_trabalho'] = $apresentar_trabalho;
+
+				$atualiza_participacao['id_tipo_apresentacao'] = $id_tipo_apresentacao;
+
+				$atualiza_participacao['participante_convidado'] = $participante_convidado;
+
+				$status_participacao = $submeteu_participacao->atualiza_tipo_participacao($id_participacao, $id_inscricao_evento, $id_participante, $atualiza_participacao);
+
+			}
 		}
+	notify()->flash('Inscrição realizada com sucesso!','success');
+	return redirect()->route('inscricao.manual');
 	}
 }
