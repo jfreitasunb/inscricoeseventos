@@ -132,6 +132,12 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::post('inscricao/problemas', '\InscricoesEventos\Http\Controllers\Admin\InscricoesNaoFinalizadasController@postInscricoesComProblemas');
 
+	##
+	Route::get('inscricao/manual', '\InscricoesEventos\Http\Controllers\Admin\InscricaoManualController@getInscricaoManual')->name('inscricoes.manual');
+
+	Route::post('inscricao/manual', '\InscricoesEventos\Http\Controllers\Admin\InscricaoManualController@postInscricaoManual');
+
+
 	// Route::post('relatorio/link/acesso', '\InscricoesEventos\Http\Controllers\Coordenador\LinkAcessoController@postLinkAcesso')->name('link.acesso');
 
 	Route::get('gera/ficha/individual', '\InscricoesEventos\Http\Controllers\Coordenador\RelatorioPosController@getFichaInscricaoPorCandidato')->name('gera.ficha.individual');
