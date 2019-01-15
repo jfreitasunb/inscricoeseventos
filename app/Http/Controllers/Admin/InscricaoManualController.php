@@ -157,7 +157,7 @@ class InscricaoManualController extends AdminController
 				
 				$submeter_trabalho->id_area_trabalho = $id_area_trabalho;
 				
-				$submeter_trabalho->id_inscricao_evento = $evento_corrente->id_inscricao_evento;
+				$submeter_trabalho->id_inscricao_evento = $id_inscricao_evento;
 				
 				$submeter_trabalho->titulo_trabalho = $titulo_trabalho;
 				
@@ -261,7 +261,7 @@ class InscricaoManualController extends AdminController
 				if (is_null($submeteu_trabalho)) {
 					$submeter_trabalho->id_participante = $id_participante;
 					$submeter_trabalho->id_area_trabalho = $id_area_trabalho;
-					$submeter_trabalho->id_inscricao_evento = $evento_corrente->id_inscricao_evento;
+					$submeter_trabalho->id_inscricao_evento = $id_inscricao_evento;
 					$submeter_trabalho->titulo_trabalho = $titulo_trabalho;
 					$submeter_trabalho->autor_trabalho = $autor_trabalho;
 					$submeter_trabalho->abstract_trabalho = $abstract_trabalho;
@@ -322,8 +322,29 @@ class InscricaoManualController extends AdminController
 				$status_participacao = $submeteu_participacao->atualiza_tipo_participacao($id_participacao, $id_inscricao_evento, $id_participante, $atualiza_participacao);
 
 			}
+
+			$finalizar_inscricao = new FinalizaInscricao();
+
+			$id_finalizada_anteriormente = $finalizar_inscricao->select('id')->where('id_participante',$id_participante)->where('id_inscricao_evento',$id_inscricao_evento)->pluck('id');
+
+			if (count($id_finalizada_anteriormente)>0){
+
+				DB::table('finaliza_inscricao')->where('id', $id_finalizada_anteriormente[0])->where('id_participante', $id_participante)->where('id_inscricao_evento', $id_inscricao_evento)->update(['finalizada' => True, 'updated_at' => date('Y-m-d H:i:s')]);
+			}else{
+				
+				$finalizar_inscricao->id_participante = $id_participante;
+				
+				$finalizar_inscricao->id_inscricao_evento = $id_inscricao_evento;
+				
+				$finalizar_inscricao->finalizada = true;
+				
+				$finalizar_inscricao->save();
+			}
 		}
+	
 	notify()->flash('Inscrição realizada com sucesso!','success');
+	
 	return redirect()->route('inscricao.manual');
+	
 	}
 }
