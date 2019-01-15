@@ -62,14 +62,30 @@ class InscricaoManualController extends AdminController
 	}
 
 	public function postInscricaoManual(Request $request)
-	{
+	{	
+		dd($request);
 		$this->validate($request, [
-			'finalizar_manualmente' => 'required',
+			'id_inscricao_evento' => 'required',
+			'nome' => 'required',
+			'email' => 'required|email',
+			'nome_cracha' => 'required',
+			'numero_documento' => 'required',
+			'instituicao' => 'required',
+			'id_pais' => 'required',
+			'id_categoria_participante' => 'required',
+			'participante_convidado' => 'required',
+			'apresentar_trabalho' => 'required',
+			'participante_convidado' => 'required_if:apresentar_trabalho,==,on',
+			'id_tipo_apresentacao' => 'required_if:apresentar_trabalho,==,on',
+			'titulo_trabalho' => 'required_if:apresentar_trabalho,==,on',
+			'autor_trabalho' => 'required_if:apresentar_trabalho,==,on',
+			'abstract_trabalho' => 'required_if:apresentar_trabalho,==,on',
+			'id_area_trabalho' => 'required_if:apresentar_trabalho,==,on',
 		]);
 
-		$finalizar_manualmente = $request->finalizar_manualmente;
+		// $finalizar_manualmente = $request->finalizar_manualmente;
 
-		$id_inscricao_evento = $request->id_inscricao_evento;
+		// $id_inscricao_evento = $request->id_inscricao_evento;
 
 		
 
