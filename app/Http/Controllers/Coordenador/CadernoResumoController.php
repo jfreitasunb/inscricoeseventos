@@ -168,14 +168,13 @@ class CadernoResumoController extends CoordenadorController
         $str=str_replace("mes_realizacao_evento", $mes_realizacao_evento, $str);
 
         file_put_contents($arquivo_capa_creditos, $str);
-
-        $dados_resumo = [];
         
         foreach ($trabalhos_aceitos as $aceito) {
 
             $total_aceitos_por_area = $aceitos->total_trabalhos_por_area($id_inscricao_evento, $aceito->id_area_trabalho);
 
             $arquivo_area = $locais_arquivos['caderno_de_resumos'].$this->array_arquivos_resumos[$aceito->id_area_trabalho];
+            
 
             if ($aceito->id_tipo_apresentacao == 1) {
 
@@ -198,7 +197,7 @@ class CadernoResumoController extends CoordenadorController
                 $dados_resumo[$nome]['titulo_trabalho'] = $trabalho->titulo_trabalho;
 
                 $dados_resumo[$nome]['abstract_trabalho'] = $trabalho->abstract_trabalho;
-                
+
                 if (sizeof($dados_resumo) == $total_aceitos_por_area) {
                     
                     $i = 1;
@@ -208,7 +207,7 @@ class CadernoResumoController extends CoordenadorController
                     $str=file_get_contents($arquivo_area);
 
                     $parsed = $this->get_string_between($str, '%inicio_bloco_repetir', '%fim_bloco_repetir');
-                    
+
                     foreach ($dados_resumo as $key => $value) {
                         
                         $i++;
@@ -245,8 +244,11 @@ class CadernoResumoController extends CoordenadorController
                     $str .= "\n\\clearpage";
 
                     file_put_contents($arquivo_area, $str);
+                }else{
+                    if (sizeof($dados_resumo) > $total_aceitos_por_area) {
+                        $dados_resumo = [];
+                    }
                 }
-                
             }
         }
         
