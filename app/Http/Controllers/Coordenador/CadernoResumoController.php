@@ -48,6 +48,7 @@ class CadernoResumoController extends CoordenadorController
         9 => "resumos/teorianumeros.tex",
         10 => "resumos/mecanica.tex",
         11 => "resumos/educacaomatematica.tex",
+        12 => "resumos/matematicaaplicada.tex",
     );
 
     protected $normalize_to_tex = array(
