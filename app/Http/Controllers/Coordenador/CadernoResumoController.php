@@ -40,7 +40,7 @@ class CadernoResumoController extends CoordenadorController
         1 => "resumos/algebra.tex",
         2 => "resumos/analise.tex",
         3 => "resumos/analisenumerica.tex",
-        4 => "resumos/dinamicafluidos.tex",
+        4 => "resumos/matematicaaplicada.tex",
         5 => "resumos/geometria.tex",
         6 => "resumos/probabilidade.tex",
         7 => "resumos/sistemasdinamicos.tex",
@@ -48,7 +48,7 @@ class CadernoResumoController extends CoordenadorController
         9 => "resumos/teorianumeros.tex",
         10 => "resumos/mecanica.tex",
         11 => "resumos/educacaomatematica.tex",
-        12 => "resumos/matematicaaplicada.tex",
+        12 => "resumos/dinamicafluidos.tex",
     );
 
     protected $normalize_to_tex = array(
@@ -175,7 +175,6 @@ class CadernoResumoController extends CoordenadorController
             $total_aceitos_por_area = $aceitos->total_trabalhos_por_area($id_inscricao_evento, $aceito->id_area_trabalho);
 
             $arquivo_area = $locais_arquivos['caderno_de_resumos'].$this->array_arquivos_resumos[$aceito->id_area_trabalho];
-            
 
             if ($aceito->id_tipo_apresentacao == 1) {
 
@@ -201,9 +200,9 @@ class CadernoResumoController extends CoordenadorController
 
                 if (sizeof($dados_resumo) == $total_aceitos_por_area) {
                     
-                    $i = 1;
-
                     ksort($dados_resumo);
+
+                    $i = 1;
                     
                     $str=file_get_contents($arquivo_area);
 
@@ -245,10 +244,8 @@ class CadernoResumoController extends CoordenadorController
                     $str .= "\n\\clearpage";
 
                     file_put_contents($arquivo_area, $str);
-                }else{
-                    if (sizeof($dados_resumo) > $total_aceitos_por_area) {
-                        $dados_resumo = [];
-                    }
+
+                    $dados_resumo = [];
                 }
             }
         }

@@ -40,12 +40,12 @@ class TrabalhoSelecionado extends FuncoesModels
 
     public function retorna_trabalhos_selecionados($id_inscricao_evento)
     {
-        return $this->where('id_inscricao_evento', $id_inscricao_evento)->orderBy('id_area_trabalho')->get();
+        return $this->where('id_inscricao_evento', $id_inscricao_evento)->where('id_tipo_apresentacao', 1)->orderBy('id_area_trabalho', 'ASC')->get();
     }
 
     public function retorna_areas_trabalhos_selecionados($id_inscricao_evento)
     {
-        return $this->select('id_area_trabalho')->where('id_inscricao_evento', $id_inscricao_evento)->orderBy('id_area_trabalho')->get()->unique('id_area_trabalho');
+        return $this->select('id_area_trabalho')->where('id_inscricao_evento', $id_inscricao_evento)->orderBy('id_area_trabalho', 'ASC')->get()->unique('id_area_trabalho');
     }
 
     public function existe_trabalho_selecionado($id_inscricao_evento)
